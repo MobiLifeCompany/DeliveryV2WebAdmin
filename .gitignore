@@ -31,3 +31,6 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+/backend/runtime/debug
+/frontend/runtime/debug
+/vendor/bin
