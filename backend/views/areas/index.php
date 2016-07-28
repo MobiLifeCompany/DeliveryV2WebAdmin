@@ -12,9 +12,15 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Areas');
 $this->params['breadcrumbs'][] = $this->title;
+
+// get current page name for leftside menu
+$curpage = Yii::$app->controller->id;
+$this->params['currentPage'] = $curpage;
+
 ?>
 <div class="areas-index">
-<?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h3><?= Html::encode($this->title) ?></h3>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=areas/create'),'id'=>'modalButton']); ?>
     </p>

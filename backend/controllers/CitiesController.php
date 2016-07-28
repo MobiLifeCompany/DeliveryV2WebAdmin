@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 
 /**
  * CitiesController implements the CRUD actions for Cities model.
@@ -22,6 +23,16 @@ class CitiesController extends Controller
     public function behaviors()
     {
         return [
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index','update','create','delete','details','view'],
+                'rules' =>[
+                    [
+                        'allow' =>true,
+                        'roles' =>['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -37,7 +48,6 @@ class CitiesController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='CrudLayout';
         $searchModel = new CitiesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -67,7 +77,6 @@ class CitiesController extends Controller
      */
     public function actionDetails($id)
     {
-        $this->layout='CrudLayout';
         $cities = new Cities();
         $dataProvider = $cities->getCountryCities(Yii::$app->request->queryParams);
 
@@ -86,8 +95,8 @@ class CitiesController extends Controller
         $model = new Cities();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_by = date('Y-m-d h:m:s');
-            $model->updated_by = date('Y-m-d h:m:s');
+            $model->created_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d h:m:s');
             $model->save();
             return $this->redirect(['index']);
         } else {
@@ -107,8 +116,10 @@ class CitiesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+             $model->updated_at = date('Y-m-d h:m:s');
+             $model->save();
+             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -142,6 +153,26 @@ class CitiesController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        // Check only when the user is logged in
+        if ( !Yii::$app->user->isGuest)  {
+            if (Yii::$app->session['userSessionTimeout'] < time()) {
+                Yii::$app->user->logout();
+                $this->redirect(['site/login']);
+            } else {
+                Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+                return true; 
+            }
+        } else {
+            return true;
         }
     }
    

@@ -324,41 +324,93 @@ DashboardAsset::register($this);
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
-        <li>
-          <a href="index.php?r=countries">
-            <i class="fa fa-globe"></i> <span>Countries</span>
+        <li class="treeview <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='user' || $this->params['currentPage']=='auth-item' || $this->params['currentPage']=='auth-item-child')){
+                      echo "active";
+                }
+              ?>">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Users Permissions</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
+          <ul class="treeview-menu">
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='user') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=user"><i class="fa fa-user"></i> Users</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='auth-item') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=auth-item"><i class="fa fa-unlock-alt"></i> Permissions</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='auth-item-child') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=auth-item-child"><i class="fa fa-users"></i> Permissions Group</a></li>
+          </ul>
         </li>
-        <li>
-          <a href="index.php?r=cities">
-            <i class="fa fa-map-signs"></i> <span>Cities</span>
+        <li class="treeview  <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='countries' || $this->params['currentPage']=='cities' || $this->params['currentPage']=='areas')){
+                      echo "active";
+                }
+              ?>">
+          <a href="#">
+            <i class="fa fa-map"></i> <span>Logistic</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
-        </li>
-        <li>
-          <a href="index.php?r=areas">
-            <i class="fa fa-map-pin"></i> <span>Areas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
+          <ul class="treeview-menu">
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='countries') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=countries"><i class="fa fa-globe"></i> Countries</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='cities') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=cities"><i class="fa fa-map-signs"></i> Cities</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='areas') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=areas"><i class="fa fa-map-pin"></i> Areas</a></li>
+          </ul>
         </li>
       </ul>
     </section>
@@ -368,12 +420,25 @@ DashboardAsset::register($this);
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        <?= Html::encode($this->title) ?>
-      </h1>
       <ol class="breadcrumb">
-        <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= Html::encode($this->title) ?></li>
+        <li>
+        <?php
+            echo Breadcrumbs::widget([
+                'homeLink' => [ 
+                                'label' => Yii::t('yii', 'Dashboard'),
+                                'url' => Yii::$app->homeUrl,
+                                'links'			=> isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                'tagName'		=>'ul', // container tag
+                                'htmlOptions'	=>[], // no attributes on container
+                                'separator'		=>'', // no separator
+                                'homeLink'		=>'<li><a href="'.Yii::$app->homeUrl.'">Home</a></li>', // home link template
+                                'activeLinkTemplate'	=>'<li><a href="{url}">{label}</a></li>', // active link template
+                                'inactiveLinkTemplate'	=>'<li class="selected"><a>{label}</a></li>', // in-active link template
+                          ],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]); 
+      ?>
+      </li>
       </ol>
     </section>
 

@@ -71,6 +71,8 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $this->layout='loginLayout';
+
+        Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
         
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -96,5 +98,25 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        // Check only when the user is logged in
+        if ( !Yii::$app->user->isGuest)  {
+            if (Yii::$app->session['userSessionTimeout'] < time()) {
+                Yii::$app->user->logout();
+                $this->redirect(['login']);
+            } else {
+                Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+                return true; 
+            }
+        } else {
+            return true;
+        }
     }
 }

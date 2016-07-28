@@ -25,10 +25,8 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'k' => 
         array (
-            'kartik\\popover\\' => 15,
-            'kartik\\plugins\\popover\\' => 23,
+            'kartik\\select2\\' => 15,
             'kartik\\grid\\' => 12,
-            'kartik\\editable\\' => 16,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -74,21 +72,13 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
-        'kartik\\popover\\' => 
+        'kartik\\select2\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-popover-x',
-        ),
-        'kartik\\plugins\\popover\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-popover-x',
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
         ),
         'kartik\\grid\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-grid',
-        ),
-        'kartik\\editable\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-editable',
         ),
         'kartik\\base\\' => 
         array (

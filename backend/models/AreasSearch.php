@@ -49,7 +49,7 @@ class AreasSearch extends Areas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 15),
+            'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
         ]);
 
         $this->load($params);

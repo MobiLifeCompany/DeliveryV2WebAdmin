@@ -34,3 +34,5 @@ phpunit.phar
 /backend/runtime/debug
 /frontend/runtime/debug
 /vendor/bin
+/vendor/bin/markdown
+/vendor/bin/yii
