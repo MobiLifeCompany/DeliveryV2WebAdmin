@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use backend\models\Countries;
+use backend\models\Cities;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Cities */
@@ -21,9 +22,9 @@ use backend\models\Countries;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'deleted')->textInput() ?>
+    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
 
-    <?= $form->field($model, 'lang')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'lang')->dropDownList([ 'en' => 'En', 'ar' => 'Ar', ], ['prompt' => 'Language']) ?>
 
     <?= $form->field($model, 'ar_name')->textInput(['maxlength' => true]) ?>
 

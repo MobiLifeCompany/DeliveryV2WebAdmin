@@ -20,7 +20,6 @@ $this->params['currentPage'] = $curpage;
 ?>
 <div class="areas-index">
     <h3><?= Html::encode($this->title) ?></h3>
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=areas/create'),'id'=>'modalButton']); ?>
     </p>

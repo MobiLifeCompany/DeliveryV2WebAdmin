@@ -12,14 +12,16 @@ use backend\models\Cities;
  */
 class CitiesSearch extends Cities
 {
+
+    public $globalSearch;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'deleted'], 'integer'],
-            [['name', 'lang', 'created_at', 'updated_at', 'ar_name', 'country_id'], 'safe'],
+            [['id'], 'integer'],
+            [[ 'globalSearch'], 'safe'],    
         ];
     }
 
@@ -58,19 +60,10 @@ class CitiesSearch extends Cities
             return $dataProvider;
         }
 
-        $query->joinWith('country');
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'deleted' => $this->deleted,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
-        $query->andFilterWhere(['like', 'cities.name', $this->name])
-            ->andFilterWhere(['like', 'lang', $this->lang])
-            ->andFilterWhere(['like', 'countries.name', $this->country_id])
-            ->andFilterWhere(['like', 'cities.ar_name', $this->ar_name]);
+        $query->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'deleted', $this->globalSearch])
+            ->orFilterWhere(['like', 'lang', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_name', $this->globalSearch]);
 
         return $dataProvider;
     }

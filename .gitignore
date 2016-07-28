@@ -37,3 +37,4 @@ phpunit.phar
 /vendor/bin/markdown
 /vendor/bin/yii
 /backend/runtime/logs
+/backend/runtime/logs/app.log

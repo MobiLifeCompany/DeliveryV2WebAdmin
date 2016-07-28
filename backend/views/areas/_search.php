@@ -7,35 +7,24 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\AreasSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-<div class="areas-search">
-
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'city_id') ?>
-
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'deleted') ?>
-
-    <?= $form->field($model, 'lang') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'ar_name') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+<div class="box-header">
+    <div class="box-tools">
+        <div class="input-group input-group-sm" style="width: 200px;">
+            <?php $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+                 'fieldConfig' => [
+                    'template' => '<div class="input-group"><span class="input-group-btn">'.
+                    '<button class="btn btn-default"><i class="fa fa-search"></i></button></span>{input}</div>',
+                    'options' => [
+                        'tag' => false,
+                         ],
+                     ],
+                 ]); ?>
+                 <p class="text-items">
+                <?= $form->field($model, 'globalSearch')->textInput(['maxlength' => 255, 'class' => 'form-control', 'placeholder' => 'Search'])->label(false); ?>
+                </p>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
+<?php ActiveForm::end(); ?>

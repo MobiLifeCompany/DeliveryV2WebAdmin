@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "{{%areas}}".
@@ -26,7 +27,7 @@ class Areas extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%areas}}';
+        return 'areas';
     }
 
     /**
@@ -54,10 +55,10 @@ class Areas extends \yii\db\ActiveRecord
             'city_id' => Yii::t('app', 'City ID'),
             'name' => Yii::t('app', 'Name'),
             'deleted' => Yii::t('app', 'Deleted'),
-            'lang' => Yii::t('app', 'Lang'),
+            'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Ar Name'),
+            'ar_name' => Yii::t('app', 'Arabic Name'),
         ];
     }
 
@@ -67,6 +68,21 @@ class Areas extends \yii\db\ActiveRecord
     public function getCity()
     {
         return $this->hasOne(Cities::className(), ['id' => 'city_id']);
+    }
+
+    public function getCityAreas($id)
+    {
+        $query = Areas::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['city_id'=> $id]);
+
+        return $dataProvider;
     }
 
     /**

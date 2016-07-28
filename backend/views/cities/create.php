@@ -1,12 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-
+use backend\assets\AppAsset;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Cities */
 
-$this->title = Yii::t('app', 'Create Cities');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->renderAjax('_form', [
         'model' => $model,
     ]) ?>
 
