@@ -55,10 +55,10 @@ class Cities extends \yii\db\ActiveRecord
             'country_id' => Yii::t('app', 'Country ID'),
             'name' => Yii::t('app', 'Name'),
             'deleted' => Yii::t('app', 'Deleted'),
-            'lang' => Yii::t('app', 'Lang'),
+            'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Ar Name'),
+            'ar_name' => Yii::t('app', 'Arabic Name'),
         ];
     }
 

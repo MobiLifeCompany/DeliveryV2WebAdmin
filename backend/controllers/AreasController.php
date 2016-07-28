@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Areas;
 use backend\models\AreasSearch;
+use backend\models\Cities;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * AreasController implements the CRUD actions for Areas model.
@@ -35,6 +37,7 @@ class AreasController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='CrudLayout';
         $searchModel = new AreasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -51,8 +54,25 @@ class AreasController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
+            'city_name' => Cities::findOne($this->findModel($id)->city_id)->name,
+        ]);
+    }
+
+    /**
+     * Displays a single Cities model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        $this->layout='CrudLayout';
+        $areas = new Areas();
+        $dataProvider = $areas->getCityAreas(Yii::$app->request->queryParams);
+
+        return $this->render('details', [
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -65,10 +85,13 @@ class AreasController extends Controller
     {
         $model = new Areas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->created_by = date('Y-m-d h:m:s');
+            $model->updated_by = date('Y-m-d h:m:s');
+            $model->save();
+            return $this->redirect(['index']);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -87,7 +110,7 @@ class AreasController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }

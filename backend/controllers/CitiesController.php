@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Cities;
 use backend\models\CitiesSearch;
+use backend\models\Countries;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,6 +37,7 @@ class CitiesController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='CrudLayout';
         $searchModel = new CitiesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -52,8 +54,9 @@ class CitiesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
+            'country_name' => Countries::findOne($this->findModel($id)->country_id)->name,
         ]);
     }
 
@@ -64,7 +67,8 @@ class CitiesController extends Controller
      */
     public function actionDetails($id)
     {
-         $cities = new Cities();
+        $this->layout='CrudLayout';
+        $cities = new Cities();
         $dataProvider = $cities->getCountryCities(Yii::$app->request->queryParams);
 
         return $this->render('details', [
@@ -85,9 +89,9 @@ class CitiesController extends Controller
             $model->created_by = date('Y-m-d h:m:s');
             $model->updated_by = date('Y-m-d h:m:s');
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -106,7 +110,7 @@ class CitiesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }

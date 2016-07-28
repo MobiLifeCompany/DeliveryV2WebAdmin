@@ -12,14 +12,16 @@ use backend\models\Areas;
  */
 class AreasSearch extends Areas
 {
+
+    public $globalSearch;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'city_id', 'deleted'], 'integer'],
-            [['name', 'lang', 'created_at', 'updated_at', 'ar_name'], 'safe'],
+            [['id'], 'integer'],
+            [[ 'globalSearch'], 'safe'],
         ];
     }
 
@@ -47,6 +49,7 @@ class AreasSearch extends Areas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 15),
         ]);
 
         $this->load($params);
@@ -57,18 +60,10 @@ class AreasSearch extends Areas
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'city_id' => $this->city_id,
-            'deleted' => $this->deleted,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'lang', $this->lang])
-            ->andFilterWhere(['like', 'ar_name', $this->ar_name]);
+        $query->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'deleted', $this->globalSearch])
+            ->orFilterWhere(['like', 'lang', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_name', $this->globalSearch]);
 
         return $dataProvider;
     }

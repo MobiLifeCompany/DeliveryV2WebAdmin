@@ -6,26 +6,23 @@ use yii\bootstrap\Modal;
 use yii\Helpers\Url;
 use yii\widgets\Pjax;
 
-
-
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CountriesSearch */
+/* @var $searchModel backend\models\AreasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Countries');
+$this->title = Yii::t('app', 'Areas');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="countries-index">
-   <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="areas-index">
+
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=countries/create'),'id'=>'modalButton']); ?>
+        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=areas/create'),'id'=>'modalButton']); ?>
     </p>
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Country</h4>',
+                'header'=>'<h4>Areas</h4>',
                 'id' => 'modal',
-                'size' => 'modal-lg',
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();
@@ -43,10 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            ['attribute' => 'city_id',
+             'value'=>'city.name'
+            ],
             'name',
             'ar_name',
-            'country_code',
-            'iso_code',
             [
 	            'attribute' => 'deleted',
                 'vAlign'=>'middle',
@@ -66,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Cities','index.php?r=cities/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a('Shops','index.php?r=shops/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',
@@ -84,5 +82,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
 </div>
