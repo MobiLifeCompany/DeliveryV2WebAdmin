@@ -9,10 +9,15 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('app', 'Areas');
 $this->params['breadcrumbs'][] = $this->title;
+
+// get current page name for leftside menu
+$curpage = Yii::$app->controller->id;
+$this->params['currentPage'] = $curpage;
+
 ?>
 <div class="areas-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

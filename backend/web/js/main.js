@@ -7,19 +7,15 @@ $(document).ready(function(){
 });
 
 
-function showUpdateCountryModal(id){
-      $('#updateModalButton'+id).click(function(){
+function showUpdateModal(id){
       $('#modal').modal('show')
-        .find('#modalContent')
-      .load($(this).attr('value'));
-  });
+      .find('#modalContent')
+      .load($('#updateModalButton'+id).attr('value'));
 }
 
 
-function showViewCountryModal(id){
-      $('#viewModalButton'+id).click(function(){
+function showViewModal(id){
       $('#modal').modal('show')
       .find('#modalContent')
-      .load($(this).attr('value'));
-  });
+      .load($('#viewModalButton'+id).attr('value'));
 }

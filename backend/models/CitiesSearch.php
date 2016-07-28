@@ -47,6 +47,7 @@ class CitiesSearch extends Cities
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
         ]);
 
         $this->load($params);

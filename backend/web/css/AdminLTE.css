@@ -331,8 +331,8 @@ a:focus {
   font-size: 12px;
   padding: 7px 5px;
   position: absolute;
-  top: 15px;
-  right: 10px;
+  top: 13px;
+  right: 40px;
   border-radius: 2px;
 }
 .content-header > .breadcrumb > li > a {
