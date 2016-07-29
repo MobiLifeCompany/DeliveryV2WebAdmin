@@ -36,11 +36,13 @@ class Cities extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['country_id'], 'required'],
+            [['country_id','name', 'ar_name','lang','deleted'], 'required'],
+            [['country_id','name', 'ar_name','lang','deleted'], 'safe'],
             [['country_id', 'deleted'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'ar_name'], 'string', 'max' => 255],
             [['lang'], 'string', 'max' => 5],
+             [['name', 'ar_name'], 'unique'],
             [['country_id'], 'exist', 'skipOnError' => true, 'targetClass' => Countries::className(), 'targetAttribute' => ['country_id' => 'id']],
         ];
     }
@@ -52,9 +54,9 @@ class Cities extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'country_id' => Yii::t('app', 'Country ID'),
-            'name' => Yii::t('app', 'Name'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'country_id' => Yii::t('app', 'Country Name'),
+            'name' => Yii::t('app', 'City Name'),
+            'deleted' => Yii::t('app', 'Active'),
             'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

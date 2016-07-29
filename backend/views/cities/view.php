@@ -19,11 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
              'value'=>$country_name
             ],
             'name',
-            'deleted',
+            'ar_name',
+            [
+                'attribute'=>'deleted',
+                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+            ],
             'lang',
             'created_at',
-            'updated_at',
-            'ar_name',
+            'updated_at', 
         ],
     ]) ?>
 

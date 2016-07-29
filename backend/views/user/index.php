@@ -53,7 +53,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'first_name',
             'last_name',
             'username',
-            'shop.name',
+             ['attribute' => 'shop_id',
+             'value'=>'shop.name'
+            ],
             // 'auth_key',
             // 'password_hash',
             // 'password_reset_token',

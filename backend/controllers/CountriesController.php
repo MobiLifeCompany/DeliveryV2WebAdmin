@@ -7,8 +7,10 @@ use backend\models\Countries;
 use backend\models\CountriesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\widgets\ActiveForm;
 
 /**
  * CountriesController implements the CRUD actions for Countries model.
@@ -81,8 +83,13 @@ class CountriesController extends Controller
             if ($model->load(Yii::$app->request->post())) {
                 $model->created_at = date('Y-m-d h:m:s');
                 $model->updated_at = date('Y-m-d h:m:s');
-                $model->save();
-                return $this->redirect(['index']);
+               if($model->save())
+                {
+                    echo 1;
+                }else
+                {
+                    echo 0;
+                }
             } else {
                 return $this->renderAjax('create', [
                     'model' => $model,
@@ -104,8 +111,14 @@ class CountriesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save())
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -159,6 +172,16 @@ class CountriesController extends Controller
             }
         } else {
             return true;
+        }
+    }
+
+    // Ajax Validation 
+    public function actionValidation($id = null){
+        $model = $id===null ? new Countries : Countries::findOne($id);
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format='json';
+            return ActiveForm::validate($model);
         }
     }
 }

@@ -36,6 +36,9 @@ class Countries extends \yii\db\ActiveRecord
     {
         return [
             [['deleted'], 'integer'],
+            [['name', 'ar_name','country_code', 'iso_code','deleted','lang'], 'required'],
+            [['name', 'ar_name','country_code', 'iso_code','deleted','lang'], 'safe'],
+             [['name', 'ar_name','country_code', 'iso_code'], 'unique'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'ar_name'], 'string', 'max' => 255],
             [['country_code', 'iso_code'], 'string', 'max' => 3],
@@ -50,7 +53,7 @@ class Countries extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Country Name'),
             'country_code' => Yii::t('app', 'Country Code'),
             'iso_code' => Yii::t('app', 'Iso Code'),
             'deleted' => Yii::t('app', 'Active'),

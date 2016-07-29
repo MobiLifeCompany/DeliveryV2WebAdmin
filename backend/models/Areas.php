@@ -36,7 +36,9 @@ class Areas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['city_id'], 'required'],
+            [['city_id','name', 'ar_name','lang','deleted'], 'required'],
+            [['city_id','name', 'ar_name','lang','deleted'], 'safe'],
+            [['name', 'ar_name'], 'unique'],
             [['city_id', 'deleted'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'ar_name'], 'string', 'max' => 255],
@@ -52,9 +54,9 @@ class Areas extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'city_id' => Yii::t('app', 'City ID'),
-            'name' => Yii::t('app', 'Name'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'city_id' => Yii::t('app', 'City'),
+            'name' => Yii::t('app', 'Area Name'),
+            'deleted' => Yii::t('app', 'Active'),
             'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

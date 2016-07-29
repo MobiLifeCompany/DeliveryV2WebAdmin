@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\Helpers\Url;
-
+use yii\widgets\Pjax;
 
 
 /* @var $this yii\web\View */
@@ -37,7 +37,7 @@ $this->params['currentPage'] = $curpage;
            echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
-
+     <?php Pjax::begin(['id'=>'modalGrid']);?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'export' =>false,
@@ -91,5 +91,5 @@ $this->params['currentPage'] = $curpage;
             ],
         ],
     ]); ?>
-
+ <?php Pjax::end();?>
 </div>

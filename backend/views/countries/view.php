@@ -18,7 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'country_code',
             'iso_code',
-            'deleted',
+            [
+                'attribute'=>'deleted',
+                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+            ],
             'lang',
             'created_at',
             'updated_at',

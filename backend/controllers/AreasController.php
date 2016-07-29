@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\widgets\ActiveForm;
 
 /**
  * AreasController implements the CRUD actions for Areas model.
@@ -95,10 +96,15 @@ class AreasController extends Controller
         $model = new Areas();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_by = date('Y-m-d h:m:s');
-            $model->updated_by = date('Y-m-d h:m:s');
-            $model->save();
-            return $this->redirect(['index']);
+            $model->created_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d h:m:s');
+            if($model->save())
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -116,8 +122,15 @@ class AreasController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->updated_at = date('Y-m-d h:m:s');
+            if($model->save())
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -171,6 +184,16 @@ class AreasController extends Controller
             }
         } else {
             return true;
+        }
+    }
+
+    // Ajax Validation 
+    public function actionValidation($id = null){
+        $model = $id===null ? new Areas : Areas::findOne($id);
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format='json';
+            return ActiveForm::validate($model);
         }
     }
 }

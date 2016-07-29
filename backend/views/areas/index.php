@@ -33,7 +33,7 @@ $this->params['currentPage'] = $curpage;
            echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
-
+     <?php Pjax::begin(['id'=>'modalGrid']);?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'export' =>false,
@@ -88,4 +88,5 @@ $this->params['currentPage'] = $curpage;
             ],
         ],
     ]); ?>
+ <?php Pjax::end();?>
 </div>

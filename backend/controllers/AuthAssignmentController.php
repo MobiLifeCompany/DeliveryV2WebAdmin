@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\UserPermissions;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * AuthAssignmentController implements the CRUD actions for AuthAssignment model.
@@ -47,7 +48,9 @@ class AuthAssignmentController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthAssignmentSearch();
+         throw new ForbiddenHttpException;
+
+       /* $searchModel = new AuthAssignmentSearch();
         $userPermissionmodel = new UserPermissions();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -55,7 +58,7 @@ class AuthAssignmentController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'userPermissionmodel' =>$userPermissionmodel
-        ]);
+        ]);*/
     }
 
     /**
@@ -66,9 +69,10 @@ class AuthAssignmentController extends Controller
      */
     public function actionView($item_name, $user_id)
     {
-        return $this->render('view', [
+       /* return $this->render('view', [
             'model' => $this->findModel($item_name, $user_id),
-        ]);
+        ]);*/
+         throw new ForbiddenHttpException;
     }
 
     /**
@@ -78,6 +82,7 @@ class AuthAssignmentController extends Controller
      */
     public function actionCreate()
     {
+       /*
         $model = new AuthAssignment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,7 +91,8 @@ class AuthAssignmentController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+        }*/
+        throw new ForbiddenHttpException;
     }
 
     /**
@@ -133,9 +139,11 @@ class AuthAssignmentController extends Controller
      */
     public function actionDelete($item_name, $user_id)
     {
-        $this->findModel($item_name, $user_id)->delete();
+        throw new ForbiddenHttpException;
+        
+       /* $this->findModel($item_name, $user_id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index']);*/
     }
 
     /**

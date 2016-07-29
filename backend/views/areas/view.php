@@ -19,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
              'value'=> $city_name
             ],
             'name',
-            'deleted',
+            [
+                'attribute'=>'deleted',
+                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+            ],
             'lang',
             'created_at',
             'updated_at',
