@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\UserPermissions;
+use yii\filters\AccessControl;
 
 /**
  * AuthAssignmentController implements the CRUD actions for AuthAssignment model.
@@ -26,6 +27,16 @@ class AuthAssignmentController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+             'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index','update','create','delete','view'],
+                'rules' =>[
+                    [
+                        'allow' =>true,
+                        'roles' =>['@'],
+                    ],
+                ]
             ],
         ];
     }
