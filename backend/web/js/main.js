@@ -1,9 +1,18 @@
-$(document).ready(function(){
+$(function(){
   $('#modalButton').click(function(){
       jQuery('#modal').modal('show')
       .find('#modalContent')
       .load($(this).attr('value'));
-  })
+  });
+
+  $(document).on('click','.language',function(){
+        var lang = $(this).attr('id');
+        $.post('index.php?r=site/language',{'lang':lang},function(data){
+              location.reload();
+        })
+  });
+
+
 });
 
 

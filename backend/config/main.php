@@ -39,6 +39,19 @@ return [
             'name' => 'advanced-backend',
             'timeout' => 86400,
         ],
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -63,6 +76,9 @@ return [
             ],
         ],
         */
+    ],
+    'as beforeRequest' => [
+        'class' =>'backend\components\CheckIfLoggedIn'
     ],
     'params' => $params,
 ];
