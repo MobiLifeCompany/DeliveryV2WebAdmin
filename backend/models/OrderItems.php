@@ -1,6 +1,8 @@
 <?php
 
 namespace backend\models;
+use yii\data\ActiveDataProvider;
+
 
 use Yii;
 
@@ -36,9 +38,9 @@ class OrderItems extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'item_id', 'qty', 'item_price'], 'required'],
+            [['order_id', 'item_id', 'qty', 'item_price','is_canceled'], 'required'],
             [['order_id', 'item_id', 'qty', 'item_price', 'is_canceled'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','order_id', 'item_id', 'qty', 'item_price'], 'safe'],
             [['total'], 'string', 'max' => 255],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Items::className(), 'targetAttribute' => ['item_id' => 'id']],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orders::className(), 'targetAttribute' => ['order_id' => 'id']],
@@ -52,8 +54,8 @@ class OrderItems extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'order_id' => Yii::t('app', 'Order ID'),
-            'item_id' => Yii::t('app', 'Item ID'),
+            'order_id' => Yii::t('app', 'Order#'),
+            'item_id' => Yii::t('app', 'Item Name'),
             'qty' => Yii::t('app', 'Qty'),
             'item_price' => Yii::t('app', 'Item Price'),
             'total' => Yii::t('app', 'Total'),
@@ -77,5 +79,34 @@ class OrderItems extends \yii\db\ActiveRecord
     public function getOrder()
     {
         return $this->hasOne(Orders::className(), ['id' => 'order_id']);
+    }
+
+    public function getOrderItems($id)
+    {
+        $query = OrderItems::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['order_id'=> $id]);
+
+        return $dataProvider;
+    }
+    public function getOrderById($id)
+    {
+        $query = Orders::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['id'=> $id]);
+
+        return $dataProvider;
     }
 }

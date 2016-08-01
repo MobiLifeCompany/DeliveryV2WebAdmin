@@ -23,6 +23,7 @@ use Yii;
  * @property OrderHistories[] $orderHistories
  * @property OrderItems[] $orderItems
  * @property Customers $customer
+ * @property Shops $shop
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -43,7 +44,7 @@ class Orders extends \yii\db\ActiveRecord
             [['customer_id', 'order_status', 'qty', 'delivery_charge'], 'required'],
             [['customer_id', 'shop_id', 'qty', 'delivery_charge'], 'integer'],
             [['note'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','customer_address_id'], 'safe'],
             [['customer_address_id', 'order_status', 'total', 'cancel_reason'], 'string', 'max' => 255],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];
@@ -55,10 +56,10 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'customer_id' => Yii::t('app', 'Customer ID'),
-            'shop_id' => Yii::t('app', 'Shop ID'),
-            'customer_address_id' => Yii::t('app', 'Customer Address ID'),
+            'id' => Yii::t('app', 'ID#'),
+            'customer_id' => Yii::t('app', 'Customer'),
+            'shop_id' => Yii::t('app', 'Shop'),
+            'customer_address_id' => Yii::t('app', 'Customer Address'),
             'order_status' => Yii::t('app', 'Order Status'),
             'total' => Yii::t('app', 'Total'),
             'qty' => Yii::t('app', 'Qty'),
@@ -92,5 +93,13 @@ class Orders extends \yii\db\ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(Customers::className(), ['id' => 'customer_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShop()
+    {
+        return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
     }
 }

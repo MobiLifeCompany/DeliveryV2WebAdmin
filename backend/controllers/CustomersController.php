@@ -3,19 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Countries;
-use backend\models\CountriesSearch;
+use backend\models\Customers;
+use backend\models\CustomersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
 
 /**
- * CountriesController implements the CRUD actions for Countries model.
+ * CustomersController implements the CRUD actions for Customers model.
  */
-class CountriesController extends Controller
+class CustomersController extends Controller
 {
     /**
      * @inheritdoc
@@ -23,7 +21,7 @@ class CountriesController extends Controller
     public function behaviors()
     {
         return [
-            'access' =>[
+             'access' =>[
                 'class' => AccessControl::className(),
                 'only' => ['index','update','create','delete','view'],
                 'rules' =>[
@@ -43,14 +41,14 @@ class CountriesController extends Controller
     }
 
     /**
-     * Lists all Countries models.
+     * Lists all Customers models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CountriesSearch();
+        $searchModel = new CustomersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -58,7 +56,7 @@ class CountriesController extends Controller
     }
 
     /**
-     * Displays a single Countries model.
+     * Displays a single Customers model.
      * @param integer $id
      * @return mixed
      */
@@ -70,39 +68,25 @@ class CountriesController extends Controller
     }
 
     /**
-     * Creates a new Countries model.
+     * Creates a new Customers model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-       if(Yii::$app->user->can('create_countries'))
-       {
-            $model = new Countries();
+        $model = new Customers();
 
-            if ($model->load(Yii::$app->request->post())) {
-                $model->created_at = date('Y-m-d h:m:s');
-                $model->updated_at = date('Y-m-d h:m:s');
-               if($model->save())
-                {
-                    echo 1;
-                }else
-                {
-                    echo 0;
-                }
-            } else {
-                return $this->renderAjax('create', [
-                    'model' => $model,
-                ]);
-            }
-        }else
-        {
-            throw new ForbiddenHttpException;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
     }
 
     /**
-     * Updates an existing Countries model.
+     * Updates an existing Customers model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -128,7 +112,7 @@ class CountriesController extends Controller
     }
 
     /**
-     * Deletes an existing Countries model.
+     * Deletes an existing Customers model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,22 +125,22 @@ class CountriesController extends Controller
     }
 
     /**
-     * Finds the Countries model based on its primary key value.
+     * Finds the Customers model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Countries the loaded model
+     * @return Customers the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Countries::findOne($id)) !== null) {
+        if (($model = Customers::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
-    public function beforeAction($action)
+     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
             return false;
@@ -178,7 +162,7 @@ class CountriesController extends Controller
 
     // Ajax Validation 
     public function actionValidation($id = null){
-        $model = $id===null ? new Countries : Countries::findOne($id);
+        $model = $id===null ? new Customers : Customers::findOne($id);
         if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
         {
             Yii::$app->response->format='json';

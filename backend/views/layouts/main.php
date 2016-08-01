@@ -393,6 +393,54 @@ AppAsset::register($this);
               ?>
             ><a href="index.php?r=areas"><i class="fa fa-map-pin"></i> Areas</a></li>
           </ul>
+          <!-- Customers and Orders -->
+           <li class="treeview <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='customers' || $this->params['currentPage']=='customer-addresses'  || $this->params['currentPage']=='orders' || $this->params['currentPage']=='order-items')){
+                      echo "active";
+                }
+              ?>">
+          <a href="#">
+            <i class="fa fa-cart-plus"></i> <span>Orders</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='customers') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=customers"><i class="fa fa-user"></i> Customers</a></li>
+             <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='customer-addresses') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=customer-addresses"><i class="fa fa-building-o"></i> Customer Addresses</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='orders') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=orders"><i class="fa fa-shopping-basket"></i> Orders</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='order-items') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=order-items"><i class="fa fa-cart-plus"></i> Orders Items</a></li>
+          </ul>
+        </li>
+        <!-- End of Customers and Orders -->
         </li>
       </ul>
     </section>

@@ -62,7 +62,7 @@ class Customers extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('app', 'Username'),
-            'password_digest' => Yii::t('app', 'Password Digest'),
+            'password_digest' => Yii::t('app', 'Password'),
             'confirmation_token' => Yii::t('app', 'Confirmation Token'),
             'auth_token' => Yii::t('app', 'Auth Token'),
             'full_name' => Yii::t('app', 'Full Name'),
@@ -74,7 +74,7 @@ class Customers extends \yii\db\ActiveRecord
             'unlock_token' => Yii::t('app', 'Unlock Token'),
             'confirmed_at' => Yii::t('app', 'Confirmed At'),
             'locked_at' => Yii::t('app', 'Locked At'),
-            'sms_count' => Yii::t('app', 'Sms Count'),
+            'sms_count' => Yii::t('app', 'SMS Count'),
             'lang' => Yii::t('app', 'Lang'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

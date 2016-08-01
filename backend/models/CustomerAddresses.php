@@ -25,6 +25,8 @@ use Yii;
  * @property string $updated_at
  *
  * @property Customers $customer
+ * @property Areas $area
+ * @property Cities $city
  */
 class CustomerAddresses extends \yii\db\ActiveRecord
 {
@@ -83,5 +85,13 @@ class CustomerAddresses extends \yii\db\ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(Customers::className(), ['id' => 'customer_id']);
+    }
+    public function getArea()
+    {
+        return $this->hasOne(Areas::className(), ['id' => 'area_id']);
+    }
+    public function getCity()
+    {
+        return $this->hasOne(Cities::className(), ['id' => 'city_id']);
     }
 }
