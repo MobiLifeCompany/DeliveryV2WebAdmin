@@ -8,6 +8,9 @@ use backend\models\CustomerAddressesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\widgets\ActiveForm;
+use yii\data\ActiveDataProvider;
 
 /**
  * CustomerAddressesController implements the CRUD actions for CustomerAddresses model.
@@ -20,6 +23,16 @@ class CustomerAddressesController extends Controller
     public function behaviors()
     {
         return [
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index','update','create','delete','view'],
+                'rules' =>[
+                    [
+                        'allow' =>true,
+                        'roles' =>['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -51,7 +64,7 @@ class CustomerAddressesController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -84,10 +97,17 @@ class CustomerAddressesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->updated_at = date('Y-m-d h:m:s');
+            if($model->save())
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }
@@ -101,8 +121,10 @@ class CustomerAddressesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $customerAddresses = $this->findModel($id);
+        $customerAddresses->updated_at = date('Y-m-d h:m:s');
+        $customerAddresses->deleted = 1;
+        $customerAddresses->update(['updated_at','deleted']);
         return $this->redirect(['index']);
     }
 
@@ -120,5 +142,47 @@ class CustomerAddressesController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        // Check only when the user is logged in
+        if ( !Yii::$app->user->isGuest)  {
+            if (Yii::$app->session['userSessionTimeout'] < time()) {
+                Yii::$app->user->logout();
+                $this->redirect(['site/login']);
+            } else {
+                Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+                return true; 
+            }
+        } else {
+            return true;
+        }
+    }
+
+    // Ajax Validation 
+    public function actionValidation($id = null){
+        $model = $id===null ? new CustomerAddresses : CustomerAddresses::findOne($id);
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format='json';
+            return ActiveForm::validate($model);
+        }
+    }
+
+    public function actionDetails($id)
+    {
+        $customerAddresses = new CustomerAddresses();
+        $dataProvider = $customerAddresses->getCustomerAddresses($id);
+        $customer = $customerAddresses->getCustomerById($id);
+
+        return $this->render('details', [
+            'dataProvider' => $dataProvider,
+            'customerModel' =>$customer,
+        ]);
     }
 }

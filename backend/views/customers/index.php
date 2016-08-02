@@ -28,7 +28,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
  <?php
         Modal::begin([
-                'header'=>'<h4>Users</h4>',
+                'header'=>'<h4>Customers</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -59,15 +59,15 @@ $this->params['currentPage'] = $curpage;
              'mobile',
             // 'photo',
               [
-	            'attribute' => 'Gender',
+	            'attribute' => 'gender',
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->gender =='Male'){
-		                return Html::a('Male','#',['class'=>'label label-success']);
+		                return Html::a('Male','#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Female','#',['class'=>'label label-danger']);
+                        return Html::a('Female','#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -83,12 +83,12 @@ $this->params['currentPage'] = $curpage;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Addresses','index.php?r=customer-addresses/details&cu_id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a('Addresses','index.php?r=customer-addresses/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
            [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Orders','index.php?r=orders/details&cu_id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a('Orders','index.php?r=orders/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

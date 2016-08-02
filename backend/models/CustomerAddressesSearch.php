@@ -15,11 +15,14 @@ class CustomerAddressesSearch extends CustomerAddresses
     /**
      * @inheritdoc
      */
+
+    public $globalSearch;
+
     public function rules()
     {
         return [
             [['id', 'customer_id', 'city_id', 'area_id', 'is_default', 'deleted'], 'integer'],
-            [['street', 'building', 'floor', 'details', 'phone', 'email', 'latitude', 'longitude', 'created_at', 'updated_at'], 'safe'],
+            [['globalSearch','street', 'building', 'floor', 'details', 'phone', 'email', 'latitude', 'longitude', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -47,6 +50,7 @@ class CustomerAddressesSearch extends CustomerAddresses
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
         ]);
 
         $this->load($params);
@@ -57,26 +61,21 @@ class CustomerAddressesSearch extends CustomerAddresses
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'customer_id' => $this->customer_id,
-            'city_id' => $this->city_id,
-            'area_id' => $this->area_id,
-            'is_default' => $this->is_default,
-            'deleted' => $this->deleted,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        $query->joinWith('area');
+        $query->joinWith('city');
+        $query->joinWith('customer');
 
-        $query->andFilterWhere(['like', 'street', $this->street])
-            ->andFilterWhere(['like', 'building', $this->building])
-            ->andFilterWhere(['like', 'floor', $this->floor])
-            ->andFilterWhere(['like', 'details', $this->details])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'latitude', $this->latitude])
-            ->andFilterWhere(['like', 'longitude', $this->longitude]);
+        $query->orFilterWhere(['like', 'cities.name', $this->globalSearch])
+            ->orFilterWhere(['like', 'areas.name', $this->globalSearch])
+            ->orFilterWhere(['like', 'customers.full_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'street', $this->globalSearch])
+            ->orFilterWhere(['like', 'building', $this->globalSearch])
+            ->orFilterWhere(['like', 'floor', $this->globalSearch])
+            ->orFilterWhere(['like', 'details', $this->globalSearch])
+            ->orFilterWhere(['like', 'customer_addresses.phone', $this->globalSearch])
+            ->orFilterWhere(['like', 'customer_addresses.email', $this->globalSearch])
+            ->orFilterWhere(['like', 'latitude', $this->globalSearch])
+            ->orFilterWhere(['like', 'longitude', $this->globalSearch]);
 
         return $dataProvider;
     }

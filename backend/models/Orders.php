@@ -3,7 +3,7 @@
 namespace backend\models;
 
 use Yii;
-
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "orders".
  *
@@ -101,5 +101,35 @@ class Orders extends \yii\db\ActiveRecord
     public function getShop()
     {
         return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
+    }
+
+    public function getOrdersByCustomerId($id)
+    {
+        $query = Orders::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['customer_id'=> $id]);
+
+        return $dataProvider;
+    }
+
+    public function getCustomerById($id)
+    {
+        $query = Customers::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['id'=> $id]);
+
+        return $dataProvider;
     }
 }

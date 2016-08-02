@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -170,5 +171,17 @@ class OrdersController extends Controller
             Yii::$app->response->format='json';
             return ActiveForm::validate($model);
         }
+    }
+
+    public function actionDetails($id)
+    {
+        $orders = new Orders();
+        $dataProvider = $orders->getOrdersByCustomerId(Yii::$app->request->queryParams);
+        $customer = $orders->getCustomerById(Yii::$app->request->queryParams);
+
+        return $this->render('details', [
+            'dataProvider' => $dataProvider,
+            'customerModel' =>$customer,
+        ]);
     }
 }
