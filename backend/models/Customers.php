@@ -47,7 +47,8 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
             [['is_allowed', 'sms_count'], 'integer'],
-            [['confirmed_at', 'locked_at', 'created_at', 'updated_at'], 'safe'],
+            [['username','full_name','phone', 'mobile', 'gender'], 'required'],
+            [['created_at', 'updated_at', 'username','full_name','phone', 'mobile', 'gender','email'], 'safe'],
             [['username'], 'string', 'max' => 150],
             [['password_digest', 'confirmation_token', 'auth_token', 'full_name', 'phone', 'mobile', 'photo', 'gender', 'unlock_token', 'email'], 'string', 'max' => 255],
             [['lang'], 'string', 'max' => 5],
@@ -70,7 +71,7 @@ class Customers extends \yii\db\ActiveRecord
             'mobile' => Yii::t('app', 'Mobile'),
             'photo' => Yii::t('app', 'Photo'),
             'gender' => Yii::t('app', 'Gender'),
-            'is_allowed' => Yii::t('app', 'Is Allowed'),
+            'is_allowed' => Yii::t('app', 'Acitve'),
             'unlock_token' => Yii::t('app', 'Unlock Token'),
             'confirmed_at' => Yii::t('app', 'Confirmed At'),
             'locked_at' => Yii::t('app', 'Locked At'),

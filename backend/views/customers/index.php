@@ -26,6 +26,7 @@ $this->params['currentPage'] = $curpage;
          ?>
     </p>
     <br/>
+    
  <?php
         Modal::begin([
                 'header'=>'<h4>Customers</h4>',
@@ -57,6 +58,19 @@ $this->params['currentPage'] = $curpage;
              'full_name',
              'phone',
              'mobile',
+             [
+	            'attribute' => 'is_allowed',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->is_allowed ==1){
+		               return Html::a('Yes','#',['class'=>'label label-success']);
+                    }
+                    else {
+                        return Html::a('No','#',['class'=>'label label-danger']);
+                    }    
+	            }
+	        ],
             // 'photo',
               [
 	            'attribute' => 'gender',

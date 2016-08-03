@@ -120,7 +120,10 @@ class CustomersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       $user = $this->findModel($id);
+       $user->updated_at = date('Y-m-d h:m:s');
+       $user->is_allowed = 0;
+       $user->update(['updated_at','is_allowed']);
 
         return $this->redirect(['index']);
     }

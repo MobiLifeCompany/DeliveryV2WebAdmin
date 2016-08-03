@@ -52,7 +52,17 @@ use yii\helpers\Url;
                     
      ?>
 
-    <?= $form->field($model, 'order_status')->dropDownList([ 'OPEN' => 'OPEN', 'PENDING' => 'PENDING', 'CANCEL' => 'CANCEL', 'CLOSED' => 'CLOSED','RE-OPEN' => 'RE-OPEN', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'order_status')->dropDownList([ 'OPEN' => 'OPEN', 'PENDING' => 'PENDING', 'CANCEL' => 'CANCEL', 'CLOSED' => 'CLOSED','RE-OPEN' => 'RE-OPEN', ], ['prompt' => '',
+     'onchange'=>
+               'if($(this).val() == "CANCEL")
+                {
+                    document.getElementById("orders-cancel_reason").disabled = false;
+                } 
+                else 
+                {
+                    document.getElementById("orders-cancel_reason").disabled = true;
+                }',
+              ]) ?>
 
      <?= $form->field($model, 'delivery_charge')->textInput() ?>
 
@@ -60,7 +70,7 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cancel_reason')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cancel_reason')->textInput(['maxlength' => true, 'disabled'=> ($model->order_status == 'CANCEL')? "disabled" : ""]) ?>
 
     <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?> 
 

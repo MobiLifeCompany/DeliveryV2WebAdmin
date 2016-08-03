@@ -41,10 +41,20 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'order_status', 'qty', 'delivery_charge'], 'required'],
+            [['customer_id', 'order_status','total', 'qty', 'delivery_charge','customer_address_id'], 'required'],
             [['customer_id', 'shop_id', 'qty', 'delivery_charge'], 'integer'],
             [['note'], 'string'],
             [['created_at', 'updated_at','customer_address_id'], 'safe'],
+            ['cancel_reason','required','when'=>function($model){
+                return ($model->order_status == 'CANCEL')? true : false;
+            },'whenClient' => "function(){
+                if($('#order_status').val()=='CANCEL'){
+                    true;
+                }else
+                {
+                    false;
+                }
+            }"],
             [['customer_address_id', 'order_status', 'total', 'cancel_reason'], 'string', 'max' => 255],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::className(), 'targetAttribute' => ['customer_id' => 'id']],
         ];

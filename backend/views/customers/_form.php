@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php 
       //$actionType =Yii::$app->controller->action->id;
-       $validationUrl = ['orders/validation'];
+       $validationUrl = ['customers/validation'];
        if (!$model->isNewRecord)
             $validationUrl['id'] = $model->id;
 
@@ -24,9 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password_digest')->textInput(['maxlength' => true]) ?>
-
-
     <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
@@ -35,7 +32,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'gender')->dropDownList([ 'Male' => 'Male', 'Female' => 'Female', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'gender')->dropDownList([ 'M' => 'Male', 'F' => 'Female', ], ['prompt' => '']) ?>
+
+    <?= $form->field($model, 'is_allowed')->dropDownList([ '1' => 'Yes', '0' => 'No', ], ['prompt' => '']) ?>
+    
 
 
     <div class="form-group">
