@@ -391,7 +391,15 @@ AppAsset::register($this);
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=areas"><i class="fa fa-map-pin"></i> Areas</a></li>
+            ><a href="index.php?r=shops"><i class="fa fa-map-pin"></i> Areas</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='shops') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=shops"><i class="fa fa-home"></i> Shops</a></li>
           </ul>
         </li>
       </ul>

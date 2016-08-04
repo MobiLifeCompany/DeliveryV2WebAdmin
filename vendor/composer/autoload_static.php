@@ -23,10 +23,16 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'm' => 
+        array (
+            'maksyutin\\duallistbox\\' => 22,
+        ),
         'k' => 
         array (
             'kartik\\select2\\' => 15,
+            'kartik\\plugins\\fileinput\\' => 25,
             'kartik\\grid\\' => 12,
+            'kartik\\file\\' => 12,
             'kartik\\base\\' => 12,
         ),
         'c' => 
@@ -72,13 +78,25 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'maksyutin\\duallistbox\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maksyutin/yii2-dual-list-box',
+        ),
         'kartik\\select2\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
         ),
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
         'kartik\\grid\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-grid',
+        ),
+        'kartik\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput',
         ),
         'kartik\\base\\' => 
         array (

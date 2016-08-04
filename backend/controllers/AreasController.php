@@ -67,7 +67,6 @@ class AreasController extends Controller
     {
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
-            'city_name' => Cities::findOne($this->findModel($id)->city_id)->name,
         ]);
     }
 

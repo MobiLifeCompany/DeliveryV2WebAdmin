@@ -15,7 +15,6 @@ $(function(){
 
 });
 
-
 function showUpdateModal(id){
       $('#modal').modal('show')
       .find('#modalContent')
@@ -28,3 +27,14 @@ function showViewModal(id){
       .find('#modalContent')
       .load($('#viewModalButton'+id).attr('value'));
 }
+
+function showDeliveryAreasModal(id){
+      $('#modal').modal('show')
+      .find('#modalContent')
+      .load($('#deliveryAreasModalButton'+id).attr('value'));
+      
+}
+
+$('#modal').on('hidden.bs.modal', function() {
+    $('#modalContent').empty(); //to clear the modal content after hide
+})

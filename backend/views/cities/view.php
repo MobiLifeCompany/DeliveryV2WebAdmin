@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             ['attribute' => 'country_id',
-             'value'=>$country_name
+             'value'=> $model->country->name
             ],
             'name',
             'ar_name',

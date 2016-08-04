@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             ['attribute' => 'city_id',
-             'value'=> $city_name
+             'value'=> $model->city->name
             ],
             'name',
             [

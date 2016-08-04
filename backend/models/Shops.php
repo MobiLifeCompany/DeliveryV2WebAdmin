@@ -60,8 +60,8 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['business_id', 'area_id'], 'required'],
-            [['business_id', 'area_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed'], 'integer'],
+            [['business_id'], 'required'],
+            [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed'], 'integer'],
             [['promotion_note', 'warning_note', 'masteries'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'short_description', 'address', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'string', 'max' => 255],
@@ -98,15 +98,15 @@ class Shops extends \yii\db\ActiveRecord
             'photo' => Yii::t('app', 'Photo'),
             'masteries' => Yii::t('app', 'Masteries'),
             'deleted' => Yii::t('app', 'Deleted'),
-            'lang' => Yii::t('app', 'Lang'),
+            'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'rating' => Yii::t('app', 'Rating'),
             'country' => Yii::t('app', 'Country'),
             'subscribed' => Yii::t('app', 'Subscribed'),
-            'ar_name' => Yii::t('app', 'Ar Name'),
-            'ar_short_description' => Yii::t('app', 'Ar Short Description'),
-            'ar_address' => Yii::t('app', 'Ar Address'),
+            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'ar_short_description' => Yii::t('app', 'Arabic Short Description'),
+            'ar_address' => Yii::t('app', 'Arabic Address'),
             'phone' => Yii::t('app', 'Phone'),
         ];
     }
