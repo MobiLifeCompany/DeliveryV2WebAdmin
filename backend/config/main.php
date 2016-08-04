@@ -52,6 +52,17 @@ return [
                 ],
             ],
         ],
+        'assetManager' => [
+        'bundles' => [
+            'dosamigos\google\maps\MapAsset' => [
+                'options' => [
+                    'key' => 'AIzaSyBff9ACTrR5bGktksjrqnHCQepr5W80C9o',
+                    'language' => 'en',
+                    'version' => '3.1.18'
+                ]
+              ]
+            ]
+         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

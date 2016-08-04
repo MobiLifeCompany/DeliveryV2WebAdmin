@@ -185,4 +185,39 @@ class CustomerAddressesController extends Controller
             'customerModel' =>$customer,
         ]);
     }
+
+    public function actionMap($id)
+    {
+       $model = $this->findModel($id);
+       
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $customerAddresses = $this->findModel($id);
+            $customerAddresses->updated_at = date('Y-m-d h:m:s');
+            $customerAddresses->latitude = $data['CustomerAddresses']['latitude'];
+            $customerAddresses->longitude= $data['CustomerAddresses']['longitude'];
+            $customerAddresses->update(['updated_at','latitude','longitude']);
+            $model->save();
+           // print_r($model->getErrors());
+            //die();
+            return $this->render('viewWithMap', [
+             'model' => $this->findModel($id),
+             ]);
+        } else {
+            return $this->render('mapUpdate', [
+                'model' => $model,
+            ]);
+        }
+
+    }
+
+    public function actionVmap($id)
+    {
+       $model = $this->findModel($id);
+       return $this->render('viewWithMap', [
+             'model' => $this->findModel($id),
+             ]);
+    }
+
+
 }

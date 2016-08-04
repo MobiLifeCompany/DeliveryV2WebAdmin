@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Orders;
+use backend\models\OrderItems;
 use backend\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +68,7 @@ class OrdersController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
 
     /**
      * Creates a new Orders model.

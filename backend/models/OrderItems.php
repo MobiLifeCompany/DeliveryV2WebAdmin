@@ -91,6 +91,8 @@ class OrderItems extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
+        
+
         $query->andWhere(['order_id'=> $id]);
 
         return $dataProvider;
@@ -105,7 +107,10 @@ class OrderItems extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
-        $query->andWhere(['id'=> $id]);
+        $query->joinWith('shop');
+        $query->joinWith('customerAddresses');
+
+        $query->andWhere(['orders.id'=> $id]);
 
         return $dataProvider;
     }

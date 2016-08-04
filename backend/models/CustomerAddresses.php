@@ -44,9 +44,9 @@ class CustomerAddresses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'details', 'latitude', 'longitude'], 'required'],
+            [['customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'latitude', 'longitude'], 'required'],
             [['customer_id', 'city_id', 'area_id', 'is_default', 'deleted'], 'integer'],
-            [['created_at', 'updated_at','customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'details', 'latitude', 'longitude'], 'safe'],
+            [['created_at', 'updated_at','customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'latitude', 'longitude'], 'safe'],
             [['street', 'building', 'floor', 'details', 'latitude', 'longitude'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 30],
             [['email'], 'string', 'max' => 50],

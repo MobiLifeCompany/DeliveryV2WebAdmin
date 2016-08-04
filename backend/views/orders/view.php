@@ -9,6 +9,10 @@ use backend\models\CustomerAddresses;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$curpage = Yii::$app->controller->id;
+$this->params['currentPage'] = $curpage;
+
 ?>
 <div class="orders-view">
 

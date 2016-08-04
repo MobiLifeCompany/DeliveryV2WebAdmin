@@ -36,6 +36,16 @@ $this->params['currentPage'] = $curpage;
            echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
+
+    <?php
+        Modal::begin([
+                'header'=>'<h4>Order Map</h4>',
+                'id' => 'mapModal',
+                'size' => 'modal-lg',
+                ]);
+           echo "<div id='mapModalContent'></div>";
+        Modal::end();
+    ?>
     
     <?php Pjax::begin(['id'=>'modalGrid']);?>
     <?= GridView::widget([

@@ -24,6 +24,7 @@ use yii\data\ActiveDataProvider;
  * @property OrderItems[] $orderItems
  * @property Customers $customer
  * @property Shops $shop
+ * @property CustomerAddresses $customerAddresses
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -113,6 +114,12 @@ class Orders extends \yii\db\ActiveRecord
         return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
     }
 
+    public function getCustomerAddresses()
+    {
+        return $this->hasOne(CustomerAddresses::className(), ['id' => 'customer_address_id']);
+    }
+
+   
     public function getOrdersByCustomerId($id)
     {
         $query = Orders::find();

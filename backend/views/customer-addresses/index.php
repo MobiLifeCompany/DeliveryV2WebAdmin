@@ -84,6 +84,11 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
+             [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('','index.php?r=customer-addresses/map&id='.$model->id,['class'=>'glyphicon glyphicon-map-marker']); },
+            ],
             // 'created_at',
             // 'updated_at',
             [

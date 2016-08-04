@@ -6,6 +6,7 @@ use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -165,4 +166,6 @@ $this->params['currentPage'] = $curpage;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+
+</div>

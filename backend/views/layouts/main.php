@@ -441,6 +441,7 @@ AppAsset::register($this);
           </ul>
         </li>
         <!-- End of Customers and Orders -->
+        <li><a href="index.php?r=place"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         </li>
       </ul>
     </section>

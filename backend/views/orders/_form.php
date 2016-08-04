@@ -7,6 +7,9 @@ use backend\models\Shops;
 use backend\models\Customers;
 use backend\models\CustomerAddresses;
 use yii\helpers\Url;
+use yii\web\JsExpression;
+
+
 
 
 /* @var $this yii\web\View */
@@ -77,8 +80,8 @@ use yii\helpers\Url;
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
+
 
 </div>
 
