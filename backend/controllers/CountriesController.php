@@ -112,6 +112,7 @@ class CountriesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->updated_at = date('Y-m-d h:m:s');
             if($model->save())
             {
                 echo 1;

@@ -3,7 +3,7 @@
 namespace backend\models;
 
 use Yii;
-
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "customer_addresses".
  *
@@ -25,6 +25,8 @@ use Yii;
  * @property string $updated_at
  *
  * @property Customers $customer
+ * @property Areas $area
+ * @property Cities $city
  */
 class CustomerAddresses extends \yii\db\ActiveRecord
 {
@@ -42,9 +44,9 @@ class CustomerAddresses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'city_id', 'area_id', 'phone', 'email'], 'required'],
+            [['customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'latitude', 'longitude'], 'required'],
             [['customer_id', 'city_id', 'area_id', 'is_default', 'deleted'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','customer_id', 'city_id', 'area_id', 'phone', 'email','street', 'building', 'floor', 'latitude', 'longitude'], 'safe'],
             [['street', 'building', 'floor', 'details', 'latitude', 'longitude'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 30],
             [['email'], 'string', 'max' => 50],
@@ -59,9 +61,9 @@ class CustomerAddresses extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'customer_id' => Yii::t('app', 'Customer ID'),
-            'city_id' => Yii::t('app', 'City ID'),
-            'area_id' => Yii::t('app', 'Area ID'),
+            'customer_id' => Yii::t('app', 'Customer'),
+            'city_id' => Yii::t('app', 'City'),
+            'area_id' => Yii::t('app', 'Area'),
             'street' => Yii::t('app', 'Street'),
             'building' => Yii::t('app', 'Building'),
             'floor' => Yii::t('app', 'Floor'),
@@ -71,7 +73,7 @@ class CustomerAddresses extends \yii\db\ActiveRecord
             'latitude' => Yii::t('app', 'Latitude'),
             'longitude' => Yii::t('app', 'Longitude'),
             'is_default' => Yii::t('app', 'Is Default'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'deleted' => Yii::t('app', 'Active'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
@@ -83,5 +85,42 @@ class CustomerAddresses extends \yii\db\ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(Customers::className(), ['id' => 'customer_id']);
+    }
+    public function getArea()
+    {
+        return $this->hasOne(Areas::className(), ['id' => 'area_id']);
+    }
+    public function getCity()
+    {
+        return $this->hasOne(Cities::className(), ['id' => 'city_id']);
+    }
+
+    public function getCustomerAddresses($id)
+    {
+        $query = CustomerAddresses::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['customer_id'=> $id]);
+
+        return $dataProvider;
+    }
+    public function getCustomerById($id)
+    {
+        $query = Customers::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->andWhere(['id'=> $id]);
+
+        return $dataProvider;
     }
 }
