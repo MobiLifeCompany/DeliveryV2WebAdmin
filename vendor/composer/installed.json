@@ -1368,57 +1368,6 @@
         ]
     },
     {
-        "name": "maksyutin/yii2-dual-list-box",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/maksyutin/yii2-dual-list-box.git",
-            "reference": "d4f165d2a36024cb4e049d74b0730261cdb878dc"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/maksyutin/yii2-dual-list-box/zipball/d4f165d2a36024cb4e049d74b0730261cdb878dc",
-            "reference": "d4f165d2a36024cb4e049d74b0730261cdb878dc",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": "~2.0"
-        },
-        "time": "2015-02-27 23:36:21",
-        "type": "yii2-extension",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "maksyutin\\duallistbox\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "proprietary"
-        ],
-        "authors": [
-            {
-                "name": "Maksyutin Dmitriy",
-                "email": "maksyutin@yandex.ru",
-                "homepage": "http://maksyutin.ru"
-            },
-            {
-                "name": "Geodan B.V.",
-                "homepage": "http://www.geodan.nl"
-            }
-        ],
-        "description": "Dual list box Widget for Yii 2",
-        "keywords": [
-            "dual listview",
-            "dual-list-box",
-            "duallistbox",
-            "widget",
-            "yii 2",
-            "yii2"
-        ]
-    },
-    {
         "name": "kartik-v/bootstrap-fileinput",
         "version": "v4.3.3",
         "version_normalized": "4.3.3.0",
@@ -1527,6 +1476,57 @@
             "plugin",
             "upload",
             "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "maksyutin/yii2-dual-list-box",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maksyutin/yii2-dual-list-box.git",
+            "reference": "d4f165d2a36024cb4e049d74b0730261cdb878dc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maksyutin/yii2-dual-list-box/zipball/d4f165d2a36024cb4e049d74b0730261cdb878dc",
+            "reference": "d4f165d2a36024cb4e049d74b0730261cdb878dc",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "~2.0"
+        },
+        "time": "2015-02-27 23:36:21",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "maksyutin\\duallistbox\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "Maksyutin Dmitriy",
+                "email": "maksyutin@yandex.ru",
+                "homepage": "http://maksyutin.ru"
+            },
+            {
+                "name": "Geodan B.V.",
+                "homepage": "http://www.geodan.nl"
+            }
+        ],
+        "description": "Dual list box Widget for Yii 2",
+        "keywords": [
+            "dual listview",
+            "dual-list-box",
+            "duallistbox",
+            "widget",
+            "yii 2",
             "yii2"
         ]
     }
