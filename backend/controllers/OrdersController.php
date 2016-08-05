@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\OrderItems;
+use backend\models\Orders;
 use backend\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -184,5 +185,29 @@ class OrdersController extends Controller
             'dataProvider' => $dataProvider,
             'customerModel' =>$customer,
         ]);
+    }
+
+    public function actionSetdelivery($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $data = Yii::$app->request->post();
+            $model->updated_at = date('Y-m-d h:m:s');
+            $model->delivery_user_id = $data['Orders']['delivery_user_id'];
+            $model->update(['updated_at','delivery_user_id','cancel_reason']);
+            if($model->save(false))
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
+        } else {
+            return $this->renderAjax('updateDeliveryUser', [
+                'model' => $model,
+            ]);
+        }
     }
 }

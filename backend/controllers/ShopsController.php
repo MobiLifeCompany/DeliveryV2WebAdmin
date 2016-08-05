@@ -165,14 +165,16 @@ class ShopsController extends Controller
             if(isset($selectedAreas))
             {
                 ShopDeliveryAreas::deleteAll(['shop_id' => $id]);
-                foreach($selectedAreas as $area){
-                    $model = new ShopDeliveryAreas();
-                    $model->area_id = $area;
-                    $model->shop_id = $id;
-                    $model->deleted = 0;
-                    $model->created_at = date('Y-m-d h:m:s');
-                    $model->updated_at = date('Y-m-d h:m:s');
-                    $model->save();
+                if(!empty($selectedAreas)){
+                    foreach($selectedAreas as $area){
+                        $model = new ShopDeliveryAreas();
+                        $model->area_id = $area;
+                        $model->shop_id = $id;
+                        $model->deleted = 0;
+                        $model->created_at = date('Y-m-d h:m:s');
+                        $model->updated_at = date('Y-m-d h:m:s');
+                        $model->save();
+                    }
                 }
             }
 

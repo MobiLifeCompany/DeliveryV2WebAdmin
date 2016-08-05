@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
  * @property integer $id
  * @property integer $customer_id
  * @property integer $shop_id
+ * @property integer $delivery_user_id
  * @property string $customer_address_id
  * @property string $order_status
  * @property string $total
@@ -25,6 +26,7 @@ use yii\data\ActiveDataProvider;
  * @property Customers $customer
  * @property Shops $shop
  * @property CustomerAddresses $customerAddresses
+ * @property User $deliveryUser
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -79,6 +81,7 @@ class Orders extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'delivery_charge' => Yii::t('app', 'Delivery Charge'),
+            'delivery_user_id' => Yii::t('app', 'Delivery User'),
         ];
     }
 
@@ -112,6 +115,11 @@ class Orders extends \yii\db\ActiveRecord
     public function getShop()
     {
         return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
+    }
+
+    public function getDeliveryUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'delivery_user_id']);
     }
 
     public function getCustomerAddresses()

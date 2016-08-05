@@ -5,7 +5,7 @@ use yii\Helpers\Url;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
-
+use backend\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -93,8 +93,25 @@ $this->params['currentPage'] = $curpage;
                  'attribute' => 'Total With Delivery',
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
              ],
-             'cancel_reason',
-             'note:ntext',
+            // 'cancel_reason',
+            // 'note:ntext',
+            [
+             'attribute' => 'delivery_user_id',
+             'vAlign'=>'middle',
+             'format'=>'raw',
+             'value'=>function($model) { 
+                     if($model->deliveryUser!=null){
+                         return  Html::a($model->deliveryUser->username,'#',['class'=>'label label-success']);
+                     }else{
+                          return Html::a('Not Assigned','#',['class'=>'label label-danger']);
+                     }
+            	}
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']); },
+            ],
             // 'created_at',
             // 'updated_at',
              [
@@ -104,7 +121,7 @@ $this->params['currentPage'] = $curpage;
             ],
             [
                'class' => 'yii\grid\ActionColumn',
-               'template' => '{delete} {update} {view} ',
+               'template' => '{update} {view} ',
                'buttons' => [
                'view' => function ($url,$model) 
                     {
