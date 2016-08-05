@@ -19,11 +19,11 @@ class ImageUpload extends Model
         ];
     }
     
-    public function upload($id)
+    public function upload($id, $baseURL)
     {
         if ($this->validate()) {
             
-            $this->imageFile->saveAs('images/shops/'. $id . '/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            $this->imageFile->saveAs($baseURL . $id . '/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
             return true;
         } else {
             return false;

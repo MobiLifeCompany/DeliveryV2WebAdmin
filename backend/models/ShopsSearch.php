@@ -59,13 +59,7 @@ class ShopsSearch extends Shops
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query->orFilterWhere(['like', 'name', $this->globalSearch])
-            ->orFilterWhere(['like', 'deleted', $this->globalSearch])
-            ->orFilterWhere(['like', 'lang', $this->globalSearch])
-            ->orFilterWhere(['like', 'ar_name', $this->globalSearch]);
-
-        return $dataProvider;
-
+        
         $query->orFilterWhere(['like', 'name', $this->name])
             ->orFilterWhere(['like', 'short_description', $this->short_description])
             ->orFilterWhere(['like', 'address', $this->address])
@@ -76,6 +70,7 @@ class ShopsSearch extends Shops
             ->orFilterWhere(['like', 'promotion_note', $this->promotion_note])
             ->orFilterWhere(['like', 'warning_note', $this->warning_note])
             ->orFilterWhere(['like', 'masteries', $this->masteries])
+            ->orFilterWhere(['like', 'deleted', $this->globalSearch])
             ->orFilterWhere(['like', 'lang', $this->lang])
             ->orFilterWhere(['like', 'country', $this->country])
             ->orFilterWhere(['like', 'ar_name', $this->ar_name])

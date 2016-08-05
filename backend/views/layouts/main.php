@@ -405,6 +405,38 @@ else
               ?>
             ><a href="index.php?r=shops"><i class="fa fa-home"></i> Shops</a></li>
           </ul>
+          </li>
+          <!-- Categories and items -->
+          <li class="treeview  <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='categories' || $this->params['currentPage']=='items')){
+                      echo "active";
+                }
+              ?>">
+          <a href="#">
+            <i class="fa fa-sitemap"></i> <span>Products</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='categories') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=item-categories"><i class="fa fa-object-group"></i> Categories</a></li>
+            <li 
+              <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='items') 
+                      echo "class='active'";
+                }
+              ?>
+            ><a href="index.php?r=cities"><i class="fa fa-list-ul"></i> Items</a></li>
+            
+          </ul>
           <!-- Customers and Orders -->
            <li class="treeview <?php 
                 if(isset($this->params['currentPage']) && ($this->params['currentPage']=='customers' || $this->params['currentPage']=='customer-addresses'  || $this->params['currentPage']=='orders' || $this->params['currentPage']=='order-items')){

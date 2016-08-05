@@ -63,7 +63,7 @@ use maksyutin\duallistbox\Widget;
                                         'initialPreview'=>"images/shops/".$model->id."/".$model->photo."",
                                         'initialPreviewAsData'=>true,
                                         'initialCaption'=>$model->photo,
-                                        'overwriteInitial'=>false,
+                                        'overwriteInitial'=>true,
                                     ],]);
             else
                 echo $form->field($model, 'photo')->widget(FileInput::classname(), [
