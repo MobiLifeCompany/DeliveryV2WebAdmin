@@ -39,3 +39,4 @@ phpunit.phar
 /backend/runtime/logs
 /backend/runtime/logs/app.log
 /vendor/psr
+/vendor/kartik-v

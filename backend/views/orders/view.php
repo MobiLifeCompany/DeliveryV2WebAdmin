@@ -39,6 +39,10 @@ $this->params['currentPage'] = $curpage;
             'total',
             'cancel_reason',
             'note:ntext',
+            [
+             'attribute' => 'delivery_user_id',
+             'value'=>($model->deliveryUser!=null)?$model->deliveryUser->first_name.' '.$model->deliveryUser->last_name.' ['.$model->deliveryUser->username.']':'Not Assigned'
+            ],
             'created_at',
             'updated_at',
             
