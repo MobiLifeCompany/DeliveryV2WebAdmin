@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use backend\models\ImageUpload;
 use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
+use yii\widgets\ActiveForm;
 
 /**
  * ItemCategoriesController implements the CRUD actions for ItemCategories model.
@@ -69,8 +70,9 @@ class ItemCategoriesController extends Controller
         $model = new ItemCategories();
         $imageModel = new ImageUpload();
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+     //   print_r($_POST);
+     //  die();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->created_at = date('Y-m-d h:m:s');
             $model->updated_at = date('Y-m-d h:m:s');
             $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
@@ -160,6 +162,16 @@ class ItemCategoriesController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+     // Ajax Validation 
+    public function actionValidation($id = null){
+        $model = $id===null ? new ItemCategories : ItemCategories::findOne($id);
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format='json';
+            return ActiveForm::validate($model);
         }
     }
 }

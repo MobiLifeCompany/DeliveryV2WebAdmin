@@ -63,10 +63,12 @@ class ShopsController extends Controller
     {
         $shop = Shops::find()->where(['id' => $id])->one();
 
-        $deliveryAreas = array();
-        foreach ($shop->shopDeliveryAreas as $deliveryArea) {
-            array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
-        }
+       $deliveryAreas = array();
+       if(!empty($shop->shopDeliveryAreas)){
+            foreach ($shop->shopDeliveryAreas as $deliveryArea) {
+                array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+            }
+          }
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
             'deliveryAreas' => $deliveryAreas,
@@ -242,5 +244,51 @@ class ShopsController extends Controller
     {
         $model = ShopDeliveryAreas::find()->where(['shop_id' => $id])->orderBy('id')->all();
         return $model;
+    }
+
+    public function actionMap($id)
+    {
+       $model = $this->findModel($id);
+       
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $shops = $this->findModel($id);
+            $shops->updated_at = date('Y-m-d h:m:s');
+            $shops->latitude = $data['Shops']['latitude'];
+            $shops->longitude= $data['Shops']['longitude'];
+            $shops->update(['updated_at','latitude','longitude']);
+            $model->save();
+           // print_r($model->getErrors());
+            //die();
+            $deliveryAreas = array();
+          
+            foreach ($shop->shopDeliveryAreas as $deliveryArea) {
+                array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+            }
+          
+          return $this->render('viewWithMap', [
+            'model' => $this->findModel($id),
+            'deliveryAreas' => $deliveryAreas,
+         ]);
+        } else {
+            return $this->render('mapUpdate', [
+                'model' => $model,
+            ]);
+        }
+
+    }
+    public function actionVmap($id)
+    {
+       $model = $this->findModel($id);
+          //die();
+        $deliveryAreas = array();
+        foreach ($model->shopDeliveryAreas as $deliveryArea) {
+            array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+         }
+        
+        return $this->render('viewWithMap', [
+            'model' => $this->findModel($id),
+            'deliveryAreas' => $deliveryAreas,
+         ]);
     }
 }

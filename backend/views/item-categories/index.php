@@ -63,7 +63,7 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-            'photo',
+            //'photo',
             'lang',
             'created_at',
             'updated_at',

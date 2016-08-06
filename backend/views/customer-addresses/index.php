@@ -84,7 +84,20 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-             [
+            [
+	            'attribute' => 'Position',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->latitude =='0' || $model->latitude =='0' ){
+		                return Html::a('Not Set','#',['class'=>'label label-danger']);
+                    }
+                    else {
+                        return Html::a('Set','#',['class'=>'label label-success']);
+                    }    
+	            }
+	        ],
+            [
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { return Html::a('','index.php?r=customer-addresses/map&id='.$model->id,['class'=>'glyphicon glyphicon-map-marker']); },

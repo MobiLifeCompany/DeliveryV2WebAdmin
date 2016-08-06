@@ -40,3 +40,5 @@ phpunit.phar
 /backend/runtime/logs/app.log
 /vendor/psr
 /vendor/kartik-v
+/backend/web/images/shops
+/backend/web/images/categories

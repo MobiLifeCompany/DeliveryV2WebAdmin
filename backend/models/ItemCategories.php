@@ -34,9 +34,11 @@ class ItemCategories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['deleted','name', 'ar_name'], 'required'],
             [['deleted'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['name', 'photo', 'ar_name'], 'string', 'max' => 255],
+            [['created_at', 'updated_at','photo'], 'safe'],
+            [['photo'], 'file',],
+            [['name', 'ar_name'], 'string', 'max' => 255],
             [['lang'], 'string', 'max' => 5],
         ];
     }

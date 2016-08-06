@@ -66,9 +66,27 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-            'lang',
-            'created_at',
+             'created_at',
             'updated_at',
+            'lang',
+            [
+	            'attribute' => 'Position',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if(empty($model->latitude) || empty($model->latitude) ){
+		                return Html::a('Not Set','#',['class'=>'label label-danger']);
+                    }
+                    else {
+                        return Html::a('Set','#',['class'=>'label label-success']);
+                    }    
+	            }
+	        ],
+             [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('','index.php?r=shops/map&id='.$model->id,['class'=>'glyphicon glyphicon-map-marker']); },
+            ],
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
