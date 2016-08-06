@@ -30,6 +30,16 @@ class ShopsController extends Controller
     public function behaviors()
     {
         return [
+             'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index','update','create','delete','view'],
+                'rules' =>[
+                    [
+                        'allow' =>true,
+                        'roles' =>['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -290,5 +300,25 @@ class ShopsController extends Controller
             'model' => $this->findModel($id),
             'deliveryAreas' => $deliveryAreas,
          ]);
+    }
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        // Check only when the user is logged in
+        if ( !Yii::$app->user->isGuest)  {
+            if (Yii::$app->session['userSessionTimeout'] < time()) {
+                Yii::$app->user->logout();
+                $this->redirect(['site/login']);
+            } else {
+                Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+                return true; 
+            }
+        } else {
+            return true;
+        }
     }
 }
