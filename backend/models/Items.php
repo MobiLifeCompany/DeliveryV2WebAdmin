@@ -27,6 +27,8 @@ use Yii;
  */
 class Items extends \yii\db\ActiveRecord
 {
+    public $shop_id;
+    public $item_category_id;
     /**
      * @inheritdoc
      */
@@ -43,7 +45,7 @@ class Items extends \yii\db\ActiveRecord
         return [
             [['shop_item_category_id'], 'required'],
             [['shop_item_category_id', 'active', 'deleted'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'item_category_id', 'shop_id'], 'safe'],
             [['name', 'description', 'price', 'photo', 'ar_name', 'ar_description'], 'string', 'max' => 255],
             [['lang'], 'string', 'max' => 5],
             [['shop_item_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ShopItemCategories::className(), 'targetAttribute' => ['shop_item_category_id' => 'id']],
@@ -64,14 +66,23 @@ class Items extends \yii\db\ActiveRecord
             'photo' => Yii::t('app', 'Photo'),
             'active' => Yii::t('app', 'Active'),
             'deleted' => Yii::t('app', 'Deleted'),
-            'lang' => Yii::t('app', 'Lang'),
+            'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Ar Name'),
-            'ar_description' => Yii::t('app', 'Ar Description'),
+            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'ar_description' => Yii::t('app', 'Arabic Description'),
+            'shop_id' => Yii::t('app', 'Shop'),
+            'item_category_id' => Yii::t('app', 'Category'),
         ];
     }
 
+    public function getShopId() {
+        return $this->shopItemCategory->shop->id;
+    }
+
+    public function getItemCategoryId() {
+        return $this->shopItemCategory->itemCategory->id;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
