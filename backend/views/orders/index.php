@@ -62,11 +62,13 @@ $this->params['currentPage'] = $curpage;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            ['attribute' => 'customer_id',
-             'value'=>'customer.full_name'
+            [
+                'attribute' => 'customer_id',
+                'value'=>'customer.full_name'
             ],
-            ['attribute' => 'shop_id',
-             'value'=>'shop.name'
+            [
+                'attribute' => 'shop_id',
+                'value'=>'shop.name'
             ],
             [
 	            'attribute' => 'order_status',

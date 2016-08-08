@@ -29,6 +29,16 @@ class ItemsController extends Controller
     public function behaviors()
     {
         return [
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index','update','create','delete','view'],
+                'rules' =>[
+                    [
+                        'allow' =>true,
+                        'roles' =>['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -104,7 +114,7 @@ class ItemsController extends Controller
                     echo 0;
                 }
             }
-            return $this->redirect(['index']);
+           return $this->redirect(['index']);
         }
         else {
             return $this->renderAjax('create', [
@@ -146,8 +156,10 @@ class ItemsController extends Controller
                 if($model->save())
                 {
                     //Upload image
-                    if(isset($imageModel->imageFile))
+                    if(isset($imageModel->imageFile)){
+                        FileHelper::createDirectory('images/items/'.$model->id);
                         $imageModel->upload($model->id,'images/items/');
+                    }
                     echo 1;
                 }
                 else
@@ -190,6 +202,26 @@ class ItemsController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        // Check only when the user is logged in
+        if ( !Yii::$app->user->isGuest)  {
+            if (Yii::$app->session['userSessionTimeout'] < time()) {
+                Yii::$app->user->logout();
+                $this->redirect(['site/login']);
+            } else {
+                Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
+                return true; 
+            }
+        } else {
+            return true;
         }
     }
 }

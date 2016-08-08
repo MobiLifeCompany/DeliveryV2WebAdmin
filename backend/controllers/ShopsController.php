@@ -127,6 +127,7 @@ class ShopsController extends Controller
             {
                 echo 0;
             }
+            return $this->redirect(['index']);
         }
         else {
             return $this->renderAjax('create', [
@@ -151,11 +152,7 @@ class ShopsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->updated_at = date('Y-m-d H:i:s');
-<<<<<<< Updated upstream
-            
-=======
             echo $model->photo;
->>>>>>> Stashed changes
             if(isset($imageModel->imageFile))
                 $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
             else
@@ -163,8 +160,10 @@ class ShopsController extends Controller
             if($model->save())
             {
                 //Upload image
-                if(isset($imageModel->imageFile))
+                if(isset($imageModel->imageFile)){
+                    FileHelper::createDirectory('images/shops/'.$model->id);
                     $imageModel->upload($model->id,'images/shops/');
+                }
                 echo 1;
             }
             else

@@ -59,7 +59,7 @@ class Items extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'shop_item_category_id' => Yii::t('app', 'Shop Item Category ID'),
+            'shop_item_category_id' => Yii::t('app', 'Item Category'),
             'name' => Yii::t('app', 'Name'),
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),

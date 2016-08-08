@@ -48,11 +48,11 @@ $this->params['currentPage'] = $curpage;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            'ar_name',
             ['attribute' => 'business_id',
              'value'=>'business.name'
             ],
-            'name',
-            'ar_name',
             [
 	            'attribute' => 'deleted',
                 'vAlign'=>'middle',
@@ -66,9 +66,12 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-             'created_at',
-            'updated_at',
-            'lang',
+            'rating',
+            'estimation_time',
+            'min_amount',
+           // 'delivery_expected_time',
+            'delivery_charge',
+            //'lang',
             [
 	            'attribute' => 'Position',
                 'vAlign'=>'middle',

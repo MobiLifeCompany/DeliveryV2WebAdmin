@@ -70,3 +70,4 @@ use kartik\file\FileInput;
     $("select").select2();
 </script>
 </div>
+

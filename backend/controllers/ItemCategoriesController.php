@@ -130,8 +130,10 @@ class ItemCategoriesController extends Controller
             if($model->save())
             {
                 //Upload image
-                if(isset($imageModel->imageFile))
+                if(isset($imageModel->imageFile)){
+                    FileHelper::createDirectory('images/categories/'.$model->id);
                     $imageModel->upload($model->id,'images/categories/');
+                }
                 echo 1;
             }
             else

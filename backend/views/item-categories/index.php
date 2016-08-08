@@ -19,7 +19,7 @@ $this->params['currentPage'] = $curpage;
 
 ?>
 <div class="item-categories-index">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
         <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=item-categories/create'),'id'=>'modalButton']); ?>

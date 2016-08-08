@@ -50,12 +50,15 @@ $this->params['currentPage'] = $curpage;
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             'ar_name',
-            ['attribute' => 'shop_id',
-             'value'=>'shopItemCategory.shop.name'
+            [
+                'attribute' => 'shop_id',
+                'value'=>'shopItemCategory.shop.name'
             ],
-            ['attribute' => 'item_category_id',
-             'value'=>'shopItemCategory.itemCategory.name'
+            [
+                'attribute' => 'shop_item_category_id',
+                'value'=>'shopItemCategory.itemCategory.name'
             ],
+            'price',
             [
 	            'attribute' => 'deleted',
                 'vAlign'=>'middle',
@@ -69,9 +72,19 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-            'created_at',
-            'updated_at',
-            'lang',
+            [
+	            'attribute' => 'active',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->active == 1){
+		                return Html::a('Yes','#',['class'=>'label label-success']);
+                    }
+                    else {
+                        return Html::a('No','#',['class'=>'label label-danger']);
+                    }    
+	            }
+	        ],
             [
                'class' => 'yii\grid\ActionColumn',
                'template' => '{delete} {update} {view} ',

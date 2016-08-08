@@ -42,3 +42,4 @@ phpunit.phar
 /vendor/kartik-v
 /backend/web/images/shops
 /backend/web/images/categories
+/backend/web/images/items

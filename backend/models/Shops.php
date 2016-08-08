@@ -41,6 +41,7 @@ use Yii;
  * @property ShopItemCategories[] $shopItemCategories
  * @property ShopOffers[] $shopOffers
  * @property Businesses $business
+ * @property Area $area
  * @property User[] $users
  * @property Users[] $users0
  */
@@ -60,10 +61,10 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['business_id'], 'required'],
+            [['business_id','area_id'], 'required'],
             [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed'], 'integer'],
             [['promotion_note', 'warning_note', 'masteries'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','area_id'], 'safe'],
             [['name', 'short_description', 'address', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'string', 'max' => 255],
             [['longitude', 'latitude', 'photo'], 'string', 'max' => 100],
             [['delivery_expected_time'], 'string', 'max' => 11],
@@ -81,8 +82,8 @@ class Shops extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'business_id' => Yii::t('app', 'Business ID'),
-            'area_id' => Yii::t('app', 'Area ID'),
+            'business_id' => Yii::t('app', 'Business Name'),
+            'area_id' => Yii::t('app', 'Area'),
             'name' => Yii::t('app', 'Name'),
             'short_description' => Yii::t('app', 'Short Description'),
             'address' => Yii::t('app', 'Address'),
@@ -97,7 +98,7 @@ class Shops extends \yii\db\ActiveRecord
             'warning_note' => Yii::t('app', 'Warning Note'),
             'photo' => Yii::t('app', 'Photo'),
             'masteries' => Yii::t('app', 'Masteries'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'deleted' => Yii::t('app', 'Active'),
             'lang' => Yii::t('app', 'Language'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -149,6 +150,14 @@ class Shops extends \yii\db\ActiveRecord
     public function getBusiness()
     {
         return $this->hasOne(Businesses::className(), ['id' => 'business_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArea()
+    {
+        return $this->hasOne(Areas::className(), ['id' => 'area_id']);
     }
 
     /**

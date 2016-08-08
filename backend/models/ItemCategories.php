@@ -53,7 +53,7 @@ class ItemCategories extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'photo' => Yii::t('app', 'Photo'),
             'lang' => Yii::t('app', 'Language'),
-            'deleted' => Yii::t('app', 'Deleted'),
+            'deleted' => Yii::t('app', 'Active'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'ar_name' => Yii::t('app', 'Arabic Name'),
