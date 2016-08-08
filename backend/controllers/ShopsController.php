@@ -151,7 +151,7 @@ class ShopsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->updated_at = date('Y-m-d h:m:s');
-            echo $model->photo;
+            
             if(isset($imageModel->imageFile))
                 $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
             else

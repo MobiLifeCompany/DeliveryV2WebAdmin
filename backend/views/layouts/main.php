@@ -434,7 +434,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=cities"><i class="fa fa-list-ul"></i> Items</a></li>
+            ><a href="index.php?r=items"><i class="fa fa-list-ul"></i> Items</a></li>
             
           </ul>
           <!-- Customers and Orders -->
