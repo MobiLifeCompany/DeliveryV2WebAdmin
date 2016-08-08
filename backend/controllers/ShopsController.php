@@ -112,8 +112,8 @@ class ShopsController extends Controller
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
         //
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at = date('Y-m-d h:m:s');
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
            if($model->save())
             {
@@ -150,8 +150,12 @@ class ShopsController extends Controller
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d H:i:s');
+<<<<<<< Updated upstream
             
+=======
+            echo $model->photo;
+>>>>>>> Stashed changes
             if(isset($imageModel->imageFile))
                 $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
             else
@@ -196,8 +200,8 @@ class ShopsController extends Controller
                         $model->area_id = $area;
                         $model->shop_id = $id;
                         $model->deleted = 0;
-                        $model->created_at = date('Y-m-d h:m:s');
-                        $model->updated_at = date('Y-m-d h:m:s');
+                        $model->created_at = date('Y-m-d H:i:s');
+                        $model->updated_at = date('Y-m-d H:i:s');
                         $model->save();
                     }
                 }
@@ -263,7 +267,7 @@ class ShopsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $data = Yii::$app->request->post();
             $shops = $this->findModel($id);
-            $shops->updated_at = date('Y-m-d h:m:s');
+            $shops->updated_at = date('Y-m-d H:i:s');
             $shops->latitude = $data['Shops']['latitude'];
             $shops->longitude= $data['Shops']['longitude'];
             $shops->update(['updated_at','latitude','longitude']);

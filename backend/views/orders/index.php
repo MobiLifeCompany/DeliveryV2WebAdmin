@@ -90,7 +90,7 @@ $this->params['currentPage'] = $curpage;
              'delivery_charge',
              'total',
               [
-                 'attribute' => 'Total With Delivery',
+                 'attribute' => 'All',
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
              ],
             // 'cancel_reason',

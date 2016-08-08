@@ -23,7 +23,11 @@
         "maksyutin/yii2-dual-list-box": "dev-master",
         "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-krajee-base": "dev-master",
-        "2amigos/yii2-google-maps-library": "*"
+        "2amigos/yii2-google-maps-library": "*",
+        "2amigos/yii2-date-picker-widget": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-builder": "@dev",
+        "kartik-v/yii2-widgets": "*"
 
     },
     "require-dev": {

@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header'=>'<h4>User Permissions Groups</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
+                'options' => [
+                    'tabindex' => false // important for Select2 to work properly
+                  ],
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();

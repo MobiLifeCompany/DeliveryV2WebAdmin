@@ -47,6 +47,7 @@ use yii\widgets\ActiveForm;
 $script = <<< JS
     $('form#{$model->formName()}').on('beforeSubmit', function(e)
     {
+        
         var \$form = $(this);
         $.post(
             \$form.attr("action"),

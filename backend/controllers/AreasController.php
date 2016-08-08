@@ -95,8 +95,8 @@ class AreasController extends Controller
         $model = new Areas();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at = date('Y-m-d h:m:s');
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;
@@ -122,7 +122,7 @@ class AreasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;

@@ -83,8 +83,8 @@ class ItemCategoriesController extends Controller
      //   print_r($_POST);
      //  die();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->created_at = date('Y-m-d h:m:s');
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
             if($model->save())
             {
@@ -121,7 +121,7 @@ class ItemCategoriesController extends Controller
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             echo $model->photo;
             if(isset($imageModel->imageFile))
                 $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;

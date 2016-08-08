@@ -312,14 +312,36 @@ else
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span>Dashboards</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="index.php"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+            <li><a href="index.php"><i class="fa fa-circle-o"></i> Map Dashboard</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='reports')){
+                      echo "active";
+                }
+              ?>" >
+          <a href="#">
+            <i class="fa fa-suitcase"></i> <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='reports') 
+                      echo "class='active'";
+                }
+              ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> Sales Report</a></li>
+            <li> <a href="index.php"><i class="fa fa-circle-o"></i> Report2</a></li>
           </ul>
         </li>
         <li class="treeview <?php 
@@ -485,7 +507,7 @@ else
           </ul>
         </li>
         <!-- End of Customers and Orders -->
-        <li><a href="index.php?r=place"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+       <!-- <li><a href="index.php?r=place"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
         </li>
       </ul>
     </section>

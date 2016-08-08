@@ -3,19 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\CustomerAddresses;
-use backend\models\CustomerAddressesSearch;
+use backend\models\SalesReport;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
-use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 
 /**
- * CustomerAddressesController implements the CRUD actions for CustomerAddresses model.
+ * UserController implements the CRUD actions for User model.
  */
-class CustomerAddressesController extends Controller
+class ReportsController extends Controller
 {
     /**
      * @inheritdoc
@@ -43,22 +41,23 @@ class CustomerAddressesController extends Controller
     }
 
     /**
-     * Lists all CustomerAddresses models.
+     * Lists all User models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionSalesreport()
     {
-        $searchModel = new CustomerAddressesSearch();
+       
+        $searchModel = new SalesReport();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('salesreport', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single CustomerAddresses model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
@@ -70,25 +69,40 @@ class CustomerAddressesController extends Controller
     }
 
     /**
-     * Creates a new CustomerAddresses model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CustomerAddresses();
+        $model = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->created_at= date('Y-m-d H:i:s');
+            $model->updated_at= date('Y-m-d H:i:s');
+            
+            $secretKey = Yii::$app->params['secretKey'];
+            $encryptedPassword = utf8_encode(Yii::$app->getSecurity()->encryptByKey($model->password_hash, $secretKey));
+            $model->password_hash =  $encryptedPassword;
+
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            if($model->save())
+            {
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
+            //return $this->redirect('index');
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing CustomerAddresses model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,7 +112,12 @@ class CustomerAddressesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at = date('Y-m-d H:i:s');
+            $model->updated_at= date('Y-m-d H:i:s');
+
+            $secretKey = Yii::$app->params['secretKey'];
+            $encryptedPassword = utf8_encode(Yii::$app->getSecurity()->encryptByKey($model->password_hash, $secretKey));
+            $model->password_hash =  $encryptedPassword;
+
             if($model->save())
             {
                 echo 1;
@@ -114,30 +133,31 @@ class CustomerAddressesController extends Controller
     }
 
     /**
-     * Deletes an existing CustomerAddresses model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $customerAddresses = $this->findModel($id);
-        $customerAddresses->updated_at = date('Y-m-d H:i:s');
-        $customerAddresses->deleted = 1;
-        $customerAddresses->update(['updated_at','deleted']);
+       $user = $this->findModel($id);
+       $user->updated_at = date('Y-m-d H:i:s');
+       $user->deleted = 'No';
+       $user->update(['updated_at','deleted']);
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the CustomerAddresses model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CustomerAddresses the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CustomerAddresses::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -166,58 +186,11 @@ class CustomerAddressesController extends Controller
 
     // Ajax Validation 
     public function actionValidation($id = null){
-        $model = $id===null ? new CustomerAddresses : CustomerAddresses::findOne($id);
+        $model = $id===null ? new User : User::findOne($id);
         if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
         {
             Yii::$app->response->format='json';
             return ActiveForm::validate($model);
         }
     }
-
-    public function actionDetails($id)
-    {
-        $customerAddresses = new CustomerAddresses();
-        $dataProvider = $customerAddresses->getCustomerAddresses($id);
-        $customer = $customerAddresses->getCustomerById($id);
-
-        return $this->render('details', [
-            'dataProvider' => $dataProvider,
-            'customerModel' =>$customer,
-        ]);
-    }
-
-    public function actionMap($id)
-    {
-       $model = $this->findModel($id);
-       
-        if ($model->load(Yii::$app->request->post())) {
-            $data = Yii::$app->request->post();
-            $customerAddresses = $this->findModel($id);
-            $customerAddresses->updated_at = date('Y-m-d H:i:s');
-            $customerAddresses->latitude = $data['CustomerAddresses']['latitude'];
-            $customerAddresses->longitude= $data['CustomerAddresses']['longitude'];
-            $customerAddresses->update(['updated_at','latitude','longitude']);
-            $model->save();
-           // print_r($model->getErrors());
-            //die();
-            return $this->render('viewWithMap', [
-             'model' => $this->findModel($id),
-             ]);
-        } else {
-            return $this->render('mapUpdate', [
-                'model' => $model,
-            ]);
-        }
-
-    }
-
-    public function actionVmap($id)
-    {
-       $model = $this->findModel($id);
-       return $this->render('viewWithMap', [
-             'model' => $this->findModel($id),
-             ]);
-    }
-
-
 }

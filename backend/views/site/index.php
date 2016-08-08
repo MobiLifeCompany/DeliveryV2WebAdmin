@@ -125,7 +125,7 @@
                     <span class="progress-number"><b>480</b>/800</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                      <div class="progress-bar progress-bar-green" style="width: 60%"></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->
@@ -134,7 +134,7 @@
                     <span class="progress-number"><b>250</b>/500</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
+                      <div class="progress-bar progress-bar-yellow" style="width: 50%"></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->

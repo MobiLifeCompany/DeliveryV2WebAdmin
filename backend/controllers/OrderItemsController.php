@@ -101,7 +101,7 @@ class OrderItemsController extends Controller
         $model = $this->findModel($id, $order_id, $item_id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at= date('Y-m-d h:m:s');
+            $model->updated_at= date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;

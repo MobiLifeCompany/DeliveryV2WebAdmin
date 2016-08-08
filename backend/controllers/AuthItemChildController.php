@@ -82,8 +82,8 @@ class AuthItemChildController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at= date('Y-m-d h:m:s');
-            $model->updated_at= date('Y-m-d h:m:s');
+            $model->created_at= date('Y-m-d H:i:s');
+            $model->updated_at= date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;
@@ -110,7 +110,7 @@ class AuthItemChildController extends Controller
         $model = $this->findModel($parent, $child);
 
         if ($model->load(Yii::$app->request->post())) {
-             $model->updated_at= date('Y-m-d h:m:s');
+             $model->updated_at= date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;

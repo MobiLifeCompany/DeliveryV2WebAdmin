@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\AuthItemChild;
 use backend\models\AuthItem;
+use kartik\widgets\Select2
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AuthItemChild */
@@ -26,14 +27,22 @@ use backend\models\AuthItem;
                 'validationUrl'=> $validationUrl]); 
     ?>
 
-     <?= $form->field($model, 'parent')->dropDownList(
-                    ArrayHelper::map(AuthItem::find()->where(['type' => 1])->all(),'name','name'), 
-                    ['prompt' => 'Select Parent Permission']);
-     ?>
+     <?php 
+        echo $form->field($model, 'parent')->widget(Select2::classname(), [
+            'data' =>ArrayHelper::map(AuthItem::find()->where(['type' => 1])->all(),'name','name'),
+            'options' => ['placeholder' => 'Select Parent Permission ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
 
-    <?= $form->field($model, 'child')->dropDownList(
-                    ArrayHelper::map(AuthItem::find()->where(['type' => 2])->all(),'name','name'), 
-                    ['prompt' => 'Select Child Permission']);
+        echo $form->field($model, 'child')->widget(Select2::classname(), [
+            'data' =>ArrayHelper::map(AuthItem::find()->where(['type' => 2])->all(),'name','name'),
+            'options' => ['placeholder' => 'Select Parent Permission ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
      ?>
 
     <div class="form-group">

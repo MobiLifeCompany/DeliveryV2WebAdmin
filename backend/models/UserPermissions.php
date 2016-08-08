@@ -107,7 +107,7 @@ class UserPermissions extends Model
                 $userPermission = new AuthAssignment();
                 $userPermission->user_id = $this->user_id;
                 $userPermission->item_name = $item_name;
-                $userPermission->created_at = date('Y-m-d h:m:s');
+                $userPermission->created_at = date('Y-m-d H:i:s');
                 $userPermission->save();
             }
         }
@@ -116,7 +116,7 @@ class UserPermissions extends Model
                 $userPermissionGroup = new AuthAssignment();
                 $userPermissionGroup->user_id = $this->user_id;
                 $userPermissionGroup->item_name = $item_name;
-                $userPermissionGroup->created_at = date('Y-m-d h:m:s');
+                $userPermissionGroup->created_at = date('Y-m-d H:i:s');
                 $userPermissionGroup->save();
             }
         }

@@ -1,7 +1,7 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'sessionTimeoutSeconds' => '300',
+    'sessionTimeoutSeconds' => '500',
     'pageSize'=>15,
     'secretKey'=>'Delivery@@2016WebV2',
     'languages' =>[

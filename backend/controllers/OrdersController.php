@@ -101,7 +101,7 @@ class OrdersController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-             $model->updated_at= date('Y-m-d h:m:s');
+             $model->updated_at= date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;
@@ -194,7 +194,7 @@ class OrdersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $data = Yii::$app->request->post();
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             $model->delivery_user_id = $data['Orders']['delivery_user_id'];
             $model->update(['updated_at','delivery_user_id','cancel_reason']);
             if($model->save(false))

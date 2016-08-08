@@ -78,8 +78,8 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at= date('Y-m-d h:m:s');
-            $model->updated_at= date('Y-m-d h:m:s');
+            $model->created_at= date('Y-m-d H:i:s');
+            $model->updated_at= date('Y-m-d H:i:s');
             
             $secretKey = Yii::$app->params['secretKey'];
             $encryptedPassword = utf8_encode(Yii::$app->getSecurity()->encryptByKey($model->password_hash, $secretKey));
@@ -112,7 +112,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at= date('Y-m-d h:m:s');
+            $model->updated_at= date('Y-m-d H:i:s');
 
             $secretKey = Yii::$app->params['secretKey'];
             $encryptedPassword = utf8_encode(Yii::$app->getSecurity()->encryptByKey($model->password_hash, $secretKey));
@@ -141,7 +141,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
        $user = $this->findModel($id);
-       $user->updated_at = date('Y-m-d h:m:s');
+       $user->updated_at = date('Y-m-d H:i:s');
        $user->deleted = 'No';
        $user->update(['updated_at','deleted']);
 

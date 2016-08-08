@@ -97,7 +97,7 @@ class CustomersController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->updated_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d H:i:s');
             if($model->save())
             {
                 echo 1;
@@ -121,7 +121,7 @@ class CustomersController extends Controller
     public function actionDelete($id)
     {
        $user = $this->findModel($id);
-       $user->updated_at = date('Y-m-d h:m:s');
+       $user->updated_at = date('Y-m-d H:i:s');
        $user->is_allowed = 0;
        $user->update(['updated_at','is_allowed']);
 
