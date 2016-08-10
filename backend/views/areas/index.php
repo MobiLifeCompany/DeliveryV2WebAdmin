@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\AreasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Areas');
+$this->title = Yii::t('app', 'AREAS');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -27,7 +27,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Areas</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'AREAS').'</h4>',
                 'id' => 'modal',
                 ]);
            echo "<div id='modalContent'></div>";
@@ -57,10 +57,11 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -70,7 +71,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Shops','index.php?r=shops/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'SHOPS'),'index.php?r=shops/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

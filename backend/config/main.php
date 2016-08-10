@@ -43,6 +43,7 @@ return [
             'translations' => [
                 'app' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    'forceTranslation' => true,
                     //'basePath' => '@app/messages',
                     'sourceLanguage' => 'en',
                     'fileMap' => [

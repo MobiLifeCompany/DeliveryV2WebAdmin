@@ -46,10 +46,10 @@ class AuthItemChild extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'parent' => Yii::t('app', 'Parent'),
-            'child' => Yii::t('app', 'Child'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'parent' => Yii::t('app', 'PARENT'),
+            'child' => Yii::t('app', 'CHILD'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
         ];
     }
 

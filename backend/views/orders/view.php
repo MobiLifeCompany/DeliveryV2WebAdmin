@@ -7,7 +7,7 @@ use backend\models\CustomerAddresses;
 /* @var $model backend\models\Orders */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ORDERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $curpage = Yii::$app->controller->id;
@@ -41,7 +41,7 @@ $this->params['currentPage'] = $curpage;
             'note:ntext',
             [
              'attribute' => 'delivery_user_id',
-             'value'=>($model->deliveryUser!=null)?$model->deliveryUser->first_name.' '.$model->deliveryUser->last_name.' ['.$model->deliveryUser->username.']':'Not Assigned'
+             'value'=>($model->deliveryUser!=null)?$model->deliveryUser->first_name.' '.$model->deliveryUser->last_name.' ['.$model->deliveryUser->username.']':Yii::t('app', 'NOT_ASSIGNED')
             ],
             'created_at',
             'updated_at',

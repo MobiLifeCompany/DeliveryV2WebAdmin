@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\ItemCategories */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Categories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ITEM_CATEGORIES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-categories-view">
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lang',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'created_at',
             'updated_at',

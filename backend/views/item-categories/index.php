@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ItemCategoriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Item Categories');
+$this->title = Yii::t('app', 'ITEM_CATEGORIES');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -27,7 +27,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Item Categories</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'ITEM_CATEGORIES').'</h4>',
                 'options' => [
                     'id' => 'modal',
                     'tabindex' => false] // important for Select2 to work properly
@@ -56,10 +56,11 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted == 1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],

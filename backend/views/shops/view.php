@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Shops */
 
 $this->title = $model->name.' Shop No# '.$model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Shops'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SHOPS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="shops-view">
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             [
                 'attribute'=>'is_avilable',
-                'value' =>  $model->is_avilable == 1 ? 'Yes' : 'No'
+                'value' =>  $model->is_avilable == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'longitude',
             'latitude',
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'masteries:ntext',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'lang',
             'created_at',
@@ -58,18 +58,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'country',
             [
                 'attribute'=>'subscribed',
-                'value' =>  $model->subscribed == 1 ? 'Yes' : 'No'
+                'value' =>  $model->subscribed == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
         ],
     ]) ?>
 
-    <h4>Shop Delivery Areas</h4>
+    <h4><?= Yii::t('app', 'DELIVERY_AREAS'); ?></h4>
 <div class="box-body table-responsive no-padding">
     <table class="table table-striped">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Arabic Name</th>
+            <th><?= Yii::t('app', 'ID'); ?></th>
+            <th><?= Yii::t('app', 'NAME'); ?></th>
+            <th><?= Yii::t('app', 'ARABIC'); ?></th>
         </tr>
 <?php
     foreach ($deliveryAreas as $area) {

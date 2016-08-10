@@ -49,9 +49,9 @@ class UserPermissions extends Model
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User',
-            'userPermissions_ids' => 'User Permissions',
-            'userPermissionGroups_ids' => 'User Permission Groups',
+            'user_id' => Yii::t('app', 'USER'),
+            'userPermissions_ids' => Yii::t('app', 'USERS_PERMISSIONS'),
+            'userPermissionGroups_ids' => Yii::t('app', 'USER_PERMISSIONS_GROUP'),
         ];
     }
 

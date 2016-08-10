@@ -53,14 +53,14 @@ class Countries extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Country Name'),
-            'country_code' => Yii::t('app', 'Country Code'),
-            'iso_code' => Yii::t('app', 'Iso Code'),
-            'deleted' => Yii::t('app', 'Active'),
-            'lang' => Yii::t('app', 'Language'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'name' => Yii::t('app', 'COUNTRY_NAME'),
+            'country_code' => Yii::t('app', 'COUNTRY_CODE'),
+            'iso_code' => Yii::t('app', 'ISO_CODE'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'lang' => Yii::t('app', 'LANGUAGE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'ar_name' => Yii::t('app', 'ARABIC_NAME'),
         ];
     }
 

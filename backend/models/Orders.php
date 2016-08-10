@@ -69,19 +69,19 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID#'),
-            'customer_id' => Yii::t('app', 'Customer'),
-            'shop_id' => Yii::t('app', 'Shop'),
-            'customer_address_id' => Yii::t('app', 'Customer Address'),
-            'order_status' => Yii::t('app', 'Order Status'),
-            'total' => Yii::t('app', 'Total'),
-            'qty' => Yii::t('app', 'Qty'),
-            'cancel_reason' => Yii::t('app', 'Cancel Reason'),
-            'note' => Yii::t('app', 'Note'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'delivery_charge' => Yii::t('app', 'Delivery Charge'),
-            'delivery_user_id' => Yii::t('app', 'Delivery User'),
+            'id' => Yii::t('app', 'ID'),
+            'customer_id' => Yii::t('app', 'CUSTOMER'),
+            'shop_id' => Yii::t('app', 'SHOP'),
+            'customer_address_id' => Yii::t('app', 'CUSTOMER_ADDRESSES'),
+            'order_status' => Yii::t('app', 'ORDER_STATUS'),
+            'total' => Yii::t('app', 'TOTAL'),
+            'qty' => Yii::t('app', 'QUANTITY'),
+            'cancel_reason' => Yii::t('app', 'CANCEL_REASON'),
+            'note' => Yii::t('app', 'NOTE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'delivery_charge' => Yii::t('app', 'DELIVERY_CHARGE'),
+            'delivery_user_id' => Yii::t('app', 'DELIVERY_USER'),
         ];
     }
 

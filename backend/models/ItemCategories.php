@@ -50,13 +50,13 @@ class ItemCategories extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'photo' => Yii::t('app', 'Photo'),
-            'lang' => Yii::t('app', 'Language'),
-            'deleted' => Yii::t('app', 'Active'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'name' => Yii::t('app', 'NAME'),
+            'photo' => Yii::t('app', 'PHOTO'),
+            'lang' => Yii::t('app', 'LANGUAGE'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'ar_name' => Yii::t('app', 'ARABIC_NAME'),
         ];
     }
 

@@ -33,13 +33,13 @@ use yii\web\JsExpression;
 
      <?= $form->field($model, 'customer_id')->dropDownList(
                     ArrayHelper::map(Customers::find()->all(),'id','full_name'), 
-                    ['prompt' => 'Select Customer', 'disabled'=>'disabled' ]);
+                    ['prompt' => Yii::t('app', 'SELECT_CUSTOMER'), 'disabled'=>'disabled' ]);
                     
      ?>
     
     <?= $form->field($model, 'shop_id')->dropDownList(
                     ArrayHelper::map(Shops::find()->all(),'id','name'), 
-                    ['prompt' => 'Select Shop', 'disabled'=>'disabled']);
+                    ['prompt' => Yii::t('app', 'SELECT_SHOP'), 'disabled'=>'disabled']);
                     
      ?>
 
@@ -51,11 +51,11 @@ use yii\web\JsExpression;
                      .'['.$model->building.'] - '
                      .'['.$model->floor.']';
         }), 
-                    ['prompt' => 'Select Address']);
+                    ['prompt' => Yii::t('app', 'SELECT_ADDRESS')]);
                     
      ?>
 
-    <?= $form->field($model, 'order_status')->dropDownList([ 'OPEN' => 'OPEN', 'PENDING' => 'PENDING', 'CANCEL' => 'CANCEL', 'CLOSED' => 'CLOSED','RE-OPEN' => 'RE-OPEN', ], ['prompt' => '',
+    <?= $form->field($model, 'order_status')->dropDownList([ 'OPEN' => Yii::t('app', 'OPEN'), 'PENDING' => Yii::t('app', 'PENDING'), 'CANCEL' => Yii::t('app', 'CANCELED'), 'CLOSED' => Yii::t('app', 'CLOSED'),'RE-OPEN' => Yii::t('app', 'REOPEN'), ], ['prompt' => Yii::t('app', 'STATUS'),
      'onchange'=>
                'if($(this).val() == "CANCEL")
                 {
@@ -78,7 +78,7 @@ use yii\web\JsExpression;
     <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?> 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 

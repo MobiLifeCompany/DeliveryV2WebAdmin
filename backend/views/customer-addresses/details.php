@@ -10,8 +10,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CustomerAddressesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Customer Addresses# '.Yii::$app->request->queryParams['id']);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customers'), 'url' => 'index.php?r=customers'];
+$this->title = Yii::t('app', 'CUSTOMER_ADDRESSES'). '# '.Yii::$app->request->queryParams['id']);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMERS'), 'url' => 'index.php?r=customers'];
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -24,7 +24,7 @@ $this->params['currentPage'] = $curpage;
  
 <?php
         Modal::begin([
-                'header'=>'<h4>Customers</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'CUSTOMERS').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -60,10 +60,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->gender =='Male'){
-		                return Html::a('Male','#',['class'=>'label label-danger']);
+		                return Html::a(Yii::t('app', 'MALE'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Female','#',['class'=>'label label-success']);
+                        return Html::a(Yii::t('app', 'FEMALE'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -135,10 +135,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==0){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],

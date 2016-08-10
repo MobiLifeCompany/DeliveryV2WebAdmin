@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CitiesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Cities');
+$this->title = Yii::t('app', 'CITIES');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -56,10 +56,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],
@@ -69,7 +69,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Areas','index.php?r=areas/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'AREAS'),'index.php?r=areas/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

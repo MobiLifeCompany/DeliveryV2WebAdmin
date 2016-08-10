@@ -6,7 +6,7 @@ use backend\assets\AppAsset;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Countries */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Countries'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'COUNTRIES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="countries-create">

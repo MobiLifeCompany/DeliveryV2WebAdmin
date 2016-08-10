@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CustomersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Customers');
+$this->title = Yii::t('app', 'CUSTOMERS');
 $this->params['breadcrumbs'][] = $this->title;
 
 $curpage = Yii::$app->controller->id;
@@ -29,7 +29,7 @@ $this->params['currentPage'] = $curpage;
     
  <?php
         Modal::begin([
-                'header'=>'<h4>Customers</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'CUSTOMERS').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -64,10 +64,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->is_allowed ==1){
-		               return Html::a('Yes','#',['class'=>'label label-success']);
+		               return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],
@@ -78,10 +78,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->gender =='Male'){
-		                return Html::a('Male','#',['class'=>'label label-danger']);
+		                return Html::a(Yii::t('app', 'MALE'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Female','#',['class'=>'label label-success']);
+                        return Html::a(Yii::t('app', 'FEMALE'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -97,12 +97,12 @@ $this->params['currentPage'] = $curpage;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Addresses','index.php?r=customer-addresses/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'ADDRESSES'),'index.php?r=customer-addresses/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
            [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Orders','index.php?r=orders/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'ORDERS'),'index.php?r=orders/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

@@ -54,13 +54,13 @@ class Areas extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'city_id' => Yii::t('app', 'City'),
-            'name' => Yii::t('app', 'Area Name'),
-            'deleted' => Yii::t('app', 'Active'),
-            'lang' => Yii::t('app', 'Language'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'city_id' => Yii::t('app', 'CITY'),
+            'name' => Yii::t('app', 'AREA_NAME'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'lang' => Yii::t('app', 'LANGUAGE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'ar_name' => Yii::t('app', 'ARABIC_NAME'),
         ];
     }
 

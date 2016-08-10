@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 $curpage = Yii::$app->controller->id;
 $this->params['currentPage'] = $curpage;
 
-$this->title = Yii::t('app', 'User Permissions');
+$this->title = Yii::t('app', 'USER_PERMISSIONS');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </br>
     <?php
         Modal::begin([
-                'header'=>'<h4>Users Permissions</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'USER_PERMISSIONS').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -60,10 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->type ==1){
-		                return Html::a('Group Permission','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'GROUP_PERMISSION'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('User Permission','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'USER_PERMISSION'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],

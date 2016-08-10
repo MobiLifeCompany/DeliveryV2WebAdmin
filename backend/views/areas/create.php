@@ -6,7 +6,7 @@ use backend\assets\AppAsset;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Areas */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Areas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'AREAS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="areas-create">

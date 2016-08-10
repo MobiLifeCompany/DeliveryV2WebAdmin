@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 $curpage = Yii::$app->controller->id;
 $this->params['currentPage'] = $curpage;
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Yii::t('app', 'USERS');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Users</h4>',
+                'header'=>'<h4>'. Yii::t('app', 'USERS') .'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -69,10 +69,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted =='Yes'){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a('No','#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a('Yes','#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Permissions','index.php?r=auth-assignment/update&user_id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'PERMISSIONS'),'index.php?r=auth-assignment/update&user_id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

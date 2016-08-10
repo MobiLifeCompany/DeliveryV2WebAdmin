@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Items */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ITEMS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="items-view">
@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'ar_name',
             'ar_description',
-            ['attribute' => 'shop',
+            ['attribute' => 'shop_id',
              'value'=>$model->shopItemCategory->shop->name
             ],
-            ['attribute' => 'category',
+            ['attribute' => 'item_category_id',
              'value'=>$model->shopItemCategory->itemCategory->name
             ],
             'price',
@@ -34,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'is_avilable',
-                'value' =>  $model->active == 1 ? 'Yes' : 'No'
+                'value' =>  $model->active == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'lang',
             'created_at',

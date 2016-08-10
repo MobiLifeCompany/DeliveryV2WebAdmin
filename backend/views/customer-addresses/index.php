@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CustomerAddressesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Customer Addresses');
+$this->title = Yii::t('app', 'CUSTOMERS_ADDRESSES');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -31,7 +31,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>customer Addresses</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'CUSTOMER_ADDRESSES').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -77,23 +77,23 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==0){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],
             [
-	            'attribute' => 'Position',
+	            'attribute' => Yii::t('app', 'POSITION'),
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->latitude =='0' || $model->latitude =='0' ){
-		                return Html::a('Not Set','#',['class'=>'label label-danger']);
+		                return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Set','#',['class'=>'label label-success']);
+                        return Html::a(Yii::t('app', 'SET'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],

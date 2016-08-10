@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\AuthItem */
 
-$this->title = 'View Permission';
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Auth Items'), 'url' => ['index']];
+$this->title = 'VIEW';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'AUTH_ITEMS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-view">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
              [
                 'attribute'=>'Type',
-                'value' =>  $model->type == 1 ? 'Group Permission' : 'User Permission'
+                'value' =>  $model->type == 1 ? Yii::t('app', 'GROUP_PERMISSION') : Yii::t('app', 'USER_PERMISSION')
             ],   
             'description:ntext',
            // 'rule_name',

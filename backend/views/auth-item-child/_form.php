@@ -30,7 +30,7 @@ use kartik\widgets\Select2
      <?php 
         echo $form->field($model, 'parent')->widget(Select2::classname(), [
             'data' =>ArrayHelper::map(AuthItem::find()->where(['type' => 1])->all(),'name','name'),
-            'options' => ['placeholder' => 'Select Parent Permission ...'],
+            'options' => ['placeholder' => Yii::t('app', 'SELECT_PARENT_PERMISSION')],
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -38,7 +38,7 @@ use kartik\widgets\Select2
 
         echo $form->field($model, 'child')->widget(Select2::classname(), [
             'data' =>ArrayHelper::map(AuthItem::find()->where(['type' => 2])->all(),'name','name'),
-            'options' => ['placeholder' => 'Select Parent Permission ...'],
+            'options' => ['placeholder' => Yii::t('app', 'SELECT_CHILD_PERMISSION')],
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -46,7 +46,7 @@ use kartik\widgets\Select2
      ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

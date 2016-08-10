@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Countries */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Countries'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'COUNTRIES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="countries-view">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'iso_code',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'lang',
             'created_at',

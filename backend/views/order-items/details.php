@@ -25,13 +25,13 @@ use dosamigos\google\maps\Event;
 /* @var $searchModel backend\models\OrderItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Order Items Details');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => 'index.php?r=orders'];
+$this->title = Yii::t('app', 'ORDER_ITEMS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ORDERS'), 'url' => 'index.php?r=orders'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-items-index">
 
-    <h2><?= Html::encode('Order#'.Yii::$app->request->queryParams['id']) ?></h2>
+    <h2><?= Html::encode(Yii::t('app', 'ORDER_NO') . ' ' .Yii::$app->request->queryParams['id']) ?></h2>
 
     <p>
         <?php //echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=cities/create'),'id'=>'modalButton']); ?>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Order Details</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'ORDER_DETAILS').'</h4>',
                 'id' => 'modal',
                 ]);
            echo "<div id='modalContent'></div>";
@@ -67,20 +67,20 @@ $this->params['breadcrumbs'][] = $this->title;
              'value'=>'shop.name'
             ],
             [
-	            'attribute' => 'order_status',
+	            'attribute' => Yii::t('app', 'ORDER_STATUS'),
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->order_status =='OPEN'){
-		                return Html::a('OPEN','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'OPEN'),'#',['class'=>'label label-success']);
                     }if($model->order_status =='RE-OPEN'){
-		                return Html::a('RE-OPEN','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'REOPEN'),'#',['class'=>'label label-success']);
                     }else if($model->order_status =='CLOSED'){
-                        return Html::a('CLOSED','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'CLOSED'),'#',['class'=>'label label-danger']);
                     }else if($model->order_status =='PENDING'){
-                        return Html::a('PENDING','#',['class'=>'label label-warning']);
+                        return Html::a(Yii::t('app', 'PENDING'),'#',['class'=>'label label-warning']);
                     }else if($model->order_status =='CANCEL'){
-                        return Html::a('CANCEL','#',['class'=>'label label-info']);
+                        return Html::a(Yii::t('app', 'CANCELED'),'#',['class'=>'label label-info']);
                     }    
 	            }
 	        ],
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'delivery_charge',
              'total',
              [
-                 'attribute' => 'Total With Delivery',
+                 'attribute' => Yii::t('app', 'TOTAL_WITH_DELIVERY'),
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
              ],
              'cancel_reason',
@@ -146,10 +146,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->is_canceled ==1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],

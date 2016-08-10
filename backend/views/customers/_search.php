@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
                      ],
                  ]); ?>
                  <p class="text-items">
-                <?= $form->field($model, 'globalCustomerSearch')->textInput(['maxlength' => 255, 'class' => 'form-control', 'placeholder' => 'Search'])->label(false); ?>
+                <?= $form->field($model, 'globalCustomerSearch')->textInput(['maxlength' => 255, 'class' => 'form-control', 'placeholder' => Yii::t('app', 'SEARCH')])->label(false); ?>
                 </p>
         </div>
     </div>

@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */
 
-$this->title = 'User Details: '. $model->first_name.' '.$model->last_name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = Yii::t('app', 'USER_DETAILS').': '. $model->first_name.' '.$model->last_name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'USERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -24,9 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'user_type',
             [
-                'attribute'=>'Active',
-                'format'=>'raw',
-                'value' => $model->deleted,
+                'attribute'=>'deleted',
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'gender',
            // 'is_fired',

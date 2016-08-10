@@ -27,18 +27,18 @@ use backend\models\Customers;
 
     <?= $form->field($model, 'customer_id')->dropDownList(
                     ArrayHelper::map(Customers::find()->all(),'id','full_name'), 
-                    ['prompt' => 'Select Customer']);
+                    ['prompt' => Yii::t('app', 'SELECT_CUSTOMER')]);
      ?>
 
 
     <?= $form->field($model, 'city_id')->dropDownList(
                     ArrayHelper::map(Cities::find()->all(),'id','name'), 
-                    ['prompt' => 'Select City']);
+                    ['prompt' => Yii::t('app', 'SELECT_CITY')]);
      ?>
 
    <?= $form->field($model, 'area_id')->dropDownList(
                     ArrayHelper::map(Areas::find()->all(),'id','name'), 
-                    ['prompt' => 'Select Area']);
+                    ['prompt' => Yii::t('app', 'SELECT_AREA')]);
      ?>
 
     <?= $form->field($model, 'street')->textInput(['maxlength' => true]) ?>
@@ -57,13 +57,13 @@ use backend\models\Customers;
 
     <?= $form->field($model, 'longitude')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_default')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'is_default')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => 'Status']) ?>
 
-    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

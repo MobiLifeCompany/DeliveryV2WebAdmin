@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ShopsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Shops');
+$this->title = Yii::t('app', 'SHOPS');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -27,7 +27,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Shops</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'SHOPS').'</h4>',
                 'options' => [
                     'id' => 'modal',
                     'tabindex' => false] // important for Select2 to work properly
@@ -59,10 +59,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted == 1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -73,15 +73,15 @@ $this->params['currentPage'] = $curpage;
             'delivery_charge',
             //'lang',
             [
-	            'attribute' => 'Position',
+	            'attribute' => Yii::t('app', 'POSITION'),
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
                     if(empty($model->latitude) || empty($model->latitude) ){
-		                return Html::a('Not Set','#',['class'=>'label label-danger']);
+		                return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Set','#',['class'=>'label label-success']);
+                        return Html::a(Yii::t('app', 'SET'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -93,7 +93,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Delivery Areas','#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=shops/areas&id='.$model->id), 'id'=>'deliveryAreasModalButton'.$model->id,'onclick'=>'return showDeliveryAreasModal('.$model->id.')']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'DELIVERY_AREAS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=shops/areas&id='.$model->id), 'id'=>'deliveryAreasModalButton'.$model->id,'onclick'=>'return showDeliveryAreasModal('.$model->id.')']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

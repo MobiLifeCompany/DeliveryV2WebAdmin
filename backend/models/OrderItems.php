@@ -54,14 +54,14 @@ class OrderItems extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'order_id' => Yii::t('app', 'Order#'),
-            'item_id' => Yii::t('app', 'Item Name'),
-            'qty' => Yii::t('app', 'Qty'),
-            'item_price' => Yii::t('app', 'Item Price'),
-            'total' => Yii::t('app', 'Total'),
-            'is_canceled' => Yii::t('app', 'Is Canceled'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'order_id' => Yii::t('app', 'ORDER_NO'),
+            'item_id' => Yii::t('app', 'ITEM_NAME'),
+            'qty' => Yii::t('app', 'QUANTITY'),
+            'item_price' => Yii::t('app', 'ITEM_PRICE'),
+            'total' => Yii::t('app', 'TOTAL'),
+            'is_canceled' => Yii::t('app', 'IS_CANCELED'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
         ];
     }
 

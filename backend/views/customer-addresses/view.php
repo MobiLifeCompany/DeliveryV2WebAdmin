@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\CustomerAddresses */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customer Addresses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMER_ADDRESSES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customer-addresses-view">
@@ -35,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'longitude',
             [
                 'attribute'=>'is_default',
-                'value' =>  $model->deleted == 0 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 0 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'created_at',
             'updated_at',

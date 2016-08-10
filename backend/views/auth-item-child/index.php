@@ -14,7 +14,7 @@ use yii\bootstrap\Modal;
 $curpage = Yii::$app->controller->id;
 $this->params['currentPage'] = $curpage;
 
-$this->title = Yii::t('app', 'User Permissions Groups');
+$this->title = Yii::t('app', 'USER_PERMISSIONS_GROUP');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
         Modal::begin([
-                'header'=>'<h4>User Permissions Groups</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'USER_PERMISSIONS_GROUP').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 'options' => [

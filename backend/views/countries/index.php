@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CountriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Countries');
+$this->title = Yii::t('app', 'COUNTRIES');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -30,9 +30,8 @@ $this->params['currentPage'] = $curpage;
     
     <?php
         Modal::begin([
-                'header'=>'<h4>Country</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'COUNTRIES').'</h4>',
                 'id' => 'modal',
-                'size' => 'modal-lg',
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();
@@ -60,11 +59,11 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
-                    }    
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    }  
 	            }
 	        ],
             'lang',
@@ -73,7 +72,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Cities','index.php?r=cities/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'CITIES'),'index.php?r=cities/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

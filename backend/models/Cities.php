@@ -54,13 +54,13 @@ class Cities extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'country_id' => Yii::t('app', 'Country Name'),
-            'name' => Yii::t('app', 'City Name'),
-            'deleted' => Yii::t('app', 'Active'),
-            'lang' => Yii::t('app', 'Language'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Arabic Name'),
+            'country_id' => Yii::t('app', 'COUNTRY_NAME'),
+            'name' => Yii::t('app', 'CITY_NAME'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'lang' => Yii::t('app', 'LANGUAGE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'ar_name' => Yii::t('app', 'ARABIC_NAME'),
         ];
     }
 

@@ -21,12 +21,12 @@ use maksyutin\duallistbox\Widget;
 
     <?= $form->field($model, 'business_id')->dropDownList(
                     ArrayHelper::map(Businesses::find()->all(),'id','name'), 
-                    ['prompt' => 'Select Business']);
+                    ['prompt' => Yii::t('app', 'SELECT_BUSINESS')]);
      ?>
 
      <?= $form->field($model, 'area_id')->dropDownList(
                     ArrayHelper::map(Areas::find()->all(),'id','name'), 
-                    ['prompt' => 'Select Area']);
+                    ['prompt' => Yii::t('app', 'SELECT_AREA')]);
      ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -43,7 +43,7 @@ use maksyutin\duallistbox\Widget;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_avilable')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Avalability']) ?>
+    <?= $form->field($model, 'is_avilable')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'AVALABILITY')]) ?>
 
     <?= $form->field($model, 'longitude')->widget(MaskedInput::className(), ['mask' => '99.9999999', ]) ?>
 
@@ -81,18 +81,18 @@ use maksyutin\duallistbox\Widget;
 
     <?= $form->field($model, 'masteries')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'YES'), '1'=>Yii::t('app', 'NO'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
-    <?= $form->field($model, 'lang')->dropDownList([ 'en' => 'En', 'ar' => 'Ar', ], ['prompt' => 'Language']) ?>
+    <?= $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]) ?>
 
-    <?= $form->field($model, 'rating')->dropDownList([ '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], ['prompt' => 'Rating']) ?>
+    <?= $form->field($model, 'rating')->dropDownList([ '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], ['prompt' => Yii::t('app', 'RATING')]) ?>
 
     <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'subscribed')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'subscribed')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

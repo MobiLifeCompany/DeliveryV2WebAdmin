@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\CustomerAddresses */
 
-$this->title = Yii::t('app', 'Create Customer Addresses');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customer Addresses'), 'url' => ['index']];
+$this->title = Yii::t('app', 'CREATE') . ' ' . Yii::t('app', 'CUSTOMER_ADDRESSES');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMER_ADDRESSES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customer-addresses-create">

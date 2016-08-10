@@ -18,12 +18,12 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'shop_id')->dropDownList(
                     ArrayHelper::map(Shops::find()->all(),'id','name'),
-                    ['prompt' => 'Select Shop']);
+                    ['prompt' => Yii::t('app', 'SELECT_SHOP')]);
     ?>
     
     <?= $form->field($model, 'item_category_id')->dropDownList(
                     ArrayHelper::map(ItemCategories::find()->all(),'id','name'), 
-                    ['prompt' => 'Select Category']);
+                    ['prompt' => 'SELECT_CATEGORY']);
     ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -54,15 +54,15 @@ use kartik\file\FileInput;
                                     ],]);
     ?>
 
-    <?= $form->field($model, 'active')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'active')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
-    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> 'No', '1'=>'Yes', ], ['prompt' => 'Status']) ?>
+    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
-    <?= $form->field($model, 'lang')->dropDownList([ 'en' => 'En', 'ar' => 'Ar', ], ['prompt' => 'Language']) ?>
+    <?= $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]) ?>
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

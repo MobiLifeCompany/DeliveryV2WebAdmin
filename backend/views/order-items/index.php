@@ -8,7 +8,7 @@ use yii\bootstrap\Modal;
 /* @var $searchModel backend\models\OrderItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Order Items');
+$this->title = Yii::t('app', 'ORDERS_ITEMS');
 $this->params['breadcrumbs'][] = $this->title;
 
 $curpage = Yii::$app->controller->id;
@@ -25,7 +25,7 @@ $this->params['currentPage'] = $curpage;
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>Order Items</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'ORDER_ITEMS').'</h4>',
                 'id' => 'modal',
                 ]);
            echo "<div id='modalContent'></div>";
@@ -60,10 +60,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->is_canceled ==1){
-		                return Html::a('Yes','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a('No','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],

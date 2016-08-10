@@ -309,17 +309,17 @@ else
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header"><?= Yii::t('app', 'MAIN_NAVIGATION') ?></li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboards</span>
+            <i class="fa fa-dashboard"></i> <span><?= Yii::t('app', 'DASHBOARDS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.php"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-            <li><a href="index.php"><i class="fa fa-circle-o"></i> Map Dashboard</a></li>
+            <li><a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'DASHBOARD') ?></a></li>
+            <li><a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'MAP_DASHBOARD') ?></a></li>
           </ul>
         </li>
 
@@ -329,7 +329,7 @@ else
                 }
               ?>" >
           <a href="#">
-            <i class="fa fa-suitcase"></i> <span>Reports</span>
+            <i class="fa fa-suitcase"></i> <span><?= Yii::t('app', 'REPORTS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -340,7 +340,7 @@ else
                     if($this->params['currentPage']=='reports') 
                       echo "class='active'";
                 }
-              ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> Sales Report</a></li>
+              ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> <?= Yii::t('app', 'SALES_REPORT') ?></a></li>
             <li> <a href="index.php"><i class="fa fa-circle-o"></i> Report2</a></li>
           </ul>
         </li>
@@ -350,7 +350,7 @@ else
                 }
               ?>">
           <a href="#">
-            <i class="fa fa-user"></i> <span>Users Permissions</span>
+            <i class="fa fa-user"></i> <span><?= Yii::t('app', 'USERS_PERMISSIONS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -363,7 +363,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=user"><i class="fa fa-user"></i> Users</a></li>
+            ><a href="index.php?r=user"><i class="fa fa-user"></i> <?= Yii::t('app', 'USERS') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -371,7 +371,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=auth-item"><i class="fa fa-unlock-alt"></i> Permissions</a></li>
+            ><a href="index.php?r=auth-item"><i class="fa fa-unlock-alt"></i> <?= Yii::t('app', 'PERMISSIONS') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -379,16 +379,16 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=auth-item-child"><i class="fa fa-users"></i> Permissions Group</a></li>
+            ><a href="index.php?r=auth-item-child"><i class="fa fa-users"></i> <?= Yii::t('app', 'PERMISSIONS_GROUP') ?></a></li>
           </ul>
         </li>
         <li class="treeview  <?php 
-                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='countries' || $this->params['currentPage']=='cities' || $this->params['currentPage']=='areas')){
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='countries' || $this->params['currentPage']=='cities' || $this->params['currentPage']=='areas' || $this->params['currentPage']=='shops')){
                       echo "active";
                 }
               ?>">
           <a href="#">
-            <i class="fa fa-map"></i> <span>Logistic</span>
+            <i class="fa fa-map"></i> <span><?= Yii::t('app', 'LOGISTICS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -401,7 +401,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=countries"><i class="fa fa-globe"></i> Countries</a></li>
+            ><a href="index.php?r=countries"><i class="fa fa-globe"></i> <?= Yii::t('app', 'COUNTRIES') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -409,7 +409,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=cities"><i class="fa fa-map-signs"></i> Cities</a></li>
+            ><a href="index.php?r=cities"><i class="fa fa-map-signs"></i> <?= Yii::t('app', 'CITIES') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -417,7 +417,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=shops"><i class="fa fa-map-pin"></i> Areas</a></li>
+            ><a href="index.php?r=areas"><i class="fa fa-map-pin"></i> <?= Yii::t('app', 'AREAS') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -425,7 +425,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=shops"><i class="fa fa-home"></i> Shops</a></li>
+            ><a href="index.php?r=shops"><i class="fa fa-home"></i> <?= Yii::t('app', 'SHOPS') ?></a></li>
           </ul>
           </li>
           <!-- Categories and items -->
@@ -435,7 +435,7 @@ else
                 }
               ?>">
           <a href="#">
-            <i class="fa fa-sitemap"></i> <span>Products</span>
+            <i class="fa fa-sitemap"></i> <span><?= Yii::t('app', 'PRODUCTS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -448,7 +448,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=item-categories"><i class="fa fa-object-group"></i> Categories</a></li>
+            ><a href="index.php?r=item-categories"><i class="fa fa-object-group"></i> <?= Yii::t('app', 'CATEGORIES') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -456,7 +456,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=items"><i class="fa fa-list-ul"></i> Items</a></li>
+            ><a href="index.php?r=items"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'ITEMS') ?></a></li>
             
           </ul>
           <!-- Customers and Orders -->
@@ -466,7 +466,7 @@ else
                 }
               ?>">
           <a href="#">
-            <i class="fa fa-cart-plus"></i> <span>Orders</span>
+            <i class="fa fa-cart-plus"></i> <span><?= Yii::t('app', 'ORDERS') ?></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -479,7 +479,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=customers"><i class="fa fa-user"></i> Customers</a></li>
+            ><a href="index.php?r=customers"><i class="fa fa-user"></i> <?= Yii::t('app', 'CUSTOMERS') ?></a></li>
              <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -487,7 +487,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=customer-addresses"><i class="fa fa-building-o"></i> Customer Addresses</a></li>
+            ><a href="index.php?r=customer-addresses"><i class="fa fa-building-o"></i> <?= Yii::t('app', 'CUSTOMERS_ADDRESSES') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -495,7 +495,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=orders"><i class="fa fa-shopping-basket"></i> Orders</a></li>
+            ><a href="index.php?r=orders"><i class="fa fa-shopping-basket"></i> <?= Yii::t('app', 'ORDERS') ?></a></li>
             <li 
               <?php 
                 if(isset($this->params['currentPage'])){
@@ -503,7 +503,7 @@ else
                       echo "class='active'";
                 }
               ?>
-            ><a href="index.php?r=order-items"><i class="fa fa-cart-plus"></i> Orders Items</a></li>
+            ><a href="index.php?r=order-items"><i class="fa fa-cart-plus"></i> <?= Yii::t('app', 'ORDERS_ITEMS') ?></a></li>
           </ul>
         </li>
         <!-- End of Customers and Orders -->
@@ -522,7 +522,7 @@ else
         <?php
             echo Breadcrumbs::widget([
                 'homeLink' => [ 
-                                'label' => Yii::t('yii', 'Dashboard'),
+                                'label' => Yii::t('app', 'DASHBOARD'),
                                 'url' => Yii::$app->homeUrl,
                                 'links'			=> isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                                 'tagName'		=>'ul', // container tag

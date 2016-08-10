@@ -21,7 +21,7 @@ use dosamigos\google\maps\Event;
 /* @var $model backend\models\CustomerAddresses */
 
 $this->title = $model->customer->full_name.' Address No# '.$model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customer Addresses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMER_ADDRESSES'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customer-addresses-view">
@@ -51,11 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'longitude',
             [
                 'attribute'=>'is_default',
-                'value' =>  $model->deleted == 0 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 0 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'created_at',
             'updated_at',

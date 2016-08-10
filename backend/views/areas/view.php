@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Areas */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cities'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'AREAS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="areas-view">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? 'Yes' : 'No'
+                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'lang',
             'created_at',

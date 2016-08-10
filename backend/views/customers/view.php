@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Customers */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMERS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customers-view">
@@ -27,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'photo',
              [
                 'attribute'=>'gender',
-                'value' =>  $model->gender == 'M' ? 'Male' : 'Female'
+                'value' =>  $model->gender == 'M' ? Yii::t('app', 'MALE') : Yii::t('app', 'FEMALE')
               ],
               [
                 'attribute'=>'is_allowed',
-                'value' =>  $model->is_allowed == 1 ? 'Yes' : 'No'
+                'value' =>  $model->is_allowed == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
               ],
         //    'unlock_token',
         //    'confirmed_at',

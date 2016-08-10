@@ -11,8 +11,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Customer#'.Yii::$app->request->queryParams['id'].' Orders');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Customers'), 'url' => 'index.php?r=customers'];
+$this->title = Yii::t('app', 'CUSTOMER') . ' # ' .Yii::$app->request->queryParams['id'].' Orders');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMERS'), 'url' => 'index.php?r=customers'];
 $this->params['breadcrumbs'][] = $this->title;
 
 $curpage = Yii::$app->controller->id;
@@ -24,7 +24,7 @@ $this->params['currentPage'] = $curpage;
  
 <?php
         Modal::begin([
-                'header'=>'<h4>Customers-Orders</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'CUSTOMERS_ORDERS').'</h4>',
                 'id' => 'modal',
                 'size' => 'modal-lg',
                 ]);
@@ -60,10 +60,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->gender =='Male'){
-		                return Html::a('Male','#',['class'=>'label label-danger']);
+		                return Html::a(Yii::t('app', 'MALE'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a('Female','#',['class'=>'label label-success']);
+                        return Html::a(Yii::t('app', 'FEMALE'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],
@@ -122,15 +122,15 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->order_status =='OPEN'){
-		                return Html::a('OPEN','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'OPEN'),'#',['class'=>'label label-success']);
                     }if($model->order_status =='RE-OPEN'){
-		                return Html::a('RE-OPEN','#',['class'=>'label label-success']);
+		                return Html::a(Yii::t('app', 'REOPEN'),'#',['class'=>'label label-success']);
                     }else if($model->order_status =='CLOSED'){
-                        return Html::a('CLOSED','#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'CLOSED'),'#',['class'=>'label label-danger']);
                     }else if($model->order_status =='PENDING'){
-                        return Html::a('PENDING','#',['class'=>'label label-warning']);
+                        return Html::a(Yii::t('app', 'PENDING'),'#',['class'=>'label label-warning']);
                     }else if($model->order_status =='CANCEL'){
-                        return Html::a('CANCEL','#',['class'=>'label label-info']);
+                        return Html::a(Yii::t('app', 'CANCELED'),'#',['class'=>'label label-info']);
                     }    
 	            }
 	        ],
@@ -138,7 +138,7 @@ $this->params['currentPage'] = $curpage;
              'delivery_charge',
              'total',
               [
-                 'attribute' => 'Total With Delivery',
+                 'attribute' => Yii::t('app', 'TOTAL_WITH_DELIVERY'),
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
              ],
              'cancel_reason',
@@ -148,7 +148,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('Order Items','index.php?r=order-items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'ORDER_ITEMS'),'index.php?r=order-items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',
