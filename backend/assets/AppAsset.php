@@ -18,6 +18,7 @@ class AppAsset extends AssetBundle
         'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
         'https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css',
         'css/AdminLTE.css',
+        'css/ltr.css',
         'css/skins/_all-skins.min.css',
         'css/plugins/iCheck/flat/blue.css',
         'css/plugins/morris/morris.css',

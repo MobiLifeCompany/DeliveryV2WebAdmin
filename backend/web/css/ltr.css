@@ -1,0 +1,4 @@
+.is-ltr {
+    visibility: hidden;
+    display: none;
+}

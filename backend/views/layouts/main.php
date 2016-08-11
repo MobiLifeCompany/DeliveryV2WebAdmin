@@ -287,11 +287,20 @@ else
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
+      <div class="user-panel is-rtl">
         <div class="pull-left image">
           <img src="dist/img/logo.png" class="img-circle" alt="DE Logo">
         </div>
         <div class="pull-left info">
+          <p><?= Yii::$app->user->identity->username;?></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <div class="user-panel is-ltr">
+        <div class="pull-right image">
+          <img src="dist/img/logo.png" class="img-circle" alt="DE Logo">
+        </div>
+        <div class="pull-right info">
           <p><?= Yii::$app->user->identity->username;?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -314,7 +323,8 @@ else
           <a href="#">
             <i class="fa fa-dashboard"></i> <span><?= Yii::t('app', 'DASHBOARDS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -331,7 +341,8 @@ else
           <a href="#">
             <i class="fa fa-suitcase"></i> <span><?= Yii::t('app', 'REPORTS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -352,7 +363,8 @@ else
           <a href="#">
             <i class="fa fa-user"></i> <span><?= Yii::t('app', 'USERS_PERMISSIONS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -390,7 +402,8 @@ else
           <a href="#">
             <i class="fa fa-map"></i> <span><?= Yii::t('app', 'LOGISTICS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -437,7 +450,8 @@ else
           <a href="#">
             <i class="fa fa-sitemap"></i> <span><?= Yii::t('app', 'PRODUCTS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -468,7 +482,8 @@ else
           <a href="#">
             <i class="fa fa-cart-plus"></i> <span><?= Yii::t('app', 'ORDERS') ?></span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
+              <i class="fa fa-angle-right pull-right is-rtl"></i>
+              <i class="fa fa-angle-left pull-left is-ltr"></i>
             </span>
           </a>
           <ul class="treeview-menu">

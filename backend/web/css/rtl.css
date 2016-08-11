@@ -1,0 +1,22 @@
+.is-rtl {
+    visibility: hidden;
+    display: none;
+}
+
+.sidebar-menu > li > a {
+    border-right: 3px solid transparent;    
+}
+
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li.active > a {
+    border-left-color: transparent !important;
+    border-right-color: #3c8dbc;
+}
+
+.user-panel > .info {
+  padding: 5px 5px 5px 15px;
+  line-height: 1;
+  position: absolute;
+  left: 0px !important;
+  right: 60px !important;
+}

@@ -19,12 +19,13 @@ class AppAssetRTL extends AssetBundle
         'https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css',
         'css/AdminLTE-RTL.css',
         'css/bootstrap-rtl.min.css',
+        'css/rtl.css',
         'css/skins/_all-skins.min.css',
         'css/plugins/iCheck/flat/blue.css',
         'css/plugins/morris/morris.css',
         'css/plugins/jvectormap/jquery-jvectormap-1.2.2.css',
-        'css/plugins/datepicker/datepicker3.css',
-        'css/plugins/daterangepicker/daterangepicker.css',
+        //'css/plugins/datepicker/datepicker3.css',
+        //'css/plugins/daterangepicker/daterangepicker.css',
         'css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
     ];
     public $js = [
@@ -42,14 +43,14 @@ class AppAssetRTL extends AssetBundle
         'js/jvectormap/jquery-jvectormap-world-mill-en.js',
         'js/knob/jquery.knob.js',
         'js/chartjs/Chart.min.js',
-        'js/daterangepicker/daterangepicker.js',
-        'js/datepicker/bootstrap-datepicker.js',
+        //'js/daterangepicker/daterangepicker.js',
+        //'js/datepicker/bootstrap-datepicker.js',
         'js/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
         'js/slimScroll/jquery.slimscroll.min.js',
         'js/main.js',
         'js/demo.js',
        // 'js/main.js',
-        'js/pages/dashboard2.js',
+        //'js/pages/dashboard2.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
