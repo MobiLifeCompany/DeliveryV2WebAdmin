@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\User;
 
 /**
  * Site controller
@@ -80,7 +81,12 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            $user = new User();
+            $username = Yii::$app->request->post()['LoginForm']['username'];
+            $realUser = $user->findByUsername(Yii::$app->request->post()['LoginForm']['username']);
+            Yii::$app->session->set('realUser',$realUser);
+            $this->redirect('index.php?r=dashboards/dashboard1');
+           // return $this->goBack();
         } else {
             return $this->render('login', [
                 'model' => $model,

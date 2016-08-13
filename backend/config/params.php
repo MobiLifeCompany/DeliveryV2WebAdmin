@@ -7,5 +7,6 @@ return [
     'languages' =>[
         'en' => 'English',
         'ar' => 'Arabic',
-    ]
+    ],
+    'currency' => 'SY'
 ];

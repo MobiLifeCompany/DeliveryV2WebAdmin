@@ -60,13 +60,13 @@ class ItemsSearch extends Items
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->globalSearch])
-            ->andFilterWhere(['like', 'description', $this->globalSearch])
-            ->andFilterWhere(['like', 'price', $this->globalSearch])
-            ->andFilterWhere(['like', 'photo', $this->globalSearch])
-            ->andFilterWhere(['like', 'lang', $this->globalSearch])
-            ->andFilterWhere(['like', 'ar_name', $this->globalSearch])
-            ->andFilterWhere(['like', 'ar_description', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'description', $this->globalSearch])
+            ->orFilterWhere(['like', 'price', $this->globalSearch])
+            ->orFilterWhere(['like', 'photo', $this->globalSearch])
+            ->orFilterWhere(['like', 'lang', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_description', $this->globalSearch]);
 
         return $dataProvider;
     }

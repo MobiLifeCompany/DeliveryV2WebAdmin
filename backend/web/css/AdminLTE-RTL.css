@@ -1721,7 +1721,7 @@ a:focus {
 .box-header > .box-tools {
   position: absolute;
   left: 10px;
-  top: 5px;
+  top: -5px;
 }
 .box-header > .box-tools [data-toggle="tooltip"] {
   position: relative;

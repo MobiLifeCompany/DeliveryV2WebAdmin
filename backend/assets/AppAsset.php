@@ -28,8 +28,7 @@ class AppAsset extends AssetBundle
         'css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css',
     ];
     public $js = [
-      //  'js/jquery-ui.min.js',
-       // 'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
+        'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
       //  'js/jQuery/jquery-2.2.3.min.js',
       //  'js/bootstrap/bootstrap.min.js',
         //'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
@@ -44,13 +43,13 @@ class AppAsset extends AssetBundle
         'js/knob/jquery.knob.js',
         'js/chartjs/Chart.min.js',
        // 'js/daterangepicker/daterangepicker.js',
-      //  'js/datepicker/bootstrap-datepicker.js',
+       // 'js/datepicker/bootstrap-datepicker.js',
         'js/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js',
         'js/slimScroll/jquery.slimscroll.min.js',
         'js/main.js',
         'js/demo.js',
        // 'js/main.js',
-       // 'js/pages/dashboard2.js',
+        //'js/pages/dashboard2.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

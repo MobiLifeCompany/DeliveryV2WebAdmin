@@ -1730,7 +1730,7 @@ a:focus {
   display: block;
   padding: 10px;
   position: relative;
-  padding: 10px 1px 12px 2px;
+  padding: 18px 1px 12px 2px;
 }
 .box-header.with-border {
   border-bottom: 1px solid #f4f4f4;
@@ -1754,7 +1754,7 @@ a:focus {
 }
 .box-header > .box-tools {
   position: absolute;
-  top: 4px;
+  top: -5px;
 }
 .box-header > .box-tools [data-toggle="tooltip"] {
   position: relative;

@@ -32,7 +32,7 @@ else
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.php" class="logo">
+    <a href="index.php?r=dashboards/dashboard1" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>DE</b>A</span>
       <!-- logo for regular state and mobile devices -->
@@ -319,7 +319,11 @@ else
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header"><?= Yii::t('app', 'MAIN_NAVIGATION') ?></li>
-        <li class="treeview">
+        <li class="treeview  <?php 
+                if(isset($this->params['currentPage']) && ($this->params['currentPage']=='dashboards')){
+                      echo "active";
+                }
+              ?>">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span><?= Yii::t('app', 'DASHBOARDS') ?></span>
             <span class="pull-right-container">
@@ -328,8 +332,18 @@ else
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'DASHBOARD') ?></a></li>
-            <li><a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'MAP_DASHBOARD') ?></a></li>
+            <li <?php 
+                if(isset($this->params['currentPageAction'])){
+                    if($this->params['currentPageAction']=='dashboard1') 
+                      echo "class='active'";
+                }
+              ?>><a href="index.php?r=dashboards/dashboard1"><i class="fa fa-circle-o text-yellow"></i> <?= Yii::t('app', 'DASHBOARD') ?></a></li>
+            <li <?php 
+                if(isset($this->params['currentPageAction'])){
+                    if($this->params['currentPageAction']=='dashboard2') 
+                      echo "class='active'";
+                }
+              ?>><a href="index.php?r=dashboards/dashboard2"><i class="fa fa-circle-o text-blue"></i> <?= Yii::t('app', 'MAP_DASHBOARD') ?></a></li>
           </ul>
         </li>
 

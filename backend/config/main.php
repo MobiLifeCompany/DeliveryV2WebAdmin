@@ -22,7 +22,7 @@ return [
         ],
         'gii' => [
             'class' => 'yii\gii\Module',
-            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.*', 'XXX.XXX.XXX.XXX'] // adjust this to your needs
+            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.*','50.117.45.141', 'XXX.XXX.XXX.XXX'] // adjust this to your needs
         ]
     ],
     'components' => [
@@ -57,7 +57,7 @@ return [
         'bundles' => [
             'dosamigos\google\maps\MapAsset' => [
                 'options' => [
-                    'key' => 'AIzaSyBff9ACTrR5bGktksjrqnHCQepr5W80C9o',
+                    'key' => 'AIzaSyBuMz8tcw44tYQr-Rc2wxRNYApuExBECTU',
                     'language' => 'en',
                     'version' => '3.1.18'
                 ]

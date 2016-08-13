@@ -181,8 +181,8 @@ class OrderItemsController extends Controller
     public function actionDetails($id)
     {
         $orderItems = new OrderItems();
-        $dataProvider = $orderItems->getOrderItems(Yii::$app->request->queryParams);
-        $order = $orderItems->getOrderById(Yii::$app->request->queryParams);
+        $dataProvider = $orderItems->getOrderItems($id);
+        $order = $orderItems->getOrderById($id);
 
         return $this->render('details', [
             'dataProvider' => $dataProvider,

@@ -66,11 +66,11 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-            'rating',
-            'estimation_time',
+           // 'rating',
+         //   'estimation_time',
             'min_amount',
            // 'delivery_expected_time',
-            'delivery_charge',
+           // 'delivery_charge',
             //'lang',
             [
 	            'attribute' => Yii::t('app', 'POSITION'),

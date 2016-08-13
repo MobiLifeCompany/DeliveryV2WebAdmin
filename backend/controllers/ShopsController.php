@@ -274,9 +274,10 @@ class ShopsController extends Controller
            // print_r($model->getErrors());
             //die();
             $deliveryAreas = array();
-          
-            foreach ($shop->shopDeliveryAreas as $deliveryArea) {
-                array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+            if(!empty($shop->shopDeliveryAreas)){
+                foreach ($shop->shopDeliveryAreas as $deliveryArea) {
+                    array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+                }
             }
           
           return $this->render('viewWithMap', [
@@ -295,8 +296,10 @@ class ShopsController extends Controller
        $model = $this->findModel($id);
           //die();
         $deliveryAreas = array();
-        foreach ($model->shopDeliveryAreas as $deliveryArea) {
-            array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+        if(!empty($model->shopDeliveryAreas)){
+            foreach ($model->shopDeliveryAreas as $deliveryArea) {
+                array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
+            }
          }
         
         return $this->render('viewWithMap', [

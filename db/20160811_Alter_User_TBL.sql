@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `photo` VARCHAR(50) NULL AFTER `subscribed`;

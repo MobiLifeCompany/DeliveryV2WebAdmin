@@ -91,12 +91,11 @@ class OrderItems extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
-        
-
         $query->andWhere(['order_id'=> $id]);
 
         return $dataProvider;
     }
+
     public function getOrderById($id)
     {
         $query = Orders::find();

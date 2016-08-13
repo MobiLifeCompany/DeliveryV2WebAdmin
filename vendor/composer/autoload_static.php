@@ -61,6 +61,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'd' => 
         array (
+            'dosamigos\\highcharts\\' => 21,
             'dosamigos\\google\\maps\\' => 22,
             'dosamigos\\datepicker\\' => 21,
         ),
@@ -224,6 +225,10 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         'kartik\\affix\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-affix',
+        ),
+        'dosamigos\\highcharts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-highcharts-widget',
         ),
         'dosamigos\\google\\maps\\' => 
         array (
