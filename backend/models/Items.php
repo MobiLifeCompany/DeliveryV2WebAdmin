@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\data\ActiveDataProvider;
+use backend\models\ShopItemCategories;
 
 /**
  * This is the model class for table "items".
@@ -89,6 +92,23 @@ class Items extends \yii\db\ActiveRecord
     public function getShopItemCategory()
     {
         return $this->hasOne(ShopItemCategories::className(), ['id' => 'shop_item_category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShopItems($shopId)
+    {
+        $result = ArrayHelper::map(ShopItemCategories::find()->where(['shop_id' => $shopId])->all(),'id','id');
+        $query = Items::find()->where(['shop_item_category_id' => $result]);
+        
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $dataProvider;
+
     }
 
     /**

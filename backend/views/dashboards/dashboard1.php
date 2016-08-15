@@ -550,7 +550,7 @@ foreach ($monthlyOrdersCount as $var) {
 
                     <div class="progress">
                         <div class="progress-bar" style="width: 
-                            <?php $digit = ($pendingOrderSumM==0)?pendingOrderSumM:($pendingOrderSum/$pendingOrderSumM);
+                            <?php $digit = ($pendingOrderSumM==0)?$pendingOrderSumM:($pendingOrderSum/$pendingOrderSumM);
                                   $digit = number_format((float)$digit, 2, '.', '');                                  
                                   $digit =  $digit * 100;
                                   echo $digit;

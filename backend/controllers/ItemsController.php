@@ -6,6 +6,7 @@ use Yii;
 use backend\models\Items;
 use backend\models\ItemsSearch;
 use backend\models\ShopItemCategories;
+use backend\models\Shops;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,6 +73,26 @@ class ItemsController extends Controller
     {
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a shop items.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        $items = new Items();
+        $dataProvider = $items->getShopItems($id);
+        $searchModel = new ItemsSearch();
+        $shop = new Shops();
+        $shopModel = $shop->getShopById($id);
+
+        return $this->render('details', [
+            'dataProvider' => $dataProvider,
+            'shopModel' => $shopModel,
+            'searchModel' => $searchModel,
         ]);
     }
 

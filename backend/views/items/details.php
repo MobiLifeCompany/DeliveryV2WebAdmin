@@ -7,10 +7,10 @@ use yii\Helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ShopsSearch */
+/* @var $searchModel backend\models\ItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'SHOPS');
+$this->title = Yii::t('app', 'ITEMS');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -18,16 +18,11 @@ $curpage = Yii::$app->controller->id;
 $this->params['currentPage'] = $curpage;
 
 ?>
-<div class="shops-index">
-    <h3><?= Html::encode($this->title) ?></h3>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']); ?>
-    </p>
-    <br/>
+<div class="items-index">
+    <h3><?= Html::encode(Yii::t('app', 'SHOP').'#'.Yii::$app->request->queryParams['id']) ?></h3>
     <?php
         Modal::begin([
-                'header'=>'<h4>'.Yii::t('app', 'SHOPS').'</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'ITEMS').'</h4>',
                 'options' => [
                     'id' => 'modal',
                     'tabindex' => false] // important for Select2 to work properly
@@ -37,11 +32,11 @@ $this->params['currentPage'] = $curpage;
     ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $shopModel,
         'export' =>false,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
-        'layout'=>"{items}\n{summary}\n{pager}",
+        'summary'=>"",
         'options'=>[
                         'tag'=>'div',
                         'class'=>'box box-body table-responsive no-padding'
@@ -100,6 +95,79 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
                 'value' => function($model) { return Html::a(Yii::t('app', 'DELIVERY_AREAS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=shops/areas&id='.$model->id), 'id'=>'deliveryAreasModalButton'.$model->id,'onclick'=>'return showDeliveryAreasModal('.$model->id.')']); },
             ],
+            [
+               'class' => 'yii\grid\ActionColumn',
+               'template' => '{update} {view} ',
+               'buttons' => [
+               'view' => function ($url,$model) 
+                    {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>'index.php?r=shops/view&id='.$model->id ,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                    },
+                'update' => function ($url,$model) 
+                    {
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>'index.php?r=shops/update&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                    }    
+                ]
+            ],
+        ],
+    ]); ?>
+
+    <h3><?= Html::encode($this->title) ?></h3>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
+    </p>
+    <br/>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'export' =>false,
+        'tableOptions' => ['class' => 'table table-hover'],
+        'class' =>  'box',
+        'layout'=>"{items}\n{summary}\n{pager}",
+        'options'=>[
+                        'tag'=>'div',
+                        'class'=>'box box-body table-responsive no-padding'
+        ],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'name',
+            'ar_name',
+            [
+                'attribute' => 'shop_id',
+                'value'=>'shopItemCategory.shop.name'
+            ],
+            [
+                'attribute' => 'item_category_id',
+                'value'=>'shopItemCategory.itemCategory.name'
+            ],
+            'price',
+            [
+	            'attribute' => 'deleted',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->deleted == 1){
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    }
+                    else {
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                    }    
+	            }
+	        ],
+            [
+	            'attribute' => 'active',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->active == 1){
+		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    }
+                    else {
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                    }    
+	            }
+	        ],
             [
                'class' => 'yii\grid\ActionColumn',
                'template' => '{delete} {update} {view} ',

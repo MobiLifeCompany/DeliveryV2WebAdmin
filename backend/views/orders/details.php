@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'CUSTOMER') . ' # ' .Yii::$app->request->queryParams['id'].' Orders');
+$this->title = Yii::t('app', 'CUSTOMER') . ' # ' .Yii::$app->request->queryParams['id'].' Orders';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'CUSTOMERS'), 'url' => 'index.php?r=customers'];
 $this->params['breadcrumbs'][] = $this->title;
 

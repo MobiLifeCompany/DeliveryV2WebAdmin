@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "shops".
@@ -158,6 +159,16 @@ class Shops extends \yii\db\ActiveRecord
     public function getArea()
     {
         return $this->hasOne(Areas::className(), ['id' => 'area_id']);
+    }
+
+    public function getShopById($id)
+    {
+        $query = Shops::find()->where(['id'=> $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        return $dataProvider;
     }
 
     /**
