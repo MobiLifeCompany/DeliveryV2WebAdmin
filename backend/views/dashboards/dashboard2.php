@@ -84,7 +84,11 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
             [
                 'attribute' => 'order_id',
                 'label' => Yii::t('app', 'ORDER_ID'),
-                'value' => function($model) { return $model['order_id'].' #';}
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) {
+		                return Html::a($model['order_id'].' #','#', ['value'=>Url::to('index.php?r=orders/view&id='.$model['order_id']),'class'=>'product-title','id'=>'viewModalButton_order_'.$model['order_id'],'onclick'=>'return showViewModalByType('.$model['order_id'].',"order")']);
+                }
             ],
             [
 	            'attribute' => 'order_status',
