@@ -176,5 +176,8 @@
         'DAILY_DELIVERY_ASSIGNMENT_TITLE1' =>'Daily Assignment Orders (Open - Pending)',
         'HOME_MESSAGE' => 'Welcome to Delivery Admin Web Control',
         'NOT_ASSIGNED' => 'Not Assigned',
+        'SHOP_RATING' => 'Shop Rating',
+        'SHOPS_RATING' => 'Shops Rating',
+        'RATING' => 'Rating',
     ];
 ?>

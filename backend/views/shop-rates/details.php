@@ -7,41 +7,35 @@ use yii\Helpers\Url;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ShopsSearch */
+/* @var $searchModel backend\models\ShopRatesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'SHOPS');
+$this->title = Yii::t('app', 'SHOP_RATING');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
 $curpage = Yii::$app->controller->id;
 $this->params['currentPage'] = $curpage;
 
+
 ?>
-<div class="shops-index">
-    <h3><?= Html::encode($this->title) ?></h3>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']); ?>
-    </p>
-    <br/>
+<div class="shop-rates-index">
+    <h3><?= Html::encode(Yii::t('app', 'SHOP').'#'.Yii::$app->request->queryParams['id']) ?></h3>
     <?php
         Modal::begin([
-                'header'=>'<h4>'.Yii::t('app', 'SHOPS').'</h4>',
-                'options' => [
-                    'id' => 'modal',
-                    'tabindex' => false] // important for Select2 to work properly
+                'header'=>'<h4>'.Yii::t('app', 'SHOP_RATING').'</h4>',
+                'id' => 'modal',
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $shopModel,
         'export' =>false,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
-        'layout'=>"{items}\n{summary}\n{pager}",
+        'summary'=>"",
         'options'=>[
                         'tag'=>'div',
                         'class'=>'box box-body table-responsive no-padding'
@@ -111,15 +105,69 @@ $this->params['currentPage'] = $curpage;
                'buttons' => [
                'view' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>'index.php?r=shops/view&id='.$model->id,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
                     },
                 'update' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>'index.php?r=shops/update&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
                     }    
                 ]
             ],
         ],
     ]); ?>
 
+    <h3><?= Html::encode($this->title) ?></h3>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+    <br>
+
+    <?php Pjax::begin(['id'=>'modalGrid']);?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'export' =>false,
+        'tableOptions' => ['class' => 'table table-hover'],
+        'class' =>  'box',
+        'layout'=>"{items}\n{summary}\n{pager}",
+        'options'=>[
+                        'tag'=>'div',
+                        'class'=>'box box-body table-responsive no-padding'
+        ],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            ['attribute' => 'customer_id',
+             'value'=>'customer.full_name'
+            ],
+            ['attribute' => 'shop_id',
+             'value'=>'shop.name'
+            ],
+            ['attribute' => 'order_id',
+             'value'=>'order.id'
+            ],
+            [
+	            'attribute' => 'rate',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    $i = 0;
+                    $stars = '';
+                    for(;$i < $model->rate; $i++)
+                        $stars .= Html::a('<span class="fa fa-star text-yellow">','#');
+                    for(;$i < 5; $i++)
+                        $stars .= Html::a('<span class="fa fa-star-o text-yellow">','#');
+                    return $stars;
+	            }
+	        ],
+
+            [
+               'class' => 'yii\grid\ActionColumn',
+               'template' => '{view} ',
+               'buttons' => [
+               'view' => function ($url,$model) 
+                    {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                    }, 
+                ]
+            ],
+        ],
+    ]); ?>
+    <?php Pjax::end();?>
 </div>

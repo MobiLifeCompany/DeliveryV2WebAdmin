@@ -535,6 +535,16 @@ else
             ><a href="index.php?r=order-items"><i class="fa fa-cart-plus"></i> <?= Yii::t('app', 'ORDERS_ITEMS') ?></a></li>
           </ul>
         </li>
+        <li
+          <?php 
+                if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='shop-rates') 
+                      echo "class='active'";
+                }
+              ?>
+        >
+          <a href="index.php?r=shop-rates"><i class="fa fa-star-half-o"></i> <span> <?= Yii::t('app', 'SHOPS_RATING') ?></span></a>
+        </li>
         <!-- End of Customers and Orders -->
        <!-- <li><a href="index.php?r=place"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
         </li>
