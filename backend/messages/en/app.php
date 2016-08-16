@@ -170,6 +170,8 @@
         'RECENTLY_ADDED_PRODUCTS' => 'Recently Added Products',
         'VIEW_ALL_PRODUCTS' => 'View All Products',
         'STATISTICS_DASHBOARD' =>'Statistics Dashboard',
+        'MAP_DASHBOARD' => 'Map Dashboard',
+        'UPDATE_TO_SHOW_ON_MAP' => 'Update and Show On Map',
         'DAILY_DELIVERY_ASSIGNMENT_TITLE2' =>'Daily Assignment Orders (Closed - Cancel)',
         'DAILY_DELIVERY_ASSIGNMENT_TITLE1' =>'Daily Assignment Orders (Open - Pending)',
         'HOME_MESSAGE' => 'Welcome to Delivery Admin Web Control',

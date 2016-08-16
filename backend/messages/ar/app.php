@@ -170,6 +170,8 @@
         'RECENTLY_ADDED_PRODUCTS' => 'المنتجات المضافة مأخراً',
         'VIEW_ALL_PRODUCTS' => 'استعراض كامل المنتجات',
         'STATISTICS_DASHBOARD' =>'لوحة القيادة الخاصة بالإحصائيات',
+        'MAP_DASHBOARD' => 'لوحة القيادة الخاصة بالخريطة',
+        'UPDATE_TO_SHOW_ON_MAP' => 'تعديل واختيار العناصر على الخريطة',
         'DAILY_DELIVERY_ASSIGNMENT_TITLE1' =>' الطلبيات اليومية المسندة المفتوحة وقيدالإنتظار',
         'DAILY_DELIVERY_ASSIGNMENT_TITLE2' =>'الطلبيات اليومية المسندة المغلقة والملغاة',
         'HOME_MESSAGE' => 'مرحباٌ في لوحة التحكم لتطبيق الدليفري إكسبريس',

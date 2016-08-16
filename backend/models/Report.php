@@ -46,11 +46,4 @@ class Report extends Model
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getShopItemCategories()
-    {
-        return $this->hasMany(ShopItemCategories::className(), ['item_category_id' => 'id']);
-    }
 }

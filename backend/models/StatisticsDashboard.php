@@ -117,13 +117,13 @@ class StatisticsDashboard extends Report
     public function getDailyItemsAmountSeries(){
         
         $shopStatment = "";
-        $shopStatment = "and shop_id = 2";
+       // $shopStatment = "and shop_id = 2";
         
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT sum(order_items.total) sumTotal,name,ar_name FROM `order_items`, items, orders 
                                                 WHERE orders.id = order_items.order_id 
                                                 and items.id = item_id ".$shopStatment."
-                                                and date(order_items.created_at) = CURDATE()-1 
+                                                and date(order_items.created_at) = CURDATE() 
                                                 group by name,ar_name");
         $result = $command->queryAll();
         

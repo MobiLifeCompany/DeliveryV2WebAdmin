@@ -687,7 +687,7 @@ foreach ($monthlyOrdersCount as $var) {
   $j=0;
   foreach ($dailyItemsAmount as $variable) {
     $seriesValues[$j] = $variable;
-    $seriesNamesValues[$j] = $nameArray[$j];
+    $seriesNamesValues[$j] = (Yii::$app->language == 'ar')?$arNameArray[$j]:$nameArray[$j];
     $j++;
   }
   $script = <<< JS

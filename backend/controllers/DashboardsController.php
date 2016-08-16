@@ -4,6 +4,9 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\StatisticsDashboard;
+use backend\models\MapOrder;
+use backend\models\MapDashboard;
+use backend\models\Orders;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,8 +75,37 @@ class DashboardsController extends Controller
 
     public function actionDashboard2()
     {
-    
-        return $this->render('dashboard2');
+        $statisticsDashboardModel = new MapDashboard();
+        $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
+
+        $data = Yii::$app->request->post();
+        if (array_key_exists('selection', $data)) {
+                $selection = $data['selection'];
+                foreach ($selection as $value) {
+                    $value = substr($value ,4);
+                    $order = Orders::find()->where(['id' => $value])->one();
+                    $order->show_on_map = 1;
+                    $order->updated_at = date('Y-m-d H:i:s');
+                    $order->update(['updated_at','show_on_map']);
+                    $order->save();
+                }
+
+                $model = $currentOrdersForMapDashboard->getModels();
+                foreach ($model as  $modelValue) {
+                    if($modelValue['show_on_map'] ==1 && !in_array('chk_'.$modelValue['order_id'], $selection)){
+                            $order = Orders::find()->where(['id' => $modelValue['order_id']])->one();
+                            $order->show_on_map = 0;
+                            $order->updated_at = date('Y-m-d H:i:s');
+                            $order->update(['updated_at','show_on_map']);
+                            $order->save();
+                    }
+            }
+        }
+
+        $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
+        return $this->render('dashboard2',[
+            'currentOrdersForMapDashboard'=>$currentOrdersForMapDashboard,
+        ]);
     }
 
     public function beforeAction($action)

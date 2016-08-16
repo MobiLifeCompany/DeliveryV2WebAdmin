@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `show_on_map` INT(1) NOT NULL DEFAULT '0' AFTER `delivery_user_id`;
