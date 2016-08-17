@@ -190,5 +190,9 @@
         'SHOP_RATING' => 'Shop Rating',
         'SHOPS_RATING' => 'Shops Rating',
         'RATING' => 'Rating',
+        'CONTACT_US' => 'Contact Us',
+        'MESSAGE' => 'Message',
+        'UNREAD_MESSAGE' => 'Unread Message',
+        'READ_MESSAGE' => 'Read Message',
     ];
 ?>

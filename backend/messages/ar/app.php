@@ -190,5 +190,9 @@
         'SHOP_RATING' => 'تقييم المتجر',
         'SHOPS_RATING' => 'تقييم المتاجر',
         'RATING' => 'التقييم',
+        'CONTACT_US' => 'اتصل بنا',
+        'MESSAGE' => 'الرسالة',
+        'UNREAD_MESSAGE' => 'غير مقروءة',
+        'READ_MESSAGE' => 'مقروءة',
     ];
 ?>
