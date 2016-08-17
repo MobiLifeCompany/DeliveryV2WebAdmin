@@ -344,6 +344,12 @@ else
                       echo "class='active'";
                 }
               ?>><a href="index.php?r=dashboards/dashboard2"><i class="fa fa-circle-o text-blue"></i> <?= Yii::t('app', 'MAP_DASHBOARD') ?></a></li>
+             <li <?php 
+                if(isset($this->params['currentPageAction'])){
+                    if($this->params['currentPageAction']=='dashboard3') 
+                      echo "class='active'";
+                }
+              ?>><a href="index.php?r=dashboards/dashboard3"><i class="fa fa-circle-o text-green"></i> <?= Yii::t('app', 'TOP_TEN_DASHBOARDS') ?></a></li>
           </ul>
         </li>
 
@@ -366,9 +372,13 @@ else
                       echo "class='active'";
                 }
               ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> <?= Yii::t('app', 'SALES_REPORT') ?></a></li>
-            <li> <a href="index.php"><i class="fa fa-circle-o"></i> Report2</a></li>
+            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'SHOPS') ?></a></li>
+            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'CUSTOMERS') ?></a></li>
+            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'DAILY') ?></a></li>
+            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'MONTHLY') ?></a></li>
           </ul>
         </li>
+        
         <li class="treeview <?php 
                 if(isset($this->params['currentPage']) && ($this->params['currentPage']=='user' || $this->params['currentPage']=='auth-item' || $this->params['currentPage']=='auth-item-child')){
                       echo "active";

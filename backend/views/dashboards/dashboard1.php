@@ -487,13 +487,15 @@ foreach ($monthlyOrdersCount as $var) {
                       $dailyItemsAmount = ArrayHelper::getColumn($dailyItemsAmountSeries, 'sumTotal');
                       $dailyItemsAmount = array_map('intval', $dailyItemsAmount );
                       $colorClassArray = ['text-red','text-green','text-yellow','text-aqua','text-light-blue','text-gray'];
-                      $i = -1;
+                      $i = 0;
                       foreach ($nameArray as $name) {
-                        $i++;
+                        if($i>=6)
+                          break;
                         $displayName = (Yii::$app->language == 'ar')?$arNameArray[$i]:$name;
                   ?>
                         <li><i class="fa fa-circle-o <?=$colorClassArray[$i]?>"></i><?='('.$dailyItemsAmount[$i].') '.$displayName?></li>
                   <?php
+                      $i++;
                       }
                   ?>      
                   </ul>

@@ -6,6 +6,7 @@ use Yii;
 use backend\models\StatisticsDashboard;
 use backend\models\MapOrder;
 use backend\models\MapDashboard;
+use backend\models\TopTenDashboard;
 use backend\models\Orders;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -108,6 +109,25 @@ class DashboardsController extends Controller
         ]);
     }
 
+    public function actionDashboard3()
+    {
+        $topTenDashboard = new TopTenDashboard();
+
+        $topTenItemsAmount = $topTenDashboard->getTopTenItemsAmount();
+        $topTenShopsAmount = $topTenDashboard->getTopTenShopsAmount();
+        $topTenCustomersAmount = $topTenDashboard->getTopTenCustomersAmount();
+        $topTenMonthDaysAmount = $topTenDashboard->getTopTenMonthDaysAmount();
+        $topTenMonthlyAmount = $topTenDashboard->getTopTenMonthlyAmount();
+        
+
+        return $this->render('dashboard3',[
+            'topTenItemsAmount' =>$topTenItemsAmount,
+            'topTenShopsAmount' =>$topTenShopsAmount,
+            'topTenCustomersAmount'=>$topTenCustomersAmount,
+            'topTenMonthDaysAmount' =>$topTenMonthDaysAmount,
+            'topTenMonthlyAmount' =>$topTenMonthlyAmount,
+        ]);
+    }
     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
