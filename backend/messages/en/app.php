@@ -194,5 +194,14 @@
         'MESSAGE' => 'Message',
         'UNREAD_MESSAGE' => 'Unread Message',
         'READ_MESSAGE' => 'Read Message',
+        'SHOPS_OFFERS' => 'Shops Offers',
+        'SHOP_OFFERS' => 'Shop Offers',
+        'OFFER' => 'Offer',
+        'FROM_DATE' => 'From Date',
+        'TO_DATE' => 'To Date',
+        'OFFER_TYPE' => 'Offer Type',
+        'CLICKABLE' => 'Clickable',
+        'GOLDEN' => 'Golden',
+        'SILVER' => 'Silver',
     ];
 ?>

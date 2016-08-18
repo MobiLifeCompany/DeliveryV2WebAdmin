@@ -548,6 +548,16 @@ else
         <li
           <?php 
                 if(isset($this->params['currentPage'])){
+                    if($this->params['currentPage']=='shop-offers') 
+                      echo "class='active'";
+                }
+              ?>
+        >
+          <a href="index.php?r=shop-offers"><i class="fa fa-tags"></i> <span> <?= Yii::t('app', 'SHOPS_OFFERS') ?></span></a>
+        </li>
+        <li
+          <?php 
+                if(isset($this->params['currentPage'])){
                     if($this->params['currentPage']=='shop-rates') 
                       echo "class='active'";
                 }

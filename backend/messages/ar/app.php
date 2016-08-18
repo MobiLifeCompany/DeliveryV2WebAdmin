@@ -194,5 +194,14 @@
         'MESSAGE' => 'الرسالة',
         'UNREAD_MESSAGE' => 'غير مقروءة',
         'READ_MESSAGE' => 'مقروءة',
+        'SHOPS_OFFERS' => 'عروض المتاجر',
+        'SHOP_OFFERS' => 'عروض المتجر',
+        'OFFER' => 'العرض',
+        'FROM_DATE' => 'من تاريخ',
+        'TO_DATE' => 'إلى تاريخ',
+        'OFFER_TYPE' => 'نوع العرض',
+        'CLICKABLE' => 'إمكانية النقر',
+        'GOLDEN' => 'ذهبي',
+        'SILVER' => 'فضي',
     ];
 ?>

@@ -1,0 +1,1 @@
+alter table shop_offers convert to character set utf8 collate utf8_unicode_ci;
