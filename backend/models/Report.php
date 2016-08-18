@@ -21,6 +21,7 @@ class Report extends Model
     public $from_date;
     public $to_date;
     public $order_status;
+    public $item_id;
 
     /**
      * @inheritdoc
@@ -40,9 +41,11 @@ class Report extends Model
     public function attributeLabels()
     {
         return [
-            'shop_id' => Yii::t('app', 'Shop'),
-            'from_date' => Yii::t('app', 'From Date'),
-            'to_date' => Yii::t('app', 'To Date'),
+            'shop_id' => Yii::t('app', 'SHOPS'),
+            'from_date' => Yii::t('app', 'FROM_DATE'),
+            'to_date' => Yii::t('app', 'TO_DATE'),
+            'item_id' => Yii::t('app', 'ITEMS'),
+            'order_status' => Yii::t('app', 'ORDER_STATUS'),
         ];
     }
 

@@ -48,12 +48,24 @@ class ReportsController extends Controller
     {
        
         $searchModel = new SalesReport();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchShops(Yii::$app->request->queryParams);
 
         return $this->render('salesreport', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionItemsreport()
+    {
+        $searchModel = new SalesReport();
+        $dataProvider = $searchModel->searchItems(Yii::$app->request->queryParams);
+
+        return $this->render('itemsreport', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+       
     }
 
     public function beforeAction($action)

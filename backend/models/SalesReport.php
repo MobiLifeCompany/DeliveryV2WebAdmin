@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use backend\models\Report;
 
 /**
@@ -40,7 +41,7 @@ class SalesReport extends Report
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function searchShops($params)
     {
         $query = Orders::find();
 
@@ -87,6 +88,63 @@ class SalesReport extends Report
          // print_r($query->createCommand()->getRawSql());
         //  print_r('----------');
 
+        return $dataProvider;
+    }
+
+    public function searchItems($params)
+    {
+         $shopStatment = "";
+       // $shopStatment = "and shop_id = 2";
+
+        $item_id_val = -1;
+        $from_date_val=date('Y-m-d');
+        $to_date_val = date('Y-m-d');
+        $order_status='OPEN';
+
+        $sqlStatment = "";
+
+        
+        foreach ($params as $k => $v) {
+            if($k=='SalesReport'){
+                $item_id_val = $params['SalesReport']['item_id'];
+                $from_date_val=$params['SalesReport']['from_date'];
+                $to_date_val = $params['SalesReport']['to_date'];
+                $order_status = $params['SalesReport']['order_status'];
+                break;
+            }
+        }
+
+         if($item_id_val!=-1){
+             if($from_date_val==$to_date_val){
+                $sqlStatment = $sqlStatment." and `items`.`id` = '".$item_id_val."'";
+                $sqlStatment = $sqlStatment." and `orders`.`created_at` '".$from_date_val."'";
+             }else{
+                $sqlStatment = $sqlStatment." and `items`.`id` = '".$item_id_val."'";
+                $sqlStatment = $sqlStatment." and `orders`.`created_at` >= '".$from_date_val."'";
+                $sqlStatment = $sqlStatment." and `orders`.`created_at` <= '".$to_date_val."'";
+             } 
+         }else{
+             $sqlStatment = $sqlStatment." and `orders`.`created_at` >= '".$from_date_val."'";
+         }
+
+         $sqlStatment = $sqlStatment." and `orders`.`order_status` = '".$order_status."'";
+        
+         $query =  "SELECT `orders`.id,`orders`.order_status,`item_categories`.`name` category_name,`items`.`name` item_name,`order_items`.`qty`, `items`.`price`,(`order_items`.`qty`* `items`.`price`) total, `orders`.`created_at` 
+                    FROM `orders`, `order_items`, `items`, `item_categories` , `shop_item_categories`
+                    where `orders`.`id` = `order_items`.`order_id`
+                    and `order_items`.`item_id` = `items`.`id`
+                    and `items`.`shop_item_category_id` = `shop_item_categories`.`id`
+                    and  `shop_item_categories`.`item_category_id` = `item_categories`.`id` ".$sqlStatment ;
+
+        $count=Yii::$app->db->createCommand($query)->queryScalar();
+        $dataProvider = new SqlDataProvider([
+            'sql' => $query,
+            'totalCount'=>$count,
+            'pagination' => [
+                'pageSize' => Yii::$app->params['pageSize'],
+                ],
+            ]);
+        
         return $dataProvider;
     }
 }

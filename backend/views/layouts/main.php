@@ -367,15 +367,18 @@ else
           </a>
           <ul class="treeview-menu">
             <li <?php 
-                if(isset($this->params['currentPage'])){
-                    if($this->params['currentPage']=='reports') 
+                if(isset($this->params['currentPageAction'])){
+                    if($this->params['currentPageAction']=='salesreport') 
                       echo "class='active'";
                 }
               ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> <?= Yii::t('app', 'SALES_REPORT') ?></a></li>
-            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'SHOPS') ?></a></li>
-            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'CUSTOMERS') ?></a></li>
-            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'DAILY') ?></a></li>
-            <li> <a href="index.php"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'MONTHLY') ?></a></li>
+            <li <?php 
+                if(isset($this->params['currentPageAction'])){
+                    if($this->params['currentPageAction']=='itemsreport') 
+                      echo "class='active'";
+                }
+              ?>> <a href="index.php?r=reports/itemsreport"><i class="fa fa-circle-o text-green"></i> <?= Yii::t('app', 'ITEMS_REPORT') ?></a></li>
+         
           </ul>
         </li>
         
