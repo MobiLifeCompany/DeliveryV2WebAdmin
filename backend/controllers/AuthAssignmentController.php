@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use backend\models\UserPermissions;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
-
+use yii\helpers\ArrayHelper;
 /**
  * AuthAssignmentController implements the CRUD actions for AuthAssignment model.
  */
@@ -102,6 +102,85 @@ class AuthAssignmentController extends Controller
      * @param string $user_id
      * @return mixed
      */
+     public function actionPermissions($user_id)
+        {
+        $model = new AuthAssignment();
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $selectedUserPermissions = $data['AuthAssignment']['userPermissions_ids'];
+
+            if(isset($selectedUserPermissions))
+            {
+                if(!empty($selectedUserPermissions)){
+                    AuthAssignment::deleteAll(['user_id' => $user_id]);
+                    foreach($selectedUserPermissions as $item_name){
+                        $userPermission = new AuthAssignment();
+                        $userPermission->user_id = $user_id;
+                        $userPermission->item_name = $item_name;
+                        $userPermission->created_at = date('Y-m-d H:i:s');
+                        $userPermission->save();
+                    }
+                }
+            }
+
+            $selectedGroupsUserPermissions = $data['AuthAssignment']['userPermissionGroups_ids'];
+            if(isset($selectedGroupsUserPermissions))
+            {
+                if(!empty($selectedGroupsUserPermissions)){
+                    foreach($selectedGroupsUserPermissions as $item_name){
+                        $userPermission = new AuthAssignment();
+                        $userPermission->user_id = $user_id;
+                        $userPermission->item_name = $item_name;
+                        $userPermission->created_at = date('Y-m-d H:i:s');
+                        $userPermission->save();
+                    }
+                }
+            }
+
+            return $this->redirect(['user/index']);
+
+        } else {
+            $userPermission = ArrayHelper::map($this->findUserPermission($user_id),'item_name','item_name');
+            $userGroupsPermission = ArrayHelper::map($this->findUserGroupsPermission($user_id),'item_name','item_name');
+            $model->userPermissions_ids = $userPermission;
+            $model->userPermissionGroups_ids = $userGroupsPermission;
+            return $this->renderAjax('permissions', [
+                'model' => $model,
+            ]);
+
+        }
+       
+    }
+
+    protected function findUserPermission($id)
+    {
+        $query = AuthAssignment::find();
+        $query->joinWith('itemName');
+        $query->andFilterWhere([
+           'user_id' => $id,
+           'type' => 2
+        ]);
+
+        $command = $query->createCommand();
+        $data= $command->queryAll();
+        return $data;
+    }
+
+     protected function findUserGroupsPermission($id)
+    {
+        $query = AuthAssignment::find();
+        $query->joinWith('itemName');
+        $query->andFilterWhere([
+           'user_id' => $id,
+           'type' => 1
+        ]);
+
+        $command = $query->createCommand();
+        $data= $command->queryAll();
+        return $data;
+    }
+
+
     public function actionUpdate($user_id)
     {
 

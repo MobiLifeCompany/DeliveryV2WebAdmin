@@ -4,12 +4,17 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\User;
+use backend\models\Shops;
 use backend\models\UserSearch;
+use backend\models\UserShops;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use yii\web\ForbiddenHttpException;
+use backend\models\AuthAssignment;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -47,13 +52,19 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_users') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -63,8 +74,16 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $user = User::find()->where(['id' => $id])->one();
+        $userShops = array();
+        if(!empty($user->userShops)){
+            foreach ($user->userShops as $userShop) {
+                array_push($userShops, Shops::find()->where(['id' => $userShop->shop_id])->one());
+            }
+          }
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
+            'userShops' => $userShops,
         ]);
     }
 
@@ -193,4 +212,104 @@ class UserController extends Controller
             return ActiveForm::validate($model);
         }
     }
+
+    public function actionShops($id)
+    {
+        $model = new UserShops();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $selectedShops = $model->shop_id;
+            if(isset($selectedShops))
+            {
+                UserShops::deleteAll(['user_id' => $id]);
+                if(!empty($selectedShops)){
+                    foreach($selectedShops as $shop){
+                        $model = new UserShops();
+                        $model->shop_id = $shop;
+                        $model->user_id = $id;
+                        $model->deleted = 0;
+                        $model->created_at = date('Y-m-d H:i:s');
+                        $model->updated_at = date('Y-m-d H:i:s');
+                        $model->save();
+                    }
+                }
+            }
+
+            return $this->redirect(['index']);
+
+        } else {
+            $userShops = ArrayHelper::map($this->findUserShops($id),'shop_id','shop_id');
+            $model->shop_id = $userShops;
+            return $this->renderAjax('shops', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    protected function findUserShops($id)
+    {
+        $model = UserShops::find()->where(['user_id' => $id])->orderBy('id')->all();
+        return $model;
+    }
+
+    public function actionProfile($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $secretKey = Yii::$app->params['secretKey'];
+            $encryptedPassword = utf8_encode(Yii::$app->getSecurity()->encryptByKey($model->password_hash, $secretKey));
+            $model->password_hash =  $encryptedPassword;
+
+            $model->updated_at= date('Y-m-d H:i:s');
+            $model->save(false);
+        } 
+
+        $userShops = array();
+        if(!empty($model->userShops)){
+            foreach ($model->userShops as $userShop) {
+                array_push($userShops, Shops::find()->where(['id' => $userShop->shop_id])->one());
+            }
+        }
+
+        $userPermission = ArrayHelper::map($this->findUserPermission($id),'item_name','item_name');
+        $userGroupsPermission = ArrayHelper::map($this->findUserGroupsPermission($id),'item_name','item_name');
+
+        return $this->render('profile', [
+            'model' =>  $model,
+            'userShops' => $userShops,
+            'userPermission' => $userPermission,
+            'userGroupsPermission' =>$userGroupsPermission,
+        ]);
+        
+    }
+
+    protected function findUserPermission($id)
+    {
+        $query = AuthAssignment::find();
+        $query->joinWith('itemName');
+        $query->andFilterWhere([
+           'user_id' => $id,
+           'type' => 2
+        ]);
+
+        $command = $query->createCommand();
+        $data= $command->queryAll();
+        return $data;
+    }
+
+     protected function findUserGroupsPermission($id)
+    {
+        $query = AuthAssignment::find();
+        $query->joinWith('itemName');
+        $query->andFilterWhere([
+           'user_id' => $id,
+           'type' => 1
+        ]);
+
+        $command = $query->createCommand();
+        $data= $command->queryAll();
+        return $data;
+    }
+
 }

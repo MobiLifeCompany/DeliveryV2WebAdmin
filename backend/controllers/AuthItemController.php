@@ -5,11 +5,13 @@ namespace backend\controllers;
 use Yii;
 use backend\models\AuthItem;
 use backend\models\AuthItemSearch;
+use backend\models\AuthItemChild;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * AuthItemController implements the CRUD actions for AuthItem model.
@@ -47,13 +49,19 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthItemSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_auth_item') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new AuthItemSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -178,5 +186,13 @@ class AuthItemController extends Controller
             Yii::$app->response->format='json';
             return ActiveForm::validate($model);
         }
+    }
+
+    public function actionPermissions($id)
+    {
+        $model = AuthItemChild::find()->where(['parent' => $id])->all();
+        return $this->renderAjax('permissions', [
+            'model' => $model,
+        ]);
     }
 }

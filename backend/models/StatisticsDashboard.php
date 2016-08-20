@@ -6,6 +6,9 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Report;
+use yii\helpers\ArrayHelper;
+use backend\models\UserShops;
+
 
 /**
  * AreasSearch represents the model behind the search form about `backend\models\Areas`.
@@ -160,6 +163,39 @@ class StatisticsDashboard extends Report
         return $result;
 
     }
+
+    public function getGeneralOrderCount(){
+        
+        $queryStatment = " where 1=1 ";
+        $model = UserShops::find()->where(['user_id' => Yii::$app->session['realUser']['id']])->all();
+        $shop_ids = "";
+        $userShops = ArrayHelper::map($model,'shop_id','shop_id');
+        if(!empty($userShops)){
+            $shop_ids = " and shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+        }
+        
+        if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ){
+            $queryStatment = $queryStatment.' and delivery_user_id = '.Yii::$app->session['realUser']['id'];
+            $queryStatment = $queryStatment.' and shop_id = '.Yii::$app->session['realUser']['shop_id'];
+        }else if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN'){
+            $queryStatment = $queryStatment.' and delivery_user_id = '.Yii::$app->session['realUser']['id'];
+            $queryStatment = $queryStatment.$shop_ids;
+        }if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
+            $queryStatment = $queryStatment.$shop_ids;
+        }
+
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT order_status,count(*) countNum  FROM orders ".$queryStatment." group by order_status");
+        $result = $command->queryAll();
+        
+        return $result;
+
+    }
+    
     
    
 }

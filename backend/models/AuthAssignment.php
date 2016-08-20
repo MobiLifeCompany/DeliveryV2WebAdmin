@@ -19,6 +19,11 @@ class AuthAssignment extends \yii\db\ActiveRecord
      * @inheritdoc
      */
 
+    public $userPermissions_ids ;
+
+    public $userPermissionGroups_ids;
+
+
     public static function tableName()
     {
         return 'auth_assignment';
@@ -45,6 +50,8 @@ class AuthAssignment extends \yii\db\ActiveRecord
             'item_name' => Yii::t('app', 'Item Name'),
             'user_id' => Yii::t('app', 'User ID'),
             'created_at' => Yii::t('app', 'Created At'),
+            'userPermissions_ids' => Yii::t('app', 'USER_PERMISSIONS'),
+            'userPermissionGroups_ids' => Yii::t('app', 'USER_PERMISSIONS_GROUP'),
         ];
     }
 

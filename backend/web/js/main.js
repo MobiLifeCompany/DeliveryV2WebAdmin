@@ -60,6 +60,20 @@ function showDeliveryAreasModal(id){
       
 }
 
+function showUserShopsModal(id){
+      $('#modal').modal('show')
+      .find('#modalContent')
+      .load($('#userShopsModalButton'+id).attr('value'));
+      
+}
+
+function showUserPermModal(id){
+      $('#modal').modal('show')
+      .find('#modalContent')
+      .load($('#userPermModalButton'+id).attr('value'));
+      
+}
+
 $('#modal').on('hidden.bs.modal', function() {
     $('#modalContent').empty(); //to clear the modal content after hide
 })

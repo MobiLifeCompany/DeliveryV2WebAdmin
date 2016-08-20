@@ -52,8 +52,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'name',
+            //'name',
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { 
+                         if($model->type ==1){
+                            return Html::a($model->name,'#',['value'=>Url::to('index.php?r=auth-item/permissions&id='.$model->name), 'id'=>'userPermModalButton'.$model->name,'onclick'=>'return showUserPermModal("'.$model->name.'")']);
+                         }else {
+                            return $model->name;
+                         }
+                    },
+            ],
              [
 	            'attribute' => 'type',
                 'vAlign'=>'middle',
@@ -63,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                return Html::a(Yii::t('app', 'GROUP_PERMISSION'),'#',['class'=>'label label-success']);
                     }
                     else {
-                        return Html::a(Yii::t('app', 'USER_PERMISSION'),'#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'USER_PERMISSION'),'#',['class'=>'label label-warning']);
                     }    
 	            }
 	        ],

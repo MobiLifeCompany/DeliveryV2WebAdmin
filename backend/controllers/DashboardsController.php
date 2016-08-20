@@ -13,6 +13,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -48,9 +49,15 @@ class DashboardsController extends Controller
      * Lists all User models.
      * @return mixed
      */
-    public function actionDashboard1()
-    {
-    
+public function actionDashboard1()
+{
+
+     if(!Yii::$app->user->can('show_dashboard1') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+     {
+         throw new ForbiddenHttpException;
+     }
+     else
+     {  
         $statisticsDashboardModel = new StatisticsDashboard();
         $latestOrderdataProvider = $statisticsDashboardModel->getLatestOrders();
         $latestItemsdataProvider = $statisticsDashboardModel->getRecentlyAddedProducts();
@@ -73,35 +80,43 @@ class DashboardsController extends Controller
 
         ]);
     }
+}
 
     public function actionDashboard2()
     {
-        $statisticsDashboardModel = new MapDashboard();
-        $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
-
-        $data = Yii::$app->request->post();
-        if (array_key_exists('selection', $data)) {
-                $selection = $data['selection'];
-                foreach ($selection as $value) {
-                    $value = substr($value ,4);
-                    $order = Orders::find()->where(['id' => $value])->one();
-                    $order->show_on_map = 1;
-                    $order->updated_at = date('Y-m-d H:i:s');
-                    $order->update(['updated_at','show_on_map']);
-                    $order->save();
-                }
-
-                $model = $currentOrdersForMapDashboard->getModels();
-                foreach ($model as  $modelValue) {
-                    if($modelValue['show_on_map'] ==1 && !in_array('chk_'.$modelValue['order_id'], $selection)){
-                            $order = Orders::find()->where(['id' => $modelValue['order_id']])->one();
-                            $order->show_on_map = 0;
-                            $order->updated_at = date('Y-m-d H:i:s');
-                            $order->update(['updated_at','show_on_map']);
-                            $order->save();
-                    }
-            }
+       if(!Yii::$app->user->can('show_dashboard2') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
         }
+        else
+        {  
+            $statisticsDashboardModel = new MapDashboard();
+            $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
+
+            $data = Yii::$app->request->post();
+            if (array_key_exists('selection', $data)) {
+                    $selection = $data['selection'];
+                    foreach ($selection as $value) {
+                        $value = substr($value ,4);
+                        $order = Orders::find()->where(['id' => $value])->one();
+                        $order->show_on_map = 1;
+                        $order->updated_at = date('Y-m-d H:i:s');
+                        $order->update(['updated_at','show_on_map']);
+                        $order->save();
+                    }
+
+                    $model = $currentOrdersForMapDashboard->getModels();
+                    foreach ($model as  $modelValue) {
+                        if($modelValue['show_on_map'] ==1 && !in_array('chk_'.$modelValue['order_id'], $selection)){
+                                $order = Orders::find()->where(['id' => $modelValue['order_id']])->one();
+                                $order->show_on_map = 0;
+                                $order->updated_at = date('Y-m-d H:i:s');
+                                $order->update(['updated_at','show_on_map']);
+                                $order->save();
+                        }
+                }
+        }
+    }
 
         $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
         return $this->render('dashboard2',[
@@ -111,22 +126,29 @@ class DashboardsController extends Controller
 
     public function actionDashboard3()
     {
-        $topTenDashboard = new TopTenDashboard();
+        if(!Yii::$app->user->can('show_dashboard3') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {  
+            $topTenDashboard = new TopTenDashboard();
 
-        $topTenItemsAmount = $topTenDashboard->getTopTenItemsAmount();
-        $topTenShopsAmount = $topTenDashboard->getTopTenShopsAmount();
-        $topTenCustomersAmount = $topTenDashboard->getTopTenCustomersAmount();
-        $topTenMonthDaysAmount = $topTenDashboard->getTopTenMonthDaysAmount();
-        $topTenMonthlyAmount = $topTenDashboard->getTopTenMonthlyAmount();
-        
+            $topTenItemsAmount = $topTenDashboard->getTopTenItemsAmount();
+            $topTenShopsAmount = $topTenDashboard->getTopTenShopsAmount();
+            $topTenCustomersAmount = $topTenDashboard->getTopTenCustomersAmount();
+            $topTenMonthDaysAmount = $topTenDashboard->getTopTenMonthDaysAmount();
+            $topTenMonthlyAmount = $topTenDashboard->getTopTenMonthlyAmount();
+            
 
-        return $this->render('dashboard3',[
-            'topTenItemsAmount' =>$topTenItemsAmount,
-            'topTenShopsAmount' =>$topTenShopsAmount,
-            'topTenCustomersAmount'=>$topTenCustomersAmount,
-            'topTenMonthDaysAmount' =>$topTenMonthDaysAmount,
-            'topTenMonthlyAmount' =>$topTenMonthlyAmount,
-        ]);
+            return $this->render('dashboard3',[
+                'topTenItemsAmount' =>$topTenItemsAmount,
+                'topTenShopsAmount' =>$topTenShopsAmount,
+                'topTenCustomersAmount'=>$topTenCustomersAmount,
+                'topTenMonthDaysAmount' =>$topTenMonthDaysAmount,
+                'topTenMonthlyAmount' =>$topTenMonthlyAmount,
+            ]);
+        }
     }
     public function beforeAction($action)
     {

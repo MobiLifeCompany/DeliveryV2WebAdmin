@@ -49,7 +49,7 @@ class AppAsset extends AssetBundle
         'js/main.js',
         'js/demo.js',
        // 'js/main.js',
-        //'js/pages/dashboard2.js',
+       // 'js/pages/dashboard.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

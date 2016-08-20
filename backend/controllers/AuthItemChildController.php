@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * AuthItemChildController implements the CRUD actions for AuthItemChild model.
@@ -47,13 +48,19 @@ class AuthItemChildController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthItemChildSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_auth_item_child') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new AuthItemChildSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

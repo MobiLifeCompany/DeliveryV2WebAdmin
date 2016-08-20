@@ -7,6 +7,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\User;
+use backend\models\StatisticsDashboard;
+use backend\models\MapDashboard;
+
 
 /**
  * Site controller
@@ -61,7 +64,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            $statisticsDashboardModel = new MapDashboard();
+            $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
+            return $this->render('index',[
+                'currentOrdersForMapDashboard'=>$currentOrdersForMapDashboard,
+            ]);
+        }else{
+            return $this->render('index');
+        }    
     }
 
     /**
@@ -75,9 +87,7 @@ class SiteController extends Controller
 
         Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
         
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+       
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -85,8 +95,14 @@ class SiteController extends Controller
             $username = Yii::$app->request->post()['LoginForm']['username'];
             $realUser = $user->findByUsername(Yii::$app->request->post()['LoginForm']['username']);
             Yii::$app->session->set('realUser',$realUser);
-            $this->redirect('index.php?r=dashboards/dashboard1');
-           // return $this->goBack();
+            Yii::$app->session->set('userShops',$this->getUserShops());
+            if($realUser['user_type']=='SHOP_DELIVERY_MAN' || $realUser['user_type']=='CR_DELIVERY_MAN'){
+                return $this->goBack();
+            }else {
+                return $this->redirect('index.php?r=dashboards/dashboard1');
+                // 
+            }
+            
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -94,6 +110,31 @@ class SiteController extends Controller
         }
     }
 
+    public function getUserShops(){
+       $userShops = array();
+       if(!Yii::$app->user->can('full_shops_admin')){
+            if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'){
+                 array_push($userShops, Yii::$app->session['realUser']['shop_id']);
+            }else if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
+                $user = \backend\models\User::find()->where(['id' => Yii::$app->session['realUser']['id']])->one();
+                if(!empty($user->userShops)){
+                    foreach ($user->userShops as $userShop) {
+                       array_push($userShops,$userShop->shop_id);
+                    }
+                }
+            }else{
+                array_push($userShops,Yii::$app->session['realUser']['shop_id']);
+            }
+       }else{
+           $shops = Shops::find()->all();
+           if(!empty($shops)){
+                foreach ($shops as $shop) {
+                    array_push($userShops,$shop->id);
+                }
+            }
+       }
+       return $userShops;
+    }
     /**
      * Logout action.
      *

@@ -1753,7 +1753,7 @@ a:focus {
   margin-right: 5px;
 }
 .box-header > .box-tools {
-  position: absolute;
+  position: relative;
   top: -5px;
 }
 .box-header > .box-tools [data-toggle="tooltip"] {

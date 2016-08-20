@@ -56,12 +56,23 @@ class UserSearch extends User
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
         $query->joinWith('shop');
+        $userShops = Yii::$app->session['userShops'];
+        if(!Yii::$app->user->can('full_shops_admin')){
+            if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'){
+                $query->andFilterWhere( ['in','user.shop_id',$userShops]);
+            }else if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
+                $query->joinWith('userShops');
+                $query->andFilterWhere([
+                    'or',
+                        ['in','user.shop_id',$userShops],
+                        ['in','user_shops.shop_id',$userShops],
+                ]);
+            }
+        }
 
         $query->orFilterWhere(['like', 'first_name', $this->userGlobalSearch])
             ->orFilterWhere(['like', 'last_name', $this->userGlobalSearch])

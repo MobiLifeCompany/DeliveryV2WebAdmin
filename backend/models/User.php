@@ -45,14 +45,23 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['shop_id', 'first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'safe'],
-            [['shop_id', 'first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'required'],
+            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'safe'],
+            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'required'],
             [['shop_id', 'status', 'phone'], 'integer'],
             [['user_type', 'deleted', 'gender'], 'string'],
+            ['shop_id','required','when'=>function($model){
+                return ($model->user_type == 'SHOP_ADMIN' || $model->user_type =='SHOP_DELIVERY_MAN') ? true : false;
+            },'whenClient' => "function(){
+                if($('#user_type').val()=='SHOP_ADMIN' || $('#user_type').val()=='SHOP_DELIVERY_MAN'){
+                    true;
+                }else
+                {
+                    false;
+                }
+            }"],
             [['first_name', 'last_name'], 'string', 'max' => 100],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['username','phone','email'], 'unique'],
-            [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Shops::className(), 'targetAttribute' => ['shop_id' => 'id']],
         ];
     }
 
@@ -91,5 +100,10 @@ class User extends \yii\db\ActiveRecord
     public function getShop()
     {
         return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
+    }
+
+    public function getUserShops()
+    {
+        return $this->hasMany(UserShops::className(), ['user_id' => 'id']);
     }
 }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use backend\models\Shops;
+use backend\models\User;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -24,10 +25,24 @@ use yii\helpers\Url;
                 'enableAjaxValidation'=>true,
                 'validationUrl'=> $validationUrl]); 
     ?>
-
+     <?= $form->field($model, 'user_type')->dropDownList([ 'SHOP_ADMIN' => 'SHOP ADMIN', 'SHOP_DELIVERY_MAN' => 'SHOP DELIVERY MAN', 'CR_ADMIN' => 'CR ADMIN', 'CR_DELIVERY_MAN' => 'CR DELIVERY MAN', ], ['prompt' => '',
+      'onchange'=>
+               'if($(this).val() == "SHOP_ADMIN" || $(this).val() == "SHOP_DELIVERY_MAN")
+                {
+                    document.getElementById("user-shop_id").disabled = false;
+                } 
+                else 
+                {
+                    document.getElementById("user-shop_id").disabled = true;
+                }',
+              ]) ?>
+     <?php
+      // filter shops according to user permissions
+         $userShops = Yii::$app->session['userShops'];
+     ?>         
      <?= $form->field($model, 'shop_id')->dropDownList(
-                    ArrayHelper::map(Shops::find()->all(),'id','name'), 
-                    ['prompt' => Yii::t('app', 'SELECT_SHOP')]);
+                    ArrayHelper::map(Shops::find()->where(['in','id',$userShops])->all(),'id','name'), 
+                    ['prompt' => Yii::t('app', 'SELECT_SHOP'),'disabled'=> ($model->user_type != 'SHOP_ADMIN' || $model->user_type != 'SHOP_DELIVERY_MAN'  )? "disabled" : ""]);
                     
      ?>
 
@@ -48,8 +63,6 @@ use yii\helpers\Url;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone')->textInput() ?>
-
-    <?= $form->field($model, 'user_type')->dropDownList([ 'SHOP_ADMIN' => 'SHOP ADMIN', 'SHOP_DELIVERY_MAN' => 'SHOP DELIVERY MAN', 'CR_ADMIN' => 'CR ADMIN', 'CR_DELIVERY_MAN' => 'CR DELIVERY MAN', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'gender')->dropDownList([ 'Male' => Yii::t('app', 'MALE'), 'Female' => Yii::t('app', 'FEMALE'), ], ['prompt' => '']) ?>
 

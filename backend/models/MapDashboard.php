@@ -37,8 +37,12 @@ class MapDashboard
 
     public function getCurrentOrdersForMapDashboard(){
         
-        $shopStatment = "";
+        $queryStatment = "";
        // $shopStatment = "and shop_id = 2";
+        if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            $queryStatment = " and (`orders`.`delivery_user_id` = '".Yii::$app->session['realUser']['id']."' || `orders`.`delivery_user_id` is null) ";
+        }
         
         $connection = Yii::$app->getDb();
         $query = "SELECT `orders`.`id` order_id,`orders`.`order_status`,`orders`.show_on_map,`user`.`username` delivery_user , `shops`.id shop_id, `shops`.`name` shop_name,`shops`.`longitude` shop_longitude, `shops`.`latitude` shop_latitude, `customers`.id customer_id,                                                               `customers`.`full_name`customer_fullname,`customer_addresses`.`id` customer_address_id, concat('[',`cities`.`name`,' - ',`areas`.`name`,' - ',`customer_addresses`.`street`,' - ',
@@ -48,7 +52,7 @@ class MapDashboard
                                                 and   `orders`.`customer_address_id` = `customer_addresses`.`id`
                                                 and   `customer_addresses`.`city_id` = `cities`.`id`
                                                 and   `customer_addresses`.`area_id` = `areas`.`id`
-                                                and   `orders`.`order_status` in ('OPEN', 'RE-OPEN', 'PENDING')";
+                                                and   `orders`.`order_status` in ('OPEN', 'RE-OPEN', 'PENDING') ".$queryStatment;
 
         $count=Yii::$app->db->createCommand($query)->queryScalar();
         $dataProvider = new SqlDataProvider([

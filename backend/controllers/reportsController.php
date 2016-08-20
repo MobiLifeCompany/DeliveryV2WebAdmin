@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -46,25 +47,38 @@ class ReportsController extends Controller
      */
     public function actionSalesreport()
     {
-       
-        $searchModel = new SalesReport();
-        $dataProvider = $searchModel->searchShops(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_sales_report') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {  
+            $searchModel = new SalesReport();
+            $dataProvider = $searchModel->searchShops(Yii::$app->request->queryParams);
 
-        return $this->render('salesreport', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('salesreport', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     public function actionItemsreport()
     {
-        $searchModel = new SalesReport();
-        $dataProvider = $searchModel->searchItems(Yii::$app->request->queryParams);
+         if(!Yii::$app->user->can('show_items_report') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {  
+            $searchModel = new SalesReport();
+            $dataProvider = $searchModel->searchItems(Yii::$app->request->queryParams);
 
-        return $this->render('itemsreport', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('itemsreport', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
        
     }
 
