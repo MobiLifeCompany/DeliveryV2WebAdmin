@@ -1,0 +1,30 @@
+
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('create_shop', '2', 'create_shop', NULL, NULL, '2016-08-22 03:37:43', '2016-08-22 03:40:17'),
+('delete_shop', '2', 'delete_shop', NULL, NULL, '2016-08-22 03:39:07', '2016-08-22 03:40:37'),
+('full_items_admin', '2', 'full_items_admin', NULL, NULL, '2016-08-21 20:03:45', '2016-08-21 20:03:45'),
+('full_shops_admin', '2', 'full_shops_admin', NULL, NULL, '2016-08-20 09:49:46', '2016-08-20 09:49:46'),
+('show_areas', '2', 'show_areas', NULL, NULL, '2016-08-21 11:58:47', '2016-08-21 11:58:47'),
+('show_assignment_orders_c_c', '2', 'show_assignment_orders_c_c on Dashbaord1\r\n', NULL, NULL, '2016-08-18 19:51:38', '2016-08-18 19:51:54'),
+('show_assignment_orders_o_p', '2', 'show_assignment_orders_o_p on Dashboard1', NULL, NULL, '2016-08-18 19:49:12', '2016-08-18 19:49:12'),
+('show_cities', '2', 'show_cities', NULL, NULL, '2016-08-21 11:58:36', '2016-08-21 11:58:36'),
+('show_countries', '2', 'show_countries', NULL, NULL, '2016-08-21 11:57:45', '2016-08-21 11:57:45'),
+('show_daily_sales_chart', '2', 'show_daily_sales_chart on Dashboard1', NULL, NULL, '2016-08-18 19:48:30', '2016-08-18 19:48:30'),
+('show_dashboard1', '1', 'show_dashboard1', NULL, NULL, '2016-08-18 19:53:47', '2016-08-20 03:31:43'),
+('show_dashboard2', '1', 'show_dashboard2', NULL, NULL, '2016-08-19 06:29:47', '2016-08-20 03:31:30'),
+('show_dashboard3', '1', 'show_dashboard3', NULL, NULL, '2016-08-19 06:34:52', '2016-08-20 03:31:36'),
+('show_items_report', '2', 'show_items_report', NULL, NULL, '2016-08-19 06:36:44', '2016-08-19 06:36:44'),
+('show_latest_product_report', '2', 'show_latest_product_report on dashbaord1', NULL, NULL, '2016-08-18 19:52:34', '2016-08-18 19:52:34'),
+('show_monthly_sales_chart', '2', 'show_monthly_sales_chart on Dashboard1', NULL, NULL, '2016-08-18 19:48:50', '2016-08-18 19:48:50'),
+('show_orders_statistics', '2', 'show_orders_statistics', NULL, NULL, '2016-08-20 03:13:13', '2016-08-20 03:13:38'),
+('show_percentage_orders_chart', '2', 'show_percentage_orders_chart on dashbaord1', NULL, NULL, '2016-08-18 19:52:53', '2016-08-18 19:52:53'),
+('show_permission_groups', '2', 'show_permission_groups', NULL, NULL, '2016-08-20 18:36:31', '2016-08-20 18:36:31'),
+('show_permissions', '2', 'show_permissions', NULL, NULL, '2016-08-20 18:36:15', '2016-08-20 18:36:15'),
+('show_products_sales_chart', '2', 'show_products_sales_chart on dashboard1', NULL, NULL, '2016-08-18 19:52:14', '2016-08-18 19:52:14'),
+('show_recently_added_products_report', '2', 'show_recently_added_products_report on dashboard1', NULL, NULL, '2016-08-18 19:53:12', '2016-08-18 19:53:12'),
+('show_sales_report', '2', '', NULL, NULL, '2016-08-19 06:36:23', '2016-08-19 06:36:23'),
+('show_shops', '2', 'show_shops', NULL, NULL, '2016-08-21 13:00:38', '2016-08-21 13:00:38'),
+('show_users', '2', 'show_users', NULL, NULL, '2016-08-19 06:50:18', '2016-08-19 06:50:18'),
+('update_shop', '2', 'update_shop', NULL, NULL, '2016-08-22 03:38:38', '2016-08-22 03:40:52');
+
+--
