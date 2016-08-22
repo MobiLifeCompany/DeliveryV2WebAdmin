@@ -52,6 +52,12 @@ function showViewModalByType(id,type){
       .load($('#viewModalButton_'+type+'_'+id).attr('value'));
 }
 
+function showUpdateModalByType(id,type){
+      $('#modal').modal('show')
+      .find('#modalContent')
+      .load($('#updateModalButton_'+type+'_'+id).attr('value'));
+}
+
 
 function showDeliveryAreasModal(id){
       $('#modal').modal('show')

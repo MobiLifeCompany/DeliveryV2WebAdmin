@@ -59,24 +59,29 @@ class ShopsSearch extends Shops
             // $query->where('0=1');
             return $dataProvider;
         }
-        
-        $query->orFilterWhere(['like', 'name', $this->name])
-            ->orFilterWhere(['like', 'short_description', $this->short_description])
-            ->orFilterWhere(['like', 'address', $this->address])
-            ->orFilterWhere(['like', 'longitude', $this->longitude])
-            ->orFilterWhere(['like', 'latitude', $this->latitude])
-            ->orFilterWhere(['like', 'estimation_time', $this->estimation_time])
-            ->orFilterWhere(['like', 'delivery_expected_time', $this->delivery_expected_time])
-            ->orFilterWhere(['like', 'promotion_note', $this->promotion_note])
-            ->orFilterWhere(['like', 'warning_note', $this->warning_note])
-            ->orFilterWhere(['like', 'masteries', $this->masteries])
+       
+        $userShops = Yii::$app->session['userShops'];
+        if(!Yii::$app->user->can('full_shops_admin')){
+           $query->andFilterWhere( ['in','id',$userShops]);
+        }
+
+        $query->orFilterWhere(['like', 'name', $this->globalSearch])
+            ->orFilterWhere(['like', 'short_description', $this->globalSearch])
+            ->orFilterWhere(['like', 'address', $this->globalSearch])
+            ->orFilterWhere(['like', 'longitude', $this->globalSearch])
+            ->orFilterWhere(['like', 'latitude', $this->globalSearch])
+            ->orFilterWhere(['like', 'estimation_time', $this->globalSearch])
+            ->orFilterWhere(['like', 'delivery_expected_time', $this->globalSearch])
+            ->orFilterWhere(['like', 'promotion_note', $this->globalSearch])
+            ->orFilterWhere(['like', 'warning_note', $this->globalSearch])
+            ->orFilterWhere(['like', 'masteries', $this->globalSearch])
             ->orFilterWhere(['like', 'deleted', $this->globalSearch])
-            ->orFilterWhere(['like', 'lang', $this->lang])
-            ->orFilterWhere(['like', 'country', $this->country])
-            ->orFilterWhere(['like', 'ar_name', $this->ar_name])
-            ->orFilterWhere(['like', 'ar_short_description', $this->ar_short_description])
-            ->orFilterWhere(['like', 'ar_address', $this->ar_address])
-            ->orFilterWhere(['like', 'phone', $this->phone]);
+            ->orFilterWhere(['like', 'lang', $this->globalSearch])
+            ->orFilterWhere(['like', 'country', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_short_description', $this->globalSearch])
+            ->orFilterWhere(['like', 'ar_address', $this->globalSearch])
+            ->orFilterWhere(['like', 'phone', $this->globalSearch]);
 
         return $dataProvider;
     }

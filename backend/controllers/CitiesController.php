@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * CitiesController implements the CRUD actions for Cities model.
@@ -26,7 +27,7 @@ class CitiesController extends Controller
         return [
             'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','details','view'],
+                'only' => ['index','update','create','delete','details','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -49,13 +50,20 @@ class CitiesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CitiesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+         if(!Yii::$app->user->can('show_cities') && !Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+         { 
+              throw new ForbiddenHttpException;
+         }
+         else{
+            $searchModel = new CitiesSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+         }
+        
     }
 
     /**

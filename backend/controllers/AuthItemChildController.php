@@ -48,7 +48,7 @@ class AuthItemChildController extends Controller
      */
     public function actionIndex()
     {
-        if(!Yii::$app->user->can('show_auth_item_child') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        if(!Yii::$app->user->can('show_permission_groups') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
         {
             throw new ForbiddenHttpException;
         }else

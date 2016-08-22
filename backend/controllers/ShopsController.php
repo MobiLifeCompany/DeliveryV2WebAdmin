@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\FileHelper;
 use yii\helpers\ArrayHelper;
 use yii\Helpers\Url;
+use yii\web\ForbiddenHttpException;
 
 /**
  * ShopsController implements the CRUD actions for Shops model.
@@ -32,7 +33,7 @@ class ShopsController extends Controller
         return [
              'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view'],
+                'only' => ['index','update','create','delete','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -55,13 +56,20 @@ class ShopsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ShopsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_shops') && !(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'))
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {
+            $searchModel = new ShopsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -225,8 +233,11 @@ class ShopsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $shop = $this->findModel($id);
+        $shop->updated_at = date('Y-m-d H:i:s');
+        $shop->deleted = 1;
+        $shop->update(['updated_at','deleted']);
+        $shop->save(false);
         return $this->redirect(['index']);
     }
 

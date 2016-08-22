@@ -13,7 +13,7 @@ use yii\web\UploadedFile;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
-
+use yii\web\ForbiddenHttpException;
 /**
  * ShopOffersController implements the CRUD actions for ShopOffers model.
  */
@@ -50,13 +50,19 @@ class ShopOffersController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ShopOffersSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new ShopOffersSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -158,7 +164,11 @@ class ShopOffersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->updated_at = date('Y-m-d H:i:s');
+        $model->active = 1;
+        $model->update(['updated_at','deleted']);
+        $model->save(false);
 
         return $this->redirect(['index']);
     }

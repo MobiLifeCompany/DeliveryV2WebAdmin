@@ -16,8 +16,13 @@ use kartik\file\FileInput;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
+     <?php
+      // filter shops according to user permissions
+         $userShops = Yii::$app->session['userShops'];
+     ?> 
+
     <?= $form->field($model, 'shop_id')->dropDownList(
-                    ArrayHelper::map(Shops::find()->all(),'id','name'),
+                    ArrayHelper::map(Shops::find()->where(['in','id',$userShops])->all(),'id','name'),
                     ['prompt' => Yii::t('app', 'SELECT_SHOP')]);
     ?>
     

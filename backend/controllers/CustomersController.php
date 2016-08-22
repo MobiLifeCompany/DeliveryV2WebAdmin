@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * CustomersController implements the CRUD actions for Customers model.
@@ -47,13 +48,19 @@ class CustomersController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CustomersSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new CustomersSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

@@ -108,11 +108,12 @@ class AuthAssignmentController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $data = Yii::$app->request->post();
             $selectedUserPermissions = $data['AuthAssignment']['userPermissions_ids'];
-
+            $deleted = true;
             if(isset($selectedUserPermissions))
             {
                 if(!empty($selectedUserPermissions)){
                     AuthAssignment::deleteAll(['user_id' => $user_id]);
+                    $deleted = false;
                     foreach($selectedUserPermissions as $item_name){
                         $userPermission = new AuthAssignment();
                         $userPermission->user_id = $user_id;
@@ -126,6 +127,9 @@ class AuthAssignmentController extends Controller
             $selectedGroupsUserPermissions = $data['AuthAssignment']['userPermissionGroups_ids'];
             if(isset($selectedGroupsUserPermissions))
             {
+                if($deleted){
+                    AuthAssignment::deleteAll(['user_id' => $user_id]); 
+                }
                 if(!empty($selectedGroupsUserPermissions)){
                     foreach($selectedGroupsUserPermissions as $item_name){
                         $userPermission = new AuthAssignment();

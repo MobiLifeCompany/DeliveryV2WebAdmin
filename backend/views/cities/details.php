@@ -56,10 +56,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted ==1){
-		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+		                 return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],

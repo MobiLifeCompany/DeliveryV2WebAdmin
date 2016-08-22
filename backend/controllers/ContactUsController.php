@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 /**
  * ContactUsController implements the CRUD actions for ContactUs model.
  */
@@ -45,13 +46,20 @@ class ContactUsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ContactUsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {
+            $searchModel = new ContactUsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

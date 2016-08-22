@@ -408,7 +408,7 @@
 
                   <!-- BEGIN OF USER PERMISSION ITEM -->
                   <?php
-                    if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+                    if((Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN') && (Yii::$app->user->can('show_permission_groups') || Yii::$app->user->can('show_permissions') || Yii::$app->user->can('show_users')))
                     {
                   ?>    
                       <li class="treeview <?php 
@@ -424,22 +424,40 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li 
+                          <?php
+                              if(Yii::$app->user->can('show_users'))
+                                { 
+                          ?>
+                              <li 
+                                <?php
+                                      if(isset($this->params['currentPage'])){
+                                          if($this->params['currentPage']=='user') 
+                                            echo "class='active'";
+                                      }
+                                      ?>
+                                  ><a href="index.php?r=user"><i class="fa fa-user"></i> <?= Yii::t('app', 'USERS') ?></a></li>
                               <?php 
-                                  if(isset($this->params['currentPage'])){
-                                      if($this->params['currentPage']=='user') 
-                                        echo "class='active'";
-                                  }
-                                  ?>
-                              ><a href="index.php?r=user"><i class="fa fa-user"></i> <?= Yii::t('app', 'USERS') ?></a></li>
-                            <li 
-                              <?php 
+                                }
+                                ?>
+                          <?php
+                              if(Yii::$app->user->can('show_permissions'))
+                                { 
+                          ?>  
+                              <li 
+                                <?php 
                                   if(isset($this->params['currentPage'])){
                                       if($this->params['currentPage']=='auth-item') 
                                         echo "class='active'";
                                   }
                                   ?>
                               ><a href="index.php?r=auth-item"><i class="fa fa-unlock-alt"></i> <?= Yii::t('app', 'PERMISSIONS') ?></a></li>
+                           <?php 
+                                }
+                                ?> 
+                           <?php
+                              if(Yii::$app->user->can('show_permission_groups'))
+                                { 
+                           ?>        
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -448,6 +466,9 @@
                                   }
                                   ?>
                               ><a href="index.php?r=auth-item-child"><i class="fa fa-users"></i> <?= Yii::t('app', 'PERMISSIONS_GROUP') ?></a></li>
+                           <?php 
+                                }
+                           ?>    
                         </ul>
                       </li>
                   <?php
@@ -456,8 +477,8 @@
                   <!-- END OF USER PERMISSION ITEM -->
 
                   <!-- BEGIN OF USER LOGISTICS ITEM -->
-                  <?php
-                    if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+                  <?php 
+                    if((Yii::$app->user->can('show_countries') || Yii::$app->user->can('show_cities') || Yii::$app->user->can('show_areas') || Yii::$app->user->can('show_shops')))
                     {
                   ?> 
                       <li class="treeview  <?php 
@@ -473,6 +494,10 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
+                          <?php
+                              if(Yii::$app->user->can('show_countries') && Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                                { 
+                           ?>   
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -481,6 +506,13 @@
                                   }
                                   ?>
                               ><a href="index.php?r=countries"><i class="fa fa-globe"></i> <?= Yii::t('app', 'COUNTRIES') ?></a></li>
+                           <?php 
+                                }
+                           ?> 
+                           <?php
+                              if(Yii::$app->user->can('show_cities') && Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                                { 
+                           ?>      
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -489,6 +521,13 @@
                                   }
                                   ?>
                               ><a href="index.php?r=cities"><i class="fa fa-map-signs"></i> <?= Yii::t('app', 'CITIES') ?></a></li>
+                            <?php 
+                                }
+                           ?> 
+                           <?php
+                              if(Yii::$app->user->can('show_areas') && Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                                { 
+                           ?>    
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -497,6 +536,13 @@
                                   }
                                   ?>
                               ><a href="index.php?r=areas"><i class="fa fa-map-pin"></i> <?= Yii::t('app', 'AREAS') ?></a></li>
+                            <?php 
+                                }
+                           ?>  
+                           <?php
+                              if(Yii::$app->user->can('show_shops') && (Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'))
+                                { 
+                           ?> 
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -505,6 +551,9 @@
                                   }
                                   ?>
                               ><a href="index.php?r=shops"><i class="fa fa-home"></i> <?= Yii::t('app', 'SHOPS') ?></a></li>
+                          <?php 
+                                }
+                           ?>   
                         </ul>
                       </li>
                   <?php
@@ -531,6 +580,10 @@
                       </span>
                       </a>
                       <ul class="treeview-menu">
+                        <?php
+                          if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                          {
+                        ?> 
                           <li 
                             <?php 
                                 if(isset($this->params['currentPage'])){
@@ -539,6 +592,13 @@
                                 }
                                 ?>
                             ><a href="index.php?r=item-categories"><i class="fa fa-object-group"></i> <?= Yii::t('app', 'CATEGORIES') ?></a></li>
+                         <?php
+                          }
+                         ?>
+                         <?php
+                          if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+                            {
+                         ?>    
                           <li 
                             <?php 
                                 if(isset($this->params['currentPage'])){
@@ -547,6 +607,9 @@
                                 }
                                 ?>
                             ><a href="index.php?r=items"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'ITEMS') ?></a></li>
+                         <?php
+                          }
+                         ?>   
                       </ul>
                     </li>
                   <?php
@@ -573,6 +636,10 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
+                        <?php
+                          if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                          {
+                        ?> 
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -581,6 +648,13 @@
                                   }
                                   ?>
                               ><a href="index.php?r=customers"><i class="fa fa-user"></i> <?= Yii::t('app', 'CUSTOMERS') ?></a></li>
+                          <?php
+                          }
+                        ?> 
+                        <?php
+                          if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                          {
+                        ?>     
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){
@@ -589,6 +663,9 @@
                                   }
                                   ?>
                               ><a href="index.php?r=customer-addresses"><i class="fa fa-building-o"></i> <?= Yii::t('app', 'CUSTOMERS_ADDRESSES') ?></a></li>
+                        <?php
+                          }
+                        ?>      
                             <li 
                               <?php 
                                   if(isset($this->params['currentPage'])){

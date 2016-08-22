@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
+
 /**
  * OrderItemsController implements the CRUD actions for OrderItems model.
  */
@@ -24,7 +26,7 @@ class OrderItemsController extends Controller
         return [
             'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view'],
+                'only' => ['index','update','create','delete','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -47,13 +49,20 @@ class OrderItemsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderItemsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || !Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+        {
+             throw new ForbiddenHttpException;
+        }
+        else
+        {
+            $searchModel = new OrderItemsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

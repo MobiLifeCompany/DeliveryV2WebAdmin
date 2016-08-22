@@ -92,7 +92,6 @@ $this->params['currentPage'] = $curpage;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?>
 
 <h3><?= Html::encode('CustomerAddress') ?></h3>
 

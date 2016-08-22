@@ -92,7 +92,7 @@ $this->params['currentPage'] = $curpage;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?>
+
 <div class="orders-index">
     <h3><?= Html::encode($this->title) ?></h3>   
     <?php Pjax::begin(['id'=>'modalGrid']);?>

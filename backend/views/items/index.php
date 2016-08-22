@@ -64,11 +64,11 @@ $this->params['currentPage'] = $curpage;
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
-                    if($model->deleted == 1){
-		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    if($model->deleted == 0){
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']); 
                     }
                     else {
-                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                       return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }    
 	            }
 	        ],
@@ -77,11 +77,11 @@ $this->params['currentPage'] = $curpage;
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
-                    if($model->active == 1){
-		                return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    if($model->active == 0){
+		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
-                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                       return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
                     }    
 	            }
 	        ],

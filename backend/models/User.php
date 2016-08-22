@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Shops;
 
 /**
  * This is the model class for table "user".
@@ -29,6 +30,7 @@ use Yii;
  *
  * @property Shops $shop
  */
+ 
 class User extends \yii\db\ActiveRecord
 {
     /**
@@ -106,4 +108,6 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserShops::className(), ['user_id' => 'id']);
     }
+
+    
 }

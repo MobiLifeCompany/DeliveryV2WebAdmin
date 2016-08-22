@@ -48,13 +48,19 @@ class CountriesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CountriesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if(!Yii::$app->user->can('show_countries') && !Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }
+        else{
+            $searchModel = new CountriesSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -76,8 +82,6 @@ class CountriesController extends Controller
      */
     public function actionCreate()
     {
-       if(Yii::$app->user->can('create_countries'))
-       {
             $model = new Countries();
 
             if ($model->load(Yii::$app->request->post())) {
@@ -95,10 +99,6 @@ class CountriesController extends Controller
                     'model' => $model,
                 ]);
             }
-        }else
-        {
-            throw new ForbiddenHttpException;
-        }
     }
 
     /**

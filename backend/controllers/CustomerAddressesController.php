@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
 use yii\data\ActiveDataProvider;
-
+use yii\web\ForbiddenHttpException;
 /**
  * CustomerAddressesController implements the CRUD actions for CustomerAddresses model.
  */
@@ -25,7 +25,7 @@ class CustomerAddressesController extends Controller
         return [
             'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view'],
+                'only' => ['index','update','create','delete','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -48,13 +48,19 @@ class CustomerAddressesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CustomerAddressesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }else
+        {
+            $searchModel = new CustomerAddressesSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**

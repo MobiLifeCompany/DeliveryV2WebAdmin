@@ -61,6 +61,10 @@ class OrdersSearch extends Orders
         }
 
         $query->joinWith('shop');
+        $userShops = Yii::$app->session['userShops'];
+        if(!Yii::$app->user->can('full_shops_admin')){
+           $query->andFilterWhere( ['in','shops.id',$userShops]);
+        }
         $query->joinWith('customer');
 
 

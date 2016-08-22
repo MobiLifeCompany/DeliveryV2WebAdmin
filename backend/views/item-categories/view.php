@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lang',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'created_at',
             'updated_at',

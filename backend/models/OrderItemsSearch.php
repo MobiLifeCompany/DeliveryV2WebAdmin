@@ -62,9 +62,16 @@ class OrderItemsSearch extends OrderItems
 
         $query->joinWith('item');
 
+        if(!Yii::$app->user->can('full_shops_admin')){
+             $query->joinWith('order');
+             $userShops = Yii::$app->session['userShops'];
+             $query->andFilterWhere( ['in','orders.shop_id',$userShops]);
+        }
+
         $query->orFilterWhere(['like', 'total', $this->orderItemsGlobalSearch])
               ->orFilterWhere(['like', 'items.name', $this->orderItemsGlobalSearch]);
-
+        
+        // print_r($query->createCommand()->getRawSql());
         return $dataProvider;
     }
 }

@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\widgets\ActiveForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * AreasController implements the CRUD actions for Areas model.
@@ -26,7 +27,7 @@ class AreasController extends Controller
         return [
             'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view'],
+                'only' => ['index','update','create','delete','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -49,13 +50,21 @@ class AreasController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AreasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->user->can('show_areas') && !Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {
+            $searchModel = new AreasSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+      
     }
 
     /**

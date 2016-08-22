@@ -13,6 +13,7 @@ use yii\web\UploadedFile;
 use yii\helpers\FileHelper;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 /**
  * ItemCategoriesController implements the CRUD actions for ItemCategories model.
  */
@@ -49,13 +50,20 @@ class ItemCategoriesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ItemCategoriesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+         {
+              throw new ForbiddenHttpException;
+         }
+         else 
+         {
+            $searchModel = new ItemCategoriesSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+         }
     }
 
     /**
@@ -156,7 +164,11 @@ class ItemCategoriesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->updated_at = date('Y-m-d H:i:s');
+        $model->deleted = 1;
+        $model->update(['updated_at','deleted']);
+        $model->save(false);
 
         return $this->redirect(['index']);
     }

@@ -22,7 +22,7 @@ $this->params['currentPage'] = $curpage;
     <h3><?= Html::encode(Yii::t('app', 'SHOP').'#'.Yii::$app->request->queryParams['id']) ?></h3>
     <?php
         Modal::begin([
-                'header'=>'<h4>'.Yii::t('app', 'ITEMS').'</h4>',
+                'header'=>'<h4>'.Yii::t('app', 'DETAILS').'</h4>',
                 'options' => [
                     'id' => 'modal',
                     'tabindex' => false] // important for Select2 to work properly
@@ -113,9 +113,9 @@ $this->params['currentPage'] = $curpage;
     ]); ?>
 
     <h3><?= Html::encode($this->title) ?></h3>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
+        <?php //Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
     </p>
     <br/>
 
@@ -174,11 +174,11 @@ $this->params['currentPage'] = $curpage;
                'buttons' => [
                'view' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton_item_'.$model->id,'onclick'=>'return showViewModalByType('.$model->id.',"item")']);
                     },
                 'update' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton_item_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"item")']);
                     }    
                 ]
             ],

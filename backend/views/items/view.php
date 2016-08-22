@@ -34,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'is_avilable',
-                'value' =>  $model->active == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
+                'value' =>  $model->active == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'lang',
             'created_at',

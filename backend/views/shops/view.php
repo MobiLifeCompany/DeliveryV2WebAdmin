@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'masteries:ntext',
             [
                 'attribute'=>'deleted',
-                'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
+                'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
             'lang',
             'created_at',

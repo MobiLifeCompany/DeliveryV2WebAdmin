@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\FileHelper;
 use yii\helpers\ArrayHelper;
 use yii\Helpers\Url;
+use yii\web\ForbiddenHttpException;
 
 /**
  * ItemsController implements the CRUD actions for Items model.
@@ -32,7 +33,7 @@ class ItemsController extends Controller
         return [
             'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view'],
+                'only' => ['index','update','create','delete','view','details'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -55,13 +56,20 @@ class ItemsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ItemsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+         if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || !Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+         {
+              throw new ForbiddenHttpException;
+         }
+         else 
+         {
+            $searchModel = new ItemsSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
     }
 
     /**
@@ -83,17 +91,25 @@ class ItemsController extends Controller
      */
     public function actionDetails($id)
     {
-        $items = new Items();
-        $dataProvider = $items->getShopItems($id);
-        $searchModel = new ItemsSearch();
-        $shop = new Shops();
-        $shopModel = $shop->getShopById($id);
+        $userShops = Yii::$app->session['userShops'];
+        if(!in_array($id,$userShops))
+        {
+             throw new ForbiddenHttpException;
+        }
+        else
+        {
+            $items = new Items();
+            $dataProvider = $items->getShopItems($id);
+            $searchModel = new ItemsSearch();
+            $shop = new Shops();
+            $shopModel = $shop->getShopById($id);
 
-        return $this->render('details', [
-            'dataProvider' => $dataProvider,
-            'shopModel' => $shopModel,
-            'searchModel' => $searchModel,
-        ]);
+            return $this->render('details', [
+                'dataProvider' => $dataProvider,
+                'shopModel' => $shopModel,
+                'searchModel' => $searchModel,
+            ]);
+        }
     }
 
     /**
@@ -205,7 +221,12 @@ class ItemsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $item = $this->findModel($id);
+        $item->updated_at = date('Y-m-d H:i:s');
+        $item->deleted = 1;
+        $item->active = 0;
+        $item->update(['updated_at','deleted','active']);
+        $item->save(false);
 
         return $this->redirect(['index']);
     }

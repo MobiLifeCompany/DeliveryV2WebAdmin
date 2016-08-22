@@ -91,7 +91,13 @@ class OrderItems extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
+        if(!Yii::$app->user->can('full_shops_admin')){
+             $query->joinWith('order');
+             $userShops = Yii::$app->session['userShops'];
+             $query->andFilterWhere( ['in','orders.shop_id',$userShops]);
+        }
         $query->andWhere(['order_id'=> $id]);
+
 
         return $dataProvider;
     }
@@ -107,6 +113,10 @@ class OrderItems extends \yii\db\ActiveRecord
         ]);
 
         $query->joinWith('shop');
+        if(!Yii::$app->user->can('full_shops_admin')){
+             $userShops = Yii::$app->session['userShops'];
+             $query->andFilterWhere( ['in','shops.id',$userShops]);
+        }
         $query->joinWith('customerAddresses');
 
         $query->andWhere(['orders.id'=> $id]);

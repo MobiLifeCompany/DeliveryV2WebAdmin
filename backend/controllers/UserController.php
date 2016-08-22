@@ -161,7 +161,7 @@ class UserController extends Controller
     {
        $user = $this->findModel($id);
        $user->updated_at = date('Y-m-d H:i:s');
-       $user->deleted = 'No';
+       $user->deleted = 1;
        $user->update(['updated_at','deleted']);
 
         return $this->redirect(['index']);
@@ -232,6 +232,10 @@ class UserController extends Controller
                         $model->updated_at = date('Y-m-d H:i:s');
                         $model->save();
                     }
+                    //reset <session></session>
+                    Yii::$app->session->remove('userShops');
+                    $user = new \common\models\User();
+                    Yii::$app->session->set('userShops',$user->getUserShopsIds());
                 }
             }
 

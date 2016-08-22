@@ -22,7 +22,11 @@ $this->params['currentPage'] = $curpage;
     <h3><?= Html::encode($this->title) ?></h3>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']); ?>
+      <?php 
+         if(Yii::$app->user->can('create_shop')){
+            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']);
+         } 
+      ?>
     </p>
     <br/>
     <?php
@@ -111,11 +115,21 @@ $this->params['currentPage'] = $curpage;
                'buttons' => [
                'view' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                            return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
                     },
                 'update' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                          if(Yii::$app->user->can('update_shop')){
+                            return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                          }
+                    },
+                'delete' => function ($url,$model) 
+                    {
+                          if(Yii::$app->user->can('delete_shop')){
+                            return Html::a('<span class="glyphicon glyphicon-trash">',$url,['title' => Yii::t('yii', 'Delete'),
+                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                    'data-method' => 'post',]);
+                          }
                     }    
                 ]
             ],

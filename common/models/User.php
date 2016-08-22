@@ -200,4 +200,30 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getUserShopsIds(){
+       $userShops = array();
+       if(!Yii::$app->user->can('full_shops_admin')){
+            if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'){
+                 array_push($userShops, Yii::$app->session['realUser']['shop_id']);
+            }else if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
+                $user = \backend\models\User::find()->where(['id' => Yii::$app->session['realUser']['id']])->one();
+                if(!empty($user->userShops)){
+                    foreach ($user->userShops as $userShop) {
+                       array_push($userShops,$userShop->shop_id);
+                    }
+                }
+            }else{
+                array_push($userShops,Yii::$app->session['realUser']['shop_id']);
+            }
+       }else{
+           $shops = Shops::find()->all();
+           if(!empty($shops)){
+                foreach ($shops as $shop) {
+                    array_push($userShops,$shop->id);
+                }
+            }
+       }
+       return $userShops;
+    }
 }

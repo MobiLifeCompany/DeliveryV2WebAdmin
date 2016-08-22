@@ -6,6 +6,9 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Items;
+use backend\models\shopItemCategory;
+
+
 
 /**
  * ItemsSearch represents the model behind the search form about `backend\models\Items`.
@@ -55,9 +58,13 @@ class ItemsSearch extends Items
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
+        }
+
+        $userShops = Yii::$app->session['userShops'];
+        if(!Yii::$app->user->can('full_items_admin')){
+            $query->joinWith('shopItemCategory');
+            $query->andFilterWhere(['in','shop_item_categories.shop_id',$userShops]);
         }
 
         $query->orFilterWhere(['like', 'name', $this->globalSearch])
@@ -68,6 +75,9 @@ class ItemsSearch extends Items
             ->orFilterWhere(['like', 'ar_name', $this->globalSearch])
             ->orFilterWhere(['like', 'ar_description', $this->globalSearch]);
 
+            //print_r($query->createCommand()->getRawSql());
+        //  print_r('----------');
+        //die();
         return $dataProvider;
     }
 }

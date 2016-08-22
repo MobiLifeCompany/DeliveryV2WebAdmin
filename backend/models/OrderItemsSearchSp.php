@@ -61,6 +61,12 @@ class OrderItemsSearchSp extends OrderItems
 
        // $query->joinWith('item');
 
+       if(!Yii::$app->user->can('full_shops_admin')){
+             $query->joinWith('order');
+             $userShops = Yii::$app->session['userShops'];
+             $query->andFilterWhere( ['in','orders.shop_id',$userShops]);
+        }
+
         $query->andFilterWhere(['order_id'=>$this->order_id]);
         
       

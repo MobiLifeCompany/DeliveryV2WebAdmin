@@ -79,7 +79,6 @@ use yii\helpers\Url;
     <?php ActiveForm::end(); ?>
 
 </div>
-
 <?php  
 $script = <<< JS
     $('form#{$model->formName()}').on('beforeSubmit', function(e)

@@ -111,7 +111,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?>
 <br/>
 <br/>
 <h2><?= Html::encode($this->title) ?></h2>
@@ -183,45 +182,47 @@ $map = new Map([
     'height' => '500', 
 ]);
 
+if((!empty($orderModel->getModels()[0])))
+{
+    // lets use the directions renderer
+    $shop = new LatLng(['lat' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['shop']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['shop']->longitude:0)]);
+    $customerAddress = new LatLng(['lat' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['customerAddresses']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['customerAddresses']->longitude:0)]);
+    $deliveryMan = new LatLng(['lat' => 35.136888, 'lng' => 36.791013]);
 
-// lets use the directions renderer
-$shop = new LatLng(['lat' => $orderModel->getModels()[0]['shop']->latitude, 'lng' =>  $orderModel->getModels()[0]['shop']->longitude]);
-$customerAddress = new LatLng(['lat' => $orderModel->getModels()[0]['customerAddresses']->latitude, 'lng' => $orderModel->getModels()[0]['customerAddresses']->longitude]);
-$deliveryMan = new LatLng(['lat' => 35.136888, 'lng' => 36.791013]);
+    // setup just one waypoint (Google allows a max of 8)
+    $waypoints = [
+        new DirectionsWayPoint(['location' => $deliveryMan])
+    ];
 
-// setup just one waypoint (Google allows a max of 8)
-$waypoints = [
-    new DirectionsWayPoint(['location' => $deliveryMan])
-];
+    $directionsRequest = new DirectionsRequest([
+        'origin' => $shop,
+        'destination' => $customerAddress,
+        'waypoints' => $waypoints,
+        'travelMode' => TravelMode::DRIVING
+    ]);
 
-$directionsRequest = new DirectionsRequest([
-    'origin' => $shop,
-    'destination' => $customerAddress,
-    'waypoints' => $waypoints,
-    'travelMode' => TravelMode::DRIVING
-]);
+    // Lets configure the polyline that renders the direction
+    $polylineOptions = new PolylineOptions([
+        'strokeColor' => '#3C90BE',
+        'draggable' => true
+    ]);
 
-// Lets configure the polyline that renders the direction
-$polylineOptions = new PolylineOptions([
-    'strokeColor' => '#3C90BE',
-    'draggable' => true
-]);
+    // Now the renderer
+    $directionsRenderer = new DirectionsRenderer([
+        'map' => $map->getName(),
+        'polylineOptions' => $polylineOptions
+    ]);
 
-// Now the renderer
-$directionsRenderer = new DirectionsRenderer([
-    'map' => $map->getName(),
-    'polylineOptions' => $polylineOptions
-]);
+    // Finally the directions service
+    $directionsService = new DirectionsService([
+        'directionsRenderer' => $directionsRenderer,
+        'directionsRequest' => $directionsRequest
+    ]);
 
-// Finally the directions service
-$directionsService = new DirectionsService([
-    'directionsRenderer' => $directionsRenderer,
-    'directionsRequest' => $directionsRequest
-]);
+    // Thats it, append the resulting script to the map
+    $map->appendScript($directionsService->getJs());
 
-// Thats it, append the resulting script to the map
-$map->appendScript($directionsService->getJs());
-
-echo $map->display();
+    echo $map->display();
+}
 
 ?>
