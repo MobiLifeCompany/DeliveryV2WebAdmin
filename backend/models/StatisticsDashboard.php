@@ -52,9 +52,9 @@ class StatisticsDashboard extends Report
             'pagination' => array('pageSize' => 7),
         ]);
        
-        $shop_id_val = Yii::$app->session['realUser']['shop_id'];
+         $userShops = Yii::$app->session['userShops'];
 
-         $query->andFilterWhere(['shop_id'=> $shop_id_val]);
+         $query->andFilterWhere(['in','shop_id', $userShops]);
          $query->orderBy('id DESC');
          //$query->limit(7);
      
@@ -73,10 +73,11 @@ class StatisticsDashboard extends Report
             'pagination' => array('pageSize' => 4),
         ]);
        
-        $shop_id_val = Yii::$app->session['realUser']['shop_id'];
-        $query->joinWith('shopItemCategory');
+         $userShops = Yii::$app->session['userShops'];
+        
+         $query->joinWith('shopItemCategory');
 
-         $query->andFilterWhere(['shop_id'=> $shop_id_val]);
+         $query->andFilterWhere(['in','shop_id', $userShops]);
          $query->orderBy('id DESC');
 
         return $dataProvider;
@@ -85,8 +86,20 @@ class StatisticsDashboard extends Report
 
     public function getDeliveryManOrdersStatus(){
 
+        $shopStatment = "";
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and orders.shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
+
         $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("SELECT count(*) as countNum,username,photo,order_status FROM `orders`, user WHERE user.id = `delivery_user_id` group by username,photo,order_status");
+        $command = $connection->createCommand("SELECT count(*) as countNum,username,photo,order_status FROM `orders`, user WHERE user.id = `delivery_user_id` ".$shopStatment." group by username,photo,order_status");
         $result = $command->queryAll();
         
         return $result;
@@ -95,9 +108,21 @@ class StatisticsDashboard extends Report
 
      public function getDailyAmountSeries(){
 
+        $shopStatment = "";
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
+
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,sum(total) sumTotal FROM orders 
-                                              where EXTRACT(MONTH FROM `created_at`) = date_format(now(), '%m')-2 
+                                              where EXTRACT(MONTH FROM `created_at`) = date_format(now(), '%m')-2 ".$shopStatment."
                                               group by concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) order by created_at");
         $result = $command->queryAll();
         
@@ -107,10 +132,22 @@ class StatisticsDashboard extends Report
 
     public function getMonthlyAmountSeries(){
 
+        $shopStatment = "";
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
+
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand(" SELECT concat(EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,sum(total) sumTotal,sum(qty) sumQty 
-                                                FROM orders where EXTRACT(YEAR FROM `created_at`) = date_format(now(), '%Y') 
-                                                group by concat(EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) order by created_at");
+                                                FROM orders where EXTRACT(YEAR FROM `created_at`) = date_format(now(), '%Y')".$shopStatment.
+                                                "group by concat(EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) order by created_at");
         $result = $command->queryAll();
         
         return $result;
@@ -120,7 +157,17 @@ class StatisticsDashboard extends Report
     public function getDailyItemsAmountSeries(){
         
         $shopStatment = "";
-       // $shopStatment = "and shop_id = 2";
+
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and orders.shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
         
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT sum(order_items.total) sumTotal,name,ar_name FROM `order_items`, items, orders 
@@ -137,7 +184,16 @@ class StatisticsDashboard extends Report
     public function getMonthlyOrderCount(){
         
         $shopStatment = "";
-        //$shopStatment = "and shop_id = 2";
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
         
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT concat(EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,order_status,count(*) countNum ,sum(total) sumNum FROM orders 
@@ -152,7 +208,17 @@ class StatisticsDashboard extends Report
     public function getDailyOrderCount(){
         
         $shopStatment = "";
-       // $shopStatment = "and shop_id = 2";
+
+        $userShops = Yii::$app->session['userShops'];
+        $shop_ids = "";
+        if(!empty($userShops)){
+            $shop_ids = " and shop_id in (";
+            foreach ($userShops as $var) {
+                $shop_ids =$shop_ids.$var.',';
+            }
+            $shop_ids =$shop_ids .'-1) ';
+            $shopStatment = $shopStatment.$shop_ids;
+        }
         
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT concat(EXTRACT(DAY FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,order_status,count(*) countNum,sum(total) sumNum  FROM orders
@@ -167,9 +233,9 @@ class StatisticsDashboard extends Report
     public function getGeneralOrderCount(){
         
         $queryStatment = " where 1=1 ";
-        $model = UserShops::find()->where(['user_id' => Yii::$app->session['realUser']['id']])->all();
+
+        $userShops = Yii::$app->session['userShops'];
         $shop_ids = "";
-        $userShops = ArrayHelper::map($model,'shop_id','shop_id');
         if(!empty($userShops)){
             $shop_ids = " and shop_id in (";
             foreach ($userShops as $var) {

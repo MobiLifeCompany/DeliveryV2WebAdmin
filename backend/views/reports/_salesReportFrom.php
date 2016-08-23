@@ -11,7 +11,30 @@ use dosamigos\datepicker\DateRangePicker;
 ?>
 
 <div class="sales-Report-form">
-
+    
+     <?php
+      // filter shops according to user permissions
+        $userShops = Yii::$app->session['userShops'];
+        
+        $shop_id_val = -1;
+        $from_date_val=date('Y-m-d' ,strtotime(' -1 day'));
+        $to_date_val = date('Y-m-d');
+        $order_status='CLOSED';
+        $params = Yii::$app->request->queryParams;
+        foreach ($params as $k => $v) {
+            if($k=='SalesReport'){
+                $shop_id_val = $params['SalesReport']['shop_id'];
+                $from_date_val=$params['SalesReport']['from_date'];
+                $to_date_val = $params['SalesReport']['to_date'];
+                $order_status = $params['SalesReport']['order_status'];
+                break;
+            }
+        }
+        $model->from_date = $from_date_val;
+        $model->to_date = $to_date_val;
+        $model->shop_id = $shop_id_val;
+        $model->order_status = $order_status;
+     ?>  
     <?php $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL,'action' => ['salesreport'],'method' => 'get',]);
 
     echo Form::widget([      
@@ -44,7 +67,7 @@ use dosamigos\datepicker\DateRangePicker;
         'shop_id'=>[
             'type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\Select2', 
-            'options'=>['data'=>ArrayHelper::map(Shops::find()->all(),'id','name'),], 
+            'options'=>['data'=>ArrayHelper::map(Shops::find()->where(['in','id',$userShops])->all(),'id','name'),], 
             'hint'=>Yii::t('app', 'SELECT_SHOPS'),
             'style' => 'width:300px'
         ],

@@ -371,7 +371,7 @@
 
                    <!-- BEGIN OF USER REPORTS ITEM -->
                   <?php
-                    if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+                    if((Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN') && (Yii::$app->user->can('show_sales_report') || Yii::$app->user->can('show_items_report')))
                     {
                   ?> 
                       <li class="treeview <?php 
@@ -387,18 +387,32 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
+                        <?php
+                          if(Yii::$app->user->can('show_sales_report'))
+                            { 
+                        ?>
                             <li <?php 
                               if(isset($this->params['currentPageAction'])){
                                   if($this->params['currentPageAction']=='salesreport') 
                                     echo "class='active'";
                               }
                               ?>><a href="index.php?r=reports/salesreport"><i class="fa fa-circle-o text-red"></i> <?= Yii::t('app', 'SALES_REPORT') ?></a></li>
+                        <?php
+                            }
+                        ?>   
+                        <?php
+                          if(Yii::$app->user->can('show_items_report'))
+                            { 
+                        ?>    
                             <li <?php 
                               if(isset($this->params['currentPageAction'])){
                                   if($this->params['currentPageAction']=='itemsreport') 
                                     echo "class='active'";
                               }
                               ?>> <a href="index.php?r=reports/itemsreport"><i class="fa fa-circle-o text-green"></i> <?= Yii::t('app', 'ITEMS_REPORT') ?></a></li>
+                         <?php
+                            }
+                        ?>        
                         </ul>
                       </li>
                   <?php

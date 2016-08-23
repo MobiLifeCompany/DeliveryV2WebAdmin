@@ -96,6 +96,8 @@ class SalesReport extends Report
          $shopStatment = "";
        // $shopStatment = "and shop_id = 2";
 
+        
+
         $item_id_val = -1;
         $from_date_val=date('Y-m-d');
         $to_date_val = date('Y-m-d');
@@ -128,6 +130,20 @@ class SalesReport extends Report
          }
 
          $sqlStatment = $sqlStatment." and `orders`.`order_status` = '".$order_status."'";
+
+        
+        if(!Yii::$app->user->can('full_items_admin')){
+            $shop_ids = "";
+            $userShops = Yii::$app->session['userShops'];
+                if(!empty($userShops)){
+                    $shop_ids = " and shop_item_categories.shop_id in (";
+                    foreach ($userShops as $var) {
+                        $shop_ids =$shop_ids.$var.',';
+                    }
+                    $shop_ids =$shop_ids .'-1) ';
+                }
+            $sqlStatment = $sqlStatment.$shop_ids;
+        }
         
          $query =  "SELECT `orders`.id,`orders`.order_status,`item_categories`.`name` category_name,`items`.`name` item_name,`order_items`.`qty`, `items`.`price`,(`order_items`.`qty`* `items`.`price`) total, `orders`.`created_at` 
                     FROM `orders`, `order_items`, `items`, `item_categories` , `shop_item_categories`

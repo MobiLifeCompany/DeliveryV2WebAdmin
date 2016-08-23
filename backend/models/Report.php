@@ -29,9 +29,9 @@ class Report extends Model
     public function rules()
     {
         return [
-            [['from_date', 'from_date'], 'required'],
+            [['from_date', 'to_date'], 'required'],
             [['shop_id'], 'integer'],
-            [['from_date', 'from_date'], 'string', 'max' => 255],
+            [['from_date', 'to_date'], 'string', 'max' => 255],
         ];
     }
 
