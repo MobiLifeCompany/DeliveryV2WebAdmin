@@ -4,48 +4,29 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\Helpers\Url;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ShopsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'SHOPS');
+$this->title = Yii::t('app', 'OPENING_HOURS');
 $this->params['breadcrumbs'][] = $this->title;
-
-// get current page name for leftside menu
-$curpage = Yii::$app->controller->id;
-$this->params['currentPage'] = $curpage;
-
 ?>
-<div class="shops-index">
-    <h3><?= Html::encode($this->title) ?></h3>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-      <?php 
-         if(Yii::$app->user->can('create_shop')){
-            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']);
-         } 
-      ?>
-    </p>
-    <br/>
+<div class="opening-hours-index">
+    <h3><?= Html::encode(Yii::t('app', 'SHOP').'#'.Yii::$app->request->queryParams['id']) ?></h3>
     <?php
         Modal::begin([
-                'header'=>'<h4>'.Yii::t('app', 'SHOPS').'</h4>',
-                'options' => [
-                    'id' => 'modal',
-                    'tabindex' => false] // important for Select2 to work properly
+                'header'=>'<h4>'.Yii::t('app', 'OPENING_HOURS').'</h4>',
+                'id' => 'modal',
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();
     ?>
-
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $shopModel,
         'export' =>false,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
-        'layout'=>"{items}\n{summary}\n{pager}",
+        'summary'=>"",
         'options'=>[
                         'tag'=>'div',
                         'class'=>'box box-body table-responsive no-padding'
@@ -70,12 +51,8 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-           // 'rating',
-         //   'estimation_time',
             'min_amount',
-           // 'delivery_expected_time',
-           // 'delivery_charge',
-            //'lang',
+
             [
 	            'attribute' => Yii::t('app', 'POSITION'),
                 'vAlign'=>'middle',
@@ -93,11 +70,6 @@ $this->params['currentPage'] = $curpage;
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { return Html::a('','index.php?r=shops/map&id='.$model->id,['class'=>'glyphicon glyphicon-map-marker']); },
-            ],
-            [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a('','index.php?r=opening-hours/index&id='.$model->id,['class'=>'glyphicon glyphicon-time']); },
             ],
             [
                 'vAlign'=>'middle',
@@ -120,25 +92,57 @@ $this->params['currentPage'] = $curpage;
                'buttons' => [
                'view' => function ($url,$model) 
                     {
-                            return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>'index.php?r=shops/view&id='.$model->id,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
                     },
                 'update' => function ($url,$model) 
                     {
-                          if(Yii::$app->user->can('update_shop')){
-                            return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
-                          }
-                    },
-                'delete' => function ($url,$model) 
-                    {
-                          if(Yii::$app->user->can('delete_shop')){
-                            return Html::a('<span class="glyphicon glyphicon-trash">',$url,['title' => Yii::t('yii', 'Delete'),
-                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                    'data-method' => 'post',]);
-                          }
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>'index.php?r=shops/update&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
                     }    
                 ]
             ],
         ],
     ]); ?>
 
+    <h3><?= Html::encode($this->title) ?></h3>
+    <p>
+        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=opening-hours/create&shop_id='.Yii::$app->request->queryParams['id']),'id'=>'modalButton']); ?>
+    </p>
+    <br>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'export' =>false,
+        'tableOptions' => ['class' => 'table table-hover'],
+        'class' =>  'box',
+        'summary'=> "",
+        'options'=>[
+                        'tag'=>'div',
+                        'class'=>'box box-body table-responsive no-padding'
+        ],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            ['attribute' => 'shop_id',
+             'value'=>'shop.name'
+            ],
+            'day_name',
+            'from_hour',
+            'to_hour',
+            // 'full_day',
+            'created_at',
+            'updated_at',
+
+            [
+               'class' => 'yii\grid\ActionColumn',
+               'template' => '{delete} {update} ',
+               'buttons' => [
+               
+                'update' => function ($url,$model) 
+                    {
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                    }    
+                ]
+            ],
+        ],
+    ]); ?>
 </div>

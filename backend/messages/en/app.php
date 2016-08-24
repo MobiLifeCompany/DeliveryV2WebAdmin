@@ -217,5 +217,11 @@
         'CLICKABLE' => 'Clickable',
         'GOLDEN' => 'Golden',
         'SILVER' => 'Silver',
+        'OPENING_HOURS' => 'Opening Hours',
+        'DAY' => 'Day',
+        'FROM_HOUR' => 'From Hour',
+        'TO_HOUR' => 'To Hour',
+        'SELECT_DAY' => 'Select Day',
+        'NO_MORE_DAYS' => 'No more days to add',
     ];
 ?>
