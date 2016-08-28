@@ -40,8 +40,8 @@ class OpeningHours extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['day_name'], 'string', 'max' => 255],
             [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Shops::className(), 'targetAttribute' => ['shop_id' => 'id']],
-            [['to_hour'], 'compare', 'compareAttribute' => 'from_hour', 'operator' => '>'],
-            [['from_hour'], 'compare', 'compareAttribute' => 'to_hour', 'operator' => '<'],
+            [['to_hour'], 'compare', 'compareAttribute' => 'from_hour', 'operator' => '>', 'type' => 'number'],
+            [['from_hour'], 'compare', 'compareAttribute' => 'to_hour', 'operator' => '<', 'type' => 'number'],
         ];
     }
 
