@@ -80,6 +80,18 @@ return [
                            'class' => 'yii\rbac\DbManager',
                            'defaultRoles' => ['guest'],
           ],
+        'mailer' => [
+              'class' => 'yii\swiftmailer\Mailer',
+               'useFileTransport' => false,
+               // 'transport' => [
+             //   'class' => 'Swift_SmtpTransport',
+             //   'host' => 'smtp.gmail.com',  
+             //   'username' => 'mobilifecomp@gmail.com',
+             //   'password' => 'Mobilife',
+             //   'port' => '465', 
+           //     'encryption' => 'tls', 
+           // ],
+          ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

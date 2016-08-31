@@ -83,3 +83,7 @@ function showUserPermModal(id){
 $('#modal').on('hidden.bs.modal', function() {
     $('#modalContent').empty(); //to clear the modal content after hide
 })
+
+function activeWorkStatus(status) {
+    alert(status);
+}

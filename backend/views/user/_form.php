@@ -66,6 +66,12 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'gender')->dropDownList([ 'Male' => Yii::t('app', 'MALE'), 'Female' => Yii::t('app', 'FEMALE'), ], ['prompt' => '']) ?>
 
+    <?= $form->field($model, 'show_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']) ?>
+
+    <?= $form->field($model, 'live_status')->dropDownList([ 'On-Line' => 'On-Line', 'Off-Line' => 'Off-Line', ], ['prompt' => '']) ?>
+
+    <?= $form->field($model, 'work_status')->dropDownList([ 'Ready' => 'Ready', 'Waiting' => 'Waiting', ], ['prompt' => '']) ?>
+
     <?= $form->field($model, 'deleted')->dropDownList([ 'Yes' => Yii::t('app', 'NO'), 'No' => Yii::t('app', 'YES'), ], ['prompt' => '']) ?>
 
     <?php //$form->field($model, 'is_fired')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>

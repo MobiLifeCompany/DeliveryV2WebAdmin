@@ -10,6 +10,8 @@ use common\models\User;
 use backend\models\StatisticsDashboard;
 use backend\models\MapDashboard;
 use backend\models\Shops;
+use backend\models\Orders;
+
 
 
 
@@ -28,7 +30,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','language'],
+                        'actions' => ['login', 'error','language','gcm','gcmweb','checkorders'],
                         'allow' => true,
                     ],
                     [
@@ -78,6 +80,26 @@ class SiteController extends Controller
         }    
     }
 
+    
+    public function actionCheckorders(){
+        $userShops = Yii::$app->session['userShops'];
+        $result = Orders::find()->where(['in','shop_id',$userShops])->andWhere(['order_status' => 'OPEN'])->all();
+        $data = "NO_DATA";
+        if(!empty($result)){
+            $data ="";
+            $count = 0;
+            foreach ($result as $order) {
+              $data = $data. ' #'.$order->id;
+              $count++;
+            }
+            $data = "You have ".$count." Open Orders (".$data.")";
+            return $data;
+        }else{
+            return $data;
+        }
+        
+    }
+    
     /**
      * Login action.
      *

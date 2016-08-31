@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' =>  $model->deleted == 1 ? Yii::t('app', 'NO') : Yii::t('app', 'YES')
             ],
             'gender',
+            'show_notification',
            // 'is_fired',
            // 'lang',
             'created_at',

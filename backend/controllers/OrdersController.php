@@ -6,6 +6,11 @@ use Yii;
 use backend\models\OrderItems;
 use backend\models\Orders;
 use backend\models\OrdersSearch;
+use backend\models\Customers;
+use backend\models\Shops;
+use backend\models\PushNotification;
+use backend\models\EmailModel;
+use backend\models\OrderHistories;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -106,10 +111,21 @@ class OrdersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $previousStatus =  $model->order_status;
 
         if ($model->load(Yii::$app->request->post())) {
 
-             $model->updated_at= date('Y-m-d H:i:s');
+            $model->updated_at= date('Y-m-d H:i:s');
+
+            $userId = Yii::$app->session['realUser']['id'];
+            $orderHistories = new OrderHistories();
+            $orderHistories->user_id = $userId;
+            $orderHistories->order_id = $id;
+            $orderHistories->order_status=$previousStatus;
+            $orderHistories->created_at = date('Y-m-d H:i:s');
+            $orderHistories->updated_at = date('Y-m-d H:i:s');
+            $orderHistories->save();
+
             if($model->save())
             {
                 echo 1;
@@ -214,6 +230,105 @@ class OrdersController extends Controller
             }
         } else {
             return $this->renderAjax('updateDeliveryUser', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionSetorderstatus($id)
+    {
+        $model = $this->findModel($id);
+        $previousStatus =  $model->order_status;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $data = Yii::$app->request->post();
+            $model->updated_at = date('Y-m-d H:i:s');
+            $model->order_status = $data['Orders']['order_status'];
+            $order_status = $model->order_status;
+            $cancel_reason = $model->cancel_reason;
+            $model->update(['updated_at','order_status','cancel_reason']);
+            if($model->save(false))
+            {
+                $userId = Yii::$app->session['realUser']['id'];
+                $orderHistories = new OrderHistories();
+                $orderHistories->user_id = $userId;
+                $orderHistories->order_id = $id;
+                $orderHistories->order_status=$previousStatus;
+                $orderHistories->created_at = date('Y-m-d H:i:s');
+                $orderHistories->updated_at = date('Y-m-d H:i:s');
+                $orderHistories->save();
+
+                $title = Yii::t('app', 'DELIVERY_EXPRESS');
+                $message = "";
+                $customer = Customers::findOne($model->customer_id);
+                $gcm_id = $customer->gcm_id;
+                $lang = $customer->lang;
+                $customerEmail = $customer->email;
+
+                $shop = Shops::findOne($model->shop_id);
+                $shop_email = $shop->email;
+                $shop_enable_email_notification = $shop->enable_email_notification;
+                
+                if($lang=='ar'){
+                    $message = "تم تحديث الطلبية ذات الرقم #".$id." لتصبح بحالة  ".Yii::t('app', $model->order_status,[],'ar');
+                }else{
+                    $message = "Your Order #".$id." changed and became with new status ".$model->order_status;
+                }
+
+                if($order_status=='CANCEL' && $lang=='ar')
+                {
+                     $message = $message.' للسبب التالي '.$cancel_reason;
+                }
+                else if($order_status=='CANCEL' && $lang=='en' )
+                {
+                     $message = $message.' ,for the following reason: '.$cancel_reason;
+                }
+
+                $pushNotification = new PushNotification();
+                $pushNotification->sendPush($gcm_id,$title,$message);
+               
+               if(!empty($shop_email) && $shop_enable_email_notification=='Yes')
+                {
+                    $emailModel = new EmailModel();
+                    $emailModel->fromEmail = Yii::$app->params['company_email'];
+                    $emailModel->receiverEmail = $shop_email;
+                    $emailModel->subject = "Delivery Express";
+                    $emailModel->content = $message;
+                    print_r($emailModel);
+
+                    $value = Yii::$app->mailer->compose()
+                    ->setFrom( [$emailModel->fromEmail => 'Delivery Express'])
+                    ->setTo( $emailModel->receiverEmail) 
+                    ->setSubject( $emailModel->subject) 
+                    ->setHtmlBody( $emailModel->content)  
+                    ->send();
+                }
+
+                if(!empty($customerEmail) && $shop_enable_email_notification=='Yes')
+                {
+                    $emailModel = new EmailModel();
+                    $emailModel->fromEmail = Yii::$app->params['company_email'];
+                    $emailModel->receiverEmail = $customerEmail;
+                    $emailModel->subject = "Delivery Express";
+                    $emailModel->content = $message;
+                    print_r($emailModel);
+
+                    $value = Yii::$app->mailer->compose()
+                    ->setFrom( [$emailModel->fromEmail => 'Delivery Express'])
+                    ->setTo( $emailModel->receiverEmail) 
+                    ->setSubject( $emailModel->subject) 
+                    ->setHtmlBody( $emailModel->content)  
+                    ->send();
+                }
+
+                echo 1;
+            }else
+            {
+                echo 0;
+            }
+        } else {
+            return $this->renderAjax('updateOrderStatus', [
                 'model' => $model,
             ]);
         }

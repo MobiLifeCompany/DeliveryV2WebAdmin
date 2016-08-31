@@ -51,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'deleted',
                 'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
+            'email:email',
+            'enable_email_notification',
             'lang',
             'created_at',
             'updated_at',

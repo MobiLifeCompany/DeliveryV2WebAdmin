@@ -15,10 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $statisticsDashboardModel = new StatisticsDashboard();
 $generalOrdersCount = $statisticsDashboardModel->getGeneralOrderCount();
 
-$openOrdersCountM = 0;
-$cancelOrderCountM = 0;
-$pendingOrderCountM = 0;
-$closedOrderCountM = 0;
+$openOrdersCount = 0;
+$cancelOrderCount = 0;
+$pendingOrderCount = 0;
+$closedOrderCount = 0;
    
 foreach ($generalOrdersCount as $var) {
      if($var['order_status']=='OPEN' || $var['order_status']=='RE-OPEN'){
@@ -160,6 +160,13 @@ foreach ($generalOrdersCount as $var) {
                 <?= $form->field($model, 'phone')->textInput() ?>
 
                 <?= $form->field($model, 'gender')->dropDownList([ 'Male' => Yii::t('app', 'MALE'), 'Female' => Yii::t('app', 'FEMALE'), ], ['prompt' => '']) ?>
+
+                <?= $form->field($model, 'show_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']) ?>
+
+                <?= $form->field($model, 'live_status')->dropDownList([ 'On-Line' => 'On-Line', 'Off-Line' => 'Off-Line', ], ['prompt' => '']) ?>
+
+                <?= $form->field($model, 'work_status')->dropDownList([ 'Ready' => 'Ready', 'Waiting' => 'Waiting', ], ['prompt' => '']) ?>
+
 
                 <div class="form-group">
                      <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -88,8 +88,8 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-             'qty',
-             'delivery_charge',
+           //  'qty',
+          //   'delivery_charge',
              'total',
               [
                  'attribute' => Yii::t('app', 'TOTAL_WITH_DELIVERY'),
@@ -112,7 +112,7 @@ $this->params['currentPage'] = $curpage;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']); },
+                'value' => function($model) { return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton_deliveryMan_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"deliveryMan")']); },
             ],
             // 'created_at',
             // 'updated_at',
@@ -120,6 +120,16 @@ $this->params['currentPage'] = $curpage;
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { return Html::a(Yii::t('app', 'ORDER_ITEMS'),'index.php?r=order-items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model->id,'id'=>'updateModalButton_order_status_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"order_status")']); },
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('<span class="glyphicon glyphicon-list">','#',['value'=>'index.php?r=order-histories/index&id='.$model->id,'id'=>'viewModalButton_history_'.$model->id,'onclick'=>'return showViewModalByType('.$model->id.',"history")']);},
             ],
             [
                'class' => 'yii\grid\ActionColumn',

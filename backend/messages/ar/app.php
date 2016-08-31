@@ -1,6 +1,7 @@
 <?php
     return [
         'MAIN_NAVIGATION' => 'القائمة الرئيسية',
+        'DELIVERY_EXPRESS' => 'Delivery Express',
         'DASHBOARDS' => 'لوحات القيادة',
         'DASHBOARD' =>'لوحة القيادة',
         'MAP_DASHBOARD' => 'لوحة تحكم الخرائط',
@@ -138,7 +139,9 @@
         'RE_OPEN' => 'إعادة فتح',
         'CLOSED' => 'مغلق',
         'PENDING' => 'بالانتطار',
+        'ORDER_HISTORY' =>'سجل الطلبية',
         'CANCELED' => 'ملغى',
+        'CANCEL' => 'ملغى',
         'TOTAL_WITH_DELIVERY' => 'الإجمالي مع أجور التوصيل',
         'ORDER_ITEMS' => 'مواد الطلبية',
         'CANCEL_REASON' => 'سبب الإلغاء',

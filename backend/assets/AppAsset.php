@@ -48,6 +48,8 @@ class AppAsset extends AssetBundle
         'js/slimScroll/jquery.slimscroll.min.js',
         'js/main.js',
         'js/demo.js',
+        'js/service-worker-push.js',
+        'js/service-worker.js',
        // 'js/main.js',
        // 'js/pages/dashboard.js',
     ];

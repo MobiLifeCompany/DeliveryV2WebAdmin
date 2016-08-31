@@ -21,13 +21,13 @@ use yii\web\JsExpression;
 
    <?php 
         $form = ActiveForm::begin(['id'=>$model->formName(),]); 
-        $Currentuser = User::find()->where(['id'=>Yii::$app->User->id])->all();
-        $users = User::find()->where(['shop_id'=>$Currentuser[0]['shop_id']])->all();   
+        $userShops = Yii::$app->session['userShops'];
+        $users = User::find()->where(['in','shop_id',$userShops])->all();   
     ?>
 
      <?= $form->field($model, 'delivery_user_id')->dropDownList(
                     ArrayHelper::map($users,'id','username'), 
-                    ['prompt' => Yii::t('app', 'SELECT_USER') ]);
+                    ['prompt' => Yii::t('app', 'SELECT_USER'),]);
                     
      ?>
 

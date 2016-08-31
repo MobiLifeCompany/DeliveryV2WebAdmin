@@ -94,6 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         if($model->user_type == 'CR_DELIVERY_MAN' || $model->user_type =='CR_ADMIN') 
                         {
                             return Html::a(Yii::t('app', 'SHOPS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=user/shops&id='.$model->id), 'id'=>'userShopsModalButton'.$model->id,'onclick'=>'return showUserShopsModal('.$model->id.')']);
+                        }else {
+                            return "";
                         } 
                     },
             ],
@@ -103,6 +105,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) { 
                             return Html::a(Yii::t('app', 'PERMISSIONS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=auth-assignment/permissions&user_id='.$model->id), 'id'=>'userPermModalButton'.$model->id,'onclick'=>'return showUserPermModal('.$model->id.')']);
                     },
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { 
+                      if($model->user_type == 'CR_DELIVERY_MAN' || $model->user_type =='SHOP_DELIVERY_MAN') 
+                        {
+                            return Html::a('<span class="glyphicon glyphicon-list">','index.php?r=order-map-trace/index&id='.$model->id);
+                        }else {
+                            return "";
+                        }
+                    }
+                ,
             ],
             [
                'class' => 'yii\grid\ActionColumn',

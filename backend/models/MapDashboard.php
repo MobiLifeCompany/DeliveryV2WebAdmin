@@ -42,6 +42,18 @@ class MapDashboard
         if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
         {
             $queryStatment = " and (`orders`.`delivery_user_id` = '".Yii::$app->session['realUser']['id']."' || `orders`.`delivery_user_id` is null) ";
+        }else{
+            $shopStatment = "";
+            $userShops = Yii::$app->session['userShops'];
+            $shop_ids = "";
+            if(!empty($userShops)){
+                $shop_ids = " and orders.shop_id in (";
+                foreach ($userShops as $var) {
+                    $shop_ids =$shop_ids.$var.',';
+                }
+                $shop_ids =$shop_ids .'-1) ';
+                $queryStatment = $queryStatment.$shop_ids;
+            }                 
         }
         
         $connection = Yii::$app->getDb();
@@ -54,6 +66,8 @@ class MapDashboard
                                                 and   `customer_addresses`.`area_id` = `areas`.`id`
                                                 and   `orders`.`order_status` in ('OPEN', 'RE-OPEN', 'PENDING') ".$queryStatment;
 
+                              
+
         $count=Yii::$app->db->createCommand($query)->queryScalar();
         $dataProvider = new SqlDataProvider([
             'sql' => $query,
@@ -62,7 +76,8 @@ class MapDashboard
                 'pageSize' => 100,
                 ],
             ]);
-        
+
+      
         return $dataProvider;
 
 

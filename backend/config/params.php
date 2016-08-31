@@ -8,5 +8,7 @@ return [
         'en' => 'English',
         'ar' => 'Arabic',
     ],
-    'currency' => 'SY'
+    'currency' => 'SY',
+    'api_key' => 'AIzaSyBF3Gpn3Lv-QVjO4hWixoMGSFGyq8cq4uw',
+    'company_email' => 'mobilifecomp@gmail.com',
 ];

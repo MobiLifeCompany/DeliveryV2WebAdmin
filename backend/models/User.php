@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use backend\models\Shops;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "user".
@@ -47,8 +48,8 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'safe'],
-            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','deleted', 'gender'], 'required'],
+            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','live_status','work_status','deleted', 'gender','show_notification'], 'safe'],
+            [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','work_status','deleted', 'gender','show_notification'], 'required'],
             [['shop_id', 'status', 'phone'], 'integer'],
             [['user_type', 'deleted', 'gender'], 'string'],
             ['shop_id','required','when'=>function($model){
@@ -107,6 +108,16 @@ class User extends \yii\db\ActiveRecord
     public function getUserShops()
     {
         return $this->hasMany(UserShops::className(), ['user_id' => 'id']);
+    }
+
+    public function getUserById($id)
+    {
+        $query = User::find()->where(['id'=> $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        return $dataProvider;
     }
 
     

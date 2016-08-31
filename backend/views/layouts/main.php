@@ -21,6 +21,7 @@
    <head>
       <meta charset="<?= Yii::$app->charset ?>">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="manifest" href="manifest.json">
       <?= Html::csrfMetaTags() ?>
       <title><?= Html::encode($this->title) ?></title>
       <?php $this->head() ?>
@@ -344,24 +345,45 @@
                       </span>
                       </a>
                       <ul class="treeview-menu">
+                         <?php
+                          if(Yii::$app->user->can('show_dashboard1'))
+                            { 
+                          ?>
                           <li <?php 
                             if(isset($this->params['currentPageAction'])){
                                 if($this->params['currentPageAction']=='dashboard1') 
                                   echo "class='active'";
                             }
                             ?>><a href="index.php?r=dashboards/dashboard1"><i class="fa fa-circle-o text-yellow"></i> <?= Yii::t('app', 'DASHBOARD') ?></a></li>
+                          <?php
+                          }
+                          ?>
+                          <?php
+                          if(Yii::$app->user->can('show_dashboard2'))
+                            { 
+                          ?>  
                           <li <?php 
                             if(isset($this->params['currentPageAction'])){
                                 if($this->params['currentPageAction']=='dashboard2') 
                                   echo "class='active'";
                             }
                             ?>><a href="index.php?r=dashboards/dashboard2"><i class="fa fa-circle-o text-blue"></i> <?= Yii::t('app', 'MAP_DASHBOARD') ?></a></li>
+                          <?php
+                          }
+                          ?>  
+                          <?php
+                          if(Yii::$app->user->can('show_dashboard3'))
+                            { 
+                          ?>  
                           <li <?php 
                             if(isset($this->params['currentPageAction'])){
                                 if($this->params['currentPageAction']=='dashboard3') 
                                   echo "class='active'";
                             }
                             ?>><a href="index.php?r=dashboards/dashboard3"><i class="fa fa-circle-o text-green"></i> <?= Yii::t('app', 'TOP_TEN_DASHBOARDS') ?></a></li>
+                          <?php
+                          }
+                          ?>  
                       </ul>
                     </li>
                   <?php
@@ -957,4 +979,140 @@
       <?php $this->endBody() ?>
    </body>
 </html>
+<?php
+
+ if(Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' 
+ || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN'){
+$locationScript = <<< JS
+var saveLocation_call = function() {
+navigator.geolocation.getCurrentPosition(
+    function(position) {
+         $.ajax({ 
+            type: "POST",
+            url: "index.php?r=user/savelocation",             
+            dataType: "text",   //expect html to be returned    
+            data:{'lat':position.coords.latitude ,'long':position.coords.longitude},            
+            success: function (response) {
+              alert(response);                
+           }
+         });
+    },
+    function(error){
+         alert(error.message);
+    }, {
+         enableHighAccuracy: true
+              ,timeout : 5000
+    }
+);
+}
+var interval = 1000 * 60 * 2; // where X is your every X minutes
+setInterval(saveLocation_call, interval);
+JS;
+$this->registerJs($locationScript);
+}
+
+if(Yii::$app->session['realUser']['show_notification']=='Yes'){
+$script = <<< JS
+isRequested = true;
+function getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "Android";
+    }
+
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+    }
+
+    return "NMOS";
+}
+
+
+var ajax_call = function() {
+  //your jQuery ajax code
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") 
+  {
+    var OS = getMobileOperatingSystem();
+    if(OS == 'NMOS')
+    {
+          $.ajax({    //create an ajax request to load_page.php
+            type: "GET",
+            url: "index.php?r=site/checkorders",             
+            dataType: "html",   //expect html to be returned                
+            success: function(response)
+            {    
+              //alert(response);  
+              if(response!='NO_DATA')
+              {               
+                  var options = 
+                  {
+                      body: response,
+                      icon: 'http://admin.deliveryonweb.com/dist/img/logo.png',
+                      lang: 'en-US',
+                  };
+                  var audio = new Audio('sound/delivery-tone.mp3');
+                  audio.play();
+                  // If it's okay let's create a notification
+                  var notification = new Notification("Delivery Express", options);
+                  notification.onclick = function(event) 
+                  {
+                      event.preventDefault(); // prevent the browser from focusing the Notification's tab
+                      window.open('index.php?r=orders', '_self');
+                      notification.close();
+                  }
+              }
+            }
+         });
+      }else{
+        $.ajax({    //create an ajax request to load_page.php
+            type: "GET",
+            url: "index.php?r=site/checkorders",             
+            dataType: "html",   //expect html to be returned                
+            success: function(response)
+            {    
+              //alert(response);  
+              if(response!='NO_DATA')
+              {  
+                if (window.confirm(response))
+                  {
+                     var audio = new Audio('sound/delivery-tone.mp3');
+                     audio.play();
+                     player.pause();
+                  }             
+                  
+                 
+              }
+            }
+         });
+      }
+  }// Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied' && isRequested) {
+    isRequested = false;
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+     // if (permission === "granted") {
+      //  var notification = new Notification("Hi Request Grant!");
+      //}
+    });
+  }
+};
+
+var interval = 1000 * 60 * 1; // where X is your every X minutes
+setInterval(ajax_call, interval);
+
+JS;
+$this->registerJs($script);
+}
+?>
 <?php $this->endPage() ?>

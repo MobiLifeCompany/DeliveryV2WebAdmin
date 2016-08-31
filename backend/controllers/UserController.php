@@ -15,6 +15,8 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
 use backend\models\AuthAssignment;
+use backend\models\OrderMapTrace;
+
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -314,6 +316,31 @@ class UserController extends Controller
         $command = $query->createCommand();
         $data= $command->queryAll();
         return $data;
+    }
+
+    public function actionSavelocation(){
+        
+        $data = Yii::$app->request->post();
+        if(!empty($data))
+        {
+            $userId = Yii::$app->session['realUser']['id'];
+
+            $orderMapTrace = new OrderMapTrace();
+            $orderMapTrace->user_id = $userId;
+            $orderMapTrace->Longitude = $data['long'];
+            $orderMapTrace->Latitude = $data['lat'];
+            $orderMapTrace->created_at = date('Y-m-d H:i:s');
+            $orderMapTrace->updated_at = date('Y-m-d H:i:s');
+            $orderMapTrace->save();
+
+            $user = $this->findModel($userId);
+            $user->updated_at = date('Y-m-d H:i:s');
+            $user->latitude=$data['lat'];
+            $user->longitude=$data['long'];
+            $user->update(['updated_at','latitude','longitude']);
+            return 'OK';
+        }
+
     }
 
 }

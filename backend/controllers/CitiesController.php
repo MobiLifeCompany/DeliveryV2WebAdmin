@@ -153,7 +153,11 @@ class CitiesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->updated_at = date('Y-m-d H:i:s');
+        $model->deleted = 1;
+        $model->update(['updated_at','deleted']);
+        $model->save(false);
 
         return $this->redirect(['index']);
     }

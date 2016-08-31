@@ -1,6 +1,7 @@
 <?php
     return [
         'MAIN_NAVIGATION' => 'Main Navigation',
+        'DELIVERY_EXPRESS' => 'Delivery Express',
         'DASHBOARDS' => 'Dashboards',
         'DASHBOARD' =>'Dashboard',
         'MAP_DASHBOARD' => 'Map Dashboard',
@@ -31,6 +32,7 @@
         'FIRST_NAME' => 'First Name',
         'LAST_NAME' => 'Last Name',
         'USERNAME' => 'Username',
+        'ORDER_HISTORY' =>'Order History',
         'SHOP_NAME' => 'Shop Name',
         'PHONE' => 'Phone',
         'USER_TYPE' => 'User Type',
@@ -142,6 +144,7 @@
         'CLOSED' => 'Closed',
         'PENDING' => 'Pending',
         'CANCELED' => 'Canceled',
+        'CANCEL' => 'Canceled',
         'TOTAL_WITH_DELIVERY' => 'All',
         'ORDER_ITEMS' => 'Order Items',
         'CANCEL_REASON' => 'Cancel Reason',

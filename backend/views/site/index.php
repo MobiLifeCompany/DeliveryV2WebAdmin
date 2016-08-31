@@ -40,9 +40,9 @@
                   <h3 class="box-title">Delivery User</h3>
                   <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
                     <div class="btn-group" data-toggle="btn-toggle" style="margin-right: 11px;">
-                        <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-square text-green"></i>
+                        <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-square text-blue"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-lg"><i class="fa fa-square text-red"></i></button>
+                        <button type="button" class="btn btn-default btn-lg"><i class="fa fa-square text-yellow"></i></button>
                     </div>
                   </div>
               </div>
@@ -65,9 +65,9 @@
                   <h3 class="box-title">Delivery User</h3>
                   <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
                     <div class="btn-group" data-toggle="btn-toggle" style="margin-right: 11px;">
-                        <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-square text-green"></i>
+                        <button type="button" class="btn btn-default btn-lg active" onclick="activeWorkStatus('ON_LINE')"><i class="fa fa-square text-green"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-lg"><i class="fa fa-square text-red"></i></button>
+                        <button type="button" class="btn btn-default btn-lg" onclick="activeWorkStatus('OFF_LINE')"><i class="fa fa-square text-red"></i></button>
                     </div>
                   </div>
               </div>
@@ -272,5 +272,5 @@
     </div>
 <?php
    }
-   ?>
-
+   
+?>

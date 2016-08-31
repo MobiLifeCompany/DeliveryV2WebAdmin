@@ -81,6 +81,10 @@ use maksyutin\duallistbox\Widget;
 
     <?= $form->field($model, 'masteries')->textarea(['rows' => 2]) ?>
 
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'enable_email_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']) ?>
+
     <?= $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'YES'), '1'=>Yii::t('app', 'NO'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
     <?= $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]) ?>
