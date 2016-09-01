@@ -84,6 +84,16 @@ $('#modal').on('hidden.bs.modal', function() {
     $('#modalContent').empty(); //to clear the modal content after hide
 })
 
-function activeWorkStatus(status) {
-    alert(status);
+function activeWorkStatus(status,type) {
+    $.ajax({ 
+            type: "POST",
+            url: "index.php?r=user/updatestatus",             
+            dataType: "text",   //expect html to be returned    
+            data:{'status':status,'type':type},            
+            success: function (response) {
+              if(response ==='OK'){
+                    window.location.reload();
+              }             
+           }
+         });
 }

@@ -49,8 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'first_name',
-            'last_name',
+           // 'first_name',
+           // 'last_name',
             'username',
              ['attribute' => 'shop_id',
              'value'=>'shop.name'
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_reset_token',
             // 'email:email',
             // 'status',
-             'phone',
+           //  'phone',
              'user_type',
               [
 	            'attribute' => 'deleted',
@@ -73,6 +73,42 @@ $this->params['breadcrumbs'][] = $this->title;
                     else {
                         return Html::a('Yes','#',['class'=>'label label-success']);
                     }    
+	            }
+	        ],
+            [
+	            'attribute' => 'live_status',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->user_type ==='SHOP_DELIVERY_MAN' || $model->user_type ==='CR_DELIVERY_MAN')
+                    {
+                        if($model->live_status =='Off-Line'){
+                            return Html::a('Off-Line','#',['class'=>'label label-danger']);
+                        }
+                        else {
+                            return Html::a('On-Line','#',['class'=>'label label-success']);
+                        }  
+                    }else{
+                        return "";
+                    }  
+	            }
+	        ],
+            [
+	            'attribute' => 'work_status',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+	            'value' => function($model) {
+                    if($model->user_type ==='SHOP_DELIVERY_MAN' || $model->user_type ==='CR_DELIVERY_MAN')
+                    {
+                        if($model->work_status =='Ready'){
+                            return Html::a('Ready','#',['class'=>'label label-info']);
+                        }
+                        else {
+                            return Html::a('Waiting','#',['class'=>'label label-warning']);
+                        }  
+                    }else{
+                        return "";
+                    }  
 	            }
 	        ],
              //'deleted',

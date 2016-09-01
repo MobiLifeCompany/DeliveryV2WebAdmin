@@ -34,52 +34,76 @@
       <div class="row">
         <!-- Left col -->
         <section class="col-lg-6 connectedSortable">
-            <div class="box box-success">
+            <div class="box <?php if (Yii::$app->session['realUser']['work_status']=='Ready') { echo 'box-info';} else { echo 'box-warning';}?>">
               <div class="box-header">
                   <i class="fa fa-user"></i>
-                  <h3 class="box-title">Delivery User</h3>
+                  <h3 class="box-title">Delivery User Work Status:   
+                  <?php if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['work_status']=='Ready')) { ?>
+                        <a href="#"><i class="fa fa-square text-blue"></i> Ready</a>
+                      <?php } else if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['work_status']=='Waiting')) {  ?>
+                            <a href="#"><i class="fa fa-square text-yellow"></i> Waiting</a>
+                      <?php }          
+                      ?></h3>
                   <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
                     <div class="btn-group" data-toggle="btn-toggle" style="margin-right: 11px;">
-                        <button type="button" class="btn btn-default btn-lg active"><i class="fa fa-square text-blue"></i>
+                        <button type="button" class="btn btn-default btn-lg  <?php if (Yii::$app->session['realUser']['work_status']=='Ready') { echo 'active';}?>" onclick="activeWorkStatus('Ready','work_status')"><i class="fa fa-square text-blue"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-lg"><i class="fa fa-square text-yellow"></i></button>
+                        <button type="button" class="btn btn-default btn-lg  <?php if (Yii::$app->session['realUser']['work_status']=='Waiting') { echo 'active';}?>" onclick="activeWorkStatus('Waiting','work_status')"><i class="fa fa-square text-yellow"></i>
+                        </button>
                     </div>
                   </div>
               </div>
-              <div class="box-body chat" id="chat-box">
-                  ssssssssssss
+             <!-- <div class="box-body chat" id="chat-box">
+                  
               </div>
-              <!-- /.chat -->
+               /.chat 
               <div class="box-footer">
                   <div class="input-group">
                     hhhhhhhh
                   </div>
-              </div>
+              </div> -->
             </div>
             <!-- /.box (chat box) -->
         </section>
         <section class="col-lg-6 connectedSortable">
-            <div class="box box-danger">
+            <div class="box <?php if (Yii::$app->session['realUser']['live_status']=='On-Line') { echo 'box-success';} else { echo 'box-danger';}?>">
               <div class="box-header">
                   <i class="fa fa-user"></i>
-                  <h3 class="box-title">Delivery User</h3>
+                  <h3 class="box-title">Delivery User Live Status:  
+                    <?php if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                                Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                                && ( Yii::$app->session['realUser']['live_status']=='On-Line')) { ?>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <?php } else if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                                Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                                && ( Yii::$app->session['realUser']['live_status']=='Off-Line')) {  ?>
+                                <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                        <?php } else { ?>
+                                <a href="#"><i class="fa fa-circle text-success"></i> Online</a> 
+                        <?php }             
+                        ?>
+                  </h3>
                   <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
                     <div class="btn-group" data-toggle="btn-toggle" style="margin-right: 11px;">
-                        <button type="button" class="btn btn-default btn-lg active" onclick="activeWorkStatus('ON_LINE')"><i class="fa fa-square text-green"></i>
+                        <button type="button" class="btn btn-default btn-lg <?php if (Yii::$app->session['realUser']['live_status']=='On-Line') { echo 'active';}?>" onclick="activeWorkStatus('On-Line','live_status')"><i class="fa fa-square text-green"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-lg" onclick="activeWorkStatus('OFF_LINE')"><i class="fa fa-square text-red"></i></button>
+                        <button type="button" class="btn btn-default btn-lg <?php if (Yii::$app->session['realUser']['live_status']=='Off-Line') { echo 'active';}?>" onclick="activeWorkStatus('Off-Line','live_status')"><i class="fa fa-square text-red"></i></button>
                     </div>
                   </div>
               </div>
-              <div class="box-body chat" id="chat-box">
-                  ssssssssssss
+               <!--<div class="box-body chat" id="chat-box">
+                   
               </div>
-              <!-- /.chat -->
+              /.chat 
               <div class="box-footer">
                   <div class="input-group">
                     hhhhhhhh
                   </div>
-              </div>
+              </div>-->
             </div>
             <!-- /.box (chat box) -->
         </section>

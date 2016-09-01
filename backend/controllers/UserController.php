@@ -141,6 +141,10 @@ class UserController extends Controller
 
             if($model->save())
             {
+                Yii::$app->session->remove('realUser');
+                $user = new \common\models\User();
+                $realUser = $user->findByUsername($model->username);
+                Yii::$app->session->set('realUser',$realUser);
                 echo 1;
             }else
             {
@@ -269,6 +273,11 @@ class UserController extends Controller
 
             $model->updated_at= date('Y-m-d H:i:s');
             $model->save(false);
+
+            Yii::$app->session->remove('realUser');
+            $user = new \common\models\User();
+            $realUser = $user->findByUsername($model->username);
+            Yii::$app->session->set('realUser',$realUser);
         } 
 
         $userShops = array();
@@ -338,6 +347,32 @@ class UserController extends Controller
             $user->latitude=$data['lat'];
             $user->longitude=$data['long'];
             $user->update(['updated_at','latitude','longitude']);
+            return 'OK';
+        }
+
+    }
+
+    public function actionUpdatestatus(){
+        
+        $data = Yii::$app->request->post();
+        if(!empty($data))
+        {
+            $userId = Yii::$app->session['realUser']['id'];
+            $type=$data['type'];
+            $status=$data['status'];
+            $user = $this->findModel($userId);
+            $user->updated_at = date('Y-m-d H:i:s');
+            if($type==='live_status'){
+                $user->live_status=$status;
+            }else if($type === 'work_status'){
+                $user->work_status=$status;
+            }
+            $user->update(['updated_at','live_status','work_status']);
+
+            $user = $this->findModel($userId);
+            Yii::$app->session->remove('realUser');
+            Yii::$app->session->set('realUser',$user);
+
             return 'OK';
         }
 

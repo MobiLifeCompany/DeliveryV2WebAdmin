@@ -300,7 +300,28 @@
                   </div>
                   <div class="pull-left info">
                      <p><?= Yii::$app->user->identity->username;?></p>
-                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                     <?php if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['live_status']=='On-Line')) { ?>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                      <?php } else if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['live_status']=='Off-Line')) {  ?>
+                            <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                      <?php } else { ?>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a> 
+                      <?php }             
+                      ?>
+                      <?php if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['work_status']=='Ready')) { ?>
+                        <a href="#"><i class="fa fa-square text-blue"></i> Ready</a>
+                      <?php } else if((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ||
+                            Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') 
+                            && ( Yii::$app->session['realUser']['work_status']=='Waiting')) {  ?>
+                            <a href="#"><i class="fa fa-square text-yellow"></i> Waiting</a>
+                      <?php }          
+                      ?>
                   </div>
                </div>
                <div class="user-panel is-ltr">
@@ -993,12 +1014,12 @@ navigator.geolocation.getCurrentPosition(
             dataType: "text",   //expect html to be returned    
             data:{'lat':position.coords.latitude ,'long':position.coords.longitude},            
             success: function (response) {
-              alert(response);                
+              //alert(response);                
            }
          });
     },
     function(error){
-         alert(error.message);
+         //alert(error.message);
     }, {
          enableHighAccuracy: true
               ,timeout : 5000
