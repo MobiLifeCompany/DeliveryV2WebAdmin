@@ -62,10 +62,10 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['business_id','area_id'], 'required'],
-            [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed'], 'integer'],
+            [['business_id','area_id','city_id'], 'required'],
+            [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed','city_id'], 'integer'],
             [['promotion_note', 'warning_note', 'masteries'], 'string'],
-            [['created_at', 'updated_at','area_id','email','enable_email_notification'], 'safe'],
+            [['created_at', 'updated_at','city_id','area_id','email','enable_email_notification'], 'safe'],
             [['name', 'short_description', 'address', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'string', 'max' => 255],
             [['longitude', 'latitude', 'photo'], 'string', 'max' => 100],
             [['delivery_expected_time'], 'string', 'max' => 11],
@@ -85,6 +85,7 @@ class Shops extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'business_id' => Yii::t('app', 'BUSINESS_NAME'),
             'area_id' => Yii::t('app', 'AREA'),
+            'city_id' => Yii::t('app', 'CITY'),
             'name' => Yii::t('app', 'NAME'),
             'short_description' => Yii::t('app', 'DESCRIPTION'),
             'address' => Yii::t('app', 'ADDRESS'),
@@ -161,6 +162,11 @@ class Shops extends \yii\db\ActiveRecord
     public function getArea()
     {
         return $this->hasOne(Areas::className(), ['id' => 'area_id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(Cities::className(), ['id' => 'city_id']);
     }
 
     public function getShopById($id)

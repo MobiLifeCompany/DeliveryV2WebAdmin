@@ -201,11 +201,15 @@ class ShopsController extends Controller
             {
                 ShopDeliveryAreas::deleteAll(['shop_id' => $id]);
                 if(!empty($selectedAreas)){
+                     $shop = new Shops();
+                     $shop = $shop->getShopById($id);
+                     $deliveryCharge = $shop->getModels()[0]['delivery_charge'];
                     foreach($selectedAreas as $area){
                         $model = new ShopDeliveryAreas();
                         $model->area_id = $area;
                         $model->shop_id = $id;
                         $model->deleted = 0;
+                        $model->delivery_charge = $deliveryCharge;
                         $model->created_at = date('Y-m-d H:i:s');
                         $model->updated_at = date('Y-m-d H:i:s');
                         $model->save();

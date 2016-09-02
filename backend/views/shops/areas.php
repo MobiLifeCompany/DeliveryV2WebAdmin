@@ -10,20 +10,26 @@ use backend\models\Areas;
 /* @var $model backend\models\Shops */
 
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Shops'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SHOPS'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="shops-areas">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'area_id')->listBox(
-                    ArrayHelper::map(Areas::find()->all(),'id','name'), 
-                    ['multiple' => 'true']);
+    <?php
+        $shopId = Yii::$app->request->queryParams['id'];
+        $shop = new Shops();
+        $shop = $shop->getShopById($shopId);
+        $cityId = $shop->getModels()[0]['city_id'];
+        $allAreas = ArrayHelper::map(Areas::find()->where(['city_id'=>$cityId])->all(),'id','name');
+    ?>
+
+    <?= $form->field($model, 'area_id')->listBox($allAreas, ['multiple' => 'true']);
      ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Update'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'UPDATE'), ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

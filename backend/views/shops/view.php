@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'business_id',
              'value'=>$model->business->name
             ],
+            ['attribute' => 'city_id',
+             'value'=>$model->city->name
+            ],
              ['attribute' => 'area_id',
              'value'=>$model->area->name
             ],

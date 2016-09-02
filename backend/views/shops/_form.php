@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use backend\models\Shops;
 use backend\models\Areas;
+use backend\models\Cities;
 use backend\models\Businesses;
 use kartik\file\FileInput;
 use maksyutin\duallistbox\Widget;
@@ -22,6 +23,11 @@ use maksyutin\duallistbox\Widget;
     <?= $form->field($model, 'business_id')->dropDownList(
                     ArrayHelper::map(Businesses::find()->all(),'id','name'), 
                     ['prompt' => Yii::t('app', 'SELECT_BUSINESS')]);
+     ?>
+
+     <?= $form->field($model, 'city_id')->dropDownList(
+                    ArrayHelper::map(Cities::find()->all(),'id','name'), 
+                    ['prompt' => Yii::t('app', 'SELECT_CITY')]);
      ?>
 
      <?= $form->field($model, 'area_id')->dropDownList(

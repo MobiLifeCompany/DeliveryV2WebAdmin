@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "shop_delivery_areas".
@@ -33,8 +34,8 @@ class ShopDeliveryAreas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['area_id', 'shop_id'], 'required'],
-            [['area_id', 'shop_id', 'deleted'], 'integer'],
+            [['area_id', 'shop_id','delivery_charge'], 'required'],
+            [['area_id', 'shop_id', 'deleted','delivery_charge'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Areas::className(), 'targetAttribute' => ['area_id' => 'id']],
             [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => Shops::className(), 'targetAttribute' => ['shop_id' => 'id']],
@@ -48,10 +49,11 @@ class ShopDeliveryAreas extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'area_id' => Yii::t('app', 'Area ID'),
-            'shop_id' => Yii::t('app', 'Shop ID'),
-            'deleted' => Yii::t('app', 'Deleted'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'area_id' => Yii::t('app', 'AREA'),
+            'shop_id' => Yii::t('app', 'SHOP'),
+            'delivery_charge' => Yii::t('app', 'DELIVERY_CHARGE'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
@@ -70,5 +72,21 @@ class ShopDeliveryAreas extends \yii\db\ActiveRecord
     public function getShop()
     {
         return $this->hasOne(Shops::className(), ['id' => 'shop_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShopDeliveryAreas($shopId)
+    {
+        $query = ShopDeliveryAreas::find()->where(['shop_id' => $shopId]);
+        
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $dataProvider;
+
     }
 }

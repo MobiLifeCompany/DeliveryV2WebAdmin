@@ -70,14 +70,10 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-           // 'rating',
-         //   'estimation_time',
             'min_amount',
-           // 'delivery_expected_time',
-           // 'delivery_charge',
-            //'lang',
             [
 	            'attribute' => Yii::t('app', 'POSITION'),
+                'label' => Yii::t('app', 'POSITION'),
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
@@ -108,6 +104,11 @@ $this->params['currentPage'] = $curpage;
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { return Html::a(Yii::t('app', 'ITEMS'),'index.php?r=items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('','index.php?r=shop-delivery-areas/index&id='.$model->id,['class'=>'glyphicon glyphicon-list-alt']); },
             ],
             [
                 'vAlign'=>'middle',
