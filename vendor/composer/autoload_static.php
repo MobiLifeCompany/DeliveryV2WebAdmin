@@ -8,7 +8,6 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -26,10 +25,6 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
             'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
-        ),
-        'o' => 
-        array (
-            'odannyc\\Yii2SSE\\' => 16,
         ),
         'm' => 
         array (
@@ -55,6 +50,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
             'kartik\\grid\\' => 12,
             'kartik\\form\\' => 12,
             'kartik\\file\\' => 12,
+            'kartik\\dialog\\' => 14,
             'kartik\\depdrop\\' => 15,
             'kartik\\datetime\\' => 16,
             'kartik\\date\\' => 12,
@@ -73,12 +69,6 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\HttpFoundation\\' => 33,
-            'Sse\\' => 4,
         ),
         'P' => 
         array (
@@ -128,10 +118,6 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
-        ),
-        'odannyc\\Yii2SSE\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/odannyc/yii2-sse/src',
         ),
         'maksyutin\\duallistbox\\' => 
         array (
@@ -209,6 +195,10 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-fileinput',
         ),
+        'kartik\\dialog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog',
+        ),
         'kartik\\depdrop\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-depdrop',
@@ -256,18 +246,6 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\HttpFoundation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/http-foundation',
-        ),
-        'Sse\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tonyhhyip/sse/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
