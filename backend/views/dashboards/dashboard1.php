@@ -11,8 +11,8 @@
    $this->params['currentPage'] = $curpage;
    $this->params['currentPageAction'] = Yii::$app->controller->action->id;
    
-   $currentYear = date('Y');;
-   $currentMonth = date('F');;
+   $currentYear = date('Y');
+   $currentMonth = date('F');
    
    $openOrdersCount = 0;
    $cancelOrderCount = 0;
@@ -165,7 +165,6 @@ if(Yii::$app->user->can('show_orders_statistics') || Yii::$app->user->can('show_
                             'clientOptions' => [
                                 'chart' => [
                                         'type' => 'line',
-                                        'width' => 1000,
                                 ],
                                 'title' => [
                                     'text' => Yii::t('app', 'DAILY_SALES_REPORT').' ('. $currentMonth.'-'.$currentYear.')'
@@ -232,7 +231,6 @@ if(Yii::$app->user->can('show_orders_statistics') || Yii::$app->user->can('show_
                           'clientOptions' => [
                               'chart' => [
                                       'type' => 'bar',
-                                      'width' => 1000,
                               ],
                               'title' => [
                                   'text' => Yii::t('app', 'TOTTAL_ORDERS_QTY').$currentYear

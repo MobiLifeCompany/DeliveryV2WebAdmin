@@ -31,7 +31,7 @@ class TopTenDashboard
             $shopStatment = $shopStatment.$shop_ids;
         }
         
-        $query =  "SELECT sum(total) total,name item_name 
+        $query =  "SELECT sum(order_items.total) total,name item_name 
                     FROM `order_items`, `items`, `orders`  
                     WHERE items.id = item_id  and `orders`.id = `order_items`.order_id ".$shopStatment."
                     and  date(`order_items`.created_at) = CURDATE()
@@ -58,7 +58,7 @@ class TopTenDashboard
         $userShops = Yii::$app->session['userShops'];
         $shop_ids = "";
         if(!empty($userShops)){
-            $shop_ids = " and shops.shop_id in (";
+            $shop_ids = " and shops.id in (";
             foreach ($userShops as $var) {
                 $shop_ids =$shop_ids.$var.',';
             }

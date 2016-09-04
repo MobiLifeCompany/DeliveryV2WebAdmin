@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <h4><?= Yii::t('app', 'USER_SHOPS'); ?></h4>
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body">
             <table class="table table-striped">
                 <tr>
                     <th><?= Yii::t('app', 'ID'); ?></th>

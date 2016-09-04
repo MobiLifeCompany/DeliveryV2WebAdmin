@@ -11,18 +11,17 @@ $this->title = Yii::t('app', 'ORDER_HISTORY');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-histories-index">
-
-    <h3><?= Html::encode($this->title) ?></h3>
-  
+<h3><?= Html::encode($this->title) ?></h3>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'export' =>false,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'summary'=> "",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

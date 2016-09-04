@@ -20,9 +20,7 @@ $this->params['currentPage'] = $curpage;
 ?>
 <div class="cities-index">
     <h3><?= Html::encode($this->title) ?></h3>
-    <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=cities/create'),'id'=>'modalButton']); ?>
-    </p>
+    <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=cities/create'),'id'=>'modalButton']); ?>
     <br/>
     <?php
         Modal::begin([
@@ -39,9 +37,10 @@ $this->params['currentPage'] = $curpage;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'layout'=>"{items}\n{summary}\n{pager}",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

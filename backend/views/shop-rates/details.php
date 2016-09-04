@@ -36,9 +36,10 @@ $this->params['currentPage'] = $curpage;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'summary'=>"",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -127,9 +128,10 @@ $this->params['currentPage'] = $curpage;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'layout'=>"{items}\n{summary}\n{pager}",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

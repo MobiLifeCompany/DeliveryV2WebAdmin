@@ -83,7 +83,7 @@ if(!empty($deliveryAreas))
 {
 ?>
     <h4>Shop Delivery Areas</h4>
-    <div class="box-body table-responsive no-padding">
+    <div class="box-body">
         <table class="table table-striped">
             <tr>
                 <th>ID</th>

@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-view">
 
-<div class="box-body table-responsive no-padding">
+<div class="box-body">
     <table class="table table-striped">
         <tr>
             <th><?= Yii::t('app', 'USER_PERMISSIONS'); ?></th>

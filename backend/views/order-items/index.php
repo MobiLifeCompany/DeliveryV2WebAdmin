@@ -16,13 +16,8 @@ $this->params['currentPage'] = $curpage;
 ?>
 <div class="order-items-index">
 
-    <h4><?= Html::encode($this->title) ?></h4>
+    <h3><?= Html::encode($this->title) ?></h3>
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php //echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=cities/create'),'id'=>'modalButton']); ?>
-    </p>
-    <br/>
     <?php
         Modal::begin([
                 'header'=>'<h4>'.Yii::t('app', 'ORDER_ITEMS').'</h4>',
@@ -38,14 +33,15 @@ $this->params['currentPage'] = $curpage;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'layout'=>"{items}\n{summary}\n{pager}",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'order_id',
             //'item.name',
              ['attribute' => 'item_id',

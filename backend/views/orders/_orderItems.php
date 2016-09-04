@@ -14,9 +14,10 @@ use yii\bootstrap\Modal;
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

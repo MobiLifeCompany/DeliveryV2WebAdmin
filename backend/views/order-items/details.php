@@ -30,13 +30,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ORDERS'), 'url' => '
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-items-index">
-
-    <h2><?= Html::encode(Yii::t('app', 'ORDER_NO') . ' ' .Yii::$app->request->queryParams['id']) ?></h2>
-
-    <p>
-        <?php //echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=cities/create'),'id'=>'modalButton']); ?>
-    </p>
-    <br/>
+    <h3><?= Html::encode(Yii::t('app', 'ORDER_NO') . ' ' .Yii::$app->request->queryParams['id']) ?></h3>
     <?php
         Modal::begin([
                 'header'=>'<h4>'.Yii::t('app', 'ORDER_DETAILS').'</h4>',
@@ -52,9 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'summary' => '',
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -111,10 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-<br/>
-<br/>
-<h2><?= Html::encode($this->title) ?></h2>
-
+<h3><?= Html::encode($this->title) ?></h3>
 
  <?php Pjax::begin(['id'=>'modalGridSpecial']);?> 
 <?= GridView::widget([
@@ -123,9 +115,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'layout'=>"{items}\n{summary}\n{pager}",
+        'responsiveWrap' => false,
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -185,8 +178,8 @@ $map = new Map([
 if((!empty($orderModel->getModels()[0])))
 {
     // lets use the directions renderer
-    $shop = new LatLng(['lat' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['shop']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['shop']->longitude:0)]);
-    $customerAddress = new LatLng(['lat' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['customerAddresses']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0])?$orderModel->getModels()[0]['customerAddresses']->longitude:0)]);
+    $shop = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->longitude:0)]);
+    $customerAddress = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->longitude:0)]);
     $deliveryMan = new LatLng(['lat' => 35.136888, 'lng' => 36.791013]);
 
     // setup just one waypoint (Google allows a max of 8)

@@ -21,16 +21,15 @@ $this->params['currentPage'] = $curpage;
 <div class="items-index">
     <h3><?= Html::encode($this->title) ?></h3>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
-    </p>
+    <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
     <br/>
     <?php
         Modal::begin([
-                'header'=>'<h4>'.Yii::t('app', 'ITEMS').'</h4>',
                 'options' => [
                     'id' => 'modal',
-                    'tabindex' => false] // important for Select2 to work properly
+                    'tabindex' => false], // important for Select2 to work properly
+                'header'=>'<h4>'.Yii::t('app', 'ITEMS').'</h4>',
+                'size' => 'modal-lg',
                 ]);
            echo "<div id='modalContent'></div>";
         Modal::end();
@@ -39,12 +38,13 @@ $this->params['currentPage'] = $curpage;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'export' =>false,
+        'responsiveWrap' => false,
         'tableOptions' => ['class' => 'table table-hover'],
         'class' =>  'box',
         'layout'=>"{items}\n{summary}\n{pager}",
         'options'=>[
                         'tag'=>'div',
-                        'class'=>'box box-body table-responsive no-padding'
+                        'class'=>'box box-body'
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

@@ -1,7 +1,7 @@
 <?php
     return [
         'MAIN_NAVIGATION' => 'القائمة الرئيسية',
-        'DELIVERY_EXPRESS' => 'Delivery Express',
+        'DELIVERY_EXPRESS' => 'التوصيل السريع',
         'DASHBOARDS' => 'لوحات القيادة',
         'DASHBOARD' =>'لوحة القيادة',
         'MAP_DASHBOARD' => 'لوحة تحكم الخرائط',
@@ -129,6 +129,7 @@
         'SMS_COUNT' => 'عدد الرسائل',
         'IS_DEFAULT' => 'افتراضي',
         'SELECT_CUSTOMER' => 'اختر الزبون',
+         'CONTROL_PANEL' => 'لوحة التحكم',
         'CUSTOMER_ADDRESSES' => 'عناوين زبون',
         'CUSTOMER_ADDRESS_COORDINATES' => 'إحداثيات عنوان الزبون',
         'ORDER_NO' => 'رقم الطلبية',
@@ -139,6 +140,10 @@
         'RE_OPEN' => 'إعادة فتح',
         'CLOSED' => 'مغلق',
         'PENDING' => 'بالانتطار',
+        'COPY_RIGHT'=>'حقوق الملكية ',
+        'COPY_RESERVED'=>'كافة الحقوق محفوظة',
+        'VERSION' => 'الإصدار رقم',
+        'VERSION_NO' =>'2.3.5',
         'ORDER_HISTORY' =>'سجل الطلبية',
         'CANCELED' => 'ملغى',
         'CANCEL' => 'ملغى',

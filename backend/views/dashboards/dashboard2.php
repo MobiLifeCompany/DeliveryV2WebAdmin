@@ -49,6 +49,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         echo GridView::widget([
         'dataProvider' => $currentOrdersForMapDashboard,
         'export' =>false,
+        'responsiveWrap' => false,
         'columns' => [
             [
                 'class' => '\kartik\grid\CheckboxColumn', 

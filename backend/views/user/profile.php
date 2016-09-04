@@ -75,7 +75,7 @@ foreach ($generalOrdersCount as $var) {
             <!-- /.box-header -->
             <div class="box-body">
                <strong><i class="fa fa-home margin-r-5"></i> <?= Yii::t('app', 'SHOPS') ?></strong>
-               <div class="box-body table-responsive no-padding">
+               <div class="box-body">
                   <?php
                      $shop_name = "";
                      if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN'){
