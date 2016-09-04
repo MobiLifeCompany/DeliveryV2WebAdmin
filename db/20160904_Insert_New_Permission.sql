@@ -1,0 +1,1 @@
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('show_push_notification', '2', 'show_push_notification', NULL, NULL, '2016-09-04 03:37:43', '2016-09-04 03:37:43');

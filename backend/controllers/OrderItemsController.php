@@ -192,10 +192,12 @@ class OrderItemsController extends Controller
         $orderItems = new OrderItems();
         $dataProvider = $orderItems->getOrderItems($id);
         $order = $orderItems->getOrderById($id);
+        $deliveryUser = $orderItems->getDeliveryUserByOrderId($id);
 
         return $this->render('details', [
             'dataProvider' => $dataProvider,
             'orderModel' =>$order,
+            'deliveryUser' => $deliveryUser,
         ]);
     }
 

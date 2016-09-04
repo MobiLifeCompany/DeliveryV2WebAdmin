@@ -123,4 +123,19 @@ class OrderItems extends \yii\db\ActiveRecord
 
         return $dataProvider;
     }
+
+    public function getDeliveryUserByOrderId($id)
+    {
+        $query = Orders::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $query->joinWith('deliveryUser');
+
+        $query->andWhere(['orders.id'=> $id]);
+
+        return $dataProvider;
+    }
 }

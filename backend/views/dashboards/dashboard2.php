@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\Helpers\Url;
-
+use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'MAP_DASHBOARD');
 $this->params['breadcrumbs'][] = $this->title;
@@ -44,12 +44,20 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         echo "<div id='modalContent'></div>";
     Modal::end();
 ?>
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['id'=>'formDash']); ?>
+<?php Pjax::begin(['id'=>'modalGrid']);?>
 <?php
         echo GridView::widget([
         'dataProvider' => $currentOrdersForMapDashboard,
         'export' =>false,
+        'tableOptions' => ['class' => 'table table-hover'],
+        'class' =>  'box',
+        'layout'=>"{items}\n{summary}\n{pager}",
         'responsiveWrap' => false,
+        'options'=>[
+                        'tag'=>'div',
+                        'class'=>'box box-body'
+        ],
         'columns' => [
             [
                 'class' => '\kartik\grid\CheckboxColumn', 
@@ -165,6 +173,11 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                     }    
 	            }
 	        ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model['order_id'],'id'=>'updateModalButton_order_status_'.$model['order_id'],'onclick'=>'return showUpdateModalByType('.$model['order_id'].',"order_status")']); },
+            ],
              [
                 'attribute' => 'User',
                 'label' => Yii::t('app', 'DELIVERY_USER'),
@@ -183,6 +196,8 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         ],
     ]); 
 ?>
+<br/>
+<?php Pjax::end(); ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'UPDATE_TO_SHOW_ON_MAP'), ['class' =>  'btn btn-success']) ?>
     </div>
@@ -200,11 +215,11 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         ]);
 
         foreach ($currentOrdersForMapDashboard->getModels() as $record) {
-              if($record['show_on_map'] == 1){
+              if($record['show_on_map'] == 1 && !empty($record['user_latitude']) && $record['user_latitude']!=0){
                     // lets use the directions renderer
                     $shop = new LatLng(['lat' => $record['shop_latitude'], 'lng' =>  $record['shop_longitude']]);
-                    $customerAddress = new LatLng(['lat' => $record['customer_addresses_longitude'], 'lng' => $record['customer_addresses_latitude']]);
-                    $deliveryMan = new LatLng(['lat' => $record['shop_latitude']-0.1, 'lng' => $record['shop_longitude']-0.1]);
+                    $customerAddress = new LatLng(['lat' => $record['customer_addresses_latitude'], 'lng' => $record['customer_addresses_longitude']]);
+                    $deliveryMan = new LatLng(['lat' => $record['user_latitude'], 'lng' => $record['user_longitude']]);
 
                     // setup just one waypoint (Google allows a max of 8)
                     $waypoints = [
@@ -250,3 +265,30 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         echo $map->display();
         ?>
 
+<?php  
+$modalForm="formDash";
+$script = <<< JS
+    $('form#{$modalForm}').on('beforeSubmit', function(e)
+    {
+        var \$form = $(this);
+        $.post(
+            \$form.attr("action"),
+            \$form.serialize()
+        ).done(function(result){
+            if(result == 1){
+                $(\$form).trigger("reset");
+                $.pjax.reload({container:'#modalGrid'});
+                $(document).find('#modal').modal('hide');
+            }else
+            {
+                $(\$form).trigger("reset");
+                $("#message").html(result);
+            }
+        }).fail(function(){
+            console.log("server error");
+        });
+        return false;
+    });
+JS;
+$this->registerJs($script);
+?>

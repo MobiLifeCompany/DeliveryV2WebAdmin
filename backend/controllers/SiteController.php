@@ -11,6 +11,10 @@ use backend\models\StatisticsDashboard;
 use backend\models\MapDashboard;
 use backend\models\Shops;
 use backend\models\Orders;
+use backend\models\Customers;
+use backend\models\PushNotification;
+use yii\data\ActiveDataProvider;
+
 
 
 
@@ -30,7 +34,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','language','gcm','gcmweb','checkorders'],
+                        'actions' => ['login', 'error','language','gcm','gcmweb','checkorders','push-notification'],
                         'allow' => true,
                     ],
                     [
@@ -179,4 +183,41 @@ class SiteController extends Controller
             return true;
         }
     }
+
+    public function actionPushNotification()
+    {
+
+        $model =  new PushNotification();
+ 
+       if(!Yii::$app->user->can('show_push_notification') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {  
+            $data = Yii::$app->request->post();
+            if (array_key_exists('selection', $data)) {
+                $selection = $data['selection'];
+                foreach ($selection as $value) {
+                    $value = substr($value ,4);
+                    $pushNotification =  new PushNotification();
+                    $pushNotification->sendPush($value,$data['PushNotification']['title'],$data['PushNotification']['message']);
+                }
+            Yii::$app->session->setFlash('success',Yii::t('app', 'NOTIFICATION_SUCCESS_MSG'));
+        }else{
+             Yii::$app->session->setFlash('error',Yii::t('app', 'NOTIFICATION_ERROR_MSG'));
+        }
+    }
+        $query = Customers::find();
+        $customers = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
+        ]);
+
+        return $this->render('push-notification',[
+            'customers'=>$customers,
+            'model' => $model,
+        ]);
+    }
+
 }

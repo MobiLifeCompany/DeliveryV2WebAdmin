@@ -175,12 +175,13 @@ $map = new Map([
     'height' => '500', 
 ]);
 
-if((!empty($orderModel->getModels()[0])))
+
+if((!empty($orderModel->getModels()[0]) && !empty($deliveryUser->getModels()[0]->deliveryUser) && !empty($deliveryUser->getModels()[0]->deliveryUser->longitude)))
 {
     // lets use the directions renderer
     $shop = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->longitude:0)]);
     $customerAddress = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->longitude:0)]);
-    $deliveryMan = new LatLng(['lat' => 35.136888, 'lng' => 36.791013]);
+    $deliveryMan = new LatLng(['lat' => $deliveryUser->getModels()[0]->deliveryUser->latitude, 'lng' => $deliveryUser->getModels()[0]->deliveryUser->longitude]);
 
     // setup just one waypoint (Google allows a max of 8)
     $waypoints = [

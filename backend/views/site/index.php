@@ -236,12 +236,14 @@
                 'height' => '1000', 
             ]);
 
-            foreach ($currentOrdersForMapDashboard->getModels() as $record) {
-                  if($record['show_on_map'] == 1){
+            foreach ($currentOrdersForMapDashboard->getModels() as $record) 
+            {
+                  if($record['show_on_map'] == 1)
+                  {
                         // lets use the directions renderer
                         $shop = new LatLng(['lat' => $record['shop_latitude'], 'lng' =>  $record['shop_longitude']]);
-                        $customerAddress = new LatLng(['lat' => $record['customer_addresses_longitude'], 'lng' => $record['customer_addresses_latitude']]);
-                        $deliveryMan = new LatLng(['lat' => $record['shop_latitude']-0.1, 'lng' => $record['shop_longitude']-0.1]);
+                        $customerAddress = new LatLng(['lat' => $record['customer_addresses_latitude'], 'lng' => $record['customer_addresses_longitude']]);
+                        $deliveryMan = new LatLng(['lat' => $record['user_latitude'], 'lng' => $record['user_longitude']]);
 
                         // setup just one waypoint (Google allows a max of 8)
                         $waypoints = [

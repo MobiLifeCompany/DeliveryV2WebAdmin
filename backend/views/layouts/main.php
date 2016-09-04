@@ -779,6 +779,22 @@
                       >
                       <a href="index.php?r=contact-us"><i class="fa fa-envelope"></i> <span> <?= Yii::t('app', 'CONTACT_US') ?></span></a>
                     </li>
+                     <?php 
+                          if(Yii::$app->user->can('show_push_notification')){
+                      ?>
+                     <li
+                      <?php 
+                          if(isset($this->params['currentPage'])){
+                              if($this->params['currentPage']=='push-notification') 
+                                echo "class='active'";
+                          }
+                          ?>
+                      >
+                      <a href="index.php?r=site/push-notification"><i class="fa fa-rocket"></i> <span> <?= Yii::t('app', 'GLOBAL_PUSH_NOTIFICATION') ?></span></a>
+                    </li>
+                    <?php
+                    }
+                  ?>
                   <?php
                     }
                   ?>
