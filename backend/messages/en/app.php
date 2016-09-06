@@ -93,6 +93,7 @@
         'STATUS' => 'Status',
         'IS_FIRED' => 'Is Fired',
         'SUBSCRIBED' => 'Subscribed',
+        'SUBSCRIBED_IN_DELIVERY' => 'Subscribed in Delivery',
         'SELECT_SHOP' => 'Select Shop',
         'MALE' => 'Male',
         'FEMALE' => 'Female',

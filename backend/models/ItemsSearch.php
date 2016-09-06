@@ -78,6 +78,7 @@ class ItemsSearch extends Items
             //print_r($query->createCommand()->getRawSql());
         //  print_r('----------');
         //die();
+        $query->orderBy('id DESC');     
         return $dataProvider;
     }
 }

@@ -83,6 +83,7 @@
         'STATUS' => 'الحالة',
         'IS_FIRED' => 'مفصول',
         'SUBSCRIBED' => 'مسجل',
+        'SUBSCRIBED_IN_DELIVERY' => 'مشترك بالتوصيل',
         'SELECT_SHOP' => 'اختر متجر',
         'MALE' => 'ذكر',
         'FEMALE' => 'أنثى',

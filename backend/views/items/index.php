@@ -48,8 +48,9 @@ $this->params['currentPage'] = $curpage;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'id',
             'name',
-            'ar_name',
+            //'ar_name',
             [
                 'attribute' => 'shop_id',
                 'value'=>'shopItemCategory.shop.name'

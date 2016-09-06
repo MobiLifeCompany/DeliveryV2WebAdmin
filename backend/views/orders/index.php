@@ -86,10 +86,23 @@ $this->params['currentPage'] = $curpage;
            //  'qty',
           //   'delivery_charge',
              'total',
-              [
+            [
+                'attribute' => 'subscribed_in_delivery',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) {
+                    if($model->shop->subscribed_in_delivery == 0){
+                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                    }
+                    else {
+                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                    }    
+                }
+            ],
+            [
                  'attribute' => Yii::t('app', 'TOTAL_WITH_DELIVERY'),
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
-             ],
+            ],
             // 'cancel_reason',
             // 'note:ntext',
             [
@@ -97,17 +110,23 @@ $this->params['currentPage'] = $curpage;
              'vAlign'=>'middle',
              'format'=>'raw',
              'value'=>function($model) { 
-                     if($model->deliveryUser!=null){
-                         return  Html::a($model->deliveryUser->username,'#',['class'=>'label label-success']);
-                     }else{
-                          return Html::a(Yii::t('app', 'NOT_ASSIGNED'),'#',['class'=>'label label-danger']);
-                     }
+                        if($model->deliveryUser!=null){
+                            return  Html::a($model->deliveryUser->username,'#',['class'=>'label label-success']);
+                        }else{
+                            return Html::a(Yii::t('app', 'NOT_ASSIGNED'),'#',['class'=>'label label-danger']);
+                        }
             	}
             ],
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton_deliveryMan_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"deliveryMan")']); },
+                'value' => function($model) { 
+                      if($model->shop->subscribed_in_delivery == 1 || Yii::$app->user->can('show_unsubscribe_shop')){
+                         return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton_deliveryMan_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"deliveryMan")']); 
+                       }else{
+                        return "";
+                      }
+                },
             ],
             // 'created_at',
             // 'updated_at',
@@ -119,7 +138,15 @@ $this->params['currentPage'] = $curpage;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model->id,'id'=>'updateModalButton_order_status_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"order_status")']); },
+                'value' => function($model) { 
+                     if($model->shop->subscribed_in_delivery == 1 || Yii::$app->user->can('show_unsubscribe_shop'))
+                     {
+                         return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model->id,'id'=>'updateModalButton_order_status_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"order_status")']);
+                    }else
+                    {
+                        return "";
+                    }
+                },
             ],
             [
                 'vAlign'=>'middle',
@@ -136,8 +163,14 @@ $this->params['currentPage'] = $curpage;
                     },
                 'update' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
-                    }    
+                        if($model->shop->subscribed_in_delivery == 1 || Yii::$app->user->can('show_unsubscribe_shop')){
+                             return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                        }
+                        else
+                        {
+                             return "";
+                        }
+                    },    
                 ]
             ],
         ],

@@ -57,11 +57,11 @@ $this->params['currentPage'] = $curpage;
              'value'=>'business.name'
             ],
             [
-	            'attribute' => 'deleted',
+	            'attribute' => 'subscribed_in_delivery',
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
-                    if($model->deleted == 1){
+                    if($model->subscribed_in_delivery == 0){
 		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
@@ -69,7 +69,7 @@ $this->params['currentPage'] = $curpage;
                     }    
 	            }
 	        ],
-            'min_amount',
+           // 'min_amount',
             [
 	            'attribute' => Yii::t('app', 'POSITION'),
                 'label' => Yii::t('app', 'POSITION'),

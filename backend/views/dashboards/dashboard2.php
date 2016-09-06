@@ -176,7 +176,12 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model['order_id'],'id'=>'updateModalButton_order_status_'.$model['order_id'],'onclick'=>'return showUpdateModalByType('.$model['order_id'].',"order_status")']); },
+                'value' => function($model) 
+                    { 
+                         if($model['subscribed_in_delivery'] == 1 || Yii::$app->user->can('show_unsubscribe_shop')){
+                             return Html::a('<span class="fa fa-ship">','#',['value'=>'index.php?r=orders/setorderstatus&id='.$model['order_id'],'id'=>'updateModalButton_order_status_'.$model['order_id'],'onclick'=>'return showUpdateModalByType('.$model['order_id'].',"order_status")']); 
+                             }
+                    },
             ],
              [
                 'attribute' => 'User',

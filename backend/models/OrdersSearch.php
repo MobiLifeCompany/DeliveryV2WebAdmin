@@ -77,6 +77,8 @@ class OrdersSearch extends Orders
             ->orFilterWhere(['like', 'cancel_reason', $this->ordersGlobalSearch])
             ->orFilterWhere(['like', 'note', $this->ordersGlobalSearch]);
 
+       $query->orderBy('id DESC');     
+
         return $dataProvider;
     }
 }

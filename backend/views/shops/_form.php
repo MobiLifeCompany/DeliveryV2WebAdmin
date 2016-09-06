@@ -101,6 +101,8 @@ use maksyutin\duallistbox\Widget;
 
     <?= $form->field($model, 'subscribed')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
+    <?= $form->field($model, 'subscribed_in_delivery')->dropDownList([ 0=> Yii::t('app', 'NO'), 1=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

@@ -62,10 +62,10 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['business_id','area_id','city_id'], 'required'],
-            [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed','city_id'], 'integer'],
+            [['business_id','area_id','city_id',], 'required'],
+            [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed','city_id','subscribed_in_delivery'], 'integer'],
             [['promotion_note', 'warning_note', 'masteries'], 'string'],
-            [['created_at', 'updated_at','city_id','area_id','email','enable_email_notification'], 'safe'],
+            [['created_at', 'updated_at','city_id','area_id','email','enable_email_notification','subscribed_in_delivery'], 'safe'],
             [['name', 'short_description', 'address', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'string', 'max' => 255],
             [['longitude', 'latitude', 'photo'], 'string', 'max' => 100],
             [['delivery_expected_time'], 'string', 'max' => 11],
@@ -107,6 +107,7 @@ class Shops extends \yii\db\ActiveRecord
             'rating' => Yii::t('app', 'RATING'),
             'country' => Yii::t('app', 'COUNTRY'),
             'subscribed' => Yii::t('app', 'SUBSCRIBED'),
+            'subscribed_in_delivery'=> Yii::t('app', 'SUBSCRIBED_IN_DELIVERY'),
             'ar_name' => Yii::t('app', 'ARABIC_NAME'),
             'ar_short_description' => Yii::t('app', 'ARABIC_DESCRIPTION'),
             'ar_address' => Yii::t('app', 'ARABIC_ADDRESS'),

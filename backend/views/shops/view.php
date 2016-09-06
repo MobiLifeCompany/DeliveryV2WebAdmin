@@ -65,6 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'subscribed',
                 'value' =>  $model->subscribed == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
             ],
+            [
+                'attribute'=>'subscribed_in_delivery',
+                'value' =>  $model->subscribed_in_delivery == 1 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
+            ],
         ],
     ]) ?>
 
