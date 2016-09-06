@@ -29,6 +29,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         'layout'=>"{items}\n{summary}\n{pager}",
         'showPageSummary' => true,
         'autoXlFormat'=>true,
+        'responsiveWrap' => false,
         'export'=>[
             'fontAwesome'=>true,
             'showConfirmAlert'=>false,
