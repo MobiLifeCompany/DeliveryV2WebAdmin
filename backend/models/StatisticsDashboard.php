@@ -55,7 +55,7 @@ class StatisticsDashboard extends Report
          $userShops = Yii::$app->session['userShops'];
 
          $query->andFilterWhere(['in','shop_id', $userShops]);
-         $query->orderBy('id DESC');
+         $query->orderBy('created_at DESC');
          //$query->limit(7);
      
          // print_r($query->createCommand()->getRawSql());
@@ -78,7 +78,10 @@ class StatisticsDashboard extends Report
          $query->joinWith('shopItemCategory');
 
          $query->andFilterWhere(['in','shop_id', $userShops]);
-         $query->orderBy('id DESC');
+         $query->orderBy('updated_at DESC');
+
+         //print_r($query->createCommand()->getRawSql());
+         //print_r('----------');
 
         return $dataProvider;
 
@@ -122,7 +125,7 @@ class StatisticsDashboard extends Report
 
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,sum(total) sumTotal FROM orders 
-                                              where EXTRACT(MONTH FROM `created_at`) = date_format(now(), '%m')-2 ".$shopStatment."
+                                              where EXTRACT(MONTH FROM `created_at`) = date_format(now(), '%m') ".$shopStatment."
                                               group by concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) order by created_at");
         $result = $command->queryAll();
         

@@ -560,7 +560,7 @@
                                         echo "class='active'";
                                   }
                                   ?>
-                              ><a href="index.php?r=businesses"><i class="fa fa-globe"></i> <?= Yii::t('app', 'BUSINESSES') ?></a></li>
+                              ><a href="index.php?r=businesses"><i class="fa fa-usd"></i> <?= Yii::t('app', 'BUSINESSES') ?></a></li>
                            <?php 
                                 }
                            ?> 
