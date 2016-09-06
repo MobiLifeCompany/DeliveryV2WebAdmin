@@ -34,6 +34,7 @@ class Businesses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'ar_name','deleted'], 'required'],
             [['deleted'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'photo', 'ar_name'], 'string', 'max' => 255],
@@ -48,13 +49,13 @@ class Businesses extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'photo' => Yii::t('app', 'Photo'),
-            'deleted' => Yii::t('app', 'Deleted'),
-            'lang' => Yii::t('app', 'Lang'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'ar_name' => Yii::t('app', 'Ar Name'),
+            'name' => Yii::t('app', 'NAME'),
+            'photo' => Yii::t('app', 'PHOTO'),
+            'deleted' => Yii::t('app', 'ACTIVE'),
+            'lang' => Yii::t('app', 'LANG'),
+            'created_at' => Yii::t('app', 'CREATED_AT'),
+            'updated_at' => Yii::t('app', 'UPDATED_AT'),
+            'ar_name' => Yii::t('app', 'ARABIC_NAME'),
         ];
     }
 

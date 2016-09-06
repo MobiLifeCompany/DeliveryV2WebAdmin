@@ -220,6 +220,7 @@
         'NOTIFICATION_SUCCESS_MSG' => 'تم إرسال التنبه بنجاح',
         'UPDATE_ORDER_STATUS' => 'تعديل حالة الطلب',
         'NOTIFICATION_ERROR_MSG' => 'من فضلك قم باختيار زبون أو أكثر',
+        'BUSINESSES' => 'تصنيفات الأعمال',
         'UNREAD_MESSAGE' => 'غير مقروءة',
         'READ_MESSAGE' => 'مقروءة',
         'SHOPS_OFFERS' => 'عروض المتاجر',

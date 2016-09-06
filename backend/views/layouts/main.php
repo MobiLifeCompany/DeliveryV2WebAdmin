@@ -549,6 +549,21 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
+                        <?php
+                              if(Yii::$app->user->can('show_businesses') && Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
+                                { 
+                           ?>   
+                            <li 
+                              <?php 
+                                  if(isset($this->params['currentPage'])){
+                                      if($this->params['currentPage']=='businesses') 
+                                        echo "class='active'";
+                                  }
+                                  ?>
+                              ><a href="index.php?r=businesses"><i class="fa fa-globe"></i> <?= Yii::t('app', 'BUSINESSES') ?></a></li>
+                           <?php 
+                                }
+                           ?> 
                           <?php
                               if(Yii::$app->user->can('show_countries') && Yii::$app->session['realUser']['user_type']=='CR_ADMIN')
                                 { 
