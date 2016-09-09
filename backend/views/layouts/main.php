@@ -993,7 +993,7 @@ var ajax_call = function() {
   }
 };
 
-var interval = 1000 * 60 * 1; // where X is your every X minutes
+var interval = 1000 * 60 * 3; // where X is your every X minutes
 setInterval(ajax_call, interval);
 
 JS;

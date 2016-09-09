@@ -142,7 +142,6 @@ class ShopOffersController extends Controller
                     FileHelper::createDirectory('images/offers/'.$model->id);
                     $imageModel->upload($model->id,'images/offers/');
                 }
-                echo ss1;
             }
             else
             {
