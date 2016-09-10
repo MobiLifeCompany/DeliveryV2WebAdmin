@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
    <?= $form->field($model, 'delivery_charge')->textInput() ?>
 
-   <?= $form->field($model, 'deleted')->dropDownList([ 0 => Yii::t('app', 'NO'), 1 => Yii::t('app', 'YES'), ], ['prompt' => '']) ?>
+   <?= $form->field($model, 'deleted')->dropDownList([ 1 => Yii::t('app', 'NO'), 0 => Yii::t('app', 'YES'), ], ['prompt' => '']) ?>
 
 
     <div class="form-group">

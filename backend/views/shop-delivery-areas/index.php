@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'vAlign'=>'middle',
                 'format'=>'raw',
 	            'value' => function($model) {
-                    if($model->deleted == 0){
+                    if($model->deleted == 1){
 		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
                     }
                     else {
