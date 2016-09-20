@@ -45,7 +45,7 @@ use dosamigos\google\maps\Event;
 </div>
 
 <?php
-$coord = new LatLng(['lat' => 35.1367539, 'lng' => 36.7153893]);
+$coord = new LatLng(['lat' => Yii::$app->params['central_lat'], 'lng' => Yii::$app->params['central_lng']]);
 $map = new Map([
     'center' => $coord,
     'zoom' => 14,

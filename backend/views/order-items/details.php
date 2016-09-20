@@ -166,8 +166,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <br/>
 
 
-<?php 
-$coord = new LatLng(['lat' => 35.1367539, 'lng' => 36.7153893]);
+<?php
+$coord = new LatLng(['lat' => Yii::$app->params['central_lat'], 'lng' => Yii::$app->params['central_lng']]);
 $map = new Map([
     'center' => $coord,
     'zoom' => 14,
@@ -182,6 +182,28 @@ if((!empty($orderModel->getModels()[0]) && !empty($deliveryUser->getModels()[0]-
     $shop = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['shop'])?$orderModel->getModels()[0]['shop']->longitude:0)]);
     $customerAddress = new LatLng(['lat' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->latitude:0), 'lng' => (!empty($orderModel->getModels()[0]['customerAddresses'])?$orderModel->getModels()[0]['customerAddresses']->longitude:0)]);
     $deliveryMan = new LatLng(['lat' => $deliveryUser->getModels()[0]->deliveryUser->latitude, 'lng' => $deliveryUser->getModels()[0]->deliveryUser->longitude]);
+
+    $shopMarker = new Marker([
+        'position' => $shop,
+        'icon' => 'dist/img/shop-map-icon.png',
+    ]);
+    $shopMarker->attachInfoWindow(
+        new InfoWindow([
+            'content' => '<b> OrderID# '.$orderModel->getModels()[0]['id'].'</b>'
+        ])
+    );
+
+    $customerAddressMarker = new Marker([
+        'position' => $customerAddress,
+        'icon' => 'dist/img/customer-map-icon.png',
+    ]);
+
+
+    $deliveryManMarker = new Marker([
+        'position' => $deliveryMan,
+        'icon' => 'dist/img/delivery-map-icon.jpg',
+    ]);
+
 
     // setup just one waypoint (Google allows a max of 8)
     $waypoints = [
@@ -204,7 +226,8 @@ if((!empty($orderModel->getModels()[0]) && !empty($deliveryUser->getModels()[0]-
     // Now the renderer
     $directionsRenderer = new DirectionsRenderer([
         'map' => $map->getName(),
-        'polylineOptions' => $polylineOptions
+        'polylineOptions' => $polylineOptions,
+        'suppressMarkers' => true,
     ]);
 
     // Finally the directions service
@@ -213,8 +236,14 @@ if((!empty($orderModel->getModels()[0]) && !empty($deliveryUser->getModels()[0]-
         'directionsRequest' => $directionsRequest
     ]);
 
+    $directionsService->setOrderId("<b> OrderId#: ".$orderModel->getModels()[0]['id']."</b>");
     // Thats it, append the resulting script to the map
     $map->appendScript($directionsService->getJs());
+
+    // Add marker to the map
+    $map->addOverlay($shopMarker);
+    $map->addOverlay($customerAddressMarker);
+    $map->addOverlay($deliveryManMarker);
 
     echo $map->display();
 }
