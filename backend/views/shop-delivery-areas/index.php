@@ -58,10 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted == 1){
-		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+		                return "<span class= 'label label-danger'>".Yii::t('app', 'NO')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'YES')."</span>";
                     }    
 	            }
 	        ],
@@ -74,10 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if(empty($model->latitude) || empty($model->latitude) ){
-		                return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
+		                return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'SET'),'#',['class'=>'label label-success']);
+                       return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                     }    
 	            }
 	        ],
@@ -125,10 +125,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted == 1){
-		                return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+		                return "<span class= 'label label-danger'>".Yii::t('app', 'NO')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'YES')."</span>";
                     }    
 	            }
 	        ],

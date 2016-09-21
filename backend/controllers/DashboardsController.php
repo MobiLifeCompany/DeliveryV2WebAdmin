@@ -115,13 +115,16 @@ public function actionDashboard1()
                                 $order->save();
                         }
                 }
+            }
         }
-    }
 
         $currentOrdersForMapDashboard = $statisticsDashboardModel->getCurrentOrdersForMapDashboard();
         return $this->render('dashboard2',[
             'currentOrdersForMapDashboard'=>$currentOrdersForMapDashboard,
         ]);
+
+        print_r('sssssssssss');
+        die();
     }
 
     public function actionDashboard3()

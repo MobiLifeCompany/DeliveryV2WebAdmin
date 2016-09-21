@@ -238,14 +238,9 @@ if(Yii::$app->user->can('show_orders_statistics') || Yii::$app->user->can('show_
                               'xAxis' => [
                                   'categories' =>  $monthDate
                               ],
-                              'yAxis' => [
-                                  'title' => [
-                                      'text' => Yii::t('app', 'AMOUNT_AND_QTY')
-                                  ]
-                              ],
                               'series' => [
                                   ['name' => Yii::t('app', 'AMOUNT'), 'data' =>  $sumTotal],
-                                  ['name' => Yii::t('app', 'ITEM_QTY'), 'data' => $sumQty]
+                               //   ['name' => Yii::t('app', 'ITEM_QTY'), 'data' => $sumQty]
                               ]
                           ]
                       ]);

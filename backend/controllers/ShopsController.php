@@ -7,17 +7,15 @@ use backend\models\Shops;
 use backend\models\ShopsSearch;
 use backend\models\ShopDeliveryAreas;
 use backend\models\Areas;
+use backend\models\Cities;
 use backend\models\ImageUpload;
 use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
-use yii\widgets\ActiveForm;
 use yii\helpers\FileHelper;
 use yii\helpers\ArrayHelper;
-use yii\Helpers\Url;
 use yii\web\ForbiddenHttpException;
 
 /**

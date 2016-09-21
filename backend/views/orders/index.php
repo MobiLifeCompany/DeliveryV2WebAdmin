@@ -71,17 +71,17 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->order_status =='OPEN'){
-		                return Html::a(Yii::t('app', 'OPEN'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'OPEN')."</span>";
                     }if($model->order_status =='RE-OPEN'){
-		                return Html::a(Yii::t('app', 'REOPEN'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'REOPEN')."</span>";
                     }else if($model->order_status =='CLOSED'){
-                        return Html::a(Yii::t('app', 'CLOSED'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'CLOSED')."</span>";
                     }else if($model->order_status =='PENDING'){
-                        return Html::a(Yii::t('app', 'PENDING'),'#',['class'=>'label label-warning']);
+                        return "<span class= 'label label-warning'>".Yii::t('app', 'PENDING')."</span>";
                     }else if($model->order_status =='CANCEL'){
-                        return Html::a(Yii::t('app', 'CANCELED'),'#',['class'=>'label label-info']);
-                    }    
-	            }
+                        return "<span class= 'label label-info'>".Yii::t('app', 'CANCELED')."</span>";
+                    }
+                }
 	        ],
            //  'qty',
           //   'delivery_charge',
@@ -92,10 +92,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
                 'value' => function($model) {
                     if($model->shop->subscribed_in_delivery == 0){
-                        return Html::a(Yii::t('app', 'NO'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'NO')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'YES'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'YES')."</span>";
                     }    
                 }
             ],
@@ -111,9 +111,9 @@ $this->params['currentPage'] = $curpage;
              'format'=>'raw',
              'value'=>function($model) { 
                         if($model->deliveryUser!=null){
-                            return  Html::a($model->deliveryUser->username,'#',['class'=>'label label-success']);
+                            return "<span class= 'label label-success'>".$model->deliveryUser->username."</span>";
                         }else{
-                            return Html::a(Yii::t('app', 'NOT_ASSIGNED'),'#',['class'=>'label label-danger']);
+                            return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_ASSIGNED')."</span>";
                         }
             	}
             ],

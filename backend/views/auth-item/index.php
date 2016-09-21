@@ -68,10 +68,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->type ==1){
-		                return Html::a(Yii::t('app', 'GROUP_PERMISSION'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'GROUP_PERMISSION')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'USER_PERMISSION'),'#',['class'=>'label label-warning']);
+                        return "<span class= 'label label-warning'>".Yii::t('app', 'USER_PERMISSION')."</span>";
                     }    
 	            }
 	        ],

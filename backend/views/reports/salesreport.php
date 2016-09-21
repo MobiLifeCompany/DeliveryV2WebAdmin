@@ -49,6 +49,10 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
             ['attribute' => 'customer_id',
              'value'=>'customer.full_name'
             ],
+            ['attribute' => 'created_at',
+                'label' => Yii::t('app', 'CREATED_AT'),
+                'value'=>'created_at'
+            ],
             [
 	            'attribute' => 'order_status',
                 'hAlign'=>'middle',

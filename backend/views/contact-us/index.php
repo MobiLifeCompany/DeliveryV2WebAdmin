@@ -64,10 +64,10 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->is_new == 1){
-		                return Html::a(Yii::t('app', 'UNREAD_MESSAGE'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'UNREAD_MESSAGE')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'READ_MESSAGE'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'READ_MESSAGE')."</span>";
                     }    
 	            }
 	        ],

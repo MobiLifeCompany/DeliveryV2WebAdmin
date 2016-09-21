@@ -44,7 +44,7 @@ Modal::begin([
 echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
-<?php $form = ActiveForm::begin(['id' => 'formDash']); ?>
+<?php $form = ActiveForm::begin(['id' => 'formDash','method' => 'post',]); ?>
 <?php Pjax::begin(['id' => 'modalGrid']); ?>
 <?php
 echo GridView::widget([
@@ -105,16 +105,15 @@ echo GridView::widget([
             'format' => 'raw',
             'value' => function ($model) {
                 if ($model['order_status'] == 'OPEN') {
-                    return Html::a(Yii::t('app', 'OPEN'), '#', ['class' => 'label label-success']);
-                }
-                if ($model['order_status'] == 'RE-OPEN') {
-                    return Html::a(Yii::t('app', 'REOPEN'), '#', ['class' => 'label label-success']);
+                    return "<span class= 'label label-success'>".Yii::t('app', 'OPEN')."</span>";
+                }else if ($model['order_status'] == 'RE-OPEN') {
+                    return "<span class= 'label label-success'>".Yii::t('app', 'REOPEN')."</span>";
                 } else if ($model['order_status'] == 'CLOSED') {
-                    return Html::a(Yii::t('app', 'CLOSED'), '#', ['class' => 'label label-danger']);
+                    return "<span class= 'label label-danger'>".Yii::t('app', 'CLOSED')."</span>";
                 } else if ($model['order_status'] == 'PENDING') {
-                    return Html::a(Yii::t('app', 'PENDING'), '#', ['class' => 'label label-warning']);
+                    return "<span class= 'label label-warning'>".Yii::t('app', 'PENDING')."</span>";
                 } else if ($model['order_status'] == 'CANCEL') {
-                    return Html::a(Yii::t('app', 'CANCELED'), '#', ['class' => 'label label-info']);
+                    return "<span class= 'label label-info'>".Yii::t('app', 'CANCELED')."</span>";
                 }
             }
         ],
@@ -129,14 +128,14 @@ echo GridView::widget([
         ],
         [
             'attribute' => 'Position',
-            'label' => Yii::t('app', 'POSITION'),
+            'label' => Yii::t('app', 'SHOP_POSITION'),
             'vAlign' => 'middle',
             'format' => 'raw',
             'value' => function ($model) {
                 if ($model['shop_longitude'] == '0' || $model['shop_latitude'] == '0') {
-                    return Html::a(Yii::t('app', 'NOT_SET'), '#', ['class' => 'label label-danger']);
+                    return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                 } else {
-                    return Html::a(Yii::t('app', 'SET'), '#', ['class' => 'label label-success']);
+                    return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                 }
             }
         ],
@@ -160,14 +159,14 @@ echo GridView::widget([
         ],
         [
             'attribute' => 'Position',
-            'label' => Yii::t('app', 'POSITION'),
+            'label' => Yii::t('app', 'CUSTOMER_POSTION'),
             'vAlign' => 'middle',
             'format' => 'raw',
             'value' => function ($model) {
                 if ($model['customer_addresses_longitude'] == '0' || $model['customer_addresses_latitude'] == '0') {
-                    return Html::a(Yii::t('app', 'NOT_SET'), '#', ['class' => 'label label-danger']);
+                    return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                 } else {
-                    return Html::a(Yii::t('app', 'SET'), '#', ['class' => 'label label-success']);
+                    return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                 }
             }
         ],
@@ -191,7 +190,7 @@ echo GridView::widget([
                 if (!empty($model['username'])) {
                     return Html::a($model['username'], '#', ['value' => Url::to('index.php?r=user/view&id=' . $model['user_id']), 'class' => 'product-title', 'id' => 'viewModalButton_user_' . $model['user_id'], 'onclick' => 'return showViewModalByType(' . $model['user_id'] . ',"user")']);
                 } else {
-                    return Html::a(Yii::t('app', 'NOT_SET'), '#', ['class' => 'label label-danger']);
+                    return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                 }
             }
         ],
@@ -202,7 +201,7 @@ echo GridView::widget([
     <br/>
 <?php Pjax::end(); ?>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'UPDATE_TO_SHOW_ON_MAP'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'UPDATE_TO_SHOW_ON_MAP'), ['id'=>'submitBtn','class' => 'btn btn-success']) ?>
     </div>
     <br/>
 <?php ActiveForm::end(); ?>
@@ -328,14 +327,15 @@ $script = <<< JS
                 $(\$form).trigger("reset");
                 $.pjax.reload({container:'#modalGrid'});
                 $(document).find('#modal').modal('hide');
+                
             }else
             {
-                $(\$form).trigger("reset");
-                $("#message").html(result);
+                window.location.reload();
             }
         }).fail(function(){
             console.log("server error");
         });
+        
         return false;
     });
 JS;

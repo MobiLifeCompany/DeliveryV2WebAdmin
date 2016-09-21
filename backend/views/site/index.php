@@ -123,6 +123,14 @@ if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->
     echo GridView::widget([
         'dataProvider' => $currentOrdersForMapDashboard,
         'export' =>false,
+        'tableOptions' => ['class' => 'table table-hover'],
+        'class' => 'box',
+        'layout' => "{items}\n{summary}\n{pager}",
+        'responsiveWrap' => false,
+        'options' => [
+            'tag' => 'div',
+            'class' => 'box box-body'
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -141,15 +149,15 @@ if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->
                 'format'=>'raw',
                 'value' => function($model) {
                     if($model['order_status'] =='OPEN'){
-                        return Html::a(Yii::t('app', 'OPEN'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'OPEN')."</span>";
                     }if($model['order_status'] =='RE-OPEN'){
-                        return Html::a(Yii::t('app', 'REOPEN'),'#',['class'=>'label label-success']);
+                        return "<span class= 'label label-success'>".Yii::t('app', 'REOPEN')."</span>";
                     }else if($model['order_status'] =='CLOSED'){
-                        return Html::a(Yii::t('app', 'CLOSED'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'CLOSED')."</span>";
                     }else if($model['order_status'] =='PENDING'){
-                        return Html::a(Yii::t('app', 'PENDING'),'#',['class'=>'label label-warning']);
+                        return "<span class= 'label label-warning'>".Yii::t('app', 'PENDING')."</span>";
                     }else if($model['order_status'] =='CANCEL'){
-                        return Html::a(Yii::t('app', 'CANCELED'),'#',['class'=>'label label-info']);
+                        return "<span class= 'label label-info'>".Yii::t('app', 'CANCELED')."</span>";
                     }
                 }
             ],
@@ -169,10 +177,10 @@ if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->
                 'format'=>'raw',
                 'value' => function($model) {
                     if($model['shop_longitude'] =='0' || $model['shop_latitude'] =='0' ){
-                        return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'SET'),'#',['class'=>'label label-success']);
+                       return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                     }
                 }
             ],
@@ -201,10 +209,10 @@ if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->
                 'format'=>'raw',
                 'value' => function($model) {
                     if($model['customer_addresses_longitude'] =='0' || $model['customer_addresses_latitude'] =='0' ){
-                        return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                     }
                     else {
-                        return Html::a(Yii::t('app', 'SET'),'#',['class'=>'label label-success']);
+                       return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                     }
                 }
             ],
@@ -218,7 +226,7 @@ if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->
                         return Html::a($model['username'],'#', ['value'=>Url::to('index.php?r=user/view&id='.$model['user_id']),'class'=>'product-title','id'=>'viewModalButton_user_'.$model['user_id'],'onclick'=>'return showViewModalByType('.$model['user_id'].',"user")']);
                     }
                     else {
-                        return Html::a(Yii::t('app', 'NOT_SET'),'#',['class'=>'label label-danger']);
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_SET')."</span>";
                     }
                 }
             ],

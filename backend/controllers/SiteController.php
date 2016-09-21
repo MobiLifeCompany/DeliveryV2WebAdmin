@@ -34,7 +34,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','language','gcm','gcmweb','checkorders','push-notification'],
+                        'actions' => ['login', 'error','language','gcm','gcmweb','checkorders','checktopmenuorders','push-notification'],
                         'allow' => true,
                     ],
                     [
@@ -87,7 +87,10 @@ class SiteController extends Controller
     
     public function actionCheckorders(){
         $userShops = Yii::$app->session['userShops'];
-        $result = Orders::find()->where(['in','shop_id',$userShops])->andWhere(['order_status' => 'OPEN'])->all();
+        $openOrdersRestults = Orders::find()->where(['in','shop_id',$userShops])->andWhere(['or',
+            ['order_status' => 'OPEN'],
+            ['order_status' => 'RE-OPEN'],
+            ['order_status' => 'PENDING']])->all();
         $data = "NO_DATA";
         if(!empty($result)){
             $data ="";
@@ -103,6 +106,24 @@ class SiteController extends Controller
         }
         
     }
+
+    public function actionChecktopmenuorders()
+    {
+        $openOrdersRestults = 0;
+        $pendingOrdersRestults = 0;
+
+        $statisticsDashboard =  new StatisticsDashboard();
+        $result = $statisticsDashboard->getGeneralOrderCount();
+        foreach ($result as $record){
+            if($record['order_status']==='OPEN'){
+                $openOrdersRestults = $record['countNum'];
+            }else if($record['order_status']==='PENDING'){
+                $pendingOrdersRestults = $record['countNum'];
+            }
+        }
+        return $openOrdersRestults.'-'.$pendingOrdersRestults;
+    }
+
     
     /**
      * Login action.
@@ -155,7 +176,7 @@ class SiteController extends Controller
         {
            if(isset($_POST['lang'])){
                Yii::$app->language = $_POST['lang'];
-               $cookie = new yii\web\Cookie([
+               $cookie = new \yii\web\Cookie([
                    'name' => 'lang',
                    'value' => $_POST['lang'],
                ]);
