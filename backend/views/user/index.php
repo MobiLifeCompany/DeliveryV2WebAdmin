@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <?php
-        echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=user/create'),'id'=>'modalButton']);
+        if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN') {
+            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">', '#', ['value' => Url::to('index.php?r=user/create'), 'id' => 'modalButton']);
+        }
     ?>
     <br/>
     <?php

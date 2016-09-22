@@ -52,7 +52,11 @@ class DashboardsController extends Controller
 public function actionDashboard1()
 {
 
-     if(!Yii::$app->user->can('show_dashboard1') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
+    if(!Yii::$app->user->can('show_dashboard1') && Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+     {
+        return $this->redirect('index.php?r=orders');
+     }
+    else if(!Yii::$app->user->can('show_dashboard1') || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
      {
          throw new ForbiddenHttpException;
      }
@@ -123,8 +127,6 @@ public function actionDashboard1()
             'currentOrdersForMapDashboard'=>$currentOrdersForMapDashboard,
         ]);
 
-        print_r('sssssssssss');
-        die();
     }
 
     public function actionDashboard3()

@@ -51,6 +51,7 @@ class User extends \yii\db\ActiveRecord
             [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','live_status','work_status','deleted', 'gender','show_notification'], 'safe'],
             [['first_name', 'last_name', 'username', 'password_hash', 'email', 'phone','user_type','work_status','deleted', 'gender','show_notification'], 'required'],
             [['shop_id', 'status', 'phone'], 'integer'],
+            [['username'], 'unique'],
             [['user_type', 'deleted', 'gender'], 'string'],
             ['shop_id','required','when'=>function($model){
                 return ($model->user_type == 'SHOP_ADMIN' || $model->user_type =='SHOP_DELIVERY_MAN') ? true : false;

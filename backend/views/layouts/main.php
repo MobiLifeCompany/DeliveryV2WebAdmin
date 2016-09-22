@@ -368,7 +368,7 @@ else
 
                 <!-- BEGIN OF USER Dashboard ITEM -->
                 <?php
-                if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+                if((Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN') && (Yii::$app->user->can('show_dashboard1') || Yii::$app->user->can('show_dashboard3') || Yii::$app->user->can('show_dashboard3')))
                 {
                     ?>
                     <li class="treeview  <?php
