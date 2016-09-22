@@ -67,13 +67,13 @@ class ItemsSearch extends Items
             $query->andFilterWhere(['in','shop_item_categories.shop_id',$userShops]);
         }
 
-        $query->orFilterWhere(['like', 'name', $this->globalSearch])
-            ->orFilterWhere(['like', 'description', $this->globalSearch])
-            ->orFilterWhere(['like', 'price', $this->globalSearch])
-            ->orFilterWhere(['like', 'photo', $this->globalSearch])
-            ->orFilterWhere(['like', 'lang', $this->globalSearch])
-            ->orFilterWhere(['like', 'ar_name', $this->globalSearch])
-            ->orFilterWhere(['like', 'ar_description', $this->globalSearch]);
+        $query->andFilterWhere(['or',['like', 'name', $this->globalSearch]
+              ,['like', 'description', $this->globalSearch]
+              ,['like', 'price', $this->globalSearch]
+              ,['like', 'photo', $this->globalSearch]
+              ,['like', 'lang', $this->globalSearch]
+              ,['like', 'ar_name', $this->globalSearch]
+              ,['like', 'ar_description', $this->globalSearch]]);
 
             //print_r($query->createCommand()->getRawSql());
         //  print_r('----------');

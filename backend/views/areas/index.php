@@ -67,11 +67,6 @@ $this->params['currentPage'] = $curpage;
             'lang',
             'created_at',
             'updated_at',
-             [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a(Yii::t('app', 'SHOPS'),'index.php?r=shops/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
-            ],
             [
                'class' => 'yii\grid\ActionColumn',
                'template' => '{delete} {update} {view} ',

@@ -5,7 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Orders;
+
 
 /**
  * OrdersSearch represents the model behind the search form about `backend\models\Orders`.
@@ -68,16 +68,18 @@ class OrdersSearch extends Orders
         $query->joinWith('customer');
 
 
-        $query->orFilterWhere(['like', 'customer_address_id', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'order_status', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'shops.name', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'customers.full_name', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'total', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'qty', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'cancel_reason', $this->ordersGlobalSearch])
-            ->orFilterWhere(['like', 'note', $this->ordersGlobalSearch]);
+        $query->andFilterWhere(['or',['like', 'customer_address_id', $this->ordersGlobalSearch],
+                                     ['like', 'order_status', $this->ordersGlobalSearch],
+                                     ['like', 'shops.name', $this->ordersGlobalSearch],
+                                     ['like', 'customers.full_name', $this->ordersGlobalSearch],
+                                     ['like', 'total', $this->ordersGlobalSearch],
+                                     ['like', 'qty', $this->ordersGlobalSearch],
+                                     ['like', 'cancel_reason', $this->ordersGlobalSearch],
+                                     ['like', 'note', $this->ordersGlobalSearch]]);
 
-       $query->orderBy('id DESC');     
+       $query->orderBy('id DESC');
+
+        //print_r($query->createCommand()->getRawSql());
 
         return $dataProvider;
     }

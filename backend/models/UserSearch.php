@@ -74,16 +74,18 @@ class UserSearch extends User
             }
         }
 
-        $query->orFilterWhere(['like', 'first_name', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'last_name', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'username', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'email', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'user_type', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'user.deleted', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'gender', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'user.phone', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'is_fired', $this->userGlobalSearch])
-            ->orFilterWhere(['like', 'shops.name', $this->userGlobalSearch]);
+        $query->andFilterWhere(['or',['like', 'first_name', $this->userGlobalSearch],
+                                     ['like', 'last_name', $this->userGlobalSearch],
+                                     ['like', 'username', $this->userGlobalSearch],
+                                     ['like', 'user.email', $this->userGlobalSearch],
+                                     ['like', 'user_type', $this->userGlobalSearch],
+                                     ['like', 'user.deleted', $this->userGlobalSearch],
+                                     ['like', 'gender', $this->userGlobalSearch],
+                                     ['like', 'user.phone', $this->userGlobalSearch],
+                                     ['like', 'is_fired', $this->userGlobalSearch],
+                                     ['like', 'shops.name', $this->userGlobalSearch]]);
+
+       // print_r($query->createCommand()->getRawSql());
 
         return $dataProvider;
     }

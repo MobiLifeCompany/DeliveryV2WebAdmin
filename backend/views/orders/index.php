@@ -55,8 +55,12 @@ $this->params['currentPage'] = $curpage;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'attribute' => 'id',
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function($model) { return Html::a($model->id ,'index.php?r=order-items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+            ],
             [
                 'attribute' => 'customer_id',
                 'value'=>'customer.full_name'
@@ -130,11 +134,6 @@ $this->params['currentPage'] = $curpage;
             ],
             // 'created_at',
             // 'updated_at',
-             [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a(Yii::t('app', 'ORDER_ITEMS'),'index.php?r=order-items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
-            ],
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',

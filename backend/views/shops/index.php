@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\Helpers\Url;
-use yii\widgets\Pjax;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ShopsSearch */
