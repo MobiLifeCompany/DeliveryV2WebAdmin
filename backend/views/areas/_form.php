@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
     </div>
 
 <?php
-$script = <<< JS
+$script = <<<  JS
     $('form#{$model->formName()}').on('beforeSubmit', function(e)
     {
         var \$form = $(this);

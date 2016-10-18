@@ -46,7 +46,7 @@ use yii\helpers\Url;
                     
      ?>
 
-     <?php 
+     <?php
         $secretKey = Yii::$app->params['secretKey'];
         $decryptedPassword = Yii::$app->getSecurity()->decryptByKey(utf8_decode($model->password_hash), $secretKey);
         $model->password_hash=$decryptedPassword;    
@@ -79,7 +79,7 @@ use yii\helpers\Url;
     <?php //$form->field($model, 'lang')->dropDownList([ 'Ar' => 'Ar', 'En' => 'En', ], ['prompt' => '']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['id'=> 'permissionId','data-placement'=> 'right','data-toggle'=>"tooltip", 'title'=>"first tooltip",'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -87,6 +87,7 @@ use yii\helpers\Url;
 </div>
 <?php  
 $script = <<< JS
+       
     $('form#{$model->formName()}').on('beforeSubmit', function(e)
     {
         var \$form = $(this);
@@ -108,6 +109,7 @@ $script = <<< JS
         });
         return false;
     });
+$('#permissionId').tooltip('show');
 JS;
 $this->registerJs($script);
 ?>

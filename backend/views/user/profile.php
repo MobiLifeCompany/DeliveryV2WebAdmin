@@ -79,7 +79,8 @@ foreach ($generalOrdersCount as $var) {
                   <?php
                      $shop_name = "";
                      if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN'){
-                         $shop_name = Yii::$app->session['realUser']['shop_id'];
+                         $userShop = Shops::find()->where(['id' => Yii::$app->session['realUser']['shop_id']])->one();
+                         $shop_name = (Yii::$app->language == 'ar')?$userShop->ar_name:$userShop->name;
                          echo '<p> <span class="label label-primary">'.$shop_name.'</span></p>';
                      }else{
                          if(!empty($userShops)){

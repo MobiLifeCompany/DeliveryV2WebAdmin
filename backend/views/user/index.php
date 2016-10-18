@@ -22,9 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <?php
-        if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN') {
-            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">', '#', ['value' => Url::to('index.php?r=user/create'), 'id' => 'modalButton']);
-        }
+        echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=user/create'),'id'=>'modalButton']);
     ?>
     <br/>
     <?php
@@ -140,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { 
-                            return Html::a(Yii::t('app', 'PERMISSIONS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=auth-assignment/permissions&user_id='.$model->id), 'id'=>'userPermModalButton'.$model->id,'onclick'=>'return showUserPermModal('.$model->id.')']);
+                            return Html::a(Yii::t('app', 'PERMISSIONS'),'#',['class'=>'badge bg-light-blue', 'id'=> 'permissionId','data-placement'=> 'right','data-toggle'=>"tooltip", 'title'=>"first tooltip", 'value'=>Url::to('index.php?r=auth-assignment/permissions&user_id='.$model->id), 'id'=>'userPermModalButton'.$model->id,'onclick'=>'return showUserPermModal('.$model->id.')']);
                     },
             ],
             [
@@ -174,3 +172,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
  <?php Pjax::end();?>
 </div>
+
+<?php
+$script = <<< JS
+$('#permissionId').tooltip('show');
+JS;
+$this->registerJs($script);
+?>

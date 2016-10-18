@@ -4429,3 +4429,5 @@ ul.wysihtml5-toolbar > li {
     right: -230px;
   }
 }
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #3c8dbc;}
+.red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#3c8dbc; }

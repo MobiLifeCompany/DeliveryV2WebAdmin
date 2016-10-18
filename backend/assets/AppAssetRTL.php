@@ -38,6 +38,7 @@ class AppAssetRTL extends AssetBundle
         'js/morris/morris.min.js',
         'js/fastclick/fastclick.js',
         'js/app.min.js',
+        'js/bootstrap-popover-2.0.1.js',
         'js/sparkline/jquery.sparkline.min.js',
         'js/jvectormap/jquery-jvectormap-1.2.2.min.js',
         'js/jvectormap/jquery-jvectormap-world-mill-en.js',
