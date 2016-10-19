@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 	console.log('ServiceWorker registration successful with scope: ',    registration.scope);
 	registration.pushManager.subscribe({userVisibleOnly: true}).then(function(subscription){
 	isPushEnabled = true;  
-	alert(subscription.subscriptionId);
+	//alert(subscription.subscriptionId);
 	console.log("subscription.subscriptionId: ", subscription.subscriptionId);
 	console.log("subscription.endpoint: ", subscription.endpoint);
 	
