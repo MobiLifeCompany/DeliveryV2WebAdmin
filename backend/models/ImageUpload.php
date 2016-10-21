@@ -15,7 +15,7 @@ class ImageUpload extends Model
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'checkExtensionByMimeType'=>false],
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'jpeg,png, jpg', 'checkExtensionByMimeType'=>false],
         ];
     }
     

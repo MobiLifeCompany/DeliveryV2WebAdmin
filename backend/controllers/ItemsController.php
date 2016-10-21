@@ -56,12 +56,12 @@ class ItemsController extends Controller
      */
     public function actionIndex()
     {
-         if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || !Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
-         {
-              throw new ForbiddenHttpException;
-         }
-         else 
-         {
+        if(!Yii::$app->session['realUser']['user_type']=='CR_ADMIN' || !Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN')
+        {
+            throw new ForbiddenHttpException;
+        }
+        else
+        {
             $searchModel = new ItemsSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -94,7 +94,7 @@ class ItemsController extends Controller
         $userShops = Yii::$app->session['userShops'];
         if(!in_array($id,$userShops))
         {
-             throw new ForbiddenHttpException;
+            throw new ForbiddenHttpException;
         }
         else
         {
@@ -121,14 +121,16 @@ class ItemsController extends Controller
     {
         $model = new Items();
         $shopItemCategory = new ShopItemCategories();
+
+        $photoTemp = $model->photo;
         $imageModel = new ImageUpload();
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
         //
         if ($model->load(Yii::$app->request->post())) {
-            //check if shop_item_categories  exist first
             $shopItemCategory = ShopItemCategories::findOne(['item_category_id'=> $model->item_category_id,'shop_id' =>$model->shop_id]);
             if(empty($shopItemCategory)) {
                 //Insert into shop_item_categories first
+                $shopItemCategory = new ShopItemCategories();
                 $shopItemCategory->shop_id = $model->shop_id;
                 $shopItemCategory->item_category_id = $model->item_category_id;
                 $shopItemCategory->deleted = 0;
@@ -136,26 +138,33 @@ class ItemsController extends Controller
                 $shopItemCategory->updated_at = date('Y-m-d h:m:s');
                 $shopItemCategory->save();
             }
-           
-            $shopItemCategoryLastId = $shopItemCategory->id;
-            $model->shop_item_category_id = $shopItemCategoryLastId;
-            $model->created_at = date('Y-m-d h:m:s');
-            $model->updated_at = date('Y-m-d h:m:s');
-            $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
-            if($model->save())
-            {
-                $last_id = $model->id;
-                //Upload image
-                FileHelper::createDirectory('images/items/'. $last_id);
-                $imageModel->upload($last_id, 'images/items/');
-                echo 1;
-            }
-            else
-            {
-                echo 0;
-            }
 
-           return $this->redirect(['index']);
+            if(!empty($shopItemCategory))
+            {
+                $shopItemCategoryLastId = $shopItemCategory->id;
+                $model->shop_item_category_id = $shopItemCategoryLastId;
+                $model->created_at = date('Y-m-d h:m:s');
+                $model->updated_at = date('Y-m-d h:m:s');
+
+                if(isset($imageModel->imageFile))
+                    $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
+                else
+                    $model->photo = $photoTemp;
+
+                if($model->save())
+                {
+                    $last_id = $model->id;
+                    //Upload image
+                    FileHelper::createDirectory('images/items/'. $last_id);
+                    $imageModel->upload($last_id, 'images/items/');
+                    echo 1;
+                }
+                else
+                {
+                    echo 0;
+                }
+            }
+             return $this->redirect(['index']);
         }
         else {
             return $this->renderAjax('create', [
@@ -175,7 +184,7 @@ class ItemsController extends Controller
         $model = $this->findModel($id);
         $model->shop_id = ShopItemCategories::findOne($model->shop_item_category_id)->shop_id;
         $model->item_category_id = ShopItemCategories::findOne($model->shop_item_category_id)->item_category_id;
-        
+
         $photoTemp = $model->photo;
 
         $imageModel = new ImageUpload();
@@ -185,11 +194,11 @@ class ItemsController extends Controller
             $shopItemCategory = ShopItemCategories::findOne($model->shop_item_category_id);
             $shopItemCategory->shop_id = $model->shop_id;
             $shopItemCategory->item_category_id = $model->item_category_id;
-            $shopItemCategory->updated_at = date('Y-m-d h:m:s'); 
+            $shopItemCategory->updated_at = date('Y-m-d h:m:s');
             if($shopItemCategory->save())
             {
                 $model->updated_at = date('Y-m-d h:m:s');
-                
+
                 if(isset($imageModel->imageFile))
                     $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
                 else
@@ -208,7 +217,7 @@ class ItemsController extends Controller
                     echo 0;
                 }
             }
-            
+
             return $this->redirect(['index']);
         } else {
             return $this->renderAjax('update', [
@@ -264,7 +273,7 @@ class ItemsController extends Controller
                 $this->redirect(['site/login']);
             } else {
                 Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
-                return true; 
+                return true;
             }
         } else {
             return true;
