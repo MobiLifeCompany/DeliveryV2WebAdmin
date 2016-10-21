@@ -166,7 +166,7 @@
         'PENDING_ORDERS' => 'الطلبيات قيد التنفيذ',
         'CANCEL_ORDERS' => 'الطلبيات الملغاة',
         'CLOSED_ORDERS' => 'الطلبيات المغلقة',
-        'DAILY_SALES_REPORT' => 'تقرير المبيعات اليومية',
+        'DAILY_SALES_REPORT' => 'مخطط المبيعات اليومية',
         'SALES_SUMMARY' => 'ملخص المبيعات',
         'AMOUNT' => 'المبيعات',
         'MONTHLY_SALES_REPORT' => 'تقرير المبيعات الشهرية',

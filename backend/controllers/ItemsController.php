@@ -125,32 +125,36 @@ class ItemsController extends Controller
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
         //
         if ($model->load(Yii::$app->request->post())) {
-            //Insert into shop_item_categories first
-            $shopItemCategory->shop_id = $model->shop_id;
-            $shopItemCategory->item_category_id = $model->item_category_id;
-            $shopItemCategory->deleted = 0;
-            $shopItemCategory->created_at = date('Y-m-d h:m:s');
-            $shopItemCategory->updated_at = date('Y-m-d h:m:s'); 
-            if($shopItemCategory->save())
-            {
-                $shopItemCategoryLastId = $shopItemCategory->id;
-                $model->shop_item_category_id = $shopItemCategoryLastId;
-                $model->created_at = date('Y-m-d h:m:s');
-                $model->updated_at = date('Y-m-d h:m:s');
-                $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
-                if($model->save())
-                {
-                    $last_id = $model->id;
-                    //Upload image
-                    FileHelper::createDirectory('images/items/'. $last_id);
-                    $imageModel->upload($last_id, 'images/items/');
-                    echo 1;
-                }
-                else
-                {
-                    echo 0;
-                }
+            //check if shop_item_categories  exist first
+            $shopItemCategory = ShopItemCategories::findOne(['item_category_id'=> $model->item_category_id,'shop_id' =>$model->shop_id]);
+            if(empty($shopItemCategory)) {
+                //Insert into shop_item_categories first
+                $shopItemCategory->shop_id = $model->shop_id;
+                $shopItemCategory->item_category_id = $model->item_category_id;
+                $shopItemCategory->deleted = 0;
+                $shopItemCategory->created_at = date('Y-m-d h:m:s');
+                $shopItemCategory->updated_at = date('Y-m-d h:m:s');
+                $shopItemCategory->save();
             }
+           
+            $shopItemCategoryLastId = $shopItemCategory->id;
+            $model->shop_item_category_id = $shopItemCategoryLastId;
+            $model->created_at = date('Y-m-d h:m:s');
+            $model->updated_at = date('Y-m-d h:m:s');
+            $model->photo = $imageModel->imageFile->baseName . '.' . $imageModel->imageFile->extension;
+            if($model->save())
+            {
+                $last_id = $model->id;
+                //Upload image
+                FileHelper::createDirectory('images/items/'. $last_id);
+                $imageModel->upload($last_id, 'images/items/');
+                echo 1;
+            }
+            else
+            {
+                echo 0;
+            }
+
            return $this->redirect(['index']);
         }
         else {

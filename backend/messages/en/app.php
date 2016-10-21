@@ -169,7 +169,7 @@
         'PENDING_ORDERS' => 'Pending Orders',
         'CANCEL_ORDERS' => 'Cancel Orders',
         'CLOSED_ORDERS' => 'Closed Orders',
-        'DAILY_SALES_REPORT' => 'Daily Sales Report',
+        'DAILY_SALES_REPORT' => 'Daily Sales Chart',
         'SALES_SUMMARY' => 'Sales Summary',
         'AMOUNT' => 'Amount',
         'MONTHLY_SALES_REPORT' => 'Monthly Sales Chart',
