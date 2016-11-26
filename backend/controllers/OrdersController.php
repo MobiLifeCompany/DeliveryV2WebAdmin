@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use yii\web\ForbiddenHttpException;
+use backend\models\WorkingOrders;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -32,7 +33,7 @@ class OrdersController extends Controller
         return [
              'access' =>[
                 'class' => AccessControl::className(),
-                'only' => ['index','update','create','delete','view','details'],
+                'only' => ['index','update','create','delete','view','details','workingorders'],
                 'rules' =>[
                     [
                         'allow' =>true,
@@ -213,7 +214,11 @@ class OrdersController extends Controller
 
     public function actionWorkingorders()
     {
-        return $this->render('workingorders');
+        $workingOrdersModel = new WorkingOrders();
+        $workingOrdersDataProvider = $workingOrdersModel->getWorkingOrders();
+        return $this->render('workingorders',[
+            'workingOrdersDataProvider' => $workingOrdersDataProvider,
+        ]);
     }
 
     public function actionSetdelivery($id)
@@ -338,4 +343,60 @@ class OrdersController extends Controller
             ]);
         }
     }
+
+    public function actionSetworkingorderstatus()
+    {
+        $data = Yii::$app->request->post();
+        $id = $data['id'];
+        $status = $data['status'];
+        $model = $this->findModel($id);
+        $previousStatus =  $model->order_status;
+
+
+            $model->updated_at = date('Y-m-d H:i:s');
+            $model->order_status = $status;
+            $order_status = $model->order_status;
+            $cancel_reason = $model->cancel_reason;
+            $model->update(['updated_at','order_status','cancel_reason']);
+            if($model->save(false))
+            {
+                $userId = Yii::$app->session['realUser']['id'];
+                $orderHistories = new OrderHistories();
+                $orderHistories->user_id = $userId;
+                $orderHistories->order_id = $id;
+                $orderHistories->order_status=$previousStatus;
+                $orderHistories->created_at = date('Y-m-d H:i:s');
+                $orderHistories->updated_at = date('Y-m-d H:i:s');
+                $orderHistories->save();
+
+                $title = Yii::t('app', 'DELIVERY_EXPRESS');
+                $message = "";
+                $customer = Customers::findOne($model->customer_id);
+                $gcm_id = $customer->gcm_id;
+                $lang = $customer->lang;
+                if($lang=='ar'){
+                    $message = "تم تحديث الطلبية ذات الرقم #".$id." لتصبح بحالة  ".Yii::t('app', $model->order_status,[],'ar');
+                }else{
+                    $message = "Your Order #".$id." changed and became with new status ".$model->order_status;
+                }
+
+                if($order_status=='CANCEL' && $lang=='ar')
+                {
+                    $message = $message.' للسبب التالي '.$cancel_reason;
+                }
+                else if($order_status=='CANCEL' && $lang=='en' )
+                {
+                    $message = $message.' ,for the following reason: '.$cancel_reason;
+                }
+
+                $pushNotification = new PushNotification();
+                $pushNotification->sendPush($gcm_id,$title,$message);
+
+                echo 'ok';
+            }else
+            {
+                echo 'not ok';
+            }
+        }
+
 }
