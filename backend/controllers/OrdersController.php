@@ -211,6 +211,11 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function actionWorkingorders()
+    {
+        return $this->render('workingorders');
+    }
+
     public function actionSetdelivery($id)
     {
         $model = $this->findModel($id);
