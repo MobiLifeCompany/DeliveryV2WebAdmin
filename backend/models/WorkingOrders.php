@@ -38,13 +38,13 @@ class WorkingOrders
     public function getWorkingOrders(){
         
         $queryStatment = "";
-       // $shopStatment = "and shop_id = 2";
         if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' )
         {
             $queryStatment = " and (`orders`.`delivery_user_id` = '".Yii::$app->session['realUser']['id']."' || `orders`.`delivery_user_id` is null) ";
         }else{
             $shopStatment = "";
             $userShops = Yii::$app->session['userShops'];
+
             $shop_ids = "";
             if(!empty($userShops)){
                 $shop_ids = " and orders.shop_id in (";
@@ -79,7 +79,7 @@ class WorkingOrders
             'sql' => $query,
             'totalCount'=>$count,
             'pagination' => [
-                'pageSize' => 100,
+                'pageSize' => 1000,
                 ],
             ]);
 
