@@ -89,16 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                'class' => 'yii\grid\ActionColumn',
-               'template' => '{delete} {update} {view} ',
+               'template' => '{view} ',
                'buttons' => [
                'view' => function ($url,$model) 
                     {
                         return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>'index.php?r=shops/view&id='.$model->id,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
-                    },
-                'update' => function ($url,$model) 
-                    {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>'index.php?r=shops/update&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
-                    }    
+                    }
                 ]
             ],
         ],
