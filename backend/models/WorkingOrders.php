@@ -69,7 +69,7 @@ class WorkingOrders
                                                 and   `customer_addresses`.`area_id` = `areas`.`id`
                                                 and   `orders`.id = `order_items`.order_id
                                                 and   `order_items`.item_id = `items`.id
-                                                and   `orders`.`order_status` not in ('CLOSE', 'CANCEL') ".$queryStatment." order by order_id desc";
+                                                and   `orders`.`order_status` not in ('CLOSED', 'CANCEL') ".$queryStatment." order by order_id desc";
 
 
 

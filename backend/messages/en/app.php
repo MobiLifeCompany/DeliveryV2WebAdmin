@@ -241,5 +241,6 @@
         'TO_HOUR' => 'To Hour',
         'SELECT_DAY' => 'Select Day',
         'NO_MORE_DAYS' => 'No more days to add',
+        'WORKING_ORDERS' => 'Working Orders',
     ];
 ?>

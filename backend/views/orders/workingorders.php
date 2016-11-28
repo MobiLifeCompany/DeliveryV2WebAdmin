@@ -1,5 +1,10 @@
 <?php
-$this->title = 'Working Orders';
+$this->title = Yii::t('app', 'WORKING_ORDERS');
+$this->params['breadcrumbs'][] = $this->title;
+
+$curpage = Yii::$app->controller->id;
+$this->params['currentPage'] = $curpage;
+$this->params['currentPageAction'] = Yii::$app->controller->action->id;
 ?>
 <h2 class="page-header"><?=$this->title?></h2>
 <div class="row" xmlns="http://www.w3.org/1999/html">

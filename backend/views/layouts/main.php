@@ -766,6 +766,14 @@ else
                             ><a href="index.php?r=orders"><i class="fa fa-shopping-basket"></i> <?= Yii::t('app', 'ORDERS') ?></a></li>
                             <li
                                 <?php
+                                if(isset($this->params['currentPageAction'])){
+                                    if($this->params['currentPageAction']=='workingorders')
+                                        echo "class='active'";
+                                }
+                                ?>
+                            ><a href="index.php?r=orders/workingorders"><i class="fa fa-shopping-basket"></i> <?= Yii::t('app', 'WORKING_ORDERS') ?></a></li>
+                            <li
+                                <?php
                                 if(isset($this->params['currentPage'])){
                                     if($this->params['currentPage']=='order-items')
                                         echo "class='active'";

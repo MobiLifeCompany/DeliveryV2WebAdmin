@@ -148,8 +148,8 @@ class SiteController extends Controller
             if($realUser['user_type']=='SHOP_DELIVERY_MAN' || $realUser['user_type']=='CR_DELIVERY_MAN'){
                 return $this->goBack();
             }else {
-                return $this->redirect('index.php?r=dashboards/dashboard1');
-                // return $this->redirect('index.php?r=orders/workingorders');
+               // return $this->redirect('index.php?r=dashboards/dashboard1');
+                 return $this->redirect('index.php?r=orders/workingorders');
                 // 
             }
             
