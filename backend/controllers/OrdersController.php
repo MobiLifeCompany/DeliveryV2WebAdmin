@@ -358,7 +358,9 @@ class OrdersController extends Controller
             $model->updated_at = date('Y-m-d H:i:s');
             $model->order_status = $status;
             $model->ready_time = $ready_time;
-            $model->cancel_reason = $cancel_reason_d;
+            if(!empty($cancel_reason_d))
+                $model->cancel_reason = $cancel_reason_d;
+        
             $order_status = $model->order_status;
             $cancel_reason = $model->cancel_reason;
             $model->update(['updated_at','order_status','cancel_reason']);
