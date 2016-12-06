@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `ready_time` INT(10) NULL AFTER `note`;

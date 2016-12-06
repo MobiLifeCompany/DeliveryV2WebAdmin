@@ -34,9 +34,6 @@ class DirectionsService extends ObjectAbstract
     /**
      * @throws \yii\base\InvalidConfigException
      */
-
-    private $orderId;
-
     public function init()
     {
         if($this->getDirectionsRenderer() == null) {
@@ -66,9 +63,6 @@ class DirectionsService extends ObjectAbstract
         return $this->_request;
     }
 
-    public function  setOrderId($orderId1){
-       $this->orderId = $orderId1;
-    }
     /**
      * Sets the directions renderer object
      * @param DirectionsRenderer $renderer
@@ -100,11 +94,7 @@ class DirectionsService extends ObjectAbstract
         $js[] = "var {$this->getName()} = new google.maps.DirectionsService();";
         $js[] = "{$this->getName()}.route({$request->getName()}, function(response, status) {";
         $js[] = "if (status == google.maps.DirectionsStatus.OK) {";
-        $js[] = "{$renderer->getName()}.setDirections(response); ";
-        $js[] = " var infowindow2 = new google.maps.InfoWindow();";
-        $js[] = " infowindow2.setContent('".$this->orderId."');";
-        $js[] = " infowindow2.setPosition(response.routes[0].legs[0].steps[0].end_location);";
-        $js[] = " infowindow2.open(gmap0);";
+        $js[] = "{$renderer->getName()}.setDirections(response);";
         $js[] = "}});";
 
         return implode("\n", $js);

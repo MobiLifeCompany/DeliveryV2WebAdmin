@@ -8,8 +8,8 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
@@ -233,7 +233,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'dosamigos\\highcharts\\' => 
         array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-highcharts-widget',
+            0 => __DIR__ . '/..' . '/2amigos/yii2-highcharts-widget/src',
         ),
         'dosamigos\\google\\maps\\' => 
         array (
@@ -241,7 +241,7 @@ class ComposerStaticInit0d1d3c13f80202964b8b82ff7f2fb863
         ),
         'dosamigos\\datepicker\\' => 
         array (
-            0 => __DIR__ . '/..' . '/2amigos/yii2-date-picker-widget',
+            0 => __DIR__ . '/..' . '/2amigos/yii2-date-picker-widget/src',
         ),
         'cebe\\markdown\\' => 
         array (

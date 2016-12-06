@@ -349,12 +349,14 @@ class OrdersController extends Controller
         $data = Yii::$app->request->post();
         $id = $data['id'];
         $status = $data['status'];
+        $ready_time =  $data['item_in_m'];
         $model = $this->findModel($id);
         $previousStatus =  $model->order_status;
 
 
             $model->updated_at = date('Y-m-d H:i:s');
             $model->order_status = $status;
+            $model->ready_time = $ready_time;
             $order_status = $model->order_status;
             $cancel_reason = $model->cancel_reason;
             $model->update(['updated_at','order_status','cancel_reason']);
@@ -387,6 +389,15 @@ class OrdersController extends Controller
                 else if($order_status=='CANCEL' && $lang=='en' )
                 {
                     $message = $message.' ,for the following reason: '.$cancel_reason;
+                }
+
+                if($order_status=='PENDING' && $lang=='ar')
+                {
+                    $message = $message.'والوقت المتوقع للتحضير هو :'.$ready_time;
+                }
+                else if($order_status=='PENDING' && $lang=='en' )
+                {
+                    $message = $message.' ,and the estimated time to prepare order is: '.$ready_time;
                 }
 
                 $pushNotification = new PushNotification();

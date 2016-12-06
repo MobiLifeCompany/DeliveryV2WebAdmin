@@ -18,10 +18,18 @@ body {
 .layout-boxed body {
   height: 100%;
 }
+@font-face {
+  font-family: 'Naskh';
+  src: url('font/NotoNaskhArabic-Regular.ttf');
+}
+@font-face {
+  font-family: 'Kufi';
+  src: url('font/NotoKufiArabic-Regular.ttf');
+}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'WYekan', 'Helvetica Neue', Helvetica, Atahoma;
+  font-family: 'Kufi', 'Naskh', Helvetica, Atahoma;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -141,7 +149,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'WMitra', sans-serif;
+  font-family: 'Kufi', sans-serif;
   font-weight: bold;
 }
 /* General Links */
@@ -234,7 +242,7 @@ a:focus {
   background-color: transparent;
   background-image: none;
   padding: 15px 15px;
-  font-family: fontAwesome;
+  font-family: Kufi;
 }
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
@@ -274,7 +282,7 @@ a:focus {
   line-height: 50px;
   text-align: center;
   width: 230px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Kufi", Helvetica, Arial, sans-serif;
   padding: 0 15px;
   font-weight: 300;
   overflow: hidden;
@@ -3156,6 +3164,64 @@ table.text-center th {
  *
  * https://github.com/lipis/bootstrap-social
  */
+
+.box-widget {
+  border: none;
+  position: relative;
+}
+.widget-user .widget-user-header {
+  padding: 20px;
+  height: 120px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.widget-user .widget-user-username {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 300;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.widget-user .widget-user-desc {
+  margin-top: 0;
+}
+.widget-user .widget-user-image {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  margin-left: -45px;
+}
+.widget-user .widget-user-image > img {
+  width: 90px;
+  height: auto;
+  border: 3px solid #fff;
+}
+.widget-user .box-footer {
+  padding-top: 30px;
+}
+.widget-user-2 .widget-user-header {
+  padding: 20px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.widget-user-2 .widget-user-username {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.widget-user-2 .widget-user-desc {
+  margin-top: 0;
+}
+.widget-user-2 .widget-user-username,
+.widget-user-2 .widget-user-desc {
+  margin-right: 75px;
+}
+.widget-user-2 .widget-user-image > img {
+  width: 65px;
+  height: auto;
+  float: right;
+}
 .btn-social {
   position: relative;
   padding-left: 44px;
