@@ -166,7 +166,7 @@ function updateOrderStatusWithPrompt(id,status) {
                 type: "POST",
                 url: "index.php?r=orders/setworkingorderstatus",
                 dataType: "text",
-                data: {'id': id, 'status': status,'item_in_m':0},
+                data: {'id': id, 'status': status,'item_in_m':0,'cancel_reason':result},
                 success: function (response) {
                     if (response == 'ok') {
                         window.location.reload();
@@ -199,7 +199,7 @@ function updateOrderStatus(id,status){
                 type: "POST",
                 url: "index.php?r=orders/setworkingorderstatus",
                 dataType: "text",
-                data: {'id': id, 'status': status,'item_in_m':0},
+                data: {'id': id, 'status': status,'item_in_m':0,'cancel_reason':''},
                 success: function (response) {
                     if (response == 'ok') {
                         window.location.reload();
@@ -231,7 +231,7 @@ function updateOrderStatusWithTime(id,status,time_in_m) {
                 type: "POST",
                 url: "index.php?r=orders/setworkingorderstatus",
                 dataType: "text",
-                data: {'id': id, 'status': status,'item_in_m':time_in_m},
+                data: {'id': id, 'status': status,'item_in_m':time_in_m,'cancel_reason':''},
                 success: function (response) {
                     if (response == 'ok') {
                         window.location.reload();

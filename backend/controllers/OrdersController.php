@@ -349,6 +349,7 @@ class OrdersController extends Controller
         $data = Yii::$app->request->post();
         $id = $data['id'];
         $status = $data['status'];
+        $cancel_reason_d = $data['cancel_reason'];
         $ready_time =  $data['item_in_m'];
         $model = $this->findModel($id);
         $previousStatus =  $model->order_status;
@@ -357,6 +358,7 @@ class OrdersController extends Controller
             $model->updated_at = date('Y-m-d H:i:s');
             $model->order_status = $status;
             $model->ready_time = $ready_time;
+            $model->cancel_reason = $cancel_reason_d;
             $order_status = $model->order_status;
             $cancel_reason = $model->cancel_reason;
             $model->update(['updated_at','order_status','cancel_reason']);
