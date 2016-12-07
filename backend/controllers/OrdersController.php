@@ -353,6 +353,7 @@ class OrdersController extends Controller
         $ready_time =  $data['item_in_m'];
         $model = $this->findModel($id);
         $previousStatus =  $model->order_status;
+        $previousReady_time = $model->ready_time;
 
 
             $model->updated_at = date('Y-m-d H:i:s');
@@ -360,7 +361,7 @@ class OrdersController extends Controller
             $model->ready_time = $ready_time;
             if(!empty($cancel_reason_d))
                 $model->cancel_reason = $cancel_reason_d;
-        
+
             $order_status = $model->order_status;
             $cancel_reason = $model->cancel_reason;
             $model->update(['updated_at','order_status','cancel_reason']);
@@ -371,6 +372,8 @@ class OrdersController extends Controller
                 $orderHistories->user_id = $userId;
                 $orderHistories->order_id = $id;
                 $orderHistories->order_status=$previousStatus;
+                $orderHistories->ready_time=$previousReady_time;
+
                 $orderHistories->created_at = date('Y-m-d H:i:s');
                 $orderHistories->updated_at = date('Y-m-d H:i:s');
                 $orderHistories->save();
@@ -397,11 +400,11 @@ class OrdersController extends Controller
 
                 if($order_status=='PENDING' && $lang=='ar')
                 {
-                    $message = $message.'والوقت المتوقع للتحضير هو :'.$ready_time;
+                    $message = $message.'والوقت المتوقع للتحضير هو :'.$ready_time . ' دقيقة';
                 }
                 else if($order_status=='PENDING' && $lang=='en' )
                 {
-                    $message = $message.' ,and the estimated time to prepare order is: '.$ready_time;
+                    $message = $message.' ,and the estimated time to prepare order is: '.$ready_time .' Minutes';
                 }
 
                 $pushNotification = new PushNotification();

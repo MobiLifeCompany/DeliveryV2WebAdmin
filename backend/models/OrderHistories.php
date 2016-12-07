@@ -34,7 +34,7 @@ class OrderHistories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'order_status'], 'required'],
+            [['order_id', 'order_status','ready_time'], 'required'],
             [['order_id', 'user_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['order_status'], 'string', 'max' => 100],

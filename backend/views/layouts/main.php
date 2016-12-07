@@ -920,7 +920,7 @@ var checkNewOrders_call = function() {
             }
          });
     }
-var interval = 1000 * 60 * 1; // where X is your every X minutes
+var interval = 1000 * 30 * 1; // where X is your every X minutes
 setInterval(checkNewOrders_call, interval);
 
 checkNewOrders_call();
@@ -1004,7 +1004,7 @@ var ajax_call = function() {
                   var options = 
                   {
                       body: response,
-                      icon: 'http://admin.deliveryonweb.com/dist/img/logo.png',
+                      icon: 'dist/img/logo.png',
                       lang: 'en-US',
                   };
                   var audio = new Audio('sound/delivery-tone.mp3');
@@ -1014,7 +1014,7 @@ var ajax_call = function() {
                   notification.onclick = function(event) 
                   {
                       event.preventDefault(); // prevent the browser from focusing the Notification's tab
-                      window.open('index.php?r=orders', '_self');
+                      window.open('index.php?r=orders/workingorders', '_self');
                       notification.close();
                   }
               }

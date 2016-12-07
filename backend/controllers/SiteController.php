@@ -92,10 +92,10 @@ class SiteController extends Controller
             ['order_status' => 'RE-OPEN'],
             ['order_status' => 'PENDING']])->all();
         $data = "NO_DATA";
-        if(!empty($result)){
+        if(!empty($openOrdersRestults)){
             $data ="";
             $count = 0;
-            foreach ($result as $order) {
+            foreach ($openOrdersRestults as $order) {
               $data = $data. ' #'.$order->id;
               $count++;
             }
@@ -146,7 +146,8 @@ class SiteController extends Controller
             Yii::$app->session->set('realUser',$realUser);
             Yii::$app->session->set('userShops',$user->getUserShopsIds());
             if($realUser['user_type']=='SHOP_DELIVERY_MAN' || $realUser['user_type']=='CR_DELIVERY_MAN'){
-                return $this->goBack();
+                return $this->redirect('index.php?r=orders/workingorders');
+                //return $this->goBack();
             }else {
                // return $this->redirect('index.php?r=dashboards/dashboard1');
                  return $this->redirect('index.php?r=orders/workingorders');
