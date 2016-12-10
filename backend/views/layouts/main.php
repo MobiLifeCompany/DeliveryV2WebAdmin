@@ -910,12 +910,12 @@ var checkNewOrders_call = function() {
                 if(parseInt(openOrdersCount)!=0){
                     $('#dropdown-open-orders-count').html(openOrdersCount);
                     $('#dropdown-open-orders-content').html('<li class="header">You have '+openOrdersCount+' Open Orders</li>'+
-                                                      '<li class="footer"><a href="index.php?r=orders">View all</a></li>');
+                                                      '<li class="footer"><a href="index.php?r=orders/workingorders">View all</a></li>');
                 }
                  if(parseInt(pendingOrdersCount)!=0){
                     $('#dropdown-pending-orders-count').html(pendingOrdersCount);
                     $('#dropdown-pending-orders-content').html('<li class="header">You have '+pendingOrdersCount+' Pending Orders</li>'+
-                                                      '<li class="footer"><a href="index.php?r=orders">View all</a></li>');
+                                                      '<li class="footer"><a href="index.php?r=orders/workingorders">View all</a></li>');
                 }
             }
          });
