@@ -286,8 +286,8 @@ class ShopsController extends Controller
            // print_r($model->getErrors());
             //die();
             $deliveryAreas = array();
-            if(!empty($shop->shopDeliveryAreas)){
-                foreach ($shop->shopDeliveryAreas as $deliveryArea) {
+            if(!empty($shops->shopDeliveryAreas)){
+                foreach ($shops->shopDeliveryAreas as $deliveryArea) {
                     array_push($deliveryAreas, Areas::find()->where(['id' => $deliveryArea->area_id])->one());
                 }
             }
