@@ -89,8 +89,7 @@ class SiteController extends Controller
         $userShops = Yii::$app->session['userShops'];
         $openOrdersRestults = Orders::find()->where(['in','shop_id',$userShops])->andWhere(['or',
             ['order_status' => 'OPEN'],
-            ['order_status' => 'RE-OPEN'],
-            ['order_status' => 'PENDING']])->all();
+            ['order_status' => 'RE-OPEN']])->all(); /* I remove the pending status, only open order should notify the user*/
         $data = "NO_DATA";
         if(!empty($openOrdersRestults)){
             $data ="";

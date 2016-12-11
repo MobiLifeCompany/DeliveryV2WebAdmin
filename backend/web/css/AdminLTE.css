@@ -21,7 +21,7 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Tahoma', 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
@@ -163,7 +163,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Tahoma','Source Sans Pro', sans-serif;
 }
 /* General Links */
 a {
@@ -3058,7 +3058,7 @@ table.text-center th {
 }
 .widget-user-2 .widget-user-username,
 .widget-user-2 .widget-user-desc {
-  margin-left: 75px;
+  margin-left: 3px;
 }
 .widget-user-2 .widget-user-image > img {
   width: 65px;

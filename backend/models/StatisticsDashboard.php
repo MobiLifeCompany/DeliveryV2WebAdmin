@@ -247,13 +247,16 @@ class StatisticsDashboard extends Report
             $shop_ids =$shop_ids .'-1) ';
         }
         
-        if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ){
+        if(Yii::$app->session['realUser']['user_type']=='SHOP_ADMIN'){
+            $queryStatment = $queryStatment.' and shop_id = '.Yii::$app->session['realUser']['shop_id'];
+        }else if (Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' ){
             $queryStatment = $queryStatment.' and delivery_user_id = '.Yii::$app->session['realUser']['id'];
             $queryStatment = $queryStatment.' and shop_id = '.Yii::$app->session['realUser']['shop_id'];
-        }else if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN'){
+        }
+        else if(Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN'){
             $queryStatment = $queryStatment.' and delivery_user_id = '.Yii::$app->session['realUser']['id'];
             $queryStatment = $queryStatment.$shop_ids;
-        }if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
+        }else if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
             $queryStatment = $queryStatment.$shop_ids;
         }
 

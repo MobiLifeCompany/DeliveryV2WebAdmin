@@ -26,7 +26,7 @@ else
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <?php $this->beginBody() ?>
 <div class="wrapper">
     <header class="main-header">
@@ -910,12 +910,12 @@ var checkNewOrders_call = function() {
                 if(parseInt(openOrdersCount)!=0){
                     $('#dropdown-open-orders-count').html(openOrdersCount);
                     $('#dropdown-open-orders-content').html('<li class="header">You have '+openOrdersCount+' Open Orders</li>'+
-                                                      '<li class="footer"><a href="index.php?r=orders">View all</a></li>');
+                                                      '<li class="footer"><a href="index.php?r=orders/workingorders">View all</a></li>');
                 }
                  if(parseInt(pendingOrdersCount)!=0){
                     $('#dropdown-pending-orders-count').html(pendingOrdersCount);
                     $('#dropdown-pending-orders-content').html('<li class="header">You have '+pendingOrdersCount+' Pending Orders</li>'+
-                                                      '<li class="footer"><a href="index.php?r=orders">View all</a></li>');
+                                                      '<li class="footer"><a href="index.php?r=orders/workingorders">View all</a></li>');
                 }
             }
          });
@@ -1054,7 +1054,7 @@ var ajax_call = function() {
   }
 };
 
-var interval = 1000 * 60 * 3; // where X is your every X minutes
+var interval = 1000 * 60 * 1; // where X is your every X minutes
 setInterval(ajax_call, interval);
 
 JS;

@@ -57,20 +57,22 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                 <!-- Widget: user widget style 1 -->
                 <div class="box box-widget widget-user-2">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header <?php if($order_status=='OPEN' || $order_status=='RE-OPEN' || $order_status=='READY') echo 'bg-green'; else if($order_status=='ON-DELIVERY') echo 'bg-blue'; else echo 'bg-yellow';?> ">
-                        <div class="widget-user-image">
+                    <div class="widget-user-header <?php if($order_status=='OPEN' || $order_status=='RE-OPEN') echo 'bg-green'; else if($order_status=='READY') echo 'bg-red'; else if($order_status=='ON-DELIVERY') echo 'bg-blue'; else echo 'bg-yellow';?> ">
+                        <!--<div class="widget-user-image">
                             <img class="img-circle" src="dist/img/logo.png" alt="User Avatar">
-                        </div>
+                        </div>-->
                         <!-- /.widget-user-image -->
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','ORDER_NO');?>: <b><?= $order_id; ?></b> <?=Yii::t('app','TOTAL');?>: <b><?= $order_total + $order_delivery_charge; ?></b></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><b><?= $shop_name; ?></b></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b></h5>
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?></b></h5>
+                        <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><b><?/*= $shop_name; */?></b></h5>-->
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b>, <?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ADDRESS');?>: <?= $city_name.' - '.$area_name?></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?= $customer_address; ?></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ORDER_STATUS');?>: <span class="badge bg-red">  <?= Yii::t('app',$order_status);?> </span> <?=$order_time;?></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ORDER_DATE');?>: <?= $order_date; ?></h5>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <span class="badge bg-red"> <b><?= $order_user; ?></b> </span></h5>
+                        <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'PHONE');*/?>: <b><?/*= $customer_phone;*/?> </b></h5>-->
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ORDER_STATUS');?>: <?= Yii::t('app',$order_status);?> <?=$order_time;?></h5>
+                        <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'ORDER_DATE');*/?>: <?/*= $order_date; */?></h5>-->
+                        <?php if ($order_user ){ ?>
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $order_user; ?></b> </h5>
+                        <?php } ?>
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
@@ -78,13 +80,13 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         <?php
         }
         ?>
-                         <li><a href="javascript:void(0)" style="cursor:default"> <?=$item_name;?> <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>";"> <span class="badge bg-blue"> <?=$order_item_qty;?> </span> <span>*</span> <span class="badge bg-blue"><?=$order_items_price;?></span> = <span class="badge bg-blue"><?=$order_items_total;?></span></span> </a></li>
+                         <li><a href="javascript:void(0)" style="cursor:default"> <?=$item_name;?> <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>";"> <?=$order_item_qty;?> * <?=$order_items_price;?> = <?=$order_items_total;?></span> </a></li>
         <?php
         if($temp_order_id != $order_id || (count($workingOrdersDataProvider->getModels())== $i))
         {
          ?>
-                        <li><a href="javascript:void(0)" style="cursor:default"> <b><?=Yii::t('app','DELIVERY_CHARGE');?></b>   <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>"><span class="badge bg-red"> <?=$order_delivery_charge;?>  SYP</span></a></li>
-                        <li><a href="javascript:void(0)" style="cursor:default"> <b><?=Yii::t('app','TOTAL');?></b>  <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>"><span class="badge bg-green"> <?=$order_total + $order_delivery_charge;?> SYP</span></a></li>
+                        <li><a href="javascript:void(0)" style="cursor:default"> <b><?=Yii::t('app','DELIVERY_CHARGE');?></b>   <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>"><b> <?=$order_delivery_charge;?> </b></span></a></li>
+                        <li><a href="javascript:void(0)" style="cursor:default"> <b><?=Yii::t('app','TOTAL');?></b>  <span style="float:<?php if(Yii::$app->language=='ar') echo 'left'; else echo'right';?>"><b> <?=$order_total + $order_delivery_charge;?></b></span></a></li>
                         <li>
                             <a href="javascript:void(0)" style="cursor:default">
                                 <!-- <span class="input-group-btn">
@@ -94,21 +96,23 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                                     <button type="button" <?php if($order_status=='PENDING' || $order_status=='READY' || $order_status=='ON-DELIVERY' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') echo 'disabled';?> class="btn btn-warning  btn-flat" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updatePreparingOrderStatus(<?= $order_id; ?>);"><?php echo Yii::t('app', 'PENDING_ORDER');?></button>
                                  </span>
                                  <span class="input-group-btn">
-                                    <button type="button" <?php if($order_status=='READY' || $order_status=='ON-DELIVERY' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') echo 'disabled';?> class="btn btn-success  btn-flat" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updateOrderStatus(<?= $order_id; ?>,'READY');"><?php echo Yii::t('app', 'READY');?></button>
+                                    <button type="button" <?php if($order_status=='READY' || $order_status=='ON-DELIVERY' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') echo 'disabled';?> class="btn btn-danger btn-flat" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updateOrderStatus(<?= $order_id; ?>,'READY');"><?php echo Yii::t('app', 'READY_ORDER');?></button>
                                  </span>
+                                <span class="input-group-btn">
+                                    <button type="button" style="background-color: #0073b7; color: #FFFFFF;" <?php if($order_status=='ON-DELIVERY' || ((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') && $order_status!='READY' )) echo 'disabled';?> class="btn btn-flat" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updateOrderStatus(<?= $order_id; ?>,'ON-DELIVERY');"><?php echo Yii::t('app', 'ON-DELIVERY');?></button>
+                                </span>
+
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)" style="cursor:default">
-                                 <span class="input-group-btn">
-                                    <button type="button" <?php if($order_status=='ON-DELIVERY' || ((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') && $order_status!='READY' )) echo 'disabled';?> class="btn btn-success btn-flat" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updateOrderStatus(<?= $order_id; ?>,'ON-DELIVERY');"><?php echo Yii::t('app', 'ON-DELIVERY');?></button>
-                                 </span>
+                       <li>
+                            <a href="javascript:void(0)" style="cursor:default; align-content: center">
                                  <span class="input-group-btn">
                                     <button type="button" <?php if($order_status=='CLOSED' || ((Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') && $order_status!='READY' )) echo 'disabled';?> class="btn btn-primary btn-danger" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> id="btn-order-close" onclick="return updateOrderStatus(<?= $order_id; ?>,'CLOSED');"><?php echo Yii::t('app', 'CLOSED_ORDER');?></button>
-                                 </span>
-                                 <span class="input-group-btn">
+                                </span>
+                                <span class="input-group-btn">
                                     <button type="button" <?php if($order_status=='CANCEL' || Yii::$app->session['realUser']['user_type']=='SHOP_DELIVERY_MAN' || Yii::$app->session['realUser']['user_type']=='CR_DELIVERY_MAN') echo 'disabled';?> class="btn btn-primary btn-danger" <?php if(Yii::$app->language=='ar') echo 'style="font-size:11px;"';?> onclick="return updateOrderStatusWithPrompt(<?= $order_id; ?>,'CANCEL');"><?php echo Yii::t('app', 'CANCEL_ORDER');?></button>
-                                 </span>
+                                </span>
+                            </a>
                         </li>
          <?php
             $enter = true;

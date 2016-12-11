@@ -247,7 +247,7 @@
         'CANCEL_ORDER' => 'إلغاء',
         'CLOSED_ORDER' => 'إغلاق',
         'PENDING_ORDER'=> 'تحضير الطلبية',
-        'READY' => 'الطلبية جاهزة',
+        'READY_ORDER' => 'الطلبية جاهزة',
         'ON-DELIVERY' => 'قيد التوصيل',
         'RE-OPEN' => 'إعادة فتح الطلبية',
         'CONFIRM_WORKINGORDERS_MESSAGE_RE_OPEN' => ' هل أنت متأكد من إعادة فتح الطلبية رقم',
