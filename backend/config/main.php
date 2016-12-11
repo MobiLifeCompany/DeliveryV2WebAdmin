@@ -57,7 +57,7 @@ return [
         'bundles' => [
             'dosamigos\google\maps\MapAsset' => [
                 'options' => [
-                    'key' => 'AIzaSyBuMz8tcw44tYQr-Rc2wxRNYApuExBECTU',
+                    'key' => 'AIzaSyAxTCrolhKmaAVD2l2JAWNRhPPoRxOY5jY',
                     'language' => 'en',
                     'version' => '3.1.18'
                 ]
