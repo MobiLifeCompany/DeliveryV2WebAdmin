@@ -36,14 +36,16 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         $order_items_total= $record['order_items_total'];
         $time_in_m = $record['ready_time'];
         $order_time = "";
-        if($time_in_m==5)
-            $order_time = Yii::t("app", "5_MIN");
-        else if($time_in_m==10)
-            $order_time = Yii::t('app', "10_MIN");
-        else if($time_in_m==15)
-            $order_time = Yii::t('app', '15_MIN');
-        else if($time_in_m==25)
-            $order_time = Yii::t('app', '25_MIN');
+        if($time_in_m==10)
+            $order_time = Yii::t("app", "10_MIN");
+        else if($time_in_m==30)
+            $order_time = Yii::t('app', "30_MIN");
+        else if($time_in_m==60)
+            $order_time = Yii::t('app', '60_MIN');
+        else if($time_in_m==120)
+            $order_time = Yii::t('app', '120_MIN');
+        else if($time_in_m==240)
+            $order_time = Yii::t('app', '240_MIN');
 
         $i++;
         if(count($workingOrdersDataProvider->getModels())> $i) {
@@ -130,30 +132,37 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                 'buttons' => [
                     [
                         'id' => 'cust-btn-1',
-                        'label' => Yii::t('app', '5_MIN'),
+                        'label' => Yii::t('app', '10_MIN'),
                         'action' => new JsExpression("function(dialog) {
-                           updateOrderStatusWithTime(order_id,'PENDING',5);
+                           updateOrderStatusWithTime(order_id,'PENDING',10);
                 }")
                     ],
                     [
                         'id' => 'cust-btn-2',
-                        'label' => Yii::t('app', '10_MIN'),
+                        'label' => Yii::t('app', '30_MIN'),
                         'action' => new JsExpression("function(dialog) {
-                                updateOrderStatusWithTime(order_id,'PENDING',10);
+                                updateOrderStatusWithTime(order_id,'PENDING',30);
                 }")
                     ],
                     [
                         'id' => 'cust-btn-3',
-                        'label' => Yii::t('app', '15_MIN'),
+                        'label' => Yii::t('app', '60_MIN'),
                         'action' => new JsExpression("function(dialog) {
-                            updateOrderStatusWithTime(order_id,'PENDING',15);
+                            updateOrderStatusWithTime(order_id,'PENDING',60);
                 }")
                     ],
                     [
                         'id' => 'cust-btn-4',
-                        'label' => Yii::t('app', '25_MIN'),
+                        'label' => Yii::t('app', '120_MIN'),
                         'action' => new JsExpression("function(dialog) {
-                            updateOrderStatusWithTime(order_id,'PENDING',25);
+                            updateOrderStatusWithTime(order_id,'PENDING',120);
+                }")
+                    ],
+                    [
+                        'id' => 'cust-btn-5',
+                        'label' => Yii::t('app', '240_MIN'),
+                        'action' => new JsExpression("function(dialog) {
+                            updateOrderStatusWithTime(order_id,'PENDING',240);
                 }")
                     ],
                 ]
@@ -232,14 +241,16 @@ function updateOrderStatus(id,status){
 }
 function updateOrderStatusWithTime(id,status,time_in_m) {
     var order_time = '';
-    if(time_in_m==5)
-       order_time = '<?php echo Yii::t('app', '5_MIN');?>';
-    else if(time_in_m==10)
-       order_time = '<?php echo Yii::t('app', '10_MIN');?>';
-    else if(time_in_m==15)
-        order_time = '<?php echo Yii::t('app', '15_MIN');?>';
-    else if(time_in_m==25)
-        order_time = '<?php echo Yii::t('app', '25_MIN');?>';
+    if(time_in_m==10)
+        order_time = '<?php echo Yii::t('app', '10_MIN');?>';
+    else if(time_in_m==30)
+        order_time = '<?php echo Yii::t('app', '30_MIN');?>';
+    else if(time_in_m==60)
+        order_time = '<?php echo Yii::t('app', '60_MIN');?>';
+    else if(time_in_m==120)
+        order_time = '<?php echo Yii::t('app', '120_MIN');?>';
+    else if(time_in_m==240)
+        order_time = '<?php echo Yii::t('app', '240_MIN');?>';
 
     var message = '<?php echo Yii::t('app', 'CONFIRM_WORKINGORDERS_MESSAGE_PENDING');?>'+ order_time+'  ( #'+id+')';
     krajeeDialog.confirm(message, function (result) {
