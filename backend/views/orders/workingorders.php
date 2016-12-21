@@ -35,6 +35,13 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         $order_items_price= $record['order_items_price'];
         $order_items_total= $record['order_items_total'];
         $time_in_m = $record['ready_time'];
+        $note = null;
+        $hasNote = false;
+        if(!empty($note)){
+            $hasNote = true;
+            $note = $record['order_note'];
+        }
+
         $order_time = "";
         if($time_in_m==10)
             $order_time = Yii::t("app", "10_MIN");
@@ -65,15 +72,18 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         </div>-->
                         <!-- /.widget-user-image -->
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?></b></h5>
-                        <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><b><?/*= $shop_name; */?></b></h5>-->
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><b><? $shop_name;?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b>, <?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ADDRESS');?>: <?= $city_name.' - '.$area_name?></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?= $customer_address; ?></h5>
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'PHONE');*/?>: <b><?/*= $customer_phone;*/?> </b></h5>-->
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ORDER_STATUS');?>: <?= Yii::t('app',$order_status);?> <?=$order_time;?></h5>
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'ORDER_DATE');*/?>: <?/*= $order_date; */?></h5>-->
-                        <?php if ($order_user ){ ?>
+                        <?php if ($order_user){ ?>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $order_user; ?></b> </h5>
+                        <?php } ?>
+                        <?php if ($hasNote){ ?>
+                          <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>:<b><? $note;?></b></h5>
                         <?php } ?>
                     </div>
                     <div class="box-footer no-padding">

@@ -57,7 +57,7 @@ class WorkingOrders
         }
         
         $connection = Yii::$app->getDb();
-        $query = "SELECT `orders`.`id` order_id,`orders`.ready_time ready_time,`orders`.`created_at` order_date,`orders`.`order_status`,`orders`.total,`orders`.delivery_charge,`orders`.qty,`user`.`username` delivery_user , `shops`.id shop_id,`shops`.subscribed_in_delivery subscribed_in_delivery, `shops`.`name` shop_name,`shops`.`ar_name` ar_shop_name, `customers`.id customer_id,`customers`.full_name customer_full_name,
+        $query = "SELECT `orders`.`id` order_id,`orders`.`note` order_note,`orders`.ready_time ready_time,`orders`.`created_at` order_date,`orders`.`order_status`,`orders`.total,`orders`.delivery_charge,`orders`.qty,`user`.`username` delivery_user , `shops`.id shop_id,`shops`.subscribed_in_delivery subscribed_in_delivery, `shops`.`name` shop_name,`shops`.`ar_name` ar_shop_name, `customers`.id customer_id,`customers`.full_name customer_full_name,
                                                 `customer_addresses`.`id` customer_address_id, `cities`.`name` city_name ,`cities`.`ar_name` ar_city_name,`areas`.`name` area_name,`areas`.`ar_name` ar_area_name, concat(`customer_addresses`.`street`,' - ',
                                                 `customer_addresses`.`building`,' - ', `customer_addresses`.`floor`) customer_address , `customer_addresses`.`phone` customer_phone, `user`.id user_id,`user`.username,
                                                 `items`.name item_name,`order_items`.qty order_item_qty , `order_items`.item_price order_items_price ,`order_items`.total order_items_total
