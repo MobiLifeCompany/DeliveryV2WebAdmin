@@ -82,7 +82,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $order_user; ?></b> </h5>
                         <?php } ?>
                         <?php if ($hasNote){ ?>
-                          <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>:<b><? $note;?></b></h5>
+                          <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>:<b><?=$note;?></b></h5>
                         <?php } ?>
                     </div>
                     <div class="box-footer no-padding">
