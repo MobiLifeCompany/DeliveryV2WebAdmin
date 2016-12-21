@@ -35,11 +35,10 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         $order_items_price= $record['order_items_price'];
         $order_items_total= $record['order_items_total'];
         $time_in_m = $record['ready_time'];
-        $note = null;
+        $note = $record['order_note'];
         $hasNote = false;
         if(!empty($note)){
             $hasNote = true;
-            $note = $record['order_note'];
         }
 
         $order_time = "";
