@@ -1030,12 +1030,11 @@ var ajax_call = function() {
               //alert(response);  
               if(response!='NO_DATA')
               {  
-                if (window.confirm(response))
-                  {
+                //if (window.confirm(response)){
                      var audio = new Audio('sound/delivery-tone.mp3');
                      audio.play();
-                     player.pause();
-                  }             
+                     //player.pause();
+                  //}
                   
                  
               }
