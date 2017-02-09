@@ -23,7 +23,20 @@ use yii\helpers\Url;
         $form = ActiveForm::begin(
                 ['id'=>$model->formName(),
                 'enableAjaxValidation'=>true,
-                'validationUrl'=> $validationUrl]); 
+                'validationUrl'=> $validationUrl]);
+
+    if($model->isNewRecord){
+        $model->show_notification = 'YES';
+        $model->live_status = 'On-Line';
+        $model->work_status = 'Ready';
+        $model->deleted = 'NO';
+        $model->gender = 'MALE';
+        echo $form->field($model, 'show_notification')->hiddenInput()->label(false);
+        echo $form->field($model, 'live_status')->hiddenInput()->label(false);
+        echo $form->field($model, 'work_status')->hiddenInput()->label(false);
+        echo $form->field($model, 'deleted')->hiddenInput()->label(false);
+        echo $form->field($model, 'gender')->hiddenInput()->label(false);
+    }
     ?>
      <?= $form->field($model, 'user_type')->dropDownList([ 'SHOP_ADMIN' => 'SHOP ADMIN', 'SHOP_DELIVERY_MAN' => 'SHOP DELIVERY MAN', 'CR_ADMIN' => 'CR ADMIN', 'CR_DELIVERY_MAN' => 'CR DELIVERY MAN', ], ['prompt' => '',
       'onchange'=>
@@ -64,16 +77,17 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'phone')->textInput() ?>
 
-    <?= $form->field($model, 'gender')->dropDownList([ 'Male' => Yii::t('app', 'MALE'), 'Female' => Yii::t('app', 'FEMALE'), ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'show_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'live_status')->dropDownList([ 'On-Line' => 'On-Line', 'Off-Line' => 'Off-Line', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'work_status')->dropDownList([ 'Ready' => 'Ready', 'Waiting' => 'Waiting', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'deleted')->dropDownList([ 'Yes' => Yii::t('app', 'NO'), 'No' => Yii::t('app', 'YES'), ], ['prompt' => '']) ?>
-
+    <?php
+        if(!$model->isNewRecord){
+             echo $form->field($model, 'show_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']);
+             echo $form->field($model, 'live_status')->dropDownList([ 'On-Line' => 'On-Line', 'Off-Line' => 'Off-Line', ], ['prompt' => '']);
+             echo $form->field($model, 'work_status')->dropDownList([ 'Ready' => 'Ready', 'Waiting' => 'Waiting', ], ['prompt' => '']);
+             echo $form->field($model, 'deleted')->dropDownList([ 'Yes' => Yii::t('app', 'NO'), 'No' => Yii::t('app', 'YES'), ], ['prompt' => '']);
+             echo $form->field($model, 'gender')->dropDownList([ 'Male' => Yii::t('app', 'MALE'), 'Female' => Yii::t('app', 'FEMALE'), ], ['prompt' => '']);
+        }
+    ?>
     <?php //$form->field($model, 'is_fired')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '']) ?>
 
     <?php //$form->field($model, 'lang')->dropDownList([ 'Ar' => 'Ar', 'En' => 'En', ], ['prompt' => '']) ?>

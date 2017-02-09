@@ -9,6 +9,7 @@ use yii\Helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'OPENING_HOURS');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SHOPS'), 'url' => ['shops/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="opening-hours-index">

@@ -43,10 +43,12 @@ class ShopOffers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['shop_id', 'item_id', 'name', 'photo', 'offer_type'], 'required'],
+            [['shop_id', 'item_id','active','clickable','from_date', 'to_date', 'name','short_description', 'ar_name', 'ar_short_description', 'photo', 'offer_type'], 'required'],
             [['shop_id', 'item_id', 'active', 'clickable'], 'integer'],
             [['from_date', 'to_date', 'created_at', 'updated_at'], 'safe'],
-            [['name', 'photo'], 'string', 'max' => 100],
+            [['name',], 'string', 'max' => 100],
+            [['photo',],'required','on'=>['create','update']],
+            [['photo'], 'file','skipOnEmpty' => 'false', 'extensions' => 'png, jpg'],
             [['short_description', 'ar_name', 'ar_short_description'], 'string', 'max' => 255],
             [['offer_type'], 'string', 'max' => 45],
             [['lang'], 'string', 'max' => 5],

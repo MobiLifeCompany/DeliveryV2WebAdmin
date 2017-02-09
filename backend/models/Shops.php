@@ -62,12 +62,14 @@ class Shops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['business_id','area_id','city_id',], 'required'],
+            [['business_id','photo','area_id','city_id','min_amount','delivery_expected_time','delivery_charge', 'ar_masteries', 'masteries','name', 'short_description', 'address','phone','longitude', 'latitude', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'required'],
             [['business_id', 'is_avilable', 'min_amount', 'delivery_charge', 'deleted', 'rating', 'subscribed','city_id','subscribed_in_delivery'], 'integer'],
             [['promotion_note', 'warning_note', 'masteries'], 'string'],
             [['created_at', 'updated_at','city_id','area_id','email','enable_email_notification','subscribed_in_delivery'], 'safe'],
             [['name', 'short_description', 'address', 'estimation_time', 'ar_name', 'ar_short_description', 'ar_address'], 'string', 'max' => 255],
-            [['longitude', 'latitude', 'photo'], 'string', 'max' => 100],
+            [['photo',],'required','on'=>['create','update']],
+            [['photo'], 'file','skipOnEmpty' => 'false', 'extensions' => 'png, jpg'],
+            [['longitude', 'latitude',], 'string', 'max' => 100],
             [['delivery_expected_time'], 'string', 'max' => 11],
             [['lang'], 'string', 'max' => 5],
             [['country'], 'string', 'max' => 3],
@@ -100,6 +102,7 @@ class Shops extends \yii\db\ActiveRecord
             'warning_note' => Yii::t('app', 'WARNING_NOTE'),
             'photo' => Yii::t('app', 'PHOTO'),
             'masteries' => Yii::t('app', 'MASTERIES'),
+            'ar_masteries' => Yii::t('app', 'AR_MASTERIES'),
             'deleted' => Yii::t('app', 'ACTIVE'),
             'lang' => Yii::t('app', 'LANGUAGE'),
             'created_at' => Yii::t('app', 'CREATED_AT'),
@@ -111,7 +114,7 @@ class Shops extends \yii\db\ActiveRecord
             'ar_name' => Yii::t('app', 'ARABIC_NAME'),
             'ar_short_description' => Yii::t('app', 'ARABIC_DESCRIPTION'),
             'ar_address' => Yii::t('app', 'ARABIC_ADDRESS'),
-            'phone' => Yii::t('app', 'PHOTO'),
+            'phone' => Yii::t('app', 'PHONE'),
             'email' => Yii::t('app', 'EMAIL'),
             'enable_email_notification' => Yii::t('app', 'ENABLE_EMAIL_NOTIFICATION'),
         ];
@@ -132,6 +135,7 @@ class Shops extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ShopDeliveryAreas::className(), ['shop_id' => 'id']);
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

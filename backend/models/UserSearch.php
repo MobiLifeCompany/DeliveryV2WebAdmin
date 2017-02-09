@@ -66,7 +66,8 @@ class UserSearch extends User
                 $query->andFilterWhere( ['in','user.shop_id',$userShops]);
             }else if(Yii::$app->session['realUser']['user_type']=='CR_ADMIN'){
                 $query->joinWith('userShops');
-                $query->andFilterWhere([
+                $query->orWhere('user.shop_id is null');
+                $query->orFilterWhere([
                     'or',
                         ['in','user.shop_id',$userShops],
                         ['in','user_shops.shop_id',$userShops],
@@ -84,6 +85,8 @@ class UserSearch extends User
                                      ['like', 'user.phone', $this->userGlobalSearch],
                                      ['like', 'is_fired', $this->userGlobalSearch],
                                      ['like', 'shops.name', $this->userGlobalSearch]]);
+
+        $query->distinct();
 
        // print_r($query->createCommand()->getRawSql());
 

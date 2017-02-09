@@ -134,8 +134,8 @@ class SiteController extends Controller
         $this->layout='loginLayout';
 
         Yii::$app->session->set('userSessionTimeout', time() + Yii::$app->params['sessionTimeoutSeconds']);
-        
-       
+
+
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

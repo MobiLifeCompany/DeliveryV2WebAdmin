@@ -68,7 +68,7 @@ $this->params['currentPage'] = $curpage;
              [
                 'vAlign'=>'middle',
                 'format'=>'raw',
-                'value' => function($model) { return Html::a(Yii::t('app', 'SHOPS'),'index.php?r=shops/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
+                'value' => function($model) { return Html::a(Yii::t('app', 'SHOPS'),'#',['value'=>'index.php?r=shops/details&id='.$model->id,'class'=>'badge bg-light-blue','id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']); },
             ],
             [
                'class' => 'yii\grid\ActionColumn',

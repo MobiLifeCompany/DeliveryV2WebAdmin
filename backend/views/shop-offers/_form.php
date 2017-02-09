@@ -2,22 +2,26 @@
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 use backend\models\Shops;
 use backend\models\Items;
 use kartik\file\FileInput;
-use dosamigos\datepicker\DatePicker;
-use dosamigos\datepicker\DateRangePicker;
+use kartik\builder\Form;
 use kartik\select2\Select2;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\ShopOffers */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="shop-offers-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
+
+    <?php
+
+            $model->lang = 'ar';
+            echo $form->field($model, 'lang')->hiddenInput()->label(false);
+
+    ?>
 
     <?=
         $form->field($model, 'shop_id')->widget(Select2::classname(), [
@@ -65,21 +69,34 @@ use kartik\select2\Select2;
                                     ],]);
     ?>
 
-    <?= $form->field($model, 'from_date')->widget(DateRangePicker::className(), [
-            'attributeTo' => 'to_date', 
-            'form' => $form, // best for correct client validation
-            'clientOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-mm-dd'
-            ]
+    <?php
+        echo Form::widget([
+        'model'=>$model,
+        'form'=>$form,
+        'columns'=>2,
+        'attributes'=>[
+        'from_date'=>[
+            'type'=>Form::INPUT_WIDGET,
+            'widgetClass'=>'\kartik\widgets\DatePicker',
+            'hint'=>Yii::t('app', 'SELECT_FROM_DATE'),
+            'inline' => false,
+            'value' => '23-Feb-1982 10:01',
+            'options' => ['pluginOptions' => ['format' => 'yyyy-mm-dd', 'autoclose'=>true, 'todayHighlight' => true, ]]
+            ],
+        'to_date'=>[
+            'type'=>Form::INPUT_WIDGET,
+            'widgetClass'=>'\kartik\widgets\DatePicker',
+            'hint'=>Yii::t('app', 'SELECT_TO_DATE'),
+            'format' => 'yyyy-mm-dd',
+            'options' => ['pluginOptions' => ['format' => 'yyyy-mm-dd', 'autoclose'=>true, 'todayHighlight' => true]],
+            ],
+         ]
         ]);
     ?>
 
     <?= $form->field($model, 'active')->dropDownList([ '0' => Yii::t('app', 'NO'), '1' => Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
 
     <?= $form->field($model, 'offer_type')->dropDownList([ 'GOLDEN' => Yii::t('app', 'GOLDEN'), 'SILVER' => Yii::t('app', 'SILVER'), ], ['prompt' => Yii::t('app', 'OFFER_TYPE')]) ?>
-
-    <?= $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]) ?>
 
     <?= $form->field($model, 'clickable')->dropDownList([ '0' => Yii::t('app', 'NO'), '1' => Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'ACTIVE')]) ?>
 

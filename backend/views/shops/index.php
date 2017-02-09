@@ -23,7 +23,7 @@ $this->params['currentPage'] = $curpage;
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
       <?php 
          if(Yii::$app->user->can('create_shop')){
-            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shops/create'),'id'=>'modalButton']);
+            echo Html::a('<span class="glyphicon glyphicon-plus pull-right">','index.php?r=shops/create');
          } 
       ?>
     <br/>
@@ -125,7 +125,7 @@ $this->params['currentPage'] = $curpage;
                 'update' => function ($url,$model) 
                     {
                           if(Yii::$app->user->can('update_shop')){
-                            return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                            return Html::a('<span class="glyphicon glyphicon-pencil">',$url);
                           }
                     },
                 'delete' => function ($url,$model) 

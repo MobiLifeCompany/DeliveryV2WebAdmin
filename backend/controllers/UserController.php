@@ -141,10 +141,6 @@ class UserController extends Controller
 
             if($model->save())
             {
-                Yii::$app->session->remove('realUser');
-                $user = new \common\models\User();
-                $realUser = $user->findByUsername($model->username);
-                Yii::$app->session->set('realUser',$realUser);
                 echo 1;
             }else
             {
@@ -167,7 +163,7 @@ class UserController extends Controller
     {
        $user = $this->findModel($id);
        $user->updated_at = date('Y-m-d H:i:s');
-       $user->deleted = 1;
+       $user->deleted = 'YES';
        $user->update(['updated_at','deleted']);
 
         return $this->redirect(['index']);

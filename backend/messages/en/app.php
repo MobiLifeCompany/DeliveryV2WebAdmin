@@ -95,7 +95,7 @@
         'STATUS' => 'Status',
         'IS_FIRED' => 'Is Fired',
         'SUBSCRIBED' => 'Subscribed',
-        'SUBSCRIBED_IN_DELIVERY' => 'Subscribed in Delivery',
+        'SUBSCRIBED_IN_DELIVERY' => 'Subscribed',
         'SELECT_SHOP' => 'Select Shop',
         'MALE' => 'Male',
         'FEMALE' => 'Female',
@@ -263,5 +263,8 @@
         '240_MIN'=> '240 Minutes ',
         'PENDING_ORDER_MSG' => 'The Expected Preparing Time for this order is: ',
         'CANCEL_REASON_DECLINED' => 'Oops! You declined to provide a Cancel reason!',
+        'ENABLE_EMAIL_NOTIFICATION' => 'Enable Email Notification',
+        'AR_MASTERIES' => 'AR Masteries',
+        'SHOPS_ITEMS' => 'Shops Items',
     ];
 ?>

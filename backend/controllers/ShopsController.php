@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\OpeningHours;
 use Yii;
 use backend\models\Shops;
 use backend\models\ShopsSearch;
@@ -91,20 +92,18 @@ class ShopsController extends Controller
         ]);
     }
 
-    /**
-     * Displays all Shops delivering to selected area.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionDetails($id)
     {
-        $cities = new Cities();
-        $dataProvider = $cities->getCountryCities(Yii::$app->request->queryParams);
-
-        return $this->render('details', [
-            'dataProvider' => $dataProvider,
+        $areaShops = ShopDeliveryAreas::find()->joinWith(['shop'])->where(['shop_delivery_areas.area_id' => $id])->all();
+        $result = [];
+        foreach($areaShops as $shop){
+            $result[$shop['shop']->id] = $shop['shop'];
+         }
+        return $this->renderAjax('details', [
+            'areaShops' => $result,
         ]);
     }
+
 
     /**
      * Creates a new Shops model.
@@ -124,6 +123,18 @@ class ShopsController extends Controller
            if($model->save())
             {
                 $last_id = $model->id;
+                // Add Opening Hours
+                $days = ['sat' => 'sat', 'sun' => 'sun' , 'mon' => 'mon', 'tue' => 'tue', 'wed' => 'wed', 'thu' => 'thu', 'fri' => 'fri'];
+                foreach($days as $key=>$value){
+                    $openingHours = new OpeningHours();
+                    $openingHours->shop_id = $last_id;
+                    $openingHours->full_day = 0;
+                    $openingHours->day_name = $key;
+                    $openingHours->from_hour = 11;
+                    $openingHours->to_hour = 18;
+                    $openingHours->created_at = date('Y-m-d H:i:s');
+                    $openingHours->save();
+                }
                 //Upload image
                 FileHelper::createDirectory('images/shops/'. $last_id);
                 $imageModel->upload($last_id, 'images/shops/');
@@ -136,7 +147,7 @@ class ShopsController extends Controller
             return $this->redirect(['index']);
         }
         else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -177,7 +188,7 @@ class ShopsController extends Controller
             }
             return $this->redirect(['index']);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
@@ -237,7 +248,8 @@ class ShopsController extends Controller
         $shop = $this->findModel($id);
         $shop->updated_at = date('Y-m-d H:i:s');
         $shop->deleted = 1;
-        $shop->update(['updated_at','deleted']);
+        $shop->is_avilable = '0';
+        $shop->update(['updated_at','deleted','is_avilable']);
         $shop->save(false);
         return $this->redirect(['index']);
     }

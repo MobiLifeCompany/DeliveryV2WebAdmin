@@ -17,14 +17,18 @@ use kartik\file\FileInput;
     <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
      <?php
-      // filter shops according to user permissions
-         $userShops = Yii::$app->session['userShops'];
+         if($model->isNewRecord){
+             $model->active = '1';
+             $model->deleted = '0';
+             $model->lang = 'ar';
+
+             echo $form->field($model, 'active')->hiddenInput()->label(false);
+             echo $form->field($model, 'deleted')->hiddenInput()->label(false);
+             echo $form->field($model, 'lang')->hiddenInput()->label(false);
+         }
      ?> 
 
-    <?= $form->field($model, 'shop_id')->dropDownList(
-                    ArrayHelper::map(Shops::find()->where(['in','id',$userShops])->all(),'id','name'),
-                    ['prompt' => Yii::t('app', 'SELECT_SHOP')]);
-    ?>
+
     
     <?= $form->field($model, 'item_category_id')->dropDownList(
                     ArrayHelper::map(ItemCategories::find()->all(),'id','name'), 
@@ -59,11 +63,14 @@ use kartik\file\FileInput;
                                     ],]);
     ?>
 
-    <?= $form->field($model, 'active')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
+    <?php
+    if(!$model->isNewRecord){
+        echo $form->field($model, 'active')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
+        echo $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
+        echo $form->field($model, 'lang')->hiddenInput()->label(false);
+    }
+    ?>
 
-    <?= $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]) ?>
-
-    <?= $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]) ?>
     
 
     <div class="form-group">

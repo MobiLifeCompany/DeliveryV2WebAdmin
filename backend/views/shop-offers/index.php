@@ -21,7 +21,7 @@ $this->params['currentPage'] = $curpage;
 <div class="shop-offers-index">
     <h3><?= Html::encode($this->title) ?></h3>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=shop-offers/create'),'id'=>'modalButton']); ?>
+    <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','index.php?r=shop-offers/create'); ?>
     <br/>
     <?php
         Modal::begin([
@@ -111,7 +111,7 @@ $this->params['currentPage'] = $curpage;
                     },
                 'update' => function ($url,$model) 
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','index.php?r=shop-offers/update&id='.$model->id);
                     }    
                 ]
             ],

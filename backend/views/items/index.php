@@ -19,9 +19,8 @@ $this->params['currentPage'] = $curpage;
 
 ?>
 <div class="items-index">
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h4><?= Html::encode($this->title) ?></h4>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
     <br/>
     <?php
         Modal::begin([
@@ -87,17 +86,13 @@ $this->params['currentPage'] = $curpage;
 	            }
 	        ],
             [
-               'class' => 'yii\grid\ActionColumn',
-               'template' => '{delete} {update} {view} ',
-               'buttons' => [
-               'view' => function ($url,$model) 
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} ',
+                'buttons' => [
+                    'view' => function ($url,$model)
                     {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
-                    },
-                'update' => function ($url,$model) 
-                    {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
-                    }    
+                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton_item_'.$model->id,'onclick'=>'return showViewModalByType('.$model->id.',"item")']);
+                    }
                 ]
             ],
         ],

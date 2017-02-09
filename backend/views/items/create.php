@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Items */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'ITEMS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SHOPS_ITEMS'), 'url' => ['items/details','id'=>$_GET['id']]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="items-create">

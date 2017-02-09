@@ -107,7 +107,7 @@ class ShopOffersController extends Controller
 
             return $this->redirect(['index']);
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -149,7 +149,7 @@ class ShopOffersController extends Controller
             }
             return $this->redirect(['index']);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }
@@ -165,8 +165,8 @@ class ShopOffersController extends Controller
     {
         $model = $this->findModel($id);
         $model->updated_at = date('Y-m-d H:i:s');
-        $model->active = 1;
-        $model->update(['updated_at','deleted']);
+        $model->active = 0;
+        $model->update(['updated_at','active']);
         $model->save(false);
 
         return $this->redirect(['index']);

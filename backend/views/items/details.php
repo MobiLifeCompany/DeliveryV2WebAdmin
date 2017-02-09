@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'ITEMS');
+$this->title = Yii::t('app', 'SHOPS_ITEMS');
 $this->params['breadcrumbs'][] = $this->title;
 
 // get current page name for leftside menu
@@ -63,10 +63,10 @@ $this->params['currentPage'] = $curpage;
 	            }
 	        ],
            // 'rating',
-         //   'estimation_time',
+            'estimation_time',
             'min_amount',
-           // 'delivery_expected_time',
-           // 'delivery_charge',
+            'delivery_expected_time',
+            'delivery_charge',
             //'lang',
             [
 	            'attribute' => Yii::t('app', 'POSITION'),
@@ -80,46 +80,16 @@ $this->params['currentPage'] = $curpage;
                        return "<span class= 'label label-success'>".Yii::t('app', 'SET')."</span>";
                     }    
 	            }
-	        ],
-             [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a('','index.php?r=shops/map&id='.$model->id,['class'=>'glyphicon glyphicon-map-marker']); },
-            ],
-            [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a(Yii::t('app', 'ITEMS'),'index.php?r=items/details&id='.$model->id,['class'=>'badge bg-light-blue']); },
-            ],
-            [
-                'vAlign'=>'middle',
-                'format'=>'raw',
-                'value' => function($model) { return Html::a(Yii::t('app', 'DELIVERY_AREAS'),'#',['class'=>'badge bg-light-blue', 'value'=>Url::to('index.php?r=shops/areas&id='.$model->id), 'id'=>'deliveryAreasModalButton'.$model->id,'onclick'=>'return showDeliveryAreasModal('.$model->id.')']); },
-            ],
-            [
-               'class' => 'yii\grid\ActionColumn',
-               'template' => '{update} {view} ',
-               'buttons' => [
-               'view' => function ($url,$model) 
-                    {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>'index.php?r=shops/view&id='.$model->id ,'id'=>'viewModalButton'.$model->id,'onclick'=>'return showViewModal('.$model->id.')']);
-                    },
-                'update' => function ($url,$model) 
-                    {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>'index.php?r=shops/update&id='.$model->id,'id'=>'updateModalButton'.$model->id,'onclick'=>'return showUpdateModal('.$model->id.')']);
-                    }    
-                ]
-            ],
+	        ]
         ],
     ]); ?>
 
     <h3><?= Html::encode($this->title) ?></h3>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
     <p>
-        <?php //Html::a('<span class="glyphicon glyphicon-plus pull-right">','#', ['value'=>Url::to('index.php?r=items/create'),'id'=>'modalButton']); ?>
+        <?= Html::a('<span class="glyphicon glyphicon-plus pull-right">','index.php?r=items/create&id='.$_GET['id']); ?>
     </p>
     <br/>
-
+    <br/>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'export' =>false,
@@ -150,12 +120,12 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
 	            'value' => function($model) {
                     if($model->deleted == 1){
-		                return "<span class= 'label label-success'>".Yii::t('app', 'YES')."</span>";
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'YES')."</span>";
                     }
                     else {
-                        return "<span class= 'label label-danger'>".Yii::t('app', 'NO')."</span>";
-                    }    
-	            }
+                        return "<span class= 'label label-success'>".Yii::t('app', 'NO')."</span>";
+                    }
+                }
 	        ],
             [
 	            'attribute' => 'active',
@@ -172,17 +142,25 @@ $this->params['currentPage'] = $curpage;
 	        ],
             [
                'class' => 'yii\grid\ActionColumn',
-               'template' => '{delete} {update} {view} ',
+               'template' => '{update} {view} ',
                'buttons' => [
                'view' => function ($url,$model) 
                     {
                         return Html::a('<span class="glyphicon glyphicon-eye-open">','#',['value'=>$url,'id'=>'viewModalButton_item_'.$model->id,'onclick'=>'return showViewModalByType('.$model->id.',"item")']);
                     },
-                'update' => function ($url,$model) 
+                'update' => function ($url,$model)
                     {
-                        return Html::a('<span class="glyphicon glyphicon-pencil">','#',['value'=>$url,'id'=>'updateModalButton_item_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"item")']);
+                        return Html::a('<span class="glyphicon glyphicon-pencil">','index.php?r=items/update&id='.$model->id.'&sid='.$_GET['id']);
                     }    
                 ]
+            ],
+            [
+                'vAlign'=>'middle',
+                'format'=>'raw',
+                'value' => function ($model)
+                {
+                    return Html::a('<span class="glyphicon glyphicon-trash">','index.php?r=items/delete&id='.$model->id.'&sid='.$_GET['id'],['data' => ['confirm' => Yii::t('app', 'Are you sure you want to delete this item?')]]);
+                },
             ],
         ],
     ]); ?>

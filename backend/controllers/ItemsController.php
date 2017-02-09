@@ -40,13 +40,7 @@ class ItemsController extends Controller
                         'roles' =>['@'],
                     ],
                 ]
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+            ]
         ];
     }
 
@@ -117,7 +111,7 @@ class ItemsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Items();
         $shopItemCategory = new ShopItemCategories();
@@ -127,11 +121,11 @@ class ItemsController extends Controller
         $imageModel->imageFile = UploadedFile::getInstance($model, 'photo');
         //
         if ($model->load(Yii::$app->request->post())) {
-            $shopItemCategory = ShopItemCategories::findOne(['item_category_id'=> $model->item_category_id,'shop_id' =>$model->shop_id]);
+            $shopItemCategory = ShopItemCategories::findOne(['item_category_id'=> $model->item_category_id,'shop_id' =>$id]);
             if(empty($shopItemCategory)) {
                 //Insert into shop_item_categories first
                 $shopItemCategory = new ShopItemCategories();
-                $shopItemCategory->shop_id = $model->shop_id;
+                $shopItemCategory->shop_id = $id;
                 $shopItemCategory->item_category_id = $model->item_category_id;
                 $shopItemCategory->deleted = 0;
                 $shopItemCategory->created_at = date('Y-m-d h:m:s');
@@ -143,6 +137,7 @@ class ItemsController extends Controller
             {
                 $shopItemCategoryLastId = $shopItemCategory->id;
                 $model->shop_item_category_id = $shopItemCategoryLastId;
+                $model->shop_id = $id;
                 $model->created_at = date('Y-m-d h:m:s');
                 $model->updated_at = date('Y-m-d h:m:s');
 
@@ -164,10 +159,11 @@ class ItemsController extends Controller
                     echo 0;
                 }
             }
-             return $this->redirect(['index']);
+
+             return $this->redirect(['items/details','id'=>$id]);
         }
         else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -179,10 +175,10 @@ class ItemsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$sid)
     {
         $model = $this->findModel($id);
-        $model->shop_id = ShopItemCategories::findOne($model->shop_item_category_id)->shop_id;
+        $model->shop_id = $sid;
         $model->item_category_id = ShopItemCategories::findOne($model->shop_item_category_id)->item_category_id;
 
         $photoTemp = $model->photo;
@@ -218,10 +214,11 @@ class ItemsController extends Controller
                 }
             }
 
-            return $this->redirect(['index']);
+            return $this->redirect(['items/details','id'=>$sid]);
         } else {
-            return $this->renderAjax('update', [
+            return $this->render('update', [
                 'model' => $model,
+                'sid' =>$sid
             ]);
         }
     }
@@ -232,7 +229,7 @@ class ItemsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id,$sid)
     {
         $item = $this->findModel($id);
         $item->updated_at = date('Y-m-d H:i:s');
@@ -241,7 +238,7 @@ class ItemsController extends Controller
         $item->update(['updated_at','deleted','active']);
         $item->save(false);
 
-        return $this->redirect(['index']);
+        return $this->redirect(['items/details','id'=>$sid]);
     }
 
     /**

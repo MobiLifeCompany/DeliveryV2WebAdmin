@@ -16,7 +16,6 @@ class AppAssetRTL extends AssetBundle
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
-        'https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css',
         'css/AdminLTE-RTL.css',
         'css/bootstrap-rtl.min.css',
         'css/rtl.css',

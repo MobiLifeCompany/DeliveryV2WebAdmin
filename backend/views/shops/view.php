@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['image',['height'=>'100']],
             ],
             'masteries:ntext',
+            'ar_masteries:ntext',
             [
                 'attribute'=>'deleted',
                 'value' =>  $model->deleted == 0 ? Yii::t('app', 'YES') : Yii::t('app', 'NO')
