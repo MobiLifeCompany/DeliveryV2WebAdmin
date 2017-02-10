@@ -19,14 +19,31 @@ use yii\web\JsExpression;
 
 <div class="orders-form">
 
-   <?php 
-        $form = ActiveForm::begin(['id'=>$model->formName(),]); 
-        $userShops = Yii::$app->session['userShops'];
-        $users = User::find()->where(['in','shop_id',$userShops])->all();   
+   <?php
+       $form = ActiveForm::begin(['id'=>$model->formName(),]);
+       $userShops = Yii::$app->session['userShops'];
+
+       $query = User::find();
+       $dataProvider = new \yii\data\ActiveDataProvider([
+           'query' => $query,
+           'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
+       ]);
+       $query->joinWith('userShops');
+       $query->orWhere(['user.shop_id'=>$sid]);
+       $query->orWhere([
+           'and',
+           ['user.user_type'=>'CR_DELIVERY_MAN'],
+           ['in','user_shops.shop_id',$userShops],
+       ]);
+       $query->distinct();
+       $result = [];
+       foreach($dataProvider->getModels() as $xxx ){
+           $result[$xxx->id] = $xxx;
+       }
     ?>
 
      <?= $form->field($model, 'delivery_user_id')->dropDownList(
-                    ArrayHelper::map($users,'id','username'), 
+                    ArrayHelper::map($result,'id','username'),
                     ['prompt' => Yii::t('app', 'SELECT_USER'),]);
                     
      ?>

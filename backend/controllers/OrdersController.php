@@ -221,7 +221,7 @@ class OrdersController extends Controller
         ]);
     }
 
-    public function actionSetdelivery($id)
+    public function actionSetdelivery($id,$sid)
     {
         $model = $this->findModel($id);
 
@@ -241,6 +241,7 @@ class OrdersController extends Controller
         } else {
             return $this->renderAjax('updateDeliveryUser', [
                 'model' => $model,
+                'sid' =>$sid
             ]);
         }
     }

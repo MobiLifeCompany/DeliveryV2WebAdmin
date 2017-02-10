@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $form->field($model, 'shop_id')->listBox(
                     ArrayHelper::map(Shops::find()->all(),'id','name'), 
-                    ['multiple' => 'true']);
+                    ['multiple' => 'true'])->label(Yii::t('app', 'USER_SHOPS'));
      ?>
 
     <div class="form-group">

@@ -78,7 +78,7 @@ use dosamigos\datepicker\DateRangePicker;
             'type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\Select2', 
             'options'=>['data'=>[ 'OPEN' => 'Open', 'PENDING' => 'Pending',
-                    'CANCEL' => 'Cancel', 'CLOSED' => 'Closed','RE-OPEN' => 'Re-Open', ],], 
+                    'CANCEL' => 'Cancel', 'CLOSED' => 'Closed','READY'=>'Ready','ON-DELIVERY' => 'On-Delivery', ],],
             'hint'=>Yii::t('app', 'SELECT_ORDER_STATUS'),
             'style' => 'width:300px'
             ],

@@ -126,7 +126,7 @@ $this->params['currentPage'] = $curpage;
                 'format'=>'raw',
                 'value' => function($model) { 
                       if($model->shop->subscribed_in_delivery == 1 || Yii::$app->user->can('show_unsubscribe_shop')){
-                         return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id,'id'=>'updateModalButton_deliveryMan_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"deliveryMan")']); 
+                         return Html::a('<span class="glyphicon glyphicon-user">','#',['value'=>'index.php?r=orders/setdelivery&id='.$model->id.'&sid='.$model->shop_id,'id'=>'updateModalButton_deliveryMan_'.$model->id,'onclick'=>'return showUpdateModalByType('.$model->id.',"deliveryMan")']);
                        }else{
                         return "";
                       }

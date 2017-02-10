@@ -557,7 +557,7 @@ else
                 {
                     ?>
                     <li class="treeview  <?php
-                    if(isset($this->params['currentPage']) && ($this->params['currentPage']=='countries' || $this->params['currentPage']=='cities' || $this->params['currentPage']=='areas' || $this->params['currentPage']=='shops')){
+                    if(isset($this->params['currentPage']) && ($this->params['currentPage']=='countries' || $this->params['currentPage']=='cities' || $this->params['currentPage']=='areas' || $this->params['currentPage']=='businesses'  ||  $this->params['currentPage']=='shops')){
                         echo "active";
                     }
                     ?>">

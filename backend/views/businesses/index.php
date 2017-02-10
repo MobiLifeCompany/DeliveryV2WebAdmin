@@ -12,6 +12,10 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'BUSINESSES');
 $this->params['breadcrumbs'][] = $this->title;
+
+// get current page name for leftside menu
+$curpage = Yii::$app->controller->id;
+$this->params['currentPage'] = $curpage;
 ?>
 <div class="businesses-index">
 
