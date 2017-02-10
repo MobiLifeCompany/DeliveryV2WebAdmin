@@ -134,7 +134,7 @@ $this->params['currentPage'] = $curpage;
             ],
             // 'created_at',
             // 'updated_at',
-            [
+            /*[
                 'vAlign'=>'middle',
                 'format'=>'raw',
                 'value' => function($model) { 
@@ -146,7 +146,7 @@ $this->params['currentPage'] = $curpage;
                         return "";
                     }
                 },
-            ],
+            ],*/
             [
                 'vAlign'=>'middle',
                 'format'=>'raw',
