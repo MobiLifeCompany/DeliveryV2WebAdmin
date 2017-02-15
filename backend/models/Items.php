@@ -46,7 +46,7 @@ class Items extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_category_id','shop_item_category_id','photo','name', 'description', 'price', 'ar_name','active', 'ar_description','deleted'], 'required'],
+            [['item_category_id','shop_item_category_id','name', 'description', 'price', 'ar_name','active', 'ar_description','deleted'], 'required'],
             [['shop_item_category_id', 'active', 'deleted'], 'integer'],
             [['created_at', 'updated_at', 'item_category_id', 'shop_id'], 'safe'],
             [['name', 'description', 'price', 'ar_name', 'ar_description'], 'string', 'max' => 255],
