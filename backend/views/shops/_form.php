@@ -113,15 +113,15 @@ use kartik\file\FileInput;
 
     <?php
     if(!$model->isNewRecord){
-        $form->field($model, 'enable_email_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']);
-        $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'YES'), '1'=>Yii::t('app', 'NO'), ], ['prompt' => Yii::t('app', 'STATUS')]);
-        $form->field($model, 'is_avilable')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'AVALABILITY')]);
-        $form->field($model, 'email')->textInput(['maxlength' => true]);
-        $form->field($model, 'country')->textInput(['maxlength' => true]);
-        $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]);
-        $form->field($model, 'rating')->dropDownList([ '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], ['prompt' => Yii::t('app', 'RATING')]);
-        $form->field($model, 'subscribed')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
-        $form->field($model, 'subscribed_in_delivery')->dropDownList([ 0=> Yii::t('app', 'NO'), 1=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
+        echo $form->field($model, 'enable_email_notification')->dropDownList([ 'Yes' => Yii::t('app', 'YES'), 'No' => Yii::t('app', 'NO'), ], ['prompt' => '']);
+        echo $form->field($model, 'deleted')->dropDownList([ '0'=> Yii::t('app', 'YES'), '1'=>Yii::t('app', 'NO'), ], ['prompt' => Yii::t('app', 'STATUS')]);
+        echo $form->field($model, 'is_avilable')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'AVALABILITY')]);
+        echo $form->field($model, 'email')->textInput(['maxlength' => true]);
+        echo $form->field($model, 'country')->textInput(['maxlength' => true]);
+        echo $form->field($model, 'lang')->dropDownList([ 'en' => Yii::t('app', 'EN'), 'ar' => Yii::t('app', 'AR'), ], ['prompt' => Yii::t('app', 'LANGUAGE')]);
+        echo $form->field($model, 'rating')->dropDownList([ '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'], ['prompt' => Yii::t('app', 'RATING')]);
+        echo $form->field($model, 'subscribed')->dropDownList([ '0'=> Yii::t('app', 'NO'), '1'=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
+        echo $form->field($model, 'subscribed_in_delivery')->dropDownList([ 0=> Yii::t('app', 'NO'), 1=>Yii::t('app', 'YES'), ], ['prompt' => Yii::t('app', 'STATUS')]);
     }
     ?>
 
