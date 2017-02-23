@@ -258,6 +258,7 @@
         'CONFIRM_WORKINGORDERS_MESSAGE_PENDING' => 'Are you sure this order needs to be prepared following time ',
         '30_MIN'=> '30 Minutes ',
         '10_MIN'=> '10 Minutes ',
+        '20_MIN'=> '20 Minutes ',
         '60_MIN'=> '60 Minutes ',
         '120_MIN'=> '120 Minutes ',
         '240_MIN'=> '240 Minutes ',

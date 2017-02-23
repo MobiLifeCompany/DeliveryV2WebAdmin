@@ -78,6 +78,10 @@ $this->params['currentPage'] = $curpage;
                         return "<span class= 'label label-success'>".Yii::t('app', 'OPEN')."</span>";
                     }if($model->order_status =='RE-OPEN'){
                         return "<span class= 'label label-success'>".Yii::t('app', 'REOPEN')."</span>";
+                    }else if($model->order_status =='READY'){
+                        return "<span class= 'label label-danger'>".Yii::t('app', 'READY')."</span>";
+                    }else if($model->order_status =='ON-DELIVERY'){
+                        return "<span class= 'label label-primary'>".Yii::t('app', 'ON-DELIVERY')."</span>";
                     }else if($model->order_status =='CLOSED'){
                         return "<span class= 'label label-danger'>".Yii::t('app', 'CLOSED')."</span>";
                     }else if($model->order_status =='PENDING'){
@@ -88,9 +92,9 @@ $this->params['currentPage'] = $curpage;
                 }
 	        ],
            //  'qty',
-          //   'delivery_charge',
+             'delivery_charge',
              'total',
-            [
+            /*[
                 'attribute' => 'subscribed_in_delivery',
                 'vAlign'=>'middle',
                 'format'=>'raw',
@@ -102,7 +106,7 @@ $this->params['currentPage'] = $curpage;
                         return "<span class= 'label label-success'>".Yii::t('app', 'YES')."</span>";
                     }    
                 }
-            ],
+            ],*/
             [
                  'attribute' => Yii::t('app', 'TOTAL_WITH_DELIVERY'),
                  'value' => function($model) { return $model->total + $model->delivery_charge;},

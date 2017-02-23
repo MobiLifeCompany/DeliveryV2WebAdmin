@@ -29,7 +29,8 @@
         "kartik-v/yii2-builder": "@dev",
         "kartik-v/yii2-widgets": "*",
         "2amigos/yii2-highcharts-widget": "*",
-        "kartik-v/yii2-dialog": "*"
+        "kartik-v/yii2-dialog": "*",
+		"yiidoc/yii2-timeago": "dev-master"
 
     },
     "require-dev": {

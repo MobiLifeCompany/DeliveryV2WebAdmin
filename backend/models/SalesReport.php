@@ -47,7 +47,7 @@ class SalesReport extends Report
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => Yii::$app->params['pageSize']),
+            'pagination' => array('pageSize' => 1000),
         ]);
 
         $this->load($params);
@@ -157,7 +157,7 @@ class SalesReport extends Report
             'sql' => $query,
             'totalCount'=>$count,
             'pagination' => [
-                'pageSize' => Yii::$app->params['pageSize'],
+                'pageSize' => 1000,
                 ],
             ]);
         

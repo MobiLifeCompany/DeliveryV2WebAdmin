@@ -33,7 +33,7 @@ use yii\web\JsExpression;
        $query->orWhere([
            'and',
            ['user.user_type'=>'CR_DELIVERY_MAN'],
-           ['in','user_shops.shop_id',$userShops],
+          // ['in','user_shops.shop_id',$userShops],
        ]);
        $query->distinct();
        $result = [];

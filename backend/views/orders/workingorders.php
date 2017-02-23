@@ -1,6 +1,11 @@
 <?php
 use kartik\dialog\Dialog;
 use yii\web\JsExpression;
+use yii\helpers\Html;
+use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
+
+
 $this->title = Yii::t('app', 'WORKING_ORDERS');
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -19,6 +24,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
     foreach ($workingOrdersDataProvider->getModels() as $record)
     {
         $order_id = $record['order_id'];
+        $shop_id = $record['shop_id'];
         $order_total = $record['total'];
         $order_delivery_charge = $record['delivery_charge'];
         $customer_full_name = $record['customer_full_name'];
@@ -29,6 +35,29 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         $customer_phone = $record['customer_phone'];
         $order_status = $record['order_status'];
         $order_date = $record['order_date'];
+
+        $datediff = date_diff(new \DateTime("now"), new \DateTime($order_date));
+        $datediffStr = "";
+        if ($datediff->y >0) {  // Minutes
+            $datediffStr = $datediff->y ."y ";
+        }
+        if ($datediff->m >0) {  // Minutes
+            $datediffStr = $datediffStr.$datediff->m ."mon ";
+        }
+        if($datediff->d >0) {  // Hours
+            $datediffStr= $datediffStr.$datediff->d ."d ";
+        }
+        if($datediff->h >0) {  // Hours
+            $datediffStr= $datediffStr.$datediff->h ."h ";
+        }
+        if($datediff->i >0) {  // Hours
+            $datediffStr= $datediffStr.$datediff->i ."m ";
+        }
+        if($datediff->s >0) {  // Hours
+            $datediffStr= $datediffStr.$datediff->s ."s ";
+        }
+
+		
         $order_user = $record['username'];
         $item_name =  $record['item_name']; ;
         $order_item_qty = $record['order_item_qty'];
@@ -44,6 +73,8 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
         $order_time = "";
         if($time_in_m==10)
             $order_time = Yii::t("app", "10_MIN");
+        else if($time_in_m==20)
+            $order_time = Yii::t('app', "20_MIN");
         else if($time_in_m==30)
             $order_time = Yii::t('app', "30_MIN");
         else if($time_in_m==60)
@@ -70,7 +101,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                             <img class="img-circle" src="dist/img/logo.png" alt="User Avatar">
                         </div>-->
                         <!-- /.widget-user-image -->
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?></b></h5>
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?> -  <?=$datediffStr ?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>> <b><?=$shop_name;?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b>, <?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ADDRESS');?>: <?= $city_name.' - '.$area_name?></h5>
@@ -84,6 +115,9 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <?php if ($hasNote){ ?>
                           <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>
                         <?php } ?>
+                        <span>
+                            <?=Html::a('<span class="glyphicon glyphicon-user" style="color:#ffffff">','#',['value'=>'index.php?r=orders/setdelivery&id='.$order_id.'&sid='.$shop_id,'id'=>'updateModalButton_deliveryMan_'.$order_id,'onclick'=>'return showUpdateModalByType('.$order_id.',"deliveryMan")']);?>
+                        </span>
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
@@ -147,6 +181,13 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                 }")
                     ],
                     [
+                        'id' => 'cust-btn-10',
+                        'label' => Yii::t('app', '20_MIN'),
+                        'action' => new JsExpression("function(dialog) {
+                           updateOrderStatusWithTime(order_id,'PENDING',20);
+                }")
+                    ],
+                    [
                         'id' => 'cust-btn-2',
                         'label' => Yii::t('app', '30_MIN'),
                         'action' => new JsExpression("function(dialog) {
@@ -178,6 +219,19 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
             ]
         ]);
     ?>
+<?php
+    Modal::begin([
+        'header'=>'<h4>'. Yii::t('app', 'DELIVERY_MAN') .'</h4>',
+        'id' => 'modal',
+        'size' => 'modal-lg',
+    ]);
+    echo "<div id='modalContent'></div>";
+    Modal::end();
+?>
+<?php Pjax::begin(['id'=>'modalGrid']);?>
+<div>
+</div>
+<?php Pjax::end();?>
 </div>
 <script>
 var order_id = 0;
@@ -252,6 +306,8 @@ function updateOrderStatusWithTime(id,status,time_in_m) {
     var order_time = '';
     if(time_in_m==10)
         order_time = '<?php echo Yii::t('app', '10_MIN');?>';
+    else if(time_in_m==20)
+        order_time = '<?php echo Yii::t('app', '20_MIN');?>';
     else if(time_in_m==30)
         order_time = '<?php echo Yii::t('app', '30_MIN');?>';
     else if(time_in_m==60)
