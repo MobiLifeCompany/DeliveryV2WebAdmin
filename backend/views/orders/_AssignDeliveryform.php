@@ -41,9 +41,12 @@ use yii\web\JsExpression;
            $result[$xxx->id] = $xxx;
        }
     ?>
-
      <?= $form->field($model, 'delivery_user_id')->dropDownList(
-                    ArrayHelper::map($result,'id','username'),
+         ArrayHelper::map($result,
+             'id',
+             function($model) {
+                 return $model['first_name'].' '.$model['last_name'];
+             }),
                     ['prompt' => Yii::t('app', 'SELECT_USER'),]);
                     
      ?>

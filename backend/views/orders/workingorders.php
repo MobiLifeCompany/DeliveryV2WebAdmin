@@ -59,6 +59,8 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
 
 		
         $order_user = $record['username'];
+        $delivery_user_fname = $record['delivery_user_fname'];
+        $delivery_user_lname = $record['delivery_user_lname'];
         $item_name =  $record['item_name']; ;
         $order_item_qty = $record['order_item_qty'];
         $order_items_price= $record['order_items_price'];
@@ -110,7 +112,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ORDER_STATUS');?>: <?= Yii::t('app',$order_status);?> <?=$order_time;?></h5>
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'ORDER_DATE');*/?>: <?/*= $order_date; */?></h5>-->
                         <?php if ($order_user){ ?>
-                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $order_user; ?></b> </h5>
+                        <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $delivery_user_fname.' '.$delivery_user_lname; ?></b> </h5>
                         <?php } ?>
                         <?php if ($hasNote){ ?>
                           <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>

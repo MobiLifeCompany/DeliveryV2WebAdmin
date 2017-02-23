@@ -112,6 +112,7 @@ $this->params['currentPage'] = $curpage;
                  'value' => function($model) { return $model->total + $model->delivery_charge;},
             ],
             // 'cancel_reason',
+             'created_at',
             // 'note:ntext',
             [
              'attribute' => 'delivery_user_id',
@@ -119,7 +120,7 @@ $this->params['currentPage'] = $curpage;
              'format'=>'raw',
              'value'=>function($model) { 
                         if($model->deliveryUser!=null){
-                            return "<span class= 'label label-success'>".$model->deliveryUser->username."</span>";
+                            return "<span class= 'label label-success'>".$model->deliveryUser->first_name.' '.$model->deliveryUser->last_name."</span>";
                         }else{
                             return "<span class= 'label label-danger'>".Yii::t('app', 'NOT_ASSIGNED')."</span>";
                         }
