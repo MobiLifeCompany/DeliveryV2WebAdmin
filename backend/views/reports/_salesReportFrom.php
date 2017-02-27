@@ -82,6 +82,11 @@ use dosamigos\datepicker\DateRangePicker;
         ['user.user_type'=>'CR_DELIVERY_MAN'],
         // ['in','user_shops.shop_id',$userShops],
     ]);
+    $query->orWhere([
+        'and',
+        //['user.user_type'=>'CR_DELIVERY_MAN'],
+         ['in','user_shops.shop_id',$userShops],
+    ]);
     $query->distinct();
     $result2 = [];
     array_push($result2,['id'=>-1,'name'=>'All']);
