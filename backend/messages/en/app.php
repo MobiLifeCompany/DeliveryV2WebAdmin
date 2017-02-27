@@ -267,5 +267,8 @@
         'ENABLE_EMAIL_NOTIFICATION' => 'Enable Email Notification',
         'AR_MASTERIES' => 'AR Masteries',
         'SHOPS_ITEMS' => 'Shops Items',
+        'DAILY_ORDERS_REPORT' => 'Daily Orders Count Chart',
+        'ORDER_COUNT' => 'Orders Count',
+        'COUNT' => 'Count',
     ];
 ?>

@@ -267,5 +267,8 @@
         'ENABLE_EMAIL_NOTIFICATION' => 'التنبيه بالإيميل',
         'AR_MASTERIES' => 'الاختصاصات',
         'SHOPS_ITEMS' => 'مواد المتجر',
+        'DAILY_ORDERS_REPORT' => 'مخطط لعدد الطلبيات اليومية',
+        'ORDER_COUNT' => 'عدد الطلبيات',
+        'COUNT' => 'العدد',
     ];
 ?>

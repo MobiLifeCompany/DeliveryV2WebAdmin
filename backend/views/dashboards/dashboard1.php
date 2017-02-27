@@ -142,7 +142,7 @@ if(Yii::$app->user->can('show_orders_statistics') || Yii::$app->user->can('show_
       <div class="col-md-12">
           <div class="box box-primary ui-sortable-handle">
             <div class="box-header with-border" >
-                <h3 class="box-title"><?=Yii::t('app', 'DAILY_SALES_REPORT');?></h3>
+                <h3 class="box-title"><?=Yii::t('app', 'DAILY_ORDERS_REPORT');?></h3>
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
@@ -167,18 +167,18 @@ if(Yii::$app->user->can('show_orders_statistics') || Yii::$app->user->can('show_
                                         'type' => 'line',
                                 ],
                                 'title' => [
-                                    'text' => Yii::t('app', 'DAILY_SALES_REPORT').' ('. $currentMonth.'-'.$currentYear.')'
+                                    'text' => Yii::t('app', 'DAILY_ORDERS_REPORT').' ('. $currentMonth.'-'.$currentYear.')'
                                     ],
                                 'xAxis' => [
                                     'categories' => $monthDate
                                 ],
                                 'yAxis' => [
                                     'title' => [
-                                        'text' => Yii::t('app', 'SALES_SUMMARY').' '.Yii::$app->params['currency']
+                                        'text' => Yii::t('app', 'ORDER_COUNT')
                                     ]
                                 ],
                                 'series' => [
-                                    ['name' => Yii::t('app', 'AMOUNT'), 'data' =>$sumTotal],
+                                    ['name' => Yii::t('app', 'COUNT'), 'data' =>$sumTotal],
                                 ]
                             ]
                         ]);
