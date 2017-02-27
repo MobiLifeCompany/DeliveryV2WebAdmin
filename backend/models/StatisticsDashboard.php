@@ -124,7 +124,7 @@ class StatisticsDashboard extends Report
         }
 
         $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("SELECT concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,sum(total) sumTotal FROM orders 
+        $command = $connection->createCommand("SELECT concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) monthDate,count(*) sumTotal FROM orders
                                               where EXTRACT(MONTH FROM `created_at`) = date_format(now(), '%m') ".$shopStatment."
                                               group by concat(EXTRACT(day FROM `created_at`),'-',EXTRACT(MONTH FROM `created_at`),'-', EXTRACT(YEAR FROM `created_at`)) order by created_at");
         $result = $command->queryAll();
