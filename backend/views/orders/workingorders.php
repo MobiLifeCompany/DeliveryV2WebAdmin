@@ -106,6 +106,9 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?> -  <?=$datediffStr ?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>> <b><?=$shop_name;?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b>, <?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
+                        <?php if ($hasNote){ ?>
+                            <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>
+                        <?php } ?>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ADDRESS');?>: <?= $city_name.' - '.$area_name?></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?= $customer_address; ?></h5>
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'PHONE');*/?>: <b><?/*= $customer_phone;*/?> </b></h5>-->
@@ -113,9 +116,6 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'ORDER_DATE');*/?>: <?/*= $order_date; */?></h5>-->
                         <?php if ($order_user){ ?>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $delivery_user_fname.' '.$delivery_user_lname; ?></b> </h5>
-                        <?php } ?>
-                        <?php if ($hasNote){ ?>
-                          <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>
                         <?php } ?>
                         <span>
                             <?=Html::a('<span class="glyphicon glyphicon-user" style="color:#ffffff">','#',['value'=>'index.php?r=orders/setdelivery&id='.$order_id.'&sid='.$shop_id,'id'=>'updateModalButton_deliveryMan_'.$order_id,'onclick'=>'return showUpdateModalByType('.$order_id.',"deliveryMan")']);?>

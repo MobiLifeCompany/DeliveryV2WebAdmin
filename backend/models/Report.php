@@ -22,6 +22,7 @@ class Report extends Model
     public $to_date;
     public $order_status;
     public $item_id;
+    public $delivery_user_id;
 
     /**
      * @inheritdoc
@@ -46,6 +47,7 @@ class Report extends Model
             'to_date' => Yii::t('app', 'TO_DATE'),
             'item_id' => Yii::t('app', 'ITEMS'),
             'order_status' => Yii::t('app', 'ORDER_STATUS'),
+            'delivery_user_id'  => Yii::t('app', 'DELIVERY_USER'),
         ];
     }
 

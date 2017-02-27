@@ -60,13 +60,17 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
 	            'value' => function($model) {
                     if($model->order_status =='OPEN'){
 		                return Html::a('OPEN','#',['class'=>'label label-success']);
-                    }if($model->order_status =='RE-OPEN'){
+                    }elseif($model->order_status =='RE-OPEN'){
 		                return Html::a('RE-OPEN','#',['class'=>'label label-success']);
-                    }else if($model->order_status =='CLOSED'){
+                    }elseif($model->order_status =='CLOSED'){
                         return Html::a('CLOSED','#',['class'=>'label label-danger']);
-                    }else if($model->order_status =='PENDING'){
+                    }elseif($model->order_status =='READY'){
+                        return Html::a('READY','#',['class'=>'label label-danger']);
+                    }elseif($model->order_status =='ON-DELIVERY'){
+                        return Html::a('ON-DELIVERY','#',['class'=>'label label-primary']);
+                    }elseif($model->order_status =='PENDING'){
                         return Html::a('PENDING','#',['class'=>'label label-warning']);
-                    }else if($model->order_status =='CANCEL'){
+                    }elseif($model->order_status =='CANCEL'){
                         return Html::a('CANCEL','#',['class'=>'label label-info']);
                     }    
 	            },
@@ -113,7 +117,7 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
              'format'=>'raw',
              'value'=>function($model) { 
                      if($model->deliveryUser!=null){
-                         return  Html::a($model->deliveryUser->username,'#',['class'=>'label label-success']);
+                         return  Html::a($model->deliveryUser->first_name.' '.$model->deliveryUser->last_name,'#',['class'=>'label label-success']);
                      }else{
                           return Html::a('Not Assigned','#',['class'=>'label label-danger']);
                      }

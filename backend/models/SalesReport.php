@@ -59,7 +59,9 @@ class SalesReport extends Report
         $shop_id_val = -1;
         $from_date_val=date('Y-m-d');
         $to_date_val = date('Y-m-d');
-        $order_status='CLOSED';
+        $order_status='ALL';
+        $delivery_user_id = -1;
+
         
         foreach ($params as $k => $v) {
             if($k=='SalesReport'){
@@ -67,6 +69,7 @@ class SalesReport extends Report
                 $from_date_val=$params['SalesReport']['from_date'];
                 $to_date_val = $params['SalesReport']['to_date'];
                 $order_status = $params['SalesReport']['order_status'];
+                $delivery_user_id = $params['SalesReport']['delivery_user_id'];
                 break;
             }
         }
@@ -83,7 +86,14 @@ class SalesReport extends Report
              $query->andFilterWhere(['>=','created_at', $from_date_val]);
          }
 
-         $query->andFilterWhere(['order_status'=> $order_status]);
+        if($delivery_user_id!=-1){
+            $query->andFilterWhere(['delivery_user_id'=> $delivery_user_id]);
+        }
+
+        if($order_status!='ALL'){
+            $query->andFilterWhere(['order_status'=> $order_status]);
+        }
+
      
          // print_r($query->createCommand()->getRawSql());
         //  print_r('----------');
