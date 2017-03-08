@@ -644,7 +644,7 @@ a:focus {
     display: none;
   }
   .sidebar-mini.sidebar-collapse .main-header .navbar {
-    margin-left: 0;
+    margin-left: 50px;
   }
 }
 .sidebar-menu,

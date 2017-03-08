@@ -79,6 +79,10 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
             $order_time = Yii::t('app', "20_MIN");
         else if($time_in_m==30)
             $order_time = Yii::t('app', "30_MIN");
+        else if($time_in_m==35)
+            $order_time = Yii::t('app', "35_MIN");
+        else if($time_in_m==40)
+            $order_time = Yii::t('app', "40_MIN");
         else if($time_in_m==60)
             $order_time = Yii::t('app', '60_MIN');
         else if($time_in_m==120)
@@ -106,9 +110,6 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:14px;"';?>># <b><?= $order_id; ?></b> @ <b><?= $order_date; ?> -  <?=$datediffStr ?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>> <b><?=$shop_name;?></b></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'CUSTOMER');?>: <b><?= $customer_full_name; ?></b>, <?=Yii::t('app', 'PHONE');?>: <b><?= $customer_phone;?> </b></h5>
-                        <?php if ($hasNote){ ?>
-                            <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>
-                        <?php } ?>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app', 'ADDRESS');?>: <?= $city_name.' - '.$area_name?></h5>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?= $customer_address; ?></h5>
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'PHONE');*/?>: <b><?/*= $customer_phone;*/?> </b></h5>-->
@@ -116,6 +117,9 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         <!--<h5 class="widget-user-desc"      <?php /*if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';*/?>><?/*=Yii::t('app', 'ORDER_DATE');*/?>: <?/*= $order_date; */?></h5>-->
                         <?php if ($order_user){ ?>
                         <h5 class="widget-user-desc"      <?php if(Yii::$app->language=='ar') echo 'style="font-size:13px;"';?>><?=Yii::t('app','DELIVERY_USER');?>: <b><?= $delivery_user_fname.' '.$delivery_user_lname; ?></b> </h5>
+                        <?php } ?>
+                        <?php if ($hasNote){ ?>
+                            <h5 class="widget-user-desc"    style="background-color: chartreuse; <?php if(Yii::$app->language=='ar') echo 'font-size:13px;';?>"><?=Yii::t('app', 'NOTE');?>: <b><?=$note;?></b></h5>
                         <?php } ?>
                         <span>
                             <?=Html::a('<span class="glyphicon glyphicon-user" style="color:#ffffff">','#',['value'=>'index.php?r=orders/setdelivery&id='.$order_id.'&sid='.$shop_id,'id'=>'updateModalButton_deliveryMan_'.$order_id,'onclick'=>'return showUpdateModalByType('.$order_id.',"deliveryMan")']);?>
@@ -194,6 +198,20 @@ $this->params['currentPageAction'] = Yii::$app->controller->action->id;
                         'label' => Yii::t('app', '30_MIN'),
                         'action' => new JsExpression("function(dialog) {
                                 updateOrderStatusWithTime(order_id,'PENDING',30);
+                }")
+                    ],
+                    [
+                        'id' => 'cust-btn-35',
+                        'label' => Yii::t('app', '35_MIN'),
+                        'action' => new JsExpression("function(dialog) {
+                                updateOrderStatusWithTime(order_id,'PENDING',35);
+                }")
+                    ],
+                    [
+                        'id' => 'cust-btn-40',
+                        'label' => Yii::t('app', '40_MIN'),
+                        'action' => new JsExpression("function(dialog) {
+                                updateOrderStatusWithTime(order_id,'PENDING',40);
                 }")
                     ],
                     [
@@ -312,6 +330,10 @@ function updateOrderStatusWithTime(id,status,time_in_m) {
         order_time = '<?php echo Yii::t('app', '20_MIN');?>';
     else if(time_in_m==30)
         order_time = '<?php echo Yii::t('app', '30_MIN');?>';
+    else if(time_in_m==35)
+        order_time = '<?php echo Yii::t('app', '35_MIN');?>';
+    else if(time_in_m==40)
+        order_time = '<?php echo Yii::t('app', '40_MIN');?>';
     else if(time_in_m==60)
         order_time = '<?php echo Yii::t('app', '60_MIN');?>';
     else if(time_in_m==120)

@@ -257,6 +257,8 @@
         'CONFIRM_WORKINGORDERS_MESSAGE_ON_DELIVERY' => 'Are you sure you want to change this order to be on deliver, order number: ',
         'CONFIRM_WORKINGORDERS_MESSAGE_PENDING' => 'Are you sure this order needs to be prepared following time ',
         '30_MIN'=> '30 Minutes ',
+        '35_MIN'=> '35 Minutes ',
+        '40_MIN'=> '40 Minutes ',
         '10_MIN'=> '10 Minutes ',
         '20_MIN'=> '20 Minutes ',
         '60_MIN'=> '60 Minutes ',
