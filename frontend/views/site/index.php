@@ -27,7 +27,6 @@
                                 <li><a href="#work">how it works</a></li>
                                 <li><a href="#benefits">benefits</a></li>
                                 <li><a href="#screenshots">screenshots</a></li>
-                                <li><a href="#priceing">Pricing</a></li>
                                 <li class="download"><a href="#download">download</a></li>
                             </ul>
                         </nav>
@@ -44,8 +43,8 @@
             <div class="wrapper pr">
                 <div class="col-7 md-col-10 above-fold-text" data-wow-delay="1s">
                     <img src="images/logo-text.png" alt="logo-text" />
-                    <h1 class="small">Best way to present Your <br /> beautiful apps</h1>
-                    <p>Available on App Store, Play Store and Window Store</p>
+                    <h1 class="small">Online Platform to Handle The Process of Day-to-Day Ordering-Delivery of Things <br /> </h1>
+                    <p>Available on Play Store</p>
                     <div class="btn-box">
                         <a class="red" href="#download">GET THE APP</a>
                         <a class="blue" href="#work">WATCH VIDEO <span class="icon-ic_play"></span></a>
@@ -62,25 +61,25 @@
             <div class="wrapper">
                 <div class="title-block">
                     <h2>About us</h2>
-                    <span class="sub-title">Maecenas dictum ex ut convallis consectetur</span>
+                    <span class="sub-title">Mobilife is a Development Company with Great Persons</span>
                     <i class="sep-line">&nbsp;</i>
-                    <p>Curabitur eget lobortis arcu, non venenatis felis. Duis volutpat lorem eros, tempus ornare velit sodales in. Vivamus at risus neque. Duis auctor lorem id ipsum sollicitudin congue.</p>
+                    <p>We have great Team contains experts in software development with more than 12 years of experience Zaher Hazeem, Nebras Salman  and Yaser El Sabbouh</p>
                 </div>
                 <div class="row text-center about-box">
                     <div class="col-4 md-col-12">
                         <span class="icon-ic_flat_design ficon"></span>
-                        <h6>Flat Design</h6>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                        <h6>Web Application</h6>
+                        <p>We have a great Team to Develope Any Type of Web Application </p>
                     </div>
                     <div class="col-4 md-col-12">
                         <span class="icon-ic_market ficon"></span>
-                        <h6>Marketable</h6>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                        <h6>Mobile Application</h6>
+                        <p>We have a great Team to Develope Any Type of Mobile Application </p>
                     </div>
                     <div class="col-4 md-col-12">
                         <span class="icon-ic_photos ficon"></span>
-                        <h6>Edit Photos</h6>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                        <h6>Systems Analyze</h6>
+                        <p>We have a great Team to Analyze Any Type of Projects </p>
                     </div>
                 </div>
             </div>
@@ -98,22 +97,23 @@
                         <div class="features-info md-col-12">
                             <span class="icon-ic_design ficon"></span>
                             <div class="info-text">
-                                <h6>Creative design</h6>
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6>Online Platform</h6>
+                                <p>(mobile App or Website) that shows essentials Shops menus and Offers.
+                                </p>
                             </div>
                         </div>
                         <div class="features-info md-col-12">
                             <span class="icon-ic_customize ficon"></span>
                             <div class="info-text">
-                                <h6>Easy to customize</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit est is.</p>
+                                <h6>Automate the process</h6>
+                                <p>and provide physical delivery service to subscribed shops.</p>
                             </div>
                         </div>
                         <div class="features-info md-col-12">
                             <span class="icon-ic_speed ficon"></span>
                             <div class="info-text">
-                                <h6>Fast speed</h6>
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6>Physical Delivery</h6>
+                                <p>Provide physical delivery service to subscribed shops.</p>
                             </div>
                         </div>
                     </div>
@@ -122,22 +122,24 @@
                         <div class="features-info md-col-12" >
                             <span class="icon-ic_flat_design ficon"></span>
                             <div class="info-text">
-                                <h6>Retina ready</h6>
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6>Track Delivery Boys</h6>
+                                <p>Provide platform with ability to track delivery boys based on GPS and maps, so shop user directly identify the location of delivery boy.
+                                </p>
                             </div>
                         </div>
                         <div class="features-info md-col-12">
                             <span class="icon-ic_use ficon"></span>
                             <div class="info-text">
                                 <h6>Easy to use</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit est is.</p>
+                                <p>Provide tools to view customer’s order history and preferred orders.</p>
                             </div>
                         </div>
                         <div class="features-info md-col-12">
                             <span class="icon-ic_support ficon"></span>
                             <div class="info-text">
-                                <h6>24/7 Support</h6>
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                <h6>Manage Delivery Shops Workforces</h6>
+                                <p>Provide focused delivery service to shops and ability to Track and Manage the delivery shops workforces.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -146,8 +148,8 @@
         </div><!-- features-main -->
 
         <div id="work" class="container work-main">
-            <video id="work-video" loop preload src="http://appify.projectsmd.in/html/appify_V2/testvideo.mp4">
-                <source src="http://appify.projectsmd.in/html/appify_V2/testvideo.mp4" width="100%" type="video/mp4">
+            <video id="work-video" loop preload src="images/testvideo.mp4">
+                <source src="images/testvideo.mp4" width="100%" type="video/mp4">
                 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
             </video>
             <div class="wrapper">
@@ -164,23 +166,33 @@
                 <div class="col-5 md-col-12 benefits-text">
                     <div class="title-block small">
                         <h2>Benefits</h2>
-                        <span class="sub-title">Lorem Ipsum is simply dummy text of the printing</span>
+                        <span class="sub-title">Develop Online platform to be unified catalog in Hama  for customers  to find their needs with advanced search capabilities.</span>
                         <i class="sep-line">&nbsp;</i>
-                        <p>Curabitur eget lobortis arcu, non venenatis felis. Duis vol lorem eros, tempus ornare velit sodales in. Vivamus at riseque. Duis auctor lorem.</p>
+                        <p>A considerable part of our delivery team will use bicycles or electric motors. This will encourage people to use green vehicles.
+                        </p>
                     </div>
 
                     <div class="sub-text md-col-9 sd-col-12">
                         <span class="icon-ic_shield ficon"> </span>
                         <div class="mar-l-55">
-                            <h6>Consectetur elit adipiscing</h6>
-                            <p>Ipsum dolor sit amet, consectetur adipiscing elit Integer tincidunt.</p>
+                            <h6>Provide ability to view and manage orders with history.
+                            </h6>
+                            <p>Automate the process and provide physical delivery service to subscribed shops.</p>
                         </div>
                         <div class="mar-l-55 icon-text">
                             <ul>
-                                <li><span class="icon-ic_bag ficon"></span>Adipiscing elit Integer tincidunt</li>
-                                <li><span class="icon-ic_hammer ficon"></span>Consectetur adipiscing elit</li>
-                                <li><span class="icon-ic_laptop ficon"></span>Adipiscing elit integer tincidunt efficitur</li>
-                                <li><span class="icon-ic_setting ficon"></span>Duis auctor lorem</li>
+                                <li><span class="icon-ic_bag ficon"></span>
+                                    Automate ordering-delivery process.
+                                </li>
+                                <li><span class="icon-ic_hammer ficon"></span>
+                                    Provide shop agent the ability to receive a detailed order online with many items and customer address.
+                                </li>
+                                <li><span class="icon-ic_laptop ficon"></span>
+                                    Encourage people to use the technology and replace the traditional communication method  to be digital and more trusted (replace the call). Using the technology make their life easier and efficient.
+                                </li>
+                                <li><span class="icon-ic_setting ficon"></span>
+                                    Open New Job opportunities in Tripoli (Drivers, office worker, software developer, salesforce…)
+                                </li>
                             </ul>
                         </div>
 
@@ -193,8 +205,8 @@
         <div class="container send-block-main parallax">
             <div class="topClr"></div>
             <div class="wrapper">
-                <div class="col-9 ld-col-12 md-col-12 text-left title-block"><h2>Sed lacinia magna sit amet dolor tincidunt pulvinar elem</h2></div>
-                <div class="col-3 ld-col-12 md-col-12 text-right"><a href="#">Call to Action</a></div>
+                <div class="col-9 ld-col-12 md-col-12 text-left title-block"><h2>The First Delivery Serivce In Syria, You order and we deliver</h2></div>
+                <div class="col-3 ld-col-12 md-col-12 text-right"><a href="#download">Download</a></div>
             </div>
         </div><!-- send-block-main -->
 
@@ -202,33 +214,39 @@
             <div class="wrapper">
                 <div class="title-block">
                     <h2>Client love us</h2>
-                    <span class="sub-title">Morbi lacinia orci eu consectetur porta</span>
+                    <span class="sub-title">What The Customers Said about our Service</span>
                     <i class="sep-line">&nbsp;</i>
                 </div>
 
                 <ul class="client-slider">
                     <li>
-                        <p>“Curabitur eget lobortis arcu, non venenatis felis. Duis volutpat lorem eros, tempus ornare velit sodales in. Vivamus at risus neque. Duis auctor lorem id ipsum sollicitudin congue.</p>
+                        <p>“بالفعل الفكرة والخدمة قوية جدا
+                            ومثل ماقال الاخ ساهر لو بتشمل امور المنزلية الاساسية بكون افضل بكتير</p>
                         <div class="client-info">
                             <img src="images/client01.png" alt="client01">
-                            <strong>Tyrion Lannister</strong>
-                            <span>Master of Coin</span>
+                            <strong>Bahaa Okba</strong>
+                            <!--<span>Master of Coin</span>-->
                         </div>
                     </li>
                     <li>
-                        <p>“Curabitur eget lobortis arcu, non venenatis felis. Duis volutpat lorem eros, tempus ornare velit sodales in. Vivamus at risus neque. Duis auctor lorem id ipsum sollicitudin congue.</p>
+                        <p>
+                            "فكره رائعه
+                          موفقين اإن شاء الله"
+                        </p>
                         <div class="client-info">
-                            <img src="images/client01.png" alt="client01">
-                            <strong>Tyrion Lannister</strong>
-                            <span>Master of Coin</span>
+                            <img src="images/client02.png" alt="client01">
+                            <strong>Belal Tayfour</strong>
+                            <!--<span>Master of Coin</span>-->
                         </div>
                     </li>
                     <li>
-                        <p>“Curabitur eget lobortis arcu, non venenatis felis. Duis volutpat lorem eros, tempus ornare velit sodales in. Vivamus at risus neque. Duis auctor lorem id ipsum sollicitudin congue.</p>
+                        <p>
+                            "موفقين فكرة رائدة"
+                        </p>
                         <div class="client-info">
-                            <img src="images/client01.png" alt="client01">
-                            <strong>Tyrion Lannister</strong>
-                            <span>Master of Coin</span>
+                            <img src="images/client03.png" alt="client01">
+                            <strong>Hala Mostafa</strong>
+                            <!--<span>Master of Coin</span>-->
                         </div>
                     </li>
                 </ul>
@@ -238,8 +256,8 @@
         <div id="screenshots" class="container screenshot-main">
             <div class="wrapper">
                 <div class="title-block">
-                    <h2>Awesome screenshots</h2>
-                    <span class="sub-title">Lorem Ipsum is simply dummy text of the printing and typesetting industry!</span>
+                    <h2>Awesome Screenshots</h2>
+                    <span class="sub-title">Amazing Application with Screenshots to preview interfaces</span>
                     <i class="sep-line">&nbsp;</i>
                 </div>
                 <div class="screen-slider">
@@ -276,81 +294,34 @@
                 <div class="row text-center">
                     <div class="col-3 md-col-6">
                         <span class="icon-ic_download wow zoomIn ficon"></span>
-                        <span class="count counter">649</span>
+                        <span class="count counter">750</span>
                         <em>Downloaded</em>
                     </div>
                     <div class="col-3 md-col-6">
                         <span class="icon-ic_apple wow zoomIn ficon"></span>
-                        <span class="count counter">628</span>
-                        <em>iOs users</em>
+                        <span class="count counter">18</span>
+                        <em>Subscribed Shops</em>
                     </div>
                     <div class="col-3 md-col-6">
                         <span class="icon-ic_android wow zoomIn ficon"> </span>
-                        <span class="count counter">247</span>
-                        <em>Android users</em>
+                        <span class="count counter">15</span>
+                        <em>Daily Orders</em>
                     </div>
                     <div class="col-3 md-col-6">
                         <span class="icon-ic_windows wow zoomIn ficon"> </span>
-                        <span class="count counter">325</span>
-                        <em>Windows users</em>
+                        <span class="count counter">20</span>
+                        <em>Response Time (min)</em>
                     </div>
                 </div>
             </div>
         </div><!-- count-block-main -->
 
-        <div id="priceing" class="container plan-block-main pricing-light">
-            <div class="wrapper">
-                <div class="title-block">
-                    <h2>Choose a plan to fit your needs</h2>
-                    <span class="sub-title">Duis auctor lorem id ipsum sollicitudin congue</span>
-                    <i class="sep-line">&nbsp;</i>
-                </div>
-
-                <div class="text-center">
-                    <div class="plan-box">
-                        <div class="plan-box-main">
-                            <span class="plan-type">Basic</span>
-                            <strong class="plan-price">$ 12.99</strong>
-                            <ul>
-                                <li>12 months support</li>
-                                <li>6 PSD template</li>
-                                <li>10 HTML template</li>
-                            </ul>
-                            <a href="#">buy now</a>
-                        </div>
-
-                        <div class="plan-box-main center">
-                            <span class="plan-type">Premium</span>
-                            <strong class="plan-price">$ 30.99</strong>
-                            <ul>
-                                <li>12 months support</li>
-                                <li>6 PSD template</li>
-                                <li>10 HTML template</li>
-                            </ul>
-                            <a href="#">buy now</a>
-                        </div>
-
-                        <div class="plan-box-main">
-                            <span class="plan-type">Enterprise</span>
-                            <strong class="plan-price">$ 80.99</strong>
-                            <ul>
-                                <li>12 months support</li>
-                                <li>6 PSD template</li>
-                                <li>10 HTML template</li>
-                            </ul>
-                            <a href="#">buy now</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div><!-- coundt-block-main -->
 
         <div class="container team-block-main parallax" id="our-team">
             <div class="wrapper">
                 <div class="title-block">
                     <h2>Our Awesome Team</h2>
-                    <span class="sub-title">Epsum factorial non deposit quid pro quo hic escorol</span>
+                    <span class="sub-title">We have Great Team, with Programing and Development Experience more than 12 years</span>
                     <i class="sep-line">&nbsp;</i>
                 </div>
             </div>
@@ -362,108 +333,36 @@
                             <img src="images/team01.jpg" alt="team01" />
 								<span class="social-links">
 									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="https://www.facebook.com/yaser.elsabbouh"><i class="fa fa-facebook"></i></a>
 									<a href="#"><i class="fa fa-linkedin"></i></a>
 									<a href="#"><i class="fa fa-google-plus"></i></a>
 								</span>
                         </div>
-                        <span class="name">Daniel Moore</span><em class="role">Project Manager</em>
+                        <span class="name">Yaser El Sabbouh</span><em class="role">CEO & Co-Founder</em>
                     </li>
                     <li>
                         <div class="team-photo">
                             <img src="images/team02.jpg" alt="team02" />
 								<span class="social-links">
 									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="https://www.facebook.com/nebrassal"><i class="fa fa-facebook"></i></a>
 									<a href="#"><i class="fa fa-linkedin"></i></a>
 									<a href="#"><i class="fa fa-google-plus"></i></a>
 								</span>
                         </div>
-                        <span class="name">Carol Mills</span><em class="role">UI Designer</em>
+                        <span class="name">Nebras Salman</span><em class="role">Developer & Co-Founder</em>
                     </li>
                     <li>
                         <div class="team-photo">
                             <img src="images/team03.jpg" alt="team03" />
 								<span class="social-links">
 									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="https://www.facebook.com/profile.php?id=100012671467096"><i class="fa fa-facebook"></i></a>
 									<a href="#"><i class="fa fa-linkedin"></i></a>
 									<a href="#"><i class="fa fa-google-plus"></i></a>
 								</span>
                         </div>
-                        <span class="name">Simon Lamb</span><em class="role">Developer</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team01.jpg" alt="team01" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Daniel Moore</span><em class="role">Project Manager</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team02.jpg" alt="team02" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Carol Mills</span><em class="role">UI Designer</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team03.jpg" alt="team03" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Simon Lamb</span><em class="role">Developer</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team01.jpg" alt="team01" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Daniel Moore</span><em class="role">Project Manager</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team02.jpg" alt="team02" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Carol Mills</span><em class="role">UI Designer</em>
-                    </li>
-                    <li>
-                        <div class="team-photo">
-                            <img src="images/team03.jpg" alt="team03" />
-								<span class="social-links">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-linkedin"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-								</span>
-                        </div>
-                        <span class="name">Simon Lamb</span><em class="role">Developer</em>
+                        <span class="name">Zaher Hazeem</span><em class="role">Developer & Co-Founder</em>
                     </li>
                 </ul>
             </div>
@@ -481,14 +380,11 @@
                     </div>
 
                     <div class="downlod-btn">
-                        <a href="#">
-                            <img src="images/ic_itunes.png" alt="ic_itunes" class="no-hover" />
+                        <a href="http://sy.deliveryonweb.com/DeliveryExpressSy.apk">
+                            <img src="images/dd1.png" alt="ic_itunes" class="no-hover" />
                         </a>
-                        <a href="#">
+                        <a href="https://play.google.com/store/apps/details?id=com.mobilife.deliveryexpress.sy">
                             <img src="images/ic_play_store.png" alt="ic_play_store" class="no-hover" />
-                        </a>
-                        <a href="#">
-                            <img src="images/ic_store.png" alt="ic_store" class="no-hover" />
                         </a>
                     </div>
 
@@ -552,11 +448,11 @@
             <img src="images/logo.png" alt="logo">
             <ul class="social-link">
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://www.facebook.com/DeliveryExpressSY/"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <!--<li><a href="#"><i class="fa fa-pinterest"></i></a></li>-->
             </ul>
             <span>&copy; <a href="https://www.mobillifecomp.com/" target="_blank">Mobilife Co.</a> 2016</span>
         </div>
